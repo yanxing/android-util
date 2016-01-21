@@ -15,6 +15,10 @@ public abstract class CommonAdapter<T> extends BaseAdapter {
     protected List<T> mDataList;
     protected int mLayoutId;
 
+    /**
+     * @param dataList 数据集合
+     * @param layoutId 布局文件
+     */
     public CommonAdapter(List<T> dataList, int layoutId)
     {
         this.mDataList = dataList;
@@ -46,7 +50,7 @@ public abstract class CommonAdapter<T> extends BaseAdapter {
     /**
      * 设置数据
      * @param viewHolder
-     * @param item
+     * @param object 当前位置的数据对象
      */
-    public abstract void onBindViewHolder(ViewHolder viewHolder, T item);
+    public abstract void onBindViewHolder(ViewHolder viewHolder, T object);
 }
