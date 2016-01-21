@@ -19,7 +19,7 @@
             </intent-filter>
         </activity>
         <activity
-            android:name="com.yanxing.ui.AdapterActivity"
+            android:name=".AdapterExampleActivity"
             android:label="@string/title_activity_adapter"
             android:theme="@style/AppTheme.NoActionBar"></activity>
     </application>

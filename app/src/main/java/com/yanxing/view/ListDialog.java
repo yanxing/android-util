@@ -1,4 +1,4 @@
-package com.yanxing.ui.view;
+package com.yanxing.view;
 
 import android.app.Activity;
 import android.app.AlertDialog;

@@ -1,5 +1,6 @@
 <resources>
     <string name="app_name">android-util</string>
     <string name="action_settings">Settings</string>
-    <string name="title_activity_adapter">AdapterActivity</string>
+    <string name="title_activity_adapter">通用适配器测试</string>
+    <string name="adapterlibrary">通用适配器</string>
 </resources>
