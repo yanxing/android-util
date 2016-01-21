@@ -7,4 +7,6 @@
     <string name="list_dialog">列表对话框</string>
     <string name="title_activity_confirm_example">自定义确定对话框测试</string>
     <string name="confirm_dialog">确定对话框</string>
+    <string name="title_activity_loading_dialog_example">进度框测试</string>
+    <string name="loading_dialog">进度框</string>
 </resources>
