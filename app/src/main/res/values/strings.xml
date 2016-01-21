@@ -5,4 +5,6 @@
     <string name="adapterlibrary">通用适配器</string>
     <string name="title_activity_list_dialog_example">自定义列表对话框测试</string>
     <string name="list_dialog">列表对话框</string>
+    <string name="title_activity_confirm_example">自定义确定对话框测试</string>
+    <string name="confirm_dialog">确定对话框</string>
 </resources>

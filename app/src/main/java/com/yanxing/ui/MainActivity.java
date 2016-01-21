@@ -25,7 +25,7 @@ public class MainActivity extends BaseActivity{
         setSupportActionBar(toolbar);
     }
 
-    @Click(value = {R.id.adapter_button,R.id.list_dialog_button})
+    @Click(value = {R.id.adapter_button,R.id.list_dialog_button,R.id.confirm_dialog_button})
     public void onClick(View v) {
         Intent intent=new Intent();
         switch (v.getId()){
@@ -37,6 +37,11 @@ public class MainActivity extends BaseActivity{
             //列表适配器
             case R.id.list_dialog_button:
                 intent.setClass(this,ListDialogExampleActivity.class);
+                startActivity(intent);
+                break;
+            //确定对话框
+            case R.id.confirm_dialog_button:
+                intent.setClass(this,ConfirmExampleActivity.class);
                 startActivity(intent);
                 break;
 

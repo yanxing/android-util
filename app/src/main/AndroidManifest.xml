@@ -25,7 +25,11 @@
         <activity
             android:name=".ListDialogExampleActivity"
             android:label="@string/title_activity_list_dialog_example"
-            android:theme="@style/AppTheme.NoActionBar"/>
+            android:theme="@style/AppTheme.NoActionBar" />
+        <activity
+            android:name=".ConfirmExampleActivity"
+            android:label="@string/title_activity_confirm_example"
+            android:theme="@style/AppTheme.NoActionBar"></activity>
     </application>
 
 </manifest>
