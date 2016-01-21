@@ -1,28 +1,46 @@
 package com.yanxing.ui;
 
 import android.content.Intent;
-import android.os.Bundle;
-import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 import android.view.View;
 import android.view.Menu;
 import android.view.MenuItem;
-import android.widget.Button;
 
+import com.yanxing.base.BaseActivity;
 
-public class MainActivity extends AppCompatActivity implements View.OnClickListener{
+import org.androidannotations.annotations.AfterViews;
+import org.androidannotations.annotations.Click;
+import org.androidannotations.annotations.EActivity;
+import org.androidannotations.annotations.ViewById;
 
-    private Button mAdapterButton;
+@EActivity(R.layout.activity_main)
+public class MainActivity extends BaseActivity{
+
+    @ViewById
+    Toolbar toolbar;
 
     @Override
-    protected void onCreate(Bundle savedInstanceState) {
-        super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_main);
-        Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
+    @AfterViews
+    protected void afterInstanceView() {
         setSupportActionBar(toolbar);
+    }
 
-        mAdapterButton=(Button) findViewById(R.id.adapter_button);
-        mAdapterButton.setOnClickListener(this);
+    @Click(value = {R.id.adapter_button,R.id.list_dialog_button})
+    public void onClick(View v) {
+        Intent intent=new Intent();
+        switch (v.getId()){
+            //通用适配器
+            case R.id.adapter_button:
+                intent.setClass(this,AdapterExampleActivity.class);
+                startActivity(intent);
+                break;
+            //列表适配器
+            case R.id.list_dialog_button:
+                intent.setClass(this,ListDialogExampleActivity.class);
+                startActivity(intent);
+                break;
+
+        }
     }
 
     @Override
@@ -43,18 +61,6 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         if (id == R.id.action_settings) {
             return true;
         }
-
         return super.onOptionsItemSelected(item);
-    }
-
-    @Override
-    public void onClick(View v) {
-        Intent intent=new Intent();
-        switch (v.getId()){
-            case R.id.adapter_button:
-                intent.setClass(this,AdapterExampleActivity.class);
-                startActivity(intent);
-                break;
-        }
     }
 }

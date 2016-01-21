@@ -23,7 +23,7 @@ public class AdapterExampleActivity extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_adapter);
+        setContentView(R.layout.activity_adapter_example);
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
         mListView= (ListView) findViewById(R.id.listview);
         setSupportActionBar(toolbar);

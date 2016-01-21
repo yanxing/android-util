@@ -9,7 +9,7 @@
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
         <activity
-            android:name=".MainActivity"
+            android:name=".MainActivity_"
             android:label="@string/app_name"
             android:theme="@style/AppTheme.NoActionBar">
             <intent-filter>
@@ -21,7 +21,11 @@
         <activity
             android:name=".AdapterExampleActivity"
             android:label="@string/title_activity_adapter"
-            android:theme="@style/AppTheme.NoActionBar"></activity>
+            android:theme="@style/AppTheme.NoActionBar" />
+        <activity
+            android:name=".ListDialogExampleActivity"
+            android:label="@string/title_activity_list_dialog_example"
+            android:theme="@style/AppTheme.NoActionBar"/>
     </application>
 
 </manifest>
