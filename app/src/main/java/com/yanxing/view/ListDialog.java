@@ -39,7 +39,7 @@ public class ListDialog {
         int width = metric.widthPixels;     //屏幕宽度（像素）
         //动态设置对话框的大小
         WindowManager.LayoutParams params = mListDialog.getWindow().getAttributes();
-        params.width = width*4/5;
+        params.width = width*9/10;
         mListDialog.getWindow().setAttributes(params);
         mListDialog.setContentView(R.layout.list_dialog);
         LinearLayout root= (LinearLayout) mListDialog.findViewById(R.id.root);
