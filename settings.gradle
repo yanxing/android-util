@@ -1,1 +1,1 @@
-include ':app', ':adapterlibrary'
+include ':app', ':adapterlibrary', ':photobrowselibrary', ':photolibrary', ':baidumaplibrary'

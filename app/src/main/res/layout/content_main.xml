@@ -11,28 +11,53 @@
     android:paddingBottom="@dimen/activity_vertical_margin"
     app:layout_behavior="@string/appbar_scrolling_view_behavior"
     tools:showIn="@layout/activity_main"
-    android:orientation="vertical"
+    android:orientation="horizontal"
     tools:context="com.yanxing.ui.MainActivity">
-    <Button
-        android:id="@+id/adapter_button"
+    <LinearLayout
         android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="@string/adapterlibrary"/>
-    <Button
-        android:id="@+id/list_dialog_button"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="@string/list_dialog"/>
+        android:layout_height="match_parent"
+        android:orientation="vertical">
+        <Button
+            android:id="@+id/adapter_button"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/adapterlibrary"/>
+        <Button
+            android:id="@+id/list_dialog_button"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/list_dialog"/>
 
-    <Button
-        android:id="@+id/confirm_dialog_button"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="@string/confirm_dialog"/>
-    <Button
-        android:id="@+id/loading_dialog_button"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="@string/loading_dialog"/>
-
+        <Button
+            android:id="@+id/confirm_dialog_button"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/confirm_dialog"/>
+        <Button
+            android:id="@+id/loading_dialog_button"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/loading_dialog"/>
+        <Button
+            android:id="@+id/select_image"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/select_image"/>
+        <Button
+            android:id="@+id/browse_image"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/browse_image"/>
+    </LinearLayout>
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_marginLeft="10dp">
+        <com.facebook.drawee.view.SimpleDraweeView
+            android:id="@+id/simple_drawee_view"
+            android:layout_width="80dp"
+            android:layout_height="80dp"
+            android:visibility="gone"
+            app:placeholderImage="@mipmap/ic_launcher"/>
+    </LinearLayout>
 </LinearLayout>

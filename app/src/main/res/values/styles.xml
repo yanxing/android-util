@@ -30,4 +30,8 @@
         <!-- 背景透明 -->
         <item name="android:backgroundDimEnabled">true</item>
     </style>
+
+    <style name="noTitle">
+        <item name="android:windowNoTitle">true</item>
+    </style>
 </resources>
