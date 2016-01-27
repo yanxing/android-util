@@ -7,6 +7,7 @@ import com.baidu.location.BDLocationListener;
 import com.baidu.location.LocationClient;
 import com.baidu.location.LocationClientOption;
 import com.baidu.location.LocationClientOption.LocationMode;
+import com.baidu.map.event.BaiduLocListener;
 import com.baidu.mapapi.model.LatLng;
 import com.baidu.mapapi.search.core.SearchResult;
 import com.baidu.mapapi.search.geocode.GeoCodeResult;
@@ -19,19 +20,13 @@ public class BaiduLoc implements OnGetGeoCoderResultListener {
 	public static final int coorType_bd09ll = 0;
 	public static final int coorType_gcj02 = 1;
 	public static final int coorType_bd09 = 2;
-	public LocationClient mLocationClient;
-	public BDMapLocationListener mBDLocationListener;
-	public BDLocation mLocation;
-	public ReverseGeoCodeResult reverseGeoCodeResult;
-	public BaiduLocListener mBaiduLocListener;
-	public GeoCoder mSearch;
+	private LocationClient mLocationClient;
+	private BDMapLocationListener mBDLocationListener;
+	private BDLocation mLocation;
+	private ReverseGeoCodeResult reverseGeoCodeResult;
+	private BaiduLocListener mBaiduLocListener;
+	private GeoCoder mSearch;
 
-	// public AddressComponent mAddressComponent;
-	// public List<PoiInfo> mPois = null;
-	// private LocationMode locMode = LocationMode.NORMAL;
-	// private int locCoorType = coorType_bd09ll;
-	// private boolean locIsNeedAddress = true;
-	// private int locScanSpan = 3000; //ms
 	public BaiduLoc(Context context) {
 		try { 
 			mLocationClient = new LocationClient(context);
@@ -53,7 +48,7 @@ public class BaiduLoc implements OnGetGeoCoderResultListener {
 			mSearch = GeoCoder.newInstance();
 			mSearch.setOnGetGeoCodeResultListener(this);
 			// 开启定位
-			// mLocationClient.start();  
+			 mLocationClient.start();
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
@@ -71,7 +66,7 @@ public class BaiduLoc implements OnGetGeoCoderResultListener {
 			return "gcj02";
 		}
 	}
-	public String getAddrStr(){
+	public String getAddress(){
 		return mLocation.getAddrStr();
 	}
 	public boolean isLocationValid(double lng, double lat) {

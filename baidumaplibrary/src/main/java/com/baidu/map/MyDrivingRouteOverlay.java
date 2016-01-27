@@ -9,7 +9,7 @@ import com.baidu.mapapi.overlayutil.DrivingRouteOverlay;
 public class MyDrivingRouteOverlay extends DrivingRouteOverlay {
 
     public MyDrivingRouteOverlay(BaiduMapView baiduMapView) {
-        super(baiduMapView.mBaiduMap);
+        super(baiduMapView.getmBaiduMap());
     }
 
     @Override

@@ -6,6 +6,13 @@ import android.graphics.Bitmap;
 import android.view.View;
 import android.widget.LinearLayout;
 
+import com.baidu.map.event.BaiduMapListener;
+import com.baidu.map.event.MapStatusChangeListener;
+import com.baidu.map.event.MarkerDragListener;
+import com.baidu.map.event.PoiSearchResultListener;
+import com.baidu.map.event.RoutePlanResultListener;
+import com.baidu.map.event.SnapshotListener;
+import com.baidu.map.event.SuggestionResultListener;
 import com.baidu.mapapi.map.BaiduMap;
 import com.baidu.mapapi.map.BaiduMap.OnMapClickListener;
 import com.baidu.mapapi.map.BaiduMap.OnMapLoadedCallback;
@@ -45,392 +52,484 @@ import com.baidu.mapapi.search.sug.SuggestionResult;
 import com.baidu.mapapi.search.sug.SuggestionSearch;
 import com.baidu.mapapi.search.sug.SuggestionSearchOption;
 
-public class BaiduMapView implements OnGetPoiSearchResultListener, OnMapStatusChangeListener, OnMapClickListener, OnGetSuggestionResultListener, OnGetRoutePlanResultListener,OnMarkerDragListener{
-	public MapView mMapView;
-	public BaiduMap mBaiduMap;
-	public LinearLayout mParentLayout;
-	public PoiSearch mPoiSearch;
-	public SuggestionSearch mSuggestionSearch;
-	public Activity mParentActivity;
-	public BaiduMapListener mMapListener;
-	public float maxZoomLevel, minZoomLevel;
-	public RoutePlanSearch mSearch ;
-	public BaiduMapView(Activity activity, LinearLayout parentLayout, BaiduMapListener mapListener){
-		mParentActivity = activity;
-		mParentLayout = parentLayout;
-		mMapListener = mapListener;
-		try {
-			mMapView = new MapView(activity);
-			mParentLayout.setVisibility(View.VISIBLE);
-			mParentLayout.addView(mMapView);
-			mMapView.showZoomControls(false);
-			mBaiduMap = mMapView.getMap();
-			maxZoomLevel = mBaiduMap.getMaxZoomLevel();
-			minZoomLevel = mBaiduMap.getMinZoomLevel();
-			MapStatusUpdate msu = MapStatusUpdateFactory.zoomTo(15.0f);
-			mBaiduMap.setMapStatus(msu);
+public class BaiduMapView implements OnGetPoiSearchResultListener, OnMapStatusChangeListener,
+        OnMapClickListener, OnGetSuggestionResultListener, OnGetRoutePlanResultListener, OnMarkerDragListener, SnapshotReadyCallback {
 
-			mBaiduMap.setOnMapLoadedCallback(new OnMapLoadedCallback() {
+    private MapView mMapView;
+    private BaiduMap mBaiduMap;
 
-				public void onMapLoaded() {
-					mMapListener.onMapLoaded();
-				}
-			});
-			mBaiduMap.setOnMarkerClickListener(new OnMarkerClickListener() {
+    private LinearLayout mParentLayout;
+    private Activity mParentActivity;
 
-				public boolean onMarkerClick(Marker marker) {
-					mMapListener.onMarkerClick(marker);
-					return true;
-				}
-			});
-			
-			mBaiduMap.setOnMarkerDragListener(this);
-			mBaiduMap.setOnMapClickListener(this);
-			mBaiduMap.setOnMapStatusChangeListener(this);
+    private BaiduMapListener mMapListener;
+    //marker拖拽监听
+    private MarkerDragListener mMarkerDragListener;
+    //路线结果监听
+    private RoutePlanResultListener mRoutePlanResultListener;
+    //POI搜索监听
+    private PoiSearchResultListener mPoiSearchResultListener;
+    //搜索建议监听
+    private SuggestionResultListener mSuggestionResultListener;
+    //地图状态改变监听
+    private MapStatusChangeListener mMapStatusChangeListener;
+    private SnapshotListener mSnapshotListener;
 
+    private RoutePlanSearch mSearch;
+    private PoiSearch mPoiSearch;
+    private SuggestionSearch mSuggestionSearch;
+
+    private float maxZoomLevel;
+    private float minZoomLevel;
+
+    public BaiduMapView(Activity activity, LinearLayout parentLayout) {
+        mParentActivity = activity;
+        mParentLayout = parentLayout;
+        try {
+            mMapView = new MapView(activity);
+            mParentLayout.setVisibility(View.VISIBLE);
+            mParentLayout.addView(mMapView);
+            mMapView.showZoomControls(false);
+            mBaiduMap = mMapView.getMap();
+            maxZoomLevel = mBaiduMap.getMaxZoomLevel();
+            minZoomLevel = mBaiduMap.getMinZoomLevel();
+            MapStatusUpdate msu = MapStatusUpdateFactory.zoomTo(15.0f);
+            mBaiduMap.setMapStatus(msu);
+
+            mBaiduMap.setOnMapClickListener(this);
             mBaiduMap.setMyLocationEnabled(true);
-			mPoiSearch = PoiSearch.newInstance();
-			mPoiSearch.setOnGetPoiSearchResultListener(this);
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+    }
 
-			mSuggestionSearch = SuggestionSearch.newInstance();
-			mSuggestionSearch.setOnGetSuggestionResultListener(this);
-			mSearch = RoutePlanSearch.newInstance();
-			mSearch.setOnGetRoutePlanResultListener(this);
-		} catch (Exception e) {
-			e.printStackTrace();
-		}
-	}
-	public void setListener(BaiduMapListener listenter) {
-		mMapListener = listenter;
-	}
-	public void setCenterOnly(double latitude, double longitude) {
-		LatLng location = new LatLng(latitude, longitude);
-		mBaiduMap.setMapStatus(MapStatusUpdateFactory.newLatLng(location));
-	}
-	/**
-	 * <li>设置覆盖物
-	 * @param latitude  纬度
-	 * @param longitude 经度
-	 * @param resid 
-	 */
-	public Overlay setOverlay(double latitude, double longitude, int resid) {
-		Overlay overlay = null;
-		try {
-			BitmapDescriptor bd= BitmapDescriptorFactory.fromResource(resid);
-			if(bd == null){
-				return overlay;
-			}
-			LatLng location = new LatLng(latitude, longitude);
-			mBaiduMap.setMapStatus(MapStatusUpdateFactory.newLatLng(location));
-			OverlayOptions oop = new MarkerOptions().position(new LatLng(latitude, longitude)).icon(bd).zIndex(9).draggable(true);
-			overlay = mBaiduMap.addOverlay(oop);
-		} catch (Exception e) {
-			e.printStackTrace();
-		}
-		return overlay;
-	}
+    /**
+     * 设置marker拖拽监听
+     *
+     * @param markerDragListener
+     */
+    public void setMarkerDragListener(MarkerDragListener markerDragListener) {
+        mMarkerDragListener = markerDragListener;
+        mBaiduMap.setOnMarkerDragListener(this);
+    }
 
-	/**
-	 * <li>设置覆盖物,不会触发MapStatus事件
-	 * @param latitude  纬度
-	 * @param longitude 经度
-	 * @param resid
-	 */
-	public Overlay setOverlayNoMapStatus(double latitude, double longitude, int resid) {
-		Overlay overlay = null;
-		try {
-			BitmapDescriptor bd= BitmapDescriptorFactory.fromResource(resid);
-			if(bd == null){
-				return overlay;
-			}
-			OverlayOptions oop = new MarkerOptions().position(new LatLng(latitude, longitude)).icon(bd).zIndex(9).draggable(true);
-			overlay = mBaiduMap.addOverlay(oop);
-		} catch (Exception e) {
-			e.printStackTrace();
-		}
-		return overlay;
-	}
+    /**
+     * 设置路线监听
+     *
+     * @param routePlanResultListener
+     */
+    public void setRoutePlanResultListener(RoutePlanResultListener routePlanResultListener) {
+        mRoutePlanResultListener = routePlanResultListener;
+        mSearch = RoutePlanSearch.newInstance();
+        mSearch.setOnGetRoutePlanResultListener(this);
+    }
 
-	/**
-	 * 
-	 * <li>设置覆盖物
-	 * @param latitude  纬度
-	 * @param longitude 经度
-	 * @param bitmap
-	 */
-	public Overlay setOverlay(double latitude, double longitude, Bitmap bitmap) {
-		Overlay overlay = null;
-		if(bitmap == null){
-			return overlay;
-		}
-		try {
-			BitmapDescriptor bd= BitmapDescriptorFactory.fromBitmap(bitmap);
-			if(bd == null){
-				return overlay;
-			}
-			LatLng location = new LatLng(latitude, longitude); 
-			mBaiduMap.setMapStatus(MapStatusUpdateFactory.newLatLng(location));
-			OverlayOptions oop = new MarkerOptions().position(new LatLng(latitude, longitude)).icon(bd);
-			overlay = mBaiduMap.addOverlay(oop);
-		} catch (Exception e) {
-			e.printStackTrace();
-		}
-		return overlay;
-	}
-	/**
-	 * 
-		 * <li>设置覆盖物
-	 * @param latitude  纬度
-	 * @param longitude 经度
-	 * @param popview
-	 */
-	public Overlay setOverlay(double latitude, double longitude, View popview) {
-		Overlay overlay = null;
-		if(popview == null){
-			return overlay;
-		}
-		try {
-			BitmapDescriptor bd= BitmapDescriptorFactory.fromView(popview);
-			if(bd == null){
-				return overlay;
-			}
-			LatLng location = new LatLng(latitude, longitude);
-			mBaiduMap.setMapStatus(MapStatusUpdateFactory.newLatLng(location));
-			OverlayOptions oop = new MarkerOptions().position(new LatLng(latitude, longitude)).icon(bd);
-			overlay = mBaiduMap.addOverlay(oop);
-		} catch (Exception e) {
-			e.printStackTrace();
-		}
-		return overlay;
-	}
-	/**
-	 * 设置覆盖物
-	 * @param info
-	 * @param resid
-	 */
-	public Overlay setOverlay(PoiInfo info, int resid) {
-		Overlay overlay = null;
-		if(info == null){
-			return overlay;
-		}
-		try {
-			BitmapDescriptor bd= BitmapDescriptorFactory.fromResource(resid);
-			if(bd == null){
-				return overlay;
-			}
-			OverlayOptions oop = new MarkerOptions().position(info.location).icon(bd);
-			overlay =mBaiduMap.addOverlay(oop);
-		} catch (Exception e) {
-			e.printStackTrace();
-		}
-		return overlay;
-	}
-	/**
-	 * 点位 搜索
-	 * @param keyword 关键词
-	 * @param latitude  纬度
-	 * @param longitude 经度
-	 */
-	public void poiSearch(String keyword, double latitude, double longitude) {
-		try {
-			PoiNearbySearchOption opt = new PoiNearbySearchOption();
-			opt.location(new LatLng(latitude, longitude));
-			opt.keyword(keyword);
-			opt.radius(20000);
-			opt.pageCapacity(100);
+    /**
+     * 设置 POI检索监听
+     *
+     * @param poiSearchResultListener
+     */
+    public void setPoiSearchResultListener(PoiSearchResultListener poiSearchResultListener) {
+        mPoiSearchResultListener = poiSearchResultListener;
+        mPoiSearch = PoiSearch.newInstance();
+        mPoiSearch.setOnGetPoiSearchResultListener(this);
+    }
 
-			mPoiSearch.searchNearby(opt);
-		} catch (Exception e) {
-			e.printStackTrace();
-		}
-	}
-	public void suggestionSearch(String keyword) {
-		mSuggestionSearch.requestSuggestion((new SuggestionSearchOption()).keyword(keyword));
-	}
-	public void snapshot() {
-		try {
-			mBaiduMap.snapshot(new SnapshotReadyCallback() {
+    /**
+     * 设置搜索建议监听
+     *
+     * @param suggestionResultListener
+     */
+    public void setSuggestionResultListener(SuggestionResultListener suggestionResultListener) {
+        mSuggestionResultListener = suggestionResultListener;
+        mSuggestionSearch = SuggestionSearch.newInstance();
+        mSuggestionSearch.setOnGetSuggestionResultListener(this);
+    }
 
-				public void onSnapshotReady(Bitmap snapshot) {
-					mMapListener.onSnapshotReady(snapshot);
-				}
-			});
-		} catch (Exception e) {
-			e.printStackTrace();
-		}
-	}
-	/**
-	 * 发起驾车路线规划
-	 * @param option
-	 * @return
-	 */
-	public boolean	drivingSearch(DrivingRoutePlanOption option){
-		return mSearch.drivingSearch(option);
-	}
-	/**
-	 * 发起换乘路线规划
-	 * @param option
-	 * @return
-	 */
-	public boolean	transitSearch(TransitRoutePlanOption option){
-		return mSearch.transitSearch(option);
-	}
-	/**
-	 * 发起步行路线规
-	 * @param option
-	 * @return
-	 */
-	public boolean	walkingSearch(WalkingRoutePlanOption option){
-		return mSearch.walkingSearch(option);
-	}
-	/**
-	 *<li> 清空地图所有的 Overlay 覆盖物以及 InfoWindow
-	 */
-	public void clearMap() {
-		try {
-			if (null != mBaiduMap) {
-				mBaiduMap.clear();
-			}
-		} catch (Exception e) {
-			e.printStackTrace();
-		}
-	}
-	public void onPause() {
-		if (null != mMapView) {
-			mMapView.onPause();
-		}
-	}
+    /**
+     * 设置地图状态改变监听
+     *
+     * @param mapStatusChangeListener
+     */
+    public void setMapStatusChangeListener(MapStatusChangeListener mapStatusChangeListener) {
+        mMapStatusChangeListener = mapStatusChangeListener;
+        mBaiduMap.setOnMapStatusChangeListener(this);
+    }
 
-	public void onResume() {
-		if (null != mMapView) {
-			mMapView.onResume();
-		}
-	}
+    public void setSnapshotListener(SnapshotListener snapshotListener) {
+        mSnapshotListener = snapshotListener;
+        mBaiduMap.snapshot(this);
+    }
 
-	public void onDestroy() {
-		if (null != mPoiSearch) {
-			mPoiSearch.destroy();
-		}
+    /**
+     * 设置地图加载、点击、移动监听
+     *
+     * @param listenter
+     */
+    public void setBaiduMapListener(BaiduMapListener listenter) {
+        mMapListener = listenter;
+        mBaiduMap.setOnMapLoadedCallback(new OnMapLoadedCallback() {
 
-		if (null != mSuggestionSearch) {
-			mSuggestionSearch.destroy();
-		}
+            public void onMapLoaded() {
+                mMapListener.onMapLoaded();
+            }
+        });
+        mBaiduMap.setOnMarkerClickListener(new OnMarkerClickListener() {
 
-		if (null != mBaiduMap) {
-			mBaiduMap.clear();
-		}
-		if(mMapView!=null){
-			mMapView.onDestroy();
-		}
-		mMapView = null;
-	}
-	@Override
-	public void onGetSuggestionResult(SuggestionResult arg0) {
+            public boolean onMarkerClick(Marker marker) {
+                mMapListener.onMarkerClick(marker);
+                return true;
+            }
+        });
+    }
 
-	}
+    /**
+     * 设置视角中心
+     *
+     * @param latitude
+     * @param longitude
+     */
+    public void setCenterOnly(double latitude, double longitude) {
+        LatLng location = new LatLng(latitude, longitude);
+        mBaiduMap.setMapStatus(MapStatusUpdateFactory.newLatLng(location));
+    }
 
-	@Override
-	public void onMapClick(LatLng latLng) {
-		mMapListener.onMapClick(latLng);
-	}
+    /**
+     * 设置覆盖物
+     *
+     * @param latitude  纬度
+     * @param longitude 经度
+     * @param resid
+     */
+    public Overlay setOverlay(double latitude, double longitude, int resid) {
+        Overlay overlay = null;
+        try {
+            BitmapDescriptor bd = BitmapDescriptorFactory.fromResource(resid);
+            if (bd == null) {
+                return overlay;
+            }
+            LatLng location = new LatLng(latitude, longitude);
+            mBaiduMap.setMapStatus(MapStatusUpdateFactory.newLatLng(location));
+            OverlayOptions oop = new MarkerOptions().position(new LatLng(latitude, longitude)).icon(bd).zIndex(9).draggable(true);
+            overlay = mBaiduMap.addOverlay(oop);
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        return overlay;
+    }
 
-	@Override
-	public boolean onMapPoiClick(MapPoi arg0) {
-		mMapListener.onMapPoiClick(arg0);
-		return true;
-	}
+    /**
+     * 设置覆盖物,不会触发MapStatus事件
+     *
+     * @param latitude  纬度
+     * @param longitude 经度
+     * @param resID
+     */
+    public Overlay setOverlayNoMapStatus(double latitude, double longitude, int resID) {
+        Overlay overlay = null;
+        try {
+            BitmapDescriptor bd = BitmapDescriptorFactory.fromResource(resID);
+            if (bd == null) {
+                return overlay;
+            }
+            OverlayOptions oop = new MarkerOptions().position(new LatLng(latitude, longitude)).icon(bd).zIndex(9).draggable(true);
+            overlay = mBaiduMap.addOverlay(oop);
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        return overlay;
+    }
 
-	@Override
-	public void onMapStatusChange(MapStatus arg0) {
-		mMapListener.onMapStatusChange(arg0);
-	}
+    /**
+     * 设置覆盖物
+     *
+     * @param latitude  纬度
+     * @param longitude 经度
+     * @param bitmap
+     */
+    public Overlay setOverlay(double latitude, double longitude, Bitmap bitmap) {
+        Overlay overlay = null;
+        if (bitmap == null) {
+            return overlay;
+        }
+        try {
+            BitmapDescriptor bd = BitmapDescriptorFactory.fromBitmap(bitmap);
+            if (bd == null) {
+                return overlay;
+            }
+            LatLng location = new LatLng(latitude, longitude);
+            mBaiduMap.setMapStatus(MapStatusUpdateFactory.newLatLng(location));
+            OverlayOptions oop = new MarkerOptions().position(new LatLng(latitude, longitude)).icon(bd);
+            overlay = mBaiduMap.addOverlay(oop);
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        return overlay;
+    }
 
-	@Override
-	public void onMapStatusChangeFinish(MapStatus arg0) {
-		mMapListener.onMapStatusChangeFinish(arg0);
-	}
+    /**
+     * 设置覆盖物
+     *
+     * @param latitude  纬度
+     * @param longitude 经度
+     * @param popPiew
+     */
+    public Overlay setOverlay(double latitude, double longitude, View popPiew) {
+        Overlay overlay = null;
+        if (popPiew == null) {
+            return overlay;
+        }
+        try {
+            BitmapDescriptor bd = BitmapDescriptorFactory.fromView(popPiew);
+            if (bd == null) {
+                return overlay;
+            }
+            LatLng location = new LatLng(latitude, longitude);
+            mBaiduMap.setMapStatus(MapStatusUpdateFactory.newLatLng(location));
+            OverlayOptions oop = new MarkerOptions().position(new LatLng(latitude, longitude)).icon(bd);
+            overlay = mBaiduMap.addOverlay(oop);
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        return overlay;
+    }
 
-	@Override
-	public void onMapStatusChangeStart(MapStatus arg0) {
-		mMapListener.onMapStatusChangeStart(arg0);
-	}
+    /**
+     * 设置覆盖物
+     *
+     * @param info
+     * @param resID
+     */
+    public Overlay setOverlay(PoiInfo info, int resID) {
+        Overlay overlay = null;
+        if (info == null) {
+            return overlay;
+        }
+        try {
+            BitmapDescriptor bd = BitmapDescriptorFactory.fromResource(resID);
+            if (bd == null) {
+                return overlay;
+            }
+            OverlayOptions oop = new MarkerOptions().position(info.location).icon(bd);
+            overlay = mBaiduMap.addOverlay(oop);
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        return overlay;
+    }
 
-	@Override
-	public void onGetPoiDetailResult(PoiDetailResult arg0) {
-		mMapListener.onPoiDetailSearched(arg0);
-	}
+    /**
+     * POI搜索
+     *
+     * @param keyword   关键词
+     * @param latitude  纬度
+     * @param longitude 经度
+     */
+    public void poiSearch(String keyword, double latitude, double longitude) {
+        try {
+            PoiNearbySearchOption opt = new PoiNearbySearchOption();
+            opt.location(new LatLng(latitude, longitude));
+            opt.keyword(keyword);
+            opt.radius(20000);
+            opt.pageCapacity(100);
 
-	@Override
-	public void onGetPoiResult(PoiResult arg0) {  
-		mMapListener.onPoiSearched(arg0);
-	}
-	/**
-	 * 显示 InfoWindow
-	 * @param infoWindow
-	 */
-	public void showInfoWindow(InfoWindow infoWindow){
-		mBaiduMap.showInfoWindow(infoWindow);  
-	}
-	
-	/**
-	 * 隐藏当前 InfoWindow
-	 */
-	 public void hideInfoWindow(){
-		 mBaiduMap.hideInfoWindow();
-	 }
-//	public void snapshot(){
-//		
-//	}
-//	
-	@Override
-	public void onGetDrivingRouteResult(DrivingRouteResult result) {
-		mMapListener.onGetDrivingRouteResult(result);
-	}
-	@Override
-	public void onGetTransitRouteResult(TransitRouteResult result) {
-		mMapListener.onGetTransitRouteResult(result);
-	}
-	@Override
-	public void onGetWalkingRouteResult(WalkingRouteResult result) {
-		mMapListener.onGetWalkingRouteResult(result);
-	}
-	public void setOnMarkerClickListener(OnMarkerClickListener overlay){
-		mBaiduMap.setOnMarkerClickListener(overlay);
-	}
-	@Override
-	public void onMarkerDrag(Marker marker) {
-		mMapListener.onMarkerDrag(marker);
-	}
-	@Override
-	public void onMarkerDragEnd(Marker marker) {
-		mMapListener.onMarkerDragEnd(marker);
-	}
-	@Override
-	public void onMarkerDragStart(Marker marker) {
-		mMapListener.onMarkerDragStart(marker);
-	}
+            mPoiSearch.searchNearby(opt);
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+    }
 
-	public BaiduMap getmBaiduMap() {
-		return mBaiduMap;
-	}
+    /**
+     * 搜索建议
+     *
+     * @param keyword 关键字
+     */
+    public void suggestionSearch(String keyword) {
+        mSuggestionSearch.requestSuggestion((new SuggestionSearchOption()).keyword(keyword));
+    }
 
-	public void setmBaiduMap(BaiduMap mBaiduMap) {
-		this.mBaiduMap = mBaiduMap;
-	}
+    /**
+     * 发起驾车路线规划
+     *
+     * @param option
+     * @return
+     */
+    public boolean drivingSearch(DrivingRoutePlanOption option) {
+        return mSearch.drivingSearch(option);
+    }
 
-	public MapView getmMapView() {
-		return mMapView;
-	}
+    /**
+     * 发起换乘路线规划
+     *
+     * @param option
+     * @return
+     */
+    public boolean transitSearch(TransitRoutePlanOption option) {
+        return mSearch.transitSearch(option);
+    }
 
-	public void setmMapView(MapView mMapView) {
-		this.mMapView = mMapView;
-	}
+    /**
+     * 发起步行路线规
+     *
+     * @param option
+     * @return
+     */
+    public boolean walkingSearch(WalkingRoutePlanOption option) {
+        return mSearch.walkingSearch(option);
+    }
 
-	public RoutePlanSearch getmSearch() {
-		return mSearch;
-	}
+    /**
+     * 清空地图所有的 Overlay 覆盖物以及 InfoWindow
+     */
+    public void clearMap() {
+        try {
+            if (null != mBaiduMap) {
+                mBaiduMap.clear();
+            }
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+    }
 
-	public void setmSearch(RoutePlanSearch mSearch) {
-		this.mSearch = mSearch;
-	}
+    @Override
+    public void onGetSuggestionResult(SuggestionResult arg0) {
+        mSuggestionResultListener.onSuggestionSearched(arg0);
+    }
+
+    @Override
+    public void onMapClick(LatLng latLng) {
+        mMapListener.onMapClick(latLng);
+    }
+
+    @Override
+    public boolean onMapPoiClick(MapPoi arg0) {
+        mPoiSearchResultListener.onMapPoiClick(arg0);
+        return true;
+    }
+
+    @Override
+    public void onMapStatusChange(MapStatus arg0) {
+        mMapStatusChangeListener.onMapStatusChange(arg0);
+    }
+
+    @Override
+    public void onMapStatusChangeFinish(MapStatus arg0) {
+        mMapStatusChangeListener.onMapStatusChangeFinish(arg0);
+    }
+
+    @Override
+    public void onMapStatusChangeStart(MapStatus arg0) {
+        mMapStatusChangeListener.onMapStatusChangeStart(arg0);
+    }
+
+    @Override
+    public void onGetPoiDetailResult(PoiDetailResult arg0) {
+        mPoiSearchResultListener.onPoiDetailSearched(arg0);
+    }
+
+    @Override
+    public void onGetPoiResult(PoiResult arg0) {
+        mPoiSearchResultListener.onPoiSearched(arg0);
+    }
+
+    /**
+     * 显示 InfoWindow
+     *
+     * @param infoWindow
+     */
+    public void showInfoWindow(InfoWindow infoWindow) {
+        mBaiduMap.showInfoWindow(infoWindow);
+    }
+
+    /**
+     * 隐藏当前 InfoWindow
+     */
+    public void hideInfoWindow() {
+        mBaiduMap.hideInfoWindow();
+    }
+
+    @Override
+    public void onGetDrivingRouteResult(DrivingRouteResult result) {
+        mRoutePlanResultListener.onGetDrivingRouteResult(result);
+    }
+
+    @Override
+    public void onGetTransitRouteResult(TransitRouteResult result) {
+        mRoutePlanResultListener.onGetTransitRouteResult(result);
+    }
+
+    @Override
+    public void onGetWalkingRouteResult(WalkingRouteResult result) {
+        mRoutePlanResultListener.onGetWalkingRouteResult(result);
+    }
+
+    public void setOnMarkerClickListener(OnMarkerClickListener overlay) {
+        mBaiduMap.setOnMarkerClickListener(overlay);
+    }
+
+    @Override
+    public void onMarkerDrag(Marker marker) {
+        mMarkerDragListener.onMarkerDrag(marker);
+    }
+
+    @Override
+    public void onMarkerDragEnd(Marker marker) {
+        mMarkerDragListener.onMarkerDragEnd(marker);
+    }
+
+    @Override
+    public void onMarkerDragStart(Marker marker) {
+        mMarkerDragListener.onMarkerDragStart(marker);
+    }
+
+    @Override
+    public void onSnapshotReady(Bitmap bitmap) {
+
+    }
+
+    public BaiduMap getmBaiduMap() {
+        return mBaiduMap;
+    }
+
+    public void setmBaiduMap(BaiduMap mBaiduMap) {
+        this.mBaiduMap = mBaiduMap;
+    }
+
+    public MapView getmMapView() {
+        return mMapView;
+    }
+
+    public void setmMapView(MapView mMapView) {
+        this.mMapView = mMapView;
+    }
+
+    public void onResume() {
+        if (null != mMapView) {
+            mMapView.onResume();
+        }
+    }
+
+    public void onPause() {
+        if (null != mMapView) {
+            mMapView.onPause();
+        }
+    }
+
+    public void onDestroy() {
+        if (null != mPoiSearch) {
+            mPoiSearch.destroy();
+        }
+
+        if (null != mSuggestionSearch) {
+            mSuggestionSearch.destroy();
+        }
+
+        if (null != mBaiduMap) {
+            mBaiduMap.clear();
+        }
+        if (mMapView != null) {
+            mMapView.onDestroy();
+        }
+        mMapView = null;
+    }
+
 }
