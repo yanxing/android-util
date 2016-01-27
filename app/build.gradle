@@ -6,9 +6,9 @@ android {
     signingConfigs {
         debug {
             keyAlias 'yanxing'
-            keyPassword 'weiyun182550321'
+            keyPassword 'yanxing'
             storeFile file('C:/git/android-util/yanxing.jks')
-            storePassword 'weiyun182550321'
+            storePassword 'yanxing'
         }
     }
     compileSdkVersion 23
