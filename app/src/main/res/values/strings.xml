@@ -11,4 +11,6 @@
     <string name="loading_dialog">进度框</string>
     <string name="select_image">图片选择</string>
     <string name="browse_image">图片浏览</string>
+    <string name="map">百度地图封装</string>
+    <string name="map_lable">百度地图封装测试</string>
 </resources>

@@ -3,9 +3,16 @@ apply plugin: 'android-apt'
 def AAVersion = '3.3.2'
 
 android {
+    signingConfigs {
+        debug {
+            keyAlias 'yanxing'
+            keyPassword 'weiyun182550321'
+            storeFile file('C:/git/android-util/yanxing.jks')
+            storePassword 'weiyun182550321'
+        }
+    }
     compileSdkVersion 23
     buildToolsVersion "23.0.2"
-
     defaultConfig {
         applicationId "com.yanxing.ui"
         minSdkVersion 15
@@ -16,6 +23,9 @@ android {
         release {
             minifyEnabled false
             proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
+        }
+        debug {
+            signingConfig signingConfigs.debug
         }
     }
 }
@@ -31,7 +41,9 @@ dependencies {
     compile "org.androidannotations:androidannotations-api:$AAVersion"
     compile project(':adapterlibrary')
     compile project(':photolibrary')
-    compile project(':photobrowselibrary')}
+    compile project(':photobrowselibrary')
+    compile project(':baidumaplibrary')
+}
 
 apt {
     arguments {

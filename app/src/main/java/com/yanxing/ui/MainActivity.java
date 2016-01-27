@@ -43,7 +43,7 @@ public class MainActivity extends BaseActivity{
     }
 
     @Click(value = {R.id.adapter_button,R.id.list_dialog_button,R.id.confirm_dialog_button
-            ,R.id.loading_dialog_button,R.id.select_image,R.id.browse_image})
+            ,R.id.loading_dialog_button,R.id.select_image,R.id.browse_image,R.id.map})
     public void onClick(View v) {
         Intent intent=new Intent();
         Bundle bundle = new Bundle();
@@ -90,6 +90,10 @@ public class MainActivity extends BaseActivity{
                 intent.putExtras(bundle);
                 startActivity(intent);
                 break;
+            //百度地图
+            case R.id.map:
+                intent.setClass(getApplicationContext(),BaiduMapActivity_.class);
+                startActivity(intent);
         }
     }
 

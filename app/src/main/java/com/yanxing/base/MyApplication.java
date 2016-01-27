@@ -3,6 +3,8 @@ package com.yanxing.base;
 import android.app.Application;
 import android.content.Context;
 
+import com.baidu.map.BaiduLoc;
+import com.baidu.mapapi.SDKInitializer;
 import com.facebook.drawee.backends.pipeline.Fresco;
 import com.nostra13.universalimageloader.cache.disc.impl.UnlimitedDiskCache;
 import com.nostra13.universalimageloader.core.ImageLoader;
@@ -19,11 +21,23 @@ import java.io.File;
  */
 public class MyApplication extends Application {
 
+    public static BaiduLoc baiduLoc;
+
     @Override
     public void onCreate() {
         super.onCreate();
         Fresco.initialize(getApplicationContext());
         initImageLoader(getApplicationContext());
+        initBaiduMap();
+    }
+
+    /**
+     * 初始化百度地图
+     */
+    private void initBaiduMap(){
+        SDKInitializer.initialize(this);
+        baiduLoc = new BaiduLoc(getApplicationContext());
+        baiduLoc.startLocation();
     }
 
     /**
