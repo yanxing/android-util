@@ -64,11 +64,13 @@
             android:label="@string/title_activity_loading_dialog_example"
             android:theme="@style/AppTheme.NoActionBar" />
         <activity
-            android:name=".BrowseImageActivity_"
+            android:name=".BrowseImageExampleActivity_"
             android:theme="@style/noTitle" />
-        <activity android:name=".BaiduMapActivity"/>
-        <activity android:name=".BaiduMapActivity_"
+        <activity android:name=".BaiduMapExampleActivity"/>
+        <activity android:name=".BaiduMapExampleActivity_"
             android:label="@string/map_lable"/>
+        <activity android:name=".FrescoExampleActivity_"
+            android:label="@string/fresco_lable"/>
     </application>
 
 </manifest>

@@ -28,18 +28,18 @@ import org.androidannotations.annotations.ViewById;
 /**
  * 百度地图封装测试
  */
-@EActivity(R.layout.activity_baidu_map)
-public class BaiduMapActivity extends BaseActivity implements RoutePlanResultListener,BaiduLocListener {
+@EActivity(R.layout.activity_baidu_map_example)
+public class BaiduMapExampleActivity extends BaseActivity implements RoutePlanResultListener,BaiduLocListener {
 
-    @ViewById
-    LinearLayout map;
+    @ViewById(R.id.map)
+    LinearLayout mMap;
 
     private BaiduMapView mBaiduMapView;
 
     @AfterViews
     @Override
     protected void afterInstanceView() {
-        mBaiduMapView=new BaiduMapView(this,map);
+        mBaiduMapView=new BaiduMapView(this, mMap);
         mBaiduMapView.setRoutePlanResultListener(this);
         //驾车路径
         LatLng fromLatLng = new LatLng(31.1145130000, 121.4112010000);

@@ -24,34 +24,34 @@ import java.util.List;
  * 浏览图片
  * Created by lishuangxiang on 2016/1/26.
  */
-@EActivity(R.layout.activity_browse_image)
-public class BrowseImageActivity extends FragmentActivity{
+@EActivity(R.layout.activity_browse_image_example)
+public class BrowseImageExampleActivity extends FragmentActivity{
 
     @ViewById(R.id.custom_photo_viewpage)
-    CustomPhotoViewPager customPhotoViewPager;
+    CustomPhotoViewPager mCustomPhotoViewPager;
 
     @ViewById(R.id.number)
-    TextView number;//记录当前张数
+    TextView mNumber;//记录当前张数
 
-    private SamplePagerAdapter photoAdapter;
+    private SamplePagerAdapter mPhotoAdapter;
 
     private List<String> mPathList = new ArrayList<String>();
 
     @AfterViews
     protected void afterInstanceView() {
-        number.getPaint().setFakeBoldText(true);
+        mNumber.getPaint().setFakeBoldText(true);
         Bundle bundle = getIntent().getExtras();
         mPathList = (List<String>) bundle.getSerializable("images");
         int index = bundle.getInt("index", 0);//点击的图片索引
-        photoAdapter = new SamplePagerAdapter();
-        customPhotoViewPager.setAdapter(photoAdapter);
+        mPhotoAdapter = new SamplePagerAdapter();
+        mCustomPhotoViewPager.setAdapter(mPhotoAdapter);
         if (mPathList.size() == 1) {
-            number.setVisibility(View.GONE);
+            mNumber.setVisibility(View.GONE);
         } else {
-            number.setText((index + 1) + "/" + mPathList.size());
+            mNumber.setText((index + 1) + "/" + mPathList.size());
         }
-        customPhotoViewPager.setCurrentItem(index);
-        customPhotoViewPager.addOnPageChangeListener(new ViewPager.OnPageChangeListener() {
+        mCustomPhotoViewPager.setCurrentItem(index);
+        mCustomPhotoViewPager.addOnPageChangeListener(new ViewPager.OnPageChangeListener() {
             @Override
             public void onPageScrolled(int position, float positionOffset, int positionOffsetPixels) {
 
@@ -59,7 +59,7 @@ public class BrowseImageActivity extends FragmentActivity{
 
             @Override
             public void onPageSelected(int position) {//设置当前图片第几个
-                number.setText((position + 1) + "/" + mPathList.size());
+                mNumber.setText((position + 1) + "/" + mPathList.size());
             }
 
             @Override
@@ -95,7 +95,7 @@ public class BrowseImageActivity extends FragmentActivity{
             photoView.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
-                    BrowseImageActivity.this.finish();
+                    BrowseImageExampleActivity.this.finish();
                 }
             });
             return photoView;

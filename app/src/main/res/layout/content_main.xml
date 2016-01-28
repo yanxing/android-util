@@ -53,10 +53,16 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="@string/map"/>
+        <Button
+            android:id="@+id/fresco"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/fresco"/>
     </LinearLayout>
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
+        android:orientation="vertical"
         android:layout_marginLeft="10dp">
         <com.facebook.drawee.view.SimpleDraweeView
             android:id="@+id/simple_drawee_view"

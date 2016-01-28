@@ -26,11 +26,11 @@ import java.util.List;
 @EActivity(R.layout.activity_main)
 public class MainActivity extends BaseActivity{
 
-    @ViewById
-    Toolbar toolbar;
+    @ViewById(R.id.toolbar)
+    Toolbar mToolbar;
 
     @ViewById(R.id.simple_drawee_view)
-    SimpleDraweeView simpleDraweeView;
+    SimpleDraweeView mSimpleDraweeView;
 
     private static final int QUESTION_IMAGE_CODE = 1;
     //选择的图片名称
@@ -39,11 +39,11 @@ public class MainActivity extends BaseActivity{
     @Override
     @AfterViews
     protected void afterInstanceView() {
-        setSupportActionBar(toolbar);
+        setSupportActionBar(mToolbar);
     }
 
     @Click(value = {R.id.adapter_button,R.id.list_dialog_button,R.id.confirm_dialog_button
-            ,R.id.loading_dialog_button,R.id.select_image,R.id.browse_image,R.id.map})
+            ,R.id.loading_dialog_button,R.id.select_image,R.id.browse_image,R.id.map,R.id.fresco})
     public void onClick(View v) {
         Intent intent=new Intent();
         Bundle bundle = new Bundle();
@@ -81,7 +81,7 @@ public class MainActivity extends BaseActivity{
                 break;
             //图片浏览
             case R.id.browse_image:
-                intent.setClass(getApplicationContext(),BrowseImageActivity_.class);
+                intent.setClass(getApplicationContext(),BrowseImageExampleActivity_.class);
                 List<String> list=new ArrayList<String>();
                 list.add("http://www.loveq.cn/store/photo/144/546/1445460/2140998/1402789580862162351.png");
                 list.add("http://a0.att.hudong.com/15/08/300218769736132194086202411_950.jpg");
@@ -92,7 +92,11 @@ public class MainActivity extends BaseActivity{
                 break;
             //百度地图
             case R.id.map:
-                intent.setClass(getApplicationContext(),BaiduMapActivity_.class);
+                intent.setClass(getApplicationContext(),BaiduMapExampleActivity_.class);
+                startActivity(intent);
+                break;
+            case R.id.fresco:
+                intent.setClass(getApplicationContext(),FrescoExampleActivity_.class);
                 startActivity(intent);
         }
     }
@@ -102,8 +106,8 @@ public class MainActivity extends BaseActivity{
         super.onActivityResult(requestCode, resultCode, data);
         if (requestCode==QUESTION_IMAGE_CODE&&resultCode==RESULT_OK){
             Uri uri = Uri.parse(ConstantValue.FILE_CACHE_IMAGE+mImageName);
-            simpleDraweeView.setVisibility(View.VISIBLE);
-            simpleDraweeView.setImageURI(uri);
+            mSimpleDraweeView.setVisibility(View.VISIBLE);
+            mSimpleDraweeView.setImageURI(uri);
         }
     }
 

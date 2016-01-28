@@ -6,6 +6,10 @@ import android.content.Context;
 import com.baidu.map.BaiduLoc;
 import com.baidu.mapapi.SDKInitializer;
 import com.facebook.drawee.backends.pipeline.Fresco;
+import com.facebook.imagepipeline.core.ImagePipelineConfig;
+import com.facebook.imagepipeline.decoder.ProgressiveJpegConfig;
+import com.facebook.imagepipeline.image.ImmutableQualityInfo;
+import com.facebook.imagepipeline.image.QualityInfo;
 import com.nostra13.universalimageloader.cache.disc.impl.UnlimitedDiskCache;
 import com.nostra13.universalimageloader.core.ImageLoader;
 import com.nostra13.universalimageloader.core.ImageLoaderConfiguration;
@@ -26,9 +30,30 @@ public class MyApplication extends Application {
     @Override
     public void onCreate() {
         super.onCreate();
-        Fresco.initialize(getApplicationContext());
         initImageLoader(getApplicationContext());
         initBaiduMap();
+        initFresco();
+    }
+
+    /**
+     * 初始化fresco
+     */
+    private  void initFresco(){
+        ProgressiveJpegConfig pjpegConfig = new ProgressiveJpegConfig() {
+            @Override
+            public int getNextScanNumberToDecode(int scanNumber) {
+                return scanNumber + 2;
+            }
+
+            public QualityInfo getQualityInfo(int scanNumber) {
+                boolean isGoodEnough = (scanNumber >= 5);
+                return ImmutableQualityInfo.of(scanNumber, isGoodEnough, false);
+            }
+        };
+        ImagePipelineConfig imagePipelineConfig = ImagePipelineConfig.newBuilder(this)
+                .setProgressiveJpegConfig(pjpegConfig)
+                .build();
+        Fresco.initialize(getApplicationContext(),imagePipelineConfig);
     }
 
     /**
