@@ -58,6 +58,11 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="@string/fresco"/>
+        <Button
+            android:id="@+id/eventbus"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/eventbus"/>
     </LinearLayout>
     <LinearLayout
         android:layout_width="match_parent"

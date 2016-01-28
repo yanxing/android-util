@@ -15,4 +15,6 @@
     <string name="map_lable">百度地图封装测试</string>
     <string name="fresco">fresco使用</string>
     <string name="fresco_lable">fresco使用测试</string>
+    <string name="eventBus">EventBus使用测试</string>
+    <string name="eventbus">EventBus使用</string>
 </resources>

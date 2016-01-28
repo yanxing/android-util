@@ -14,7 +14,7 @@ public abstract class BaseActivity extends AppCompatActivity {
     private LoadingDialog mLoadingDialog;
 
     /**
-     * 在androidannotations实例化控件后执行，子类需要加上@AfterViews注解
+     * 在androidannotations实例化控件后执行(onCreate之后，onStart之前)，子类需要加上@AfterViews注解
      */
     protected abstract void afterInstanceView();
 

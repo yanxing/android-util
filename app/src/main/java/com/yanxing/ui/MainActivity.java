@@ -11,6 +11,7 @@ import android.view.MenuItem;
 import com.facebook.drawee.view.SimpleDraweeView;
 import com.photo.ui.PhotoUtilsActivity;
 import com.yanxing.base.BaseActivity;
+import com.yanxing.model.FirstEventBus;
 import com.yanxing.util.ConstantValue;
 import com.yanxing.util.FileUtil;
 
@@ -23,6 +24,8 @@ import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
 
+import de.greenrobot.event.EventBus;
+
 @EActivity(R.layout.activity_main)
 public class MainActivity extends BaseActivity{
 
@@ -34,16 +37,18 @@ public class MainActivity extends BaseActivity{
 
     private static final int QUESTION_IMAGE_CODE = 1;
     //选择的图片名称
-    private  String mImageName;
+    private String mImageName;
 
     @Override
     @AfterViews
     protected void afterInstanceView() {
         setSupportActionBar(mToolbar);
+        EventBus.getDefault().register(this);
     }
 
     @Click(value = {R.id.adapter_button,R.id.list_dialog_button,R.id.confirm_dialog_button
-            ,R.id.loading_dialog_button,R.id.select_image,R.id.browse_image,R.id.map,R.id.fresco})
+            ,R.id.loading_dialog_button,R.id.select_image,R.id.browse_image,R.id.map
+            ,R.id.fresco,R.id.eventbus})
     public void onClick(View v) {
         Intent intent=new Intent();
         Bundle bundle = new Bundle();
@@ -95,10 +100,30 @@ public class MainActivity extends BaseActivity{
                 intent.setClass(getApplicationContext(),BaiduMapExampleActivity_.class);
                 startActivity(intent);
                 break;
+            //fresco使用
             case R.id.fresco:
                 intent.setClass(getApplicationContext(),FrescoExampleActivity_.class);
                 startActivity(intent);
+                break;
+            //eventBus测试
+            case R.id.eventbus:
+                intent.setClass(getApplicationContext(),EventBusExampleActivity_.class);
+                startActivity(intent);
+
         }
+    }
+
+    @Override
+    protected void onStop() {
+        super.onStop();
+        EventBus.getDefault().post(new FirstEventBus("EventBus是一个发布 / 订阅的事件总线"));
+        EventBus.getDefault().post("EventBus是一个发布 / 订阅的事件总线");
+    }
+
+    @Override
+    protected void onDestroy() {
+        super.onDestroy();
+        EventBus.getDefault().unregister(this);
     }
 
     @Override
@@ -109,6 +134,10 @@ public class MainActivity extends BaseActivity{
             mSimpleDraweeView.setVisibility(View.VISIBLE);
             mSimpleDraweeView.setImageURI(uri);
         }
+    }
+
+    public void onEvent(String msg){
+        showToast(msg);
     }
 
     @Override

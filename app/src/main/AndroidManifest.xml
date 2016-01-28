@@ -71,6 +71,8 @@
             android:label="@string/map_lable"/>
         <activity android:name=".FrescoExampleActivity_"
             android:label="@string/fresco_lable"/>
+        <activity android:name=".EventBusExampleActivity_"
+            android:label="@string/eventBus"/>
     </application>
 
 </manifest>
