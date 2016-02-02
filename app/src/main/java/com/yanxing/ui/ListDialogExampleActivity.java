@@ -35,7 +35,7 @@ public class ListDialogExampleActivity extends AppCompatActivity {
             }
         });
         final List<String> list=new ArrayList<String>();
-        for (int i=1;i<6;i++){
+        for (int i=1;i<4;i++){
             list.add("yanxing"+i);
         }
         final ListDialog listDialog=new ListDialog(this,list);

@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+
+    <declare-styleable name = "MyTitleBar">
+        <attr name="title_center" format = "string" />
+        <attr name="right_title" format="string"/>
+   </declare-styleable>
+
+</resources>

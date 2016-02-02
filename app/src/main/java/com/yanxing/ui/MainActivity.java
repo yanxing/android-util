@@ -117,7 +117,7 @@ public class MainActivity extends BaseActivity{
     protected void onStop() {
         super.onStop();
         EventBus.getDefault().post(new FirstEventBus("EventBus是一个发布 / 订阅的事件总线"));
-        EventBus.getDefault().post("EventBus是一个发布 / 订阅的事件总线");
+//        EventBus.getDefault().post("EventBus是一个发布 / 订阅的事件总线");
     }
 
     @Override
