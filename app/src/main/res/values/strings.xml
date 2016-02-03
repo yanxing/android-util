@@ -17,4 +17,9 @@
     <string name="fresco_lable">fresco使用测试</string>
     <string name="eventBus">EventBus使用测试</string>
     <string name="eventbus">EventBus使用</string>
+    <string name="titleBar">自定义标题栏</string>
+    <string name="title">默认标题栏</string>
+    <string name="title2">修改标题栏默认颜色</string>
+    <string name="title3">显示标题栏右菜单</string>
+    <string name="right">保存</string>
 </resources>

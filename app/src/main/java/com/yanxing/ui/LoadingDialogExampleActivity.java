@@ -1,5 +1,8 @@
 package com.yanxing.ui;
 
+import android.os.Bundle;
+import android.support.annotation.Nullable;
+
 import com.yanxing.base.BaseActivity;
 
 import org.androidannotations.annotations.AfterViews;
@@ -11,6 +14,13 @@ import org.androidannotations.annotations.EActivity;
  */
 @EActivity(R.layout.activity_loading_dialog_example)
 public class LoadingDialogExampleActivity extends BaseActivity{
+
+
+    @Override
+    protected void onCreate(@Nullable Bundle savedInstanceState) {
+        mUseStatus=false;
+        super.onCreate(savedInstanceState);
+    }
 
     @AfterViews
     @Override

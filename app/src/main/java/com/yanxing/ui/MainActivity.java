@@ -20,6 +20,7 @@ import org.androidannotations.annotations.Click;
 import org.androidannotations.annotations.EActivity;
 import org.androidannotations.annotations.ViewById;
 
+import java.io.File;
 import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
@@ -44,11 +45,12 @@ public class MainActivity extends BaseActivity{
     protected void afterInstanceView() {
         setSupportActionBar(mToolbar);
         EventBus.getDefault().register(this);
+        File  file=new FileUtil().createDir(ConstantValue.CACHE_IMAGE);
     }
 
     @Click(value = {R.id.adapter_button,R.id.list_dialog_button,R.id.confirm_dialog_button
             ,R.id.loading_dialog_button,R.id.select_image,R.id.browse_image,R.id.map
-            ,R.id.fresco,R.id.eventbus})
+            ,R.id.fresco,R.id.eventbus,R.id.titleBar})
     public void onClick(View v) {
         Intent intent=new Intent();
         Bundle bundle = new Bundle();
@@ -109,7 +111,12 @@ public class MainActivity extends BaseActivity{
             case R.id.eventbus:
                 intent.setClass(getApplicationContext(),EventBusExampleActivity_.class);
                 startActivity(intent);
-
+                break;
+            //标题栏测试
+            case R.id.titleBar:
+                intent.setClass(getApplicationContext(),TitleBarExampleActivity_.class);
+                startActivity(intent);
+                break;
         }
     }
 

@@ -17,8 +17,8 @@ public class FileUtil {
     /**
      * 获取android文件系统，外置存储
      */
-    public static final String STORAGE_PATH = Environment.getExternalStorageDirectory() + "/";
-    public static final String TAG="FileUtil";
+    private static final String STORAGE_PATH = Environment.getExternalStorageDirectory() + "/";
+    private static final String TAG="FileUtil";
 
     /**
      * 获取存储根目录
@@ -39,7 +39,7 @@ public class FileUtil {
     }
 
     /**
-     * 在创建文件
+     * 在创建文件，绝对路径
      *
      * @throws IOException
      */
@@ -58,7 +58,7 @@ public class FileUtil {
     }
 
     /**
-     * 文件是否存在，true存在
+     * 文件是否存在，true存在,绝对路径
      * @param filePath 文件路径
      * @return 存在 返回true 否则false
      */
@@ -76,7 +76,7 @@ public class FileUtil {
     }
 
     /**
-     * 创建目录,如果存在，则不创建
+     * 创建目录,如果存在，则不创建 ,绝对路径
      *
      * @param dirName  文件路径
      */
@@ -94,7 +94,7 @@ public class FileUtil {
     }
 
     /**
-     * 根据路径删除图片
+     * 根据路径删除图片,绝对路径
      *
      * @param path
      */
@@ -110,7 +110,7 @@ public class FileUtil {
     }
 
     /**
-     * 将一个InputStream里面的数据写入到外置存储中
+     * 将一个InputStream里面的数据写入到外置存储中,绝对路径
      *
      * @param path     路径名
      * @param fileName 文件名

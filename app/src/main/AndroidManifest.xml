@@ -66,13 +66,19 @@
         <activity
             android:name=".BrowseImageExampleActivity_"
             android:theme="@style/noTitle" />
-        <activity android:name=".BaiduMapExampleActivity"/>
-        <activity android:name=".BaiduMapExampleActivity_"
+        <activity
+            android:name=".BaiduMapExampleActivity_"
             android:label="@string/map_lable"/>
-        <activity android:name=".FrescoExampleActivity_"
-            android:label="@string/fresco_lable"/>
-        <activity android:name=".EventBusExampleActivity_"
+        <activity
+            android:name=".FrescoExampleActivity_"
+            android:theme="@style/AppTheme.NoActionBar"/>
+        <activity
+            android:name=".EventBusExampleActivity_"
             android:label="@string/eventBus"/>
+        <activity
+            android:name=".TitleBarExampleActivity_"
+            android:theme="@style/AppTheme.NoActionBar"/>
+
     </application>
 
 </manifest>

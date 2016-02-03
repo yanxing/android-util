@@ -1,5 +1,7 @@
 package com.yanxing.ui;
 
+import android.os.Bundle;
+import android.support.annotation.Nullable;
 import android.widget.TextView;
 
 import com.yanxing.base.BaseActivity;
@@ -20,6 +22,12 @@ public class EventBusExampleActivity extends BaseActivity {
 
     @ViewById(R.id.eventbus)
     TextView mEventBus;
+
+    @Override
+    protected void onCreate(@Nullable Bundle savedInstanceState) {
+        mUseStatus=false;
+        super.onCreate(savedInstanceState);
+    }
 
     @AfterViews
     @Override

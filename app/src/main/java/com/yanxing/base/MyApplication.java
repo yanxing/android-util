@@ -5,6 +5,7 @@ import android.content.Context;
 
 import com.baidu.map.BaiduLoc;
 import com.baidu.mapapi.SDKInitializer;
+import com.facebook.cache.disk.DiskCacheConfig;
 import com.facebook.drawee.backends.pipeline.Fresco;
 import com.facebook.imagepipeline.core.ImagePipelineConfig;
 import com.facebook.imagepipeline.decoder.ProgressiveJpegConfig;
@@ -21,6 +22,7 @@ import com.yanxing.util.ImageNameGenerator;
 import java.io.File;
 
 /**
+ * APP初始化配置
  * Created by lishuangxiang on 2016/1/26.
  */
 public class MyApplication extends Application {
@@ -50,8 +52,18 @@ public class MyApplication extends Application {
                 return ImmutableQualityInfo.of(scanNumber, isGoodEnough, false);
             }
         };
+        File file=new File(FileUtil.getStoragePath());
+        //自定义图片的磁盘配置,fresco缓存文件后缀cnt
+        DiskCacheConfig diskCacheConfig =  DiskCacheConfig.newBuilder(this)
+                .setBaseDirectoryPath(file)//缓存图片基路径
+                .setBaseDirectoryName(ConstantValue.CACHE_IMAGE)//文件夹名
+                .setMaxCacheSize(ConstantValue.MAX_DISK_CACHE_SIZE)//默认缓存的最大大小。
+                .setMaxCacheSizeOnLowDiskSpace(ConstantValue.MAX_DISK_CACHE_LOW_SIZE)//缓存的最大大小,使用设备时低磁盘空间。
+                .setMaxCacheSizeOnVeryLowDiskSpace(ConstantValue.MAX_DISK_CACHE_VERYLOW_SIZE)//缓存的最大大小,当设备极低磁盘空间
+                .build();
         ImagePipelineConfig imagePipelineConfig = ImagePipelineConfig.newBuilder(this)
                 .setProgressiveJpegConfig(pjpegConfig)
+                .setMainDiskCacheConfig(diskCacheConfig)//磁盘缓存配置
                 .build();
         Fresco.initialize(getApplicationContext(),imagePipelineConfig);
     }
@@ -66,16 +78,16 @@ public class MyApplication extends Application {
     }
 
     /**
-     * 初始化UIL全局配置
+     * 初始化UIL配置
      *
      * @param context
      */
     public static void initImageLoader(Context context) {
-        File file = FileUtil.createDir(ConstantValue.CACHE_IMAGE);
+        File file =new File(FileUtil.getStoragePath()+ConstantValue.CACHE_IMAGE);
         ImageLoaderConfiguration config = new ImageLoaderConfiguration.Builder(context)
-                .threadPriority(Thread.NORM_PRIORITY - 2)
                 .denyCacheImageMultipleSizesInMemory()
-                .diskCache(new UnlimitedDiskCache(file, file, new ImageNameGenerator())) // 缓存到SD卡
+                .diskCache(new UnlimitedDiskCache(file))
+//                .diskCache(new UnlimitedDiskCache(file, file, new ImageNameGenerator())) // 自定义命名规则缓存到外存
                 .diskCacheSize(50 * 1024 * 1024) // 50 Mb
                 .tasksProcessingOrder(QueueProcessingType.LIFO)
                 .writeDebugLogs()

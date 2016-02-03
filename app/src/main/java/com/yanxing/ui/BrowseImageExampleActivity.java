@@ -76,7 +76,7 @@ public class BrowseImageExampleActivity extends FragmentActivity{
         public SamplePagerAdapter(){
             options=new DisplayImageOptions.Builder()
                     .cacheOnDisk(true)
-                    .showImageOnLoading(R.anim.loading)
+                    .showImageOnLoading(R.drawable.loading_fresco)
                     .showImageForEmptyUri(R.mipmap.ic_launcher)
                     .showImageOnFail(R.mipmap.ic_launcher)
                     .cacheInMemory(true)

@@ -8,5 +8,5 @@
         android:id="@+id/simple_drawee_view"
         android:layout_width="130dp"
         android:layout_height="130dp"
-        app:placeholderImage="@mipmap/ic_launcher"/>
+        app:progressBarImage="@drawable/loading_fresco"/>
 </LinearLayout>

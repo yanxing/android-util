@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+              xmlns:app="http://schemas.android.com/apk/res-auto"
+              android:layout_width="match_parent"
+              android:layout_height="match_parent"
+              android:background="#eee"
+              android:fitsSystemWindows="true"
+              android:orientation="vertical">
+
+    <com.yanxing.titlebarlibrary.TitleBar
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        app:title_center="@string/title"/>
+
+    <com.yanxing.titlebarlibrary.TitleBar
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        app:backgroundColor="@android:color/holo_red_light"
+        app:title_center="@string/title2"/>
+
+    <com.yanxing.titlebarlibrary.TitleBar
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        app:right_title="@string/right"
+        app:title_center="@string/title3"
+        app:right_title_visible="true"/>
+
+</LinearLayout>

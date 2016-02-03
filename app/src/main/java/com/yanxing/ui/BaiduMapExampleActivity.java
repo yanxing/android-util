@@ -1,5 +1,7 @@
 package com.yanxing.ui;
 
+import android.os.Bundle;
+import android.support.annotation.Nullable;
 import android.widget.LinearLayout;
 
 import com.baidu.location.BDLocation;
@@ -35,6 +37,12 @@ public class BaiduMapExampleActivity extends BaseActivity implements RoutePlanRe
     LinearLayout mMap;
 
     private BaiduMapView mBaiduMapView;
+
+    @Override
+    protected void onCreate(@Nullable Bundle savedInstanceState) {
+        mUseStatus=false;
+        super.onCreate(savedInstanceState);
+    }
 
     @AfterViews
     @Override

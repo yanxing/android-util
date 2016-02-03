@@ -17,6 +17,10 @@ public class LoadingDialog extends Dialog {
     //提示
     private TextView mTip;
 
+    public LoadingDialog(Context context) {
+        this(context,null);
+    }
+
     public LoadingDialog(Context context, String tip) {
         super(context, R.style.loading_dialog);
         requestWindowFeature(Window.FEATURE_NO_TITLE);

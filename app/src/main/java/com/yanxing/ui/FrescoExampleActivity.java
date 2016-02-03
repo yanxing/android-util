@@ -48,6 +48,14 @@ public class FrescoExampleActivity extends BaseActivity {
         mList.add("http://easyread.ph.126.net/oqrtUVjMy0AGTI-bGY6SDg==/8796093022410112398.jpg");
         mList.add("http://pic.yesky.com/uploadImages/2015/338/58/NDGS01TWM26A.jpg");
         mList.add("http://photocdn.sohu.com/20151209/mp47317406_1449623763081_4.gif");
+        mList.add("http://npic7.edushi.com/cn/zixun/zh-chs/2015-12/24/9fb3600ebd60a7504bcd9acf1d6ab40b.gif");
+        mList.add("http://upload.qianhuaweb.com/2015/1203/1449107626255.gif");
+        mList.add("http://jiangsu.china.com.cn/uploadfile/2015/1201/1448961827412987.jpg");
+        mList.add("http://img5.imgtn.bdimg.com/it/u=124877489,3743558634&fm=11&gp=0.jpg");
+        mList.add("http://photocdn.sohu.com/20151203/mp46210750_1449138160100_1_th.jpeg");
+        mList.add("http://img1.shenchuang.com/2015/0203/1422969395565.jpg");
+        mList.add("http://www.people.com.cn/mediafile/pic/20151201/55/6912848265428588611.jpg");
+        mList.add("http://moviepic.manmankan.com/yybpic/xinwen/2015/201512/02/14490288511739759.gif");
         mCommonAdapter=new CommonAdapter<String>(mList,R.layout.gridview_adapter) {
             @Override
             public void onBindViewHolder(ViewHolder viewHolder, String url) {

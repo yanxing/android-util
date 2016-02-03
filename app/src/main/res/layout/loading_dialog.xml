@@ -14,7 +14,7 @@
         android:indeterminate="false"
         android:layout_gravity="center"
         android:paddingLeft="4dp"
-        android:indeterminateDrawable="@anim/loading" />
+        android:indeterminateDrawable="@drawable/loading" />
 
     <TextView
         android:id="@+id/tip"
