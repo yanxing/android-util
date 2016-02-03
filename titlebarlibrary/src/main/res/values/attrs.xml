@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+
+    <declare-styleable name = "MyTitleBar">
+        <!-- 标题-->
+        <attr name="title_center" format = "string" />
+        <!-- 右菜单-->
+        <attr name="right_title" format="string"/>
+        <!-- 右菜单可见性-->
+        <attr name="right_title_visible" format="boolean" />
+        <!-- titleBar背景色-->
+        <attr name="backgroundColor" format="reference|color" />
+   </declare-styleable>
+
+</resources>
