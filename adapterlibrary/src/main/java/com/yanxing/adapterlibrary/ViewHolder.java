@@ -4,6 +4,7 @@ import android.util.SparseArray;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.ImageView;
 import android.widget.TextView;
 
 /**
@@ -62,6 +63,17 @@ public class ViewHolder {
     public void setText(int viewId, String text){
         TextView view = findViewById(viewId);
         view.setText(text);
+    }
+
+    /**
+     * 为ImageView设置背景图片
+     * @param viewId
+     * @param drawableId
+     * @return
+     */
+    public void setBackgroundResource(int viewId, int drawableId){
+        ImageView view = findViewById(viewId);
+        view.setBackgroundResource(viewId);
     }
 
     /**
