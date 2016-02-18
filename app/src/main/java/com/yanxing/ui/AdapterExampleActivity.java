@@ -27,7 +27,7 @@ public class AdapterExampleActivity extends AppCompatActivity {
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
         mListView= (ListView) findViewById(R.id.listview);
         setSupportActionBar(toolbar);
-        List<User> list=new ArrayList<User>();
+        final List<User> list=new ArrayList<User>();
         for (int i=0;i<20;i++){
             User user=new User("1","yanxing");
             list.add(user);
@@ -36,8 +36,8 @@ public class AdapterExampleActivity extends AppCompatActivity {
         CommonAdapter<User> adapter = new CommonAdapter<User>(list,R.layout.list_dialog_textview)
         {
             @Override
-            public void onBindViewHolder(ViewHolder viewHolder, User user) {
-                viewHolder.setText(R.id.text, user.getUsername());
+            public void onBindViewHolder(ViewHolder viewHolder, int position) {
+                viewHolder.setText(R.id.text, list.get(position).getUsername());
             }
         };
         mListView.setAdapter(adapter);

@@ -58,7 +58,8 @@ public class FrescoExampleActivity extends BaseActivity {
         mList.add("http://moviepic.manmankan.com/yybpic/xinwen/2015/201512/02/14490288511739759.gif");
         mCommonAdapter=new CommonAdapter<String>(mList,R.layout.gridview_adapter) {
             @Override
-            public void onBindViewHolder(ViewHolder viewHolder, String url) {
+            public void onBindViewHolder(ViewHolder viewHolder, int position) {
+                String url=mList.get(position);
                 Uri uri = Uri.parse(url);
                 SimpleDraweeView simpleDraweeView=viewHolder.findViewById(R.id.simple_drawee_view);
 

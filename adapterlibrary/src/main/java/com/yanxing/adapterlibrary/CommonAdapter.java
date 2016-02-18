@@ -43,14 +43,14 @@ public abstract class CommonAdapter<T> extends BaseAdapter {
     @Override
     public View getView(int position, View convertView, ViewGroup parent){
         final ViewHolder viewHolder = ViewHolder.getViewHolder(convertView,parent,mLayoutId,position);
-        onBindViewHolder(viewHolder, getItem(position));
+        onBindViewHolder(viewHolder, position);
         return viewHolder.getConvertView();
     }
 
     /**
      * 设置数据
      * @param viewHolder
-     * @param object 当前位置的数据对象
+     * @param position 当前位置的索引
      */
-    public abstract void onBindViewHolder(ViewHolder viewHolder, T object);
+    public abstract void onBindViewHolder(ViewHolder viewHolder, int position);
 }
