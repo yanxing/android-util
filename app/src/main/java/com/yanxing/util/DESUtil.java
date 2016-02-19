@@ -12,7 +12,7 @@ import javax.crypto.spec.IvParameterSpec;
  */
 public class DESUtil {
 
-    public static final String KEY = "app_pass";
+    public static final String KEY = "yanxing";
 
     /**
      * 解密

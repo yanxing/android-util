@@ -32,7 +32,7 @@ public class MyApplication extends Application {
     @Override
     public void onCreate() {
         super.onCreate();
-        initImageLoader(getApplicationContext());
+        initImageLoader();
         initBaiduMap();
         initFresco();
     }
@@ -80,11 +80,10 @@ public class MyApplication extends Application {
     /**
      * 初始化UIL配置
      *
-     * @param context
      */
-    public static void initImageLoader(Context context) {
+    public void initImageLoader() {
         File file =new File(FileUtil.getStoragePath()+ConstantValue.CACHE_IMAGE);
-        ImageLoaderConfiguration config = new ImageLoaderConfiguration.Builder(context)
+        ImageLoaderConfiguration config = new ImageLoaderConfiguration.Builder(getApplicationContext())
                 .denyCacheImageMultipleSizesInMemory()
                 .diskCache(new UnlimitedDiskCache(file))
 //                .diskCache(new UnlimitedDiskCache(file, file, new ImageNameGenerator())) // 自定义命名规则缓存到外存
