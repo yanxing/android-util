@@ -9,7 +9,11 @@ import android.view.View;
 import android.widget.AdapterView;
 import android.widget.Toast;
 
+import com.yanxing.base.BaseActivity;
 import com.yanxing.view.ListDialog;
+
+import org.androidannotations.annotations.AfterViews;
+import org.androidannotations.annotations.EActivity;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -17,23 +21,12 @@ import java.util.List;
  * ListDialog测试
  * Created by lishuangxiang on 2016/1/21.
  */
-public class ListDialogExampleActivity extends AppCompatActivity {
+@EActivity(R.layout.activity_list_dialog_example)
+public class ListDialogExampleActivity extends BaseActivity {
 
     @Override
-    protected void onCreate(Bundle savedInstanceState) {
-        super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_list_dialog_example);
-        Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
-        setSupportActionBar(toolbar);
-
-        FloatingActionButton fab = (FloatingActionButton) findViewById(R.id.fab);
-        fab.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                Snackbar.make(view, "Replace with your own action", Snackbar.LENGTH_LONG)
-                        .setAction("Action", null).show();
-            }
-        });
+    @AfterViews
+    protected void afterInstanceView() {
         final List<String> list=new ArrayList<String>();
         for (int i=1;i<4;i++){
             list.add("yanxing"+i);

@@ -25,7 +25,6 @@
         android:name="com.yanxing.base.MyApplication"
         android:allowBackup="true"
         android:icon="@mipmap/ic_launcher"
-        android:label="@string/app_name"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
 
@@ -40,7 +39,6 @@
 
         <activity
             android:name=".MainActivity_"
-            android:label="@string/app_name"
             android:theme="@style/AppTheme.NoActionBar">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
@@ -49,33 +47,27 @@
             </intent-filter>
         </activity>
         <activity
-            android:name=".AdapterExampleActivity"
-            android:label="@string/title_activity_adapter"
+            android:name=".AdapterExampleActivity_"
             android:theme="@style/AppTheme.NoActionBar" />
         <activity
-            android:name=".ListDialogExampleActivity"
-            android:label="@string/title_activity_list_dialog_example"
+            android:name=".ListDialogExampleActivity_"
             android:theme="@style/AppTheme.NoActionBar" />
         <activity
-            android:name=".ConfirmExampleActivity"
-            android:label="@string/title_activity_confirm_example"
+            android:name=".ConfirmExampleActivity_"
             android:theme="@style/AppTheme.NoActionBar" />
         <activity
             android:name=".LoadingDialogExampleActivity_"
-            android:label="@string/title_activity_loading_dialog_example"
             android:theme="@style/AppTheme.NoActionBar" />
         <activity
             android:name=".BrowseImageExampleActivity_"
             android:theme="@style/noTitle" />
         <activity
-            android:name=".BaiduMapExampleActivity_"
-            android:label="@string/map_lable"/>
+            android:name=".BaiduMapExampleActivity_"/>
         <activity
             android:name=".FrescoExampleActivity_"
             android:theme="@style/AppTheme.NoActionBar"/>
         <activity
-            android:name=".EventBusExampleActivity_"
-            android:label="@string/eventBus"/>
+            android:name=".EventBusExampleActivity_"/>
         <activity
             android:name=".TitleBarExampleActivity_"
             android:theme="@style/AppTheme.NoActionBar"/>

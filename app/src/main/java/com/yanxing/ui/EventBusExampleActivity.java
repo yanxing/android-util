@@ -23,12 +23,6 @@ public class EventBusExampleActivity extends BaseActivity {
     @ViewById(R.id.eventbus)
     TextView mEventBus;
 
-    @Override
-    protected void onCreate(@Nullable Bundle savedInstanceState) {
-        mUseStatus=false;
-        super.onCreate(savedInstanceState);
-    }
-
     @AfterViews
     @Override
     protected void afterInstanceView() {

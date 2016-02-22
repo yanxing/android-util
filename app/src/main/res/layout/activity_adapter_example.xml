@@ -1,37 +1,22 @@
 <?xml version="1.0" encoding="utf-8"?>
-<android.support.design.widget.CoordinatorLayout
+<LinearLayout
     xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:fitsSystemWindows="true"
-    android:clipToPadding="true"
+    android:orientation="vertical"
     tools:context=".AdapterExampleActivity">
 
-    <android.support.design.widget.AppBarLayout
+    <com.yanxing.titlebarlibrary.TitleBar
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        app:expandedTitleMarginEnd="64dp"
-        app:expandedTitleMarginStart="48dp"
-        android:fitsSystemWindows="true"
-        app:contentScrim="?attr/colorPrimary"
-        android:theme="@style/AppTheme.AppBarOverlay">
-
-        <android.support.v7.widget.Toolbar
-            android:id="@+id/toolbar"
-            android:layout_width="match_parent"
-            android:layout_height="?attr/actionBarSize"
-            android:background="?attr/colorPrimary"
-            app:layout_scrollFlags="scroll|enterAlways"
-            app:popupTheme="@style/AppTheme.PopupOverlay" />
-    </android.support.design.widget.AppBarLayout>
+        app:title_center="@string/title_activity_adapter"/>
     <ListView
         android:id="@+id/listview"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:listSelector="#00000000"
-        app:layout_behavior="@string/appbar_scrolling_view_behavior"
         android:divider="#cfcfcf"
         android:dividerHeight="1px" />
-</android.support.design.widget.CoordinatorLayout>
+</LinearLayout>

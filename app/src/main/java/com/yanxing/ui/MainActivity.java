@@ -30,9 +30,6 @@ import de.greenrobot.event.EventBus;
 @EActivity(R.layout.activity_main)
 public class MainActivity extends BaseActivity{
 
-    @ViewById(R.id.toolbar)
-    Toolbar mToolbar;
-
     @ViewById(R.id.simple_drawee_view)
     SimpleDraweeView mSimpleDraweeView;
 
@@ -43,9 +40,7 @@ public class MainActivity extends BaseActivity{
     @Override
     @AfterViews
     protected void afterInstanceView() {
-        setSupportActionBar(mToolbar);
         EventBus.getDefault().register(this);
-        File  file=new FileUtil().createDir(ConstantValue.CACHE_IMAGE);
     }
 
     @Click(value = {R.id.adapter_button,R.id.list_dialog_button,R.id.confirm_dialog_button
@@ -57,17 +52,17 @@ public class MainActivity extends BaseActivity{
         switch (v.getId()){
             //通用适配器
             case R.id.adapter_button:
-                intent.setClass(this,AdapterExampleActivity.class);
+                intent.setClass(this,AdapterExampleActivity_.class);
                 startActivity(intent);
                 break;
             //列表适配器
             case R.id.list_dialog_button:
-                intent.setClass(this,ListDialogExampleActivity.class);
+                intent.setClass(this,ListDialogExampleActivity_.class);
                 startActivity(intent);
                 break;
             //确定对话框
             case R.id.confirm_dialog_button:
-                intent.setClass(this,ConfirmExampleActivity.class);
+                intent.setClass(this,ConfirmExampleActivity_.class);
                 startActivity(intent);
                 break;
             //进度框

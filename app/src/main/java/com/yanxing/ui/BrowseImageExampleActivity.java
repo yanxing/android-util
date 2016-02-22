@@ -1,6 +1,7 @@
 package com.yanxing.ui;
 
 import android.os.Bundle;
+import android.support.annotation.Nullable;
 import android.support.v4.app.FragmentActivity;
 import android.support.v4.view.PagerAdapter;
 import android.support.v4.view.ViewPager;
@@ -12,6 +13,7 @@ import com.nostra13.universalimageloader.core.DisplayImageOptions;
 import com.nostra13.universalimageloader.core.ImageLoader;
 import com.photo.browse.widget.CustomPhotoViewPager;
 import com.photo.browse.widget.PhotoView;
+import com.yanxing.base.BaseActivity;
 
 import org.androidannotations.annotations.AfterViews;
 import org.androidannotations.annotations.EActivity;
@@ -25,7 +27,7 @@ import java.util.List;
  * Created by lishuangxiang on 2016/1/26.
  */
 @EActivity(R.layout.activity_browse_image_example)
-public class BrowseImageExampleActivity extends FragmentActivity{
+public class BrowseImageExampleActivity extends BaseActivity{
 
     @ViewById(R.id.custom_photo_viewpage)
     CustomPhotoViewPager mCustomPhotoViewPager;
@@ -37,8 +39,15 @@ public class BrowseImageExampleActivity extends FragmentActivity{
 
     private List<String> mPathList = new ArrayList<String>();
 
+    @Override
+    protected void onCreate(@Nullable Bundle savedInstanceState) {
+        mUseStatus=false;
+        super.onCreate(savedInstanceState);
+    }
+
     @AfterViews
     protected void afterInstanceView() {
+        mTintManager.setStatusBarTintEnabled(false);
         mNumber.getPaint().setFakeBoldText(true);
         Bundle bundle = getIntent().getExtras();
         mPathList = (List<String>) bundle.getSerializable("images");

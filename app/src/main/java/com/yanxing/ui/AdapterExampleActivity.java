@@ -7,7 +7,12 @@ import android.widget.ListView;
 
 import com.yanxing.adapterlibrary.CommonAdapter;
 import com.yanxing.adapterlibrary.ViewHolder;
+import com.yanxing.base.BaseActivity;
 import com.yanxing.model.User;
+
+import org.androidannotations.annotations.AfterViews;
+import org.androidannotations.annotations.EActivity;
+import org.androidannotations.annotations.ViewById;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -16,17 +21,15 @@ import java.util.List;
  * adapterlibrary测试
  * Created by lishuangxiang on 2016/1/20.
  */
-public class AdapterExampleActivity extends AppCompatActivity {
+@EActivity(R.layout.activity_adapter_example)
+public class AdapterExampleActivity extends BaseActivity {
 
-    private ListView mListView;
+    @ViewById(R.id.listview)
+    ListView mListView;
 
     @Override
-    protected void onCreate(Bundle savedInstanceState) {
-        super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_adapter_example);
-        Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
-        mListView= (ListView) findViewById(R.id.listview);
-        setSupportActionBar(toolbar);
+    @AfterViews
+    protected void afterInstanceView() {
         final List<User> list=new ArrayList<User>();
         for (int i=0;i<20;i++){
             User user=new User("1","yanxing");

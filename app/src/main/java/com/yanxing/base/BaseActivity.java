@@ -7,14 +7,18 @@ import android.support.v7.app.AppCompatActivity;
 import android.view.WindowManager;
 import android.widget.Toast;
 
+import com.readystatesoftware.systembartint.SystemBarTintManager;
 import com.yanxing.view.LoadingDialog;
+
+import me.imid.swipebacklayout.lib.app.SwipeBackActivity;
 
 /**
  * Created by lishuangxiang on 2016/1/21.
  */
-public abstract class BaseActivity extends AppCompatActivity {
+public abstract class BaseActivity extends SwipeBackActivity {
 
     private LoadingDialog mLoadingDialog;
+    protected SystemBarTintManager mTintManager;
     //默认启动沉浸式通知栏
     protected boolean mUseStatus=true;
 
@@ -23,6 +27,9 @@ public abstract class BaseActivity extends AppCompatActivity {
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         initImmersionStatus(mUseStatus);
+        mTintManager = new SystemBarTintManager(this);
+        mTintManager .setStatusBarTintEnabled(true);
+        mTintManager.setTintColor(0xff37c14f);
     }
 
     /**

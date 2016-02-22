@@ -38,12 +38,6 @@ public class BaiduMapExampleActivity extends BaseActivity implements RoutePlanRe
 
     private BaiduMapView mBaiduMapView;
 
-    @Override
-    protected void onCreate(@Nullable Bundle savedInstanceState) {
-        mUseStatus=false;
-        super.onCreate(savedInstanceState);
-    }
-
     @AfterViews
     @Override
     protected void afterInstanceView() {

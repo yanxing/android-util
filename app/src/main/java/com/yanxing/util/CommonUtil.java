@@ -5,6 +5,7 @@ import android.content.Context;
 import android.content.Intent;
 import android.content.pm.PackageInfo;
 import android.content.pm.PackageManager;
+import android.content.pm.Signature;
 import android.graphics.Bitmap;
 import android.graphics.Rect;
 import android.net.Uri;
@@ -17,6 +18,8 @@ import android.view.inputmethod.InputMethodManager;
 import android.widget.EditText;
 
 import java.io.FileOutputStream;
+import java.security.MessageDigest;
+import java.security.NoSuchAlgorithmException;
 import java.util.List;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
@@ -265,5 +268,62 @@ public class CommonUtil {
     public static void hideInputKeyBoard(Context context,EditText editText){
         InputMethodManager imm =((InputMethodManager)context.getSystemService(context.INPUT_METHOD_SERVICE));
         imm.hideSoftInputFromWindow(editText.getApplicationWindowToken(), 0);
+    }
+
+    /**
+     * 校验应用签名
+     *
+     * @param context
+     */
+    public static boolean checkSignInfo(Context context,String MD5) {
+        try {
+            PackageInfo packageInfo = context.getPackageManager().getPackageInfo(context.getPackageName(), PackageManager.GET_SIGNATURES);
+            Signature[] signs = packageInfo.signatures;
+            Signature sign = signs[0];
+            MessageDigest md = MessageDigest.getInstance("MD5");
+            md.update(sign.toByteArray());
+            byte[] digest = md.digest();
+            String res = toHexString(digest);
+            if (MD5.equals(res)){
+                return true;
+            }
+        } catch (PackageManager.NameNotFoundException e) {
+            e.printStackTrace();
+        } catch (NoSuchAlgorithmException e) {
+            e.printStackTrace();
+        }
+        return false;
+    }
+
+
+    /**
+     * 转成十六进制
+     * @param b
+     * @param buf
+     */
+    private static void byte2hex(byte b, StringBuffer buf) {
+        char[] hexChars = {'0', '1', '2', '3', '4', '5', '6', '7', '8',
+                '9', 'A', 'B', 'C', 'D', 'E', 'F'};
+        int high = ((b & 0xf0) >> 4);
+        int low = (b & 0x0f);
+        buf.append(hexChars[high]);
+        buf.append(hexChars[low]);
+    }
+
+    /**
+     * 格式化MD5值
+     * @param block
+     * @return
+     */
+    private static String toHexString(byte[] block) {
+        StringBuffer buf = new StringBuffer();
+        int len = block.length;
+        for (int i = 0; i < len; i++) {
+            byte2hex(block[i], buf);
+            if (i < len - 1) {
+                buf.append(":");
+            }
+        }
+        return buf.toString();
     }
 }

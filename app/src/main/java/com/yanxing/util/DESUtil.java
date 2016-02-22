@@ -12,7 +12,7 @@ import javax.crypto.spec.IvParameterSpec;
  */
 public class DESUtil {
 
-    public static final String KEY = "yanxing";
+    public static final String KEY = "yan_xing";
 
     /**
      * 解密
@@ -27,7 +27,7 @@ public class DESUtil {
     /**
      * 解密
      * @param message
-     * @param key
+     * @param key 8字节长度
      * @return
      * @throws Exception
      */
@@ -66,7 +66,7 @@ public class DESUtil {
     /**
      * 加密
      * @param message
-     * @param key
+     * @param key 8字节长度
      * @return
      * @throws Exception
      */
