@@ -3,13 +3,19 @@
 
     <declare-styleable name = "MyTitleBar">
         <!-- 标题-->
-        <attr name="title_center" format = "string" />
+        <attr name="title_main" format = "string" />
+        <!-- 标题居中true,默认靠左false-->
+        <attr name="title_main_center" format = "boolean" />
+        <!-- 标题颜色-->
+        <attr name="title_main_color" format = "color" />
         <!-- 右菜单-->
-        <attr name="right_title" format="string"/>
-        <!-- 右菜单可见性-->
+        <attr name="title_right" format="string"/>
+        <!-- 右菜单可见true,默认不可见false-->
         <attr name="right_title_visible" format="boolean" />
         <!-- titleBar背景色-->
         <attr name="backgroundColor" format="reference|color" />
+        <!-- 返回图片隐藏false，默认显示true-->
+        <attr name="back_img_visible" format="boolean" />
    </declare-styleable>
 
 </resources>
