@@ -9,7 +9,7 @@
     <com.yanxing.titlebarlibrary.TitleBar
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        app:title_center="@string/map_lable"/>
+        app:title_main="@string/map_lable"/>
     <LinearLayout
         android:id="@+id/map"
         android:layout_width="match_parent"

@@ -7,7 +7,7 @@
     <com.yanxing.titlebarlibrary.TitleBar
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        app:title_center="@string/eventBus"/>
+        app:title_main="@string/eventBus"/>
     <TextView
         android:id="@+id/eventbus"
         android:layout_width="wrap_content"

@@ -22,4 +22,5 @@
     <string name="title2">修改标题栏默认颜色</string>
     <string name="title3">显示标题栏右菜单</string>
     <string name="right">保存</string>
+    <string name="title4">标题居中隐藏返回</string>
 </resources>

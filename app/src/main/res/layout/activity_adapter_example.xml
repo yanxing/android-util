@@ -11,7 +11,7 @@
     <com.yanxing.titlebarlibrary.TitleBar
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        app:title_center="@string/title_activity_adapter"/>
+        app:title_main="@string/title_activity_adapter"/>
     <ListView
         android:id="@+id/listview"
         android:layout_width="match_parent"

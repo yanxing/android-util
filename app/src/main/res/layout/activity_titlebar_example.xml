@@ -9,19 +9,29 @@
     <com.yanxing.titlebarlibrary.TitleBar
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        app:title_center="@string/title"/>
+        app:title_main="@string/title"/>
 
     <com.yanxing.titlebarlibrary.TitleBar
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         app:backgroundColor="@android:color/holo_red_light"
-        app:title_center="@string/title2"/>
+        app:title_main="@string/title2"/>
 
     <com.yanxing.titlebarlibrary.TitleBar
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        app:right_title="@string/right"
-        app:title_center="@string/title3"
+        app:title_right="@string/right"
+        app:title_main="@string/title3"
         app:right_title_visible="true"/>
+
+    <com.yanxing.titlebarlibrary.TitleBar
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        app:title_main_center="true"
+        app:back_img_visible="false"
+        app:backgroundColor="@android:color/holo_red_light"
+        app:title_main_color="@android:color/holo_green_light"
+        app:title_main="@string/title4"/>
+
 
 </LinearLayout>

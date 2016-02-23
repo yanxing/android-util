@@ -9,7 +9,7 @@
     <com.yanxing.titlebarlibrary.TitleBar
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        app:title_center="@string/title_activity_list_dialog_example"/>
+        app:title_main="@string/title_activity_list_dialog_example"/>
 
     <include layout="@layout/content_list_dialog_example" />
 
