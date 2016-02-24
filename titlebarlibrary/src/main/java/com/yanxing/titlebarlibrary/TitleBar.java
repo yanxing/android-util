@@ -79,6 +79,12 @@ public class TitleBar extends LinearLayout {
             mBackImg.setVisibility(INVISIBLE);
         }
 
+        //返回图标资源
+        if (a.hasValue(7)){
+            Drawable background = a.getDrawable(R.styleable.MyTitleBar_back_img_resource);
+            mBackImg.setBackgroundDrawable(background);
+        }
+
         //返回图标可见，才有点击事件
         if (a.getBoolean(6,true)){
             mBack.setOnClickListener(new OnClickListener() {
@@ -95,21 +101,21 @@ public class TitleBar extends LinearLayout {
      *
      * @param onClickListener
      */
-    private void setOnClickBackLayout(OnClickListener onClickListener) {
+    public void setOnClickBackLayout(OnClickListener onClickListener) {
         mBack.setOnClickListener(onClickListener);
     }
 
     /**
      * 设置标题文字
      */
-    private void setTitle(String text) {
+    public void setTitle(String text) {
         mTitle.setText(text);
     }
 
     /**
      * 设置标题文字颜色
      */
-    private void setTitleColor(int  color) {
+    public void setTitleColor(int  color) {
         mTitle.setTextColor(color);
     }
 
@@ -123,7 +129,7 @@ public class TitleBar extends LinearLayout {
     /**
      * 设置标题居中，默认左边
      */
-    private void setTitleCenter() {
+    public void setTitleCenter() {
         FrameLayout.LayoutParams lp = new FrameLayout.LayoutParams(ViewGroup.LayoutParams.MATCH_PARENT, ViewGroup.LayoutParams.MATCH_PARENT);
         lp.setMargins(0, 0, 0, 0);
         mTitle.setLayoutParams(lp);
@@ -135,7 +141,7 @@ public class TitleBar extends LinearLayout {
      *
      * @param text
      */
-    private void setRightTitle(String text) {
+    public void setRightTitle(String text) {
         mRightTitle.setText(text);
     }
 
@@ -144,7 +150,7 @@ public class TitleBar extends LinearLayout {
      *
      * @param visibility
      */
-    private void setRightTitleVisibility(int visibility) {
+    public void setRightTitleVisibility(int visibility) {
         mRightTitle.setVisibility(visibility);
     }
 
@@ -153,7 +159,7 @@ public class TitleBar extends LinearLayout {
      *
      * @param onClickListener
      */
-    private void setRightTitleClick(OnClickListener onClickListener) {
+    public void setRightTitleClick(OnClickListener onClickListener) {
         mRightTitle.setOnClickListener(onClickListener);
     }
 }

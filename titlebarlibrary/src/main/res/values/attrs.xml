@@ -16,6 +16,8 @@
         <attr name="backgroundColor" format="reference|color" />
         <!-- 返回图片隐藏false，默认显示true-->
         <attr name="back_img_visible" format="boolean" />
+        <!--返回图片资源-->
+        <attr name="back_img_resource" format="reference" />
    </declare-styleable>
 
 </resources>
