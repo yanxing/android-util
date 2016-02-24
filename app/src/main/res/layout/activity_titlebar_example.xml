@@ -3,7 +3,7 @@
               xmlns:app="http://schemas.android.com/apk/res-auto"
               android:layout_width="match_parent"
               android:layout_height="match_parent"
-              android:background="#eee"
+              android:background="@android:color/white"
               android:orientation="vertical">
 
     <com.yanxing.titlebarlibrary.TitleBar
@@ -32,6 +32,14 @@
         app:backgroundColor="@android:color/holo_red_light"
         app:title_main_color="@android:color/holo_green_light"
         app:title_main="@string/title4"/>
+    <com.yanxing.titlebarlibrary.TitleBar
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        app:title_main_center="true"
+        app:back_img_resource="@mipmap/goback_dark"
+        app:backgroundColor="#eee"
+        app:title_main_color="@android:color/black"
+        app:title_main="@string/title5"/>
 
 
 </LinearLayout>
