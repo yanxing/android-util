@@ -1,7 +1,5 @@
 package com.yanxing.ui;
 
-import android.os.Bundle;
-import android.support.annotation.Nullable;
 import android.widget.TextView;
 
 import com.yanxing.base.BaseActivity;
@@ -15,6 +13,7 @@ import de.greenrobot.event.EventBus;
 
 /**
  * EventBus测试
+ * http://blog.csdn.net/lyxtime/article/details/50601632
  * Created by lishuangxiang on 2016/1/28.
  */
 @EActivity(R.layout.activity_eventbus_example)
@@ -26,6 +25,7 @@ public class EventBusExampleActivity extends BaseActivity {
     @AfterViews
     @Override
     protected void afterInstanceView() {
+        getSwipeBackLayout().setEnableGesture(false);
         EventBus.getDefault().register(this);
     }
 

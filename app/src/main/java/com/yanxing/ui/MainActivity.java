@@ -40,6 +40,7 @@ public class MainActivity extends BaseActivity{
     @Override
     @AfterViews
     protected void afterInstanceView() {
+        getSwipeBackLayout().setEnableGesture(false);
         EventBus.getDefault().register(this);
     }
 
