@@ -40,6 +40,15 @@ public abstract class CommonAdapter<T> extends BaseAdapter {
         return position;
     }
 
+    /**
+     * 更新数据
+     * @param dataList
+     */
+    public void update(List<T> dataList){
+        this.mDataList=dataList;
+        notifyDataSetChanged();
+    }
+
     @Override
     public View getView(int position, View convertView, ViewGroup parent){
         final ViewHolder viewHolder = ViewHolder.getViewHolder(convertView,parent,mLayoutId,position);

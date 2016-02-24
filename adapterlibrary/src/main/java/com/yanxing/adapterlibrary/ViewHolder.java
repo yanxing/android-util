@@ -60,7 +60,7 @@ public class ViewHolder {
      * @param text
      * @return
      */
-    public void setText(int viewId, String text){
+    public void setText(int viewId, CharSequence text){
         TextView view = findViewById(viewId);
         view.setText(text);
     }
