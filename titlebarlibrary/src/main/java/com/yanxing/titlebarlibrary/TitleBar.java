@@ -30,6 +30,8 @@ public class TitleBar extends LinearLayout {
     private TextView mRightTitle;
     //标题栏背景色
     private LinearLayout mBackground;
+    //右菜单图标
+    private ImageView mRightIcon;
 
     public TitleBar(Context context) {
         this(context, null);
@@ -48,6 +50,7 @@ public class TitleBar extends LinearLayout {
         mRightTitle = (TextView) findViewById(R.id.right_title);
         mBackground = (LinearLayout) findViewById(R.id.background);
         mBackImg= (ImageView) findViewById(R.id.back_img);
+        mRightIcon= (ImageView) findViewById(R.id.right_icon);
         TypedArray a = context.obtainStyledAttributes(attrs, R.styleable.MyTitleBar);
         //标题
         if (a.hasValue(0)){
@@ -63,30 +66,34 @@ public class TitleBar extends LinearLayout {
         }
         //右菜单
         if (a.hasValue(3)){
-            mRightTitle.setText(a.getText(1));
-        }
-        //右菜单可见true,默认不可见false
-        if (a.getBoolean(4,false)){
+            mRightTitle.setText(a.getText(3));
             mRightTitle.setVisibility(VISIBLE);
         }
         //背景颜色
-        if (a.hasValue(5)){
+        if (a.hasValue(4)){
             Drawable background = a.getDrawable(R.styleable.MyTitleBar_backgroundColor);
             mBackground.setBackgroundDrawable(background);
         }
-        //返回图标不可见false,默认可见true
-        if (!a.getBoolean(6,true)){
+        //返回图片不可见false,默认可见true
+        if (!a.getBoolean(5,true)){
             mBackImg.setVisibility(INVISIBLE);
         }
 
-        //返回图标资源
-        if (a.hasValue(7)){
+        //返回图片资源
+        if (a.hasValue(6)){
             Drawable background = a.getDrawable(R.styleable.MyTitleBar_back_img_resource);
             mBackImg.setBackgroundDrawable(background);
         }
 
-        //返回图标可见，才有点击事件
-        if (a.getBoolean(6,true)){
+        //右菜单图片
+        if (a.hasValue(7)){
+            Drawable background = a.getDrawable(R.styleable.MyTitleBar_right_icon);
+            mRightIcon.setVisibility(VISIBLE);
+            mRightIcon.setBackgroundDrawable(background);
+        }
+
+        //返回图片可见，才有点击事件
+        if (a.getBoolean(5,true)){
             mBack.setOnClickListener(new OnClickListener() {
                 @Override
                 public void onClick(View v) {
@@ -122,7 +129,7 @@ public class TitleBar extends LinearLayout {
     /**
      * 设置标题文字大小
      */
-    private void setTitleSize(float size) {
+    public void setTitleSize(float size) {
         mTitle.setTextSize(size);
     }
 
@@ -161,5 +168,14 @@ public class TitleBar extends LinearLayout {
      */
     public void setRightTitleClick(OnClickListener onClickListener) {
         mRightTitle.setOnClickListener(onClickListener);
+    }
+
+    /**
+     * 点击右图片
+     *
+     * @param onClickListener
+     */
+    public void setRightIconClick(OnClickListener onClickListener) {
+        mRightIcon.setOnClickListener(onClickListener);
     }
 }

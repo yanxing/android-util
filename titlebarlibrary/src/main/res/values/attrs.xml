@@ -8,16 +8,16 @@
         <attr name="title_main_center" format = "boolean" />
         <!-- 标题颜色-->
         <attr name="title_main_color" format = "color" />
-        <!-- 右菜单-->
+        <!-- 右菜单,如果设置，将可见，默认不可见-->
         <attr name="title_right" format="string"/>
-        <!-- 右菜单可见true,默认不可见false-->
-        <attr name="right_title_visible" format="boolean" />
         <!-- titleBar背景色-->
         <attr name="backgroundColor" format="reference|color" />
         <!-- 返回图片隐藏false，默认显示true-->
         <attr name="back_img_visible" format="boolean" />
         <!--返回图片资源-->
         <attr name="back_img_resource" format="reference" />
+        <!--右菜单图标，设置将可见，默认不可见-->
+        <attr name="right_icon" format="reference"/>
    </declare-styleable>
 
 </resources>
