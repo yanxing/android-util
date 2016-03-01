@@ -28,7 +28,15 @@ public class BaiduLoc implements OnGetGeoCoderResultListener {
 	private GeoCoder mSearch;
 
 	public BaiduLoc(Context context) {
-		try { 
+		this(context,2000);
+	}
+
+	/**
+	 * @param context
+	 * @param scanSpan 间隔多少秒定位，单位ms
+     */
+	public BaiduLoc(Context context,int scanSpan) {
+		try {
 			mLocationClient = new LocationClient(context);
 			mBDLocationListener = new BDMapLocationListener();
 			mLocationClient.registerLocationListener(mBDLocationListener);
@@ -40,20 +48,23 @@ public class BaiduLoc implements OnGetGeoCoderResultListener {
 			locClintOpt.setLocationMode(LocationMode.Hight_Accuracy);
 			// 返回的定位结果是百度经纬度，默认值gcj02
 			locClintOpt.setCoorType("bd09ll");
-			// 设置发起定位请求的间隔时间为5000ms
-			locClintOpt.setScanSpan(2000);
+			// 设置发起定位请求的间隔时间
+			locClintOpt.setScanSpan(scanSpan);
 			locClintOpt.setIsNeedAddress(true);
 			mLocationClient.setLocOption(locClintOpt);
- 
+
 			mSearch = GeoCoder.newInstance();
 			mSearch.setOnGetGeoCodeResultListener(this);
 			// 开启定位
-			 mLocationClient.start();
+			mLocationClient.start();
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
 	}
-	
+
+
+
+
 	private String getLocCoor(int coorType) {
 		switch (coorType) {
 		case coorType_gcj02:
