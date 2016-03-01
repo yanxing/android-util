@@ -73,7 +73,7 @@ public class ViewHolder {
      */
     public void setBackgroundResource(int viewId, int drawableId){
         ImageView view = findViewById(viewId);
-        view.setBackgroundResource(viewId);
+        view.setBackgroundResource(drawableId);
     }
 
     /**
