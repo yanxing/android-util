@@ -95,7 +95,6 @@ public class BaiduMapView implements OnGetPoiSearchResultListener, OnMapStatusCh
             MapStatusUpdate msu = MapStatusUpdateFactory.zoomTo(15.0f);
             mBaiduMap.setMapStatus(msu);
 
-            mBaiduMap.setOnMapClickListener(this);
             mBaiduMap.setMyLocationEnabled(true);
         } catch (Exception e) {
             e.printStackTrace();
@@ -166,6 +165,7 @@ public class BaiduMapView implements OnGetPoiSearchResultListener, OnMapStatusCh
      * @param listenter
      */
     public void setBaiduMapListener(BaiduMapListener listenter) {
+        mBaiduMap.setOnMapClickListener(this);
         mMapListener = listenter;
         mBaiduMap.setOnMapLoadedCallback(new OnMapLoadedCallback() {
 
