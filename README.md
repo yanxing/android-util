@@ -19,7 +19,7 @@ mMyGridView.setAdapter(new CommonAdapter<String>(mMenu,R.layout.adapter_grid_ite
 });
 ```
 ## baidumaplibrary
-对百度地图API的封装，只需实现相应的事件接口。[example](https://github.com/yanxing/android-util/blob/master/app/src/main/java/com/yanxing/ui/BaiduMapExampleActivity.java)
+对百度地图API的封装。[example](https://github.com/yanxing/android-util/blob/master/app/src/main/java/com/yanxing/ui/BaiduMapExampleActivity.java)
 ```Java 
 /**
  * 百度地图封装测试
@@ -37,6 +37,7 @@ public class BaiduMapExampleActivity extends BaseActivity implements RoutePlanRe
     protected void afterInstanceView() {
         mBaiduMapView=new BaiduMapView(this, mMap);
         mBaiduMapView.setRoutePlanResultListener(this);
+        //驾车路径
         LatLng fromLatLng = new LatLng(31.1145130000, 121.4112010000);
         PlanNode senderNode = PlanNode.withLocation(fromLatLng);
         LatLng toLatLng = new LatLng(31.2166060000, 121.4471340000);
@@ -45,7 +46,10 @@ public class BaiduMapExampleActivity extends BaseActivity implements RoutePlanRe
                 .policy(DrivingRoutePlanOption.DrivingPolicy.ECAR_DIS_FIRST))
                 .from(senderNode)
                 .to(receiverNode));
+        //设置视角中心
         mBaiduMapView.setCenterOnly(fromLatLng.latitude, fromLatLng.longitude);
+        //添加覆盖物
+        mBaiduMapView.setOverlay(31.1744546784,121.4980140000,R.mipmap.ic_launcher);
     }
     //回调略
   ```
