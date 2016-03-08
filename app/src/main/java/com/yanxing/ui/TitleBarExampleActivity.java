@@ -1,10 +1,5 @@
 package com.yanxing.ui;
 
-import android.graphics.Color;
-import android.os.Bundle;
-import android.support.annotation.Nullable;
-
-import com.readystatesoftware.systembartint.SystemBarTintManager;
 import com.yanxing.base.BaseActivity;
 
 import org.androidannotations.annotations.AfterViews;

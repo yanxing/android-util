@@ -36,7 +36,7 @@
         android:layout_height="wrap_content"
         app:title_main_center="true"
         app:back_img_resource="@mipmap/goback_dark"
-        app:backgroundColor="#eee"
+        app:backgroundColor="@color/gery"
         app:right_icon="@mipmap/share"
         app:title_main_color="@android:color/black"
         app:title_main="@string/title5"/>

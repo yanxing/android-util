@@ -72,6 +72,7 @@ public class BaiduMapView implements OnGetPoiSearchResultListener, OnMapStatusCh
     private SuggestionResultListener mSuggestionResultListener;
     //地图状态改变监听
     private MapStatusChangeListener mMapStatusChangeListener;
+    //截屏监听
     private SnapshotListener mSnapshotListener;
 
     private RoutePlanSearch mSearch;
@@ -94,7 +95,6 @@ public class BaiduMapView implements OnGetPoiSearchResultListener, OnMapStatusCh
             minZoomLevel = mBaiduMap.getMinZoomLevel();
             MapStatusUpdate msu = MapStatusUpdateFactory.zoomTo(15.0f);
             mBaiduMap.setMapStatus(msu);
-
             mBaiduMap.setMyLocationEnabled(true);
         } catch (Exception e) {
             e.printStackTrace();
@@ -165,8 +165,8 @@ public class BaiduMapView implements OnGetPoiSearchResultListener, OnMapStatusCh
      * @param listenter
      */
     public void setBaiduMapListener(BaiduMapListener listenter) {
-        mBaiduMap.setOnMapClickListener(this);
         mMapListener = listenter;
+        mBaiduMap.setOnMapClickListener(this);
         mBaiduMap.setOnMapLoadedCallback(new OnMapLoadedCallback() {
 
             public void onMapLoaded() {

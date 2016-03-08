@@ -1,7 +1,5 @@
 package com.yanxing.ui;
 
-import android.os.Bundle;
-import android.support.annotation.Nullable;
 import android.widget.LinearLayout;
 
 import com.baidu.location.BDLocation;
@@ -46,8 +44,11 @@ public class BaiduMapExampleActivity extends BaseActivity implements RoutePlanRe
         //驾车路径
         LatLng fromLatLng = new LatLng(31.1145130000, 121.4112010000);
         PlanNode senderNode = PlanNode.withLocation(fromLatLng);
-        LatLng toLatlng = new LatLng(31.2166060000, 121.4471340000);
-        PlanNode receiverNode = PlanNode.withLocation(toLatlng);
+        LatLng toLatLng = new LatLng(31.2166060000, 121.4471340000);
+        PlanNode receiverNode = PlanNode.withLocation(toLatLng);
+        //定位
+        MyApplication.baiduLoc.startLocation();
+        MyApplication.baiduLoc.setBaiduLocListener(this);
         //最短距离路线
         mBaiduMapView.drivingSearch((new DrivingRoutePlanOption().policy(DrivingRoutePlanOption.DrivingPolicy.ECAR_DIS_FIRST))
                 .from(senderNode)
@@ -102,7 +103,6 @@ public class BaiduMapExampleActivity extends BaseActivity implements RoutePlanRe
             double longitude = geoResult.getLocation().longitude;
             double latitude = geoResult.getLocation().latitude;
             mBaiduMapView.setCenterOnly(latitude, longitude);
-            MyApplication.baiduLoc.stopLocation();
         }
     }
 

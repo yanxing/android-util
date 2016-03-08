@@ -74,7 +74,6 @@ public class MyApplication extends Application {
     private void initBaiduMap(){
         SDKInitializer.initialize(this);
         baiduLoc = new BaiduLoc(getApplicationContext());
-        baiduLoc.startLocation();
     }
 
     /**
