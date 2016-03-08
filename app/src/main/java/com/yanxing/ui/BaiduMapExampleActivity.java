@@ -53,7 +53,10 @@ public class BaiduMapExampleActivity extends BaseActivity implements RoutePlanRe
         mBaiduMapView.drivingSearch((new DrivingRoutePlanOption().policy(DrivingRoutePlanOption.DrivingPolicy.ECAR_DIS_FIRST))
                 .from(senderNode)
                 .to(receiverNode));
+        //设置视角中心
         mBaiduMapView.setCenterOnly(fromLatLng.latitude, fromLatLng.longitude);
+        //添加覆盖物
+        mBaiduMapView.setOverlay(31.1744546784,121.4980140000,R.mipmap.ic_launcher);
     }
 
     @Override
