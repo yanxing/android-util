@@ -55,7 +55,7 @@ public class BaiduMapExampleActivity extends BaseActivity implements RoutePlanRe
   ```
 ## titlebarlibrary
 自定义标题栏。[example](https://github.com/yanxing/android-util/blob/master/app/src/main/java/com/yanxing/ui/TitleBarExampleActivity.java)
-```Java
+```XML
 <com.yanxing.titlebarlibrary.TitleBar
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
@@ -67,7 +67,7 @@ public class BaiduMapExampleActivity extends BaseActivity implements RoutePlanRe
         app:title_main="标题居中更换返回图标"/>
 ```
 支持属性：
-```Java
+```XML
 <declare-styleable name = "MyTitleBar">
         <!-- 标题-->
         <attr name="title_main" format = "string" />
