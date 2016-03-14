@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+
+    <!-- TabLayout创建的tab默认设置textAllCaps属性为true，阻止了ImageSpan被渲染出来-->
+    <style name="MyCustomTabLayout" parent="Widget.Design.TabLayout">
+        <item name="tabTextAppearance">@style/MyCustomTextAppearance</item>
+    </style>
+
+    <style name="MyCustomTextAppearance" parent="TextAppearance.Design.Tab">
+        <item name="textAllCaps">false</item>
+    </style>
+</resources>

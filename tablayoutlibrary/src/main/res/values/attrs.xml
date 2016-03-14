@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <declare-styleable name="TabLayoutPager">
+        <!-- 指示器颜色 -->
+        <attr name="tabLayoutIndicatorColor" format="color"/>
+        <!-- 选中选项卡文字颜色-->
+        <attr name="tabLayoutSelectedTextColor" format="color"/>
+        <!-- 选项卡文字颜色-->
+        <attr name="tabLayoutTextColor" format="color"/>
+    </declare-styleable>
+</resources>
