@@ -24,4 +24,5 @@
     <string name="right">保存</string>
     <string name="title4">标题居中隐藏返回</string>
     <string name="title5">标题居中更换返回</string>
+    <string name="tablayoutpager">tablayoutpager测试</string>
 </resources>

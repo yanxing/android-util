@@ -71,6 +71,9 @@
         <activity
             android:name=".TitleBarExampleActivity_"
             android:theme="@style/SwipeBack"/>
+        <activity
+            android:name=".TabLayoutPagerExampleActivity_"
+            android:theme="@style/SwipeBack"/>
 
     </application>
 

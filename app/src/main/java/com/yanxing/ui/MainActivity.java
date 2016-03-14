@@ -3,6 +3,7 @@ package com.yanxing.ui;
 import android.content.Intent;
 import android.net.Uri;
 import android.os.Bundle;
+import android.support.design.widget.TabLayout;
 import android.support.v7.widget.Toolbar;
 import android.view.View;
 import android.view.Menu;
@@ -46,7 +47,7 @@ public class MainActivity extends BaseActivity{
 
     @Click(value = {R.id.adapter_button,R.id.list_dialog_button,R.id.confirm_dialog_button
             ,R.id.loading_dialog_button,R.id.select_image,R.id.browse_image,R.id.map
-            ,R.id.fresco,R.id.eventbus,R.id.titleBar})
+            ,R.id.fresco,R.id.eventbus,R.id.titleBar,R.id.tabLayoutPager})
     public void onClick(View v) {
         Intent intent=new Intent();
         Bundle bundle = new Bundle();
@@ -111,6 +112,10 @@ public class MainActivity extends BaseActivity{
             //标题栏测试
             case R.id.titleBar:
                 intent.setClass(getApplicationContext(),TitleBarExampleActivity_.class);
+                startActivity(intent);
+                break;
+            case R.id.tabLayoutPager:
+                intent.setClass(getApplicationContext(), TabLayoutPagerExampleActivity_.class);
                 startActivity(intent);
                 break;
         }

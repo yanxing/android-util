@@ -1,1 +1,1 @@
-include ':app', ':adapterlibrary', ':photobrowselibrary', ':photolibrary', ':baidumaplibrary', ':titlebarlibrary'
+include ':app', ':adapterlibrary', ':photobrowselibrary', ':photolibrary', ':baidumaplibrary', ':titlebarlibrary', ':tablayoutlibrary'

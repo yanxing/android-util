@@ -71,6 +71,11 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="@string/titleBar"/>
+            <Button
+                android:id="@+id/tabLayoutPager"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="tablayoutpagerlibrary"/>
         </LinearLayout>
         <LinearLayout
             android:layout_width="match_parent"
