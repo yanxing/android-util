@@ -87,3 +87,36 @@ public class BaiduMapExampleActivity extends BaseActivity implements RoutePlanRe
         <attr name="right_icon" format="reference"/>
    </declare-styleable>
 ```
+## tablayoutlibrary
+TabLayout+ViewPager封装。[example](https://github.com/yanxing/android-util/blob/master/app/src/main/java/com/yanxing/ui/TabLayoutPagerExampleActivity.java)
+```XML
+<com.yanxing.tablayoutlibrary.TabLayoutPager
+        android:id="@+id/tabLayoutPager"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        app:tabLayoutTextColor="@color/colorDark"
+        app:tabLayoutIndicatorColor="@color/colorPrimary"
+        app:tabLayoutSelectedTextColor="@color/colorPrimary"/>
+```
+```Java
+mFragmentList.add(new TabLayoutPagerFragment_());
+mFragmentList.add(new TabLayoutPagerFragment_());
+mFragmentList.add(new TabLayoutPagerFragment_());
+mStringList.add("菜单一");
+mStringList.add("菜单二");
+mStringList.add("菜单三");
+mTabLayoutPager.addTab(mFragmentList,mStringList);
+mTabLayoutPager.setOnTabSelectedListener(new OnTabLayoutPagerListener() {
+    @Override
+    public void onTabSelected(TabLayout.Tab tab) {
+        int position=tab.getPosition();
+        if (position==0){
+            EventBus.getDefault().post("fragment一");
+        }else if (position==1){
+            EventBus.getDefault().post("fragment二");
+        }else if (position==2){
+            EventBus.getDefault().post("fragment三");
+        }
+    }
+});
+```
