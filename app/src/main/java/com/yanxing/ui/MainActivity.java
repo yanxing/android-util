@@ -47,7 +47,7 @@ public class MainActivity extends BaseActivity{
 
     @Click(value = {R.id.adapter_button,R.id.list_dialog_button,R.id.confirm_dialog_button
             ,R.id.loading_dialog_button,R.id.select_image,R.id.browse_image,R.id.map
-            ,R.id.fresco,R.id.eventbus,R.id.titleBar,R.id.tabLayoutPager})
+            ,R.id.fresco,R.id.eventbus,R.id.titleBar,R.id.tabLayoutPager,R.id.recyclerView})
     public void onClick(View v) {
         Intent intent=new Intent();
         Bundle bundle = new Bundle();
@@ -116,6 +116,10 @@ public class MainActivity extends BaseActivity{
                 break;
             case R.id.tabLayoutPager:
                 intent.setClass(getApplicationContext(), TabLayoutPagerExampleActivity_.class);
+                startActivity(intent);
+                break;
+            case R.id.recyclerView:
+                intent.setClass(getApplicationContext(), RecyclerViewExampleActivity_.class);
                 startActivity(intent);
                 break;
         }

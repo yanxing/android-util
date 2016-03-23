@@ -11,6 +11,7 @@
     android:paddingBottom="@dimen/activity_vertical_margin"
     app:layout_behavior="@string/appbar_scrolling_view_behavior"
     tools:showIn="@layout/activity_main"
+    android:scrollbars="none"
     tools:context="com.yanxing.ui.MainActivity">
     <LinearLayout
         android:layout_width="match_parent"
@@ -72,10 +73,15 @@
                 android:layout_height="wrap_content"
                 android:text="@string/titleBar"/>
             <Button
-                android:id="@+id/tabLayoutPager"
+            android:id="@+id/tabLayoutPager"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="tablayoutpagerlibrary"/>
+            <Button
+                android:id="@+id/recyclerView"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="tablayoutpagerlibrary"/>
+                android:text="recyclerView"/>
         </LinearLayout>
         <LinearLayout
             android:layout_width="match_parent"
