@@ -18,6 +18,23 @@ mMyGridView.setAdapter(new CommonAdapter<String>(mMenu,R.layout.adapter_grid_ite
     }
 });
 ```
+RecyclerView适配器。[example](https://github.com/yanxing/android-util/blob/master/app/src/main/java/com/yanxing/ui/RecyclerViewExampleActivity.java)
+```Java
+mStrings.add("1");
+mStrings.add("2");
+mStrings.add("3");
+mStrings.add("4");
+//线性
+mRecyclerView.setLayoutManager(new LinearLayoutManager(this));
+mRecyclerViewAdapter = new RecyclerViewAdapter<String>(mStrings,R.layout.adapter_recycler_view){
+
+    @Override
+    public void onBindViewHolder(RecyclerViewAdapter.MyViewHolder holder,int position) {
+        holder.setText(R.id.text,mStrings.get(position));
+    }
+};
+mRecyclerView.setAdapter(mRecyclerViewAdapter);
+```
 ## baidumaplibrary
 对百度地图API的封装。[example](https://github.com/yanxing/android-util/blob/master/app/src/main/java/com/yanxing/ui/BaiduMapExampleActivity.java)
 ```Java 
