@@ -53,47 +53,47 @@ public class TitleBar extends LinearLayout {
         mRightIcon= (ImageView) findViewById(R.id.right_icon);
         TypedArray a = context.obtainStyledAttributes(attrs, R.styleable.MyTitleBar);
         //标题
-        if (a.hasValue(0)){
-            mTitle.setText(a.getText(0));
+        if (a.hasValue(R.styleable.MyTitleBar_title_main)){
+            mTitle.setText(a.getText(R.styleable.MyTitleBar_title_main));
         }
         //标题居中true
-        if (a.getBoolean(1,false)){
+        if (a.getBoolean(R.styleable.MyTitleBar_title_main_center,false)){
             setTitleCenter();
         }
         //标题颜色
-        if (a.hasValue(2)){
+        if (a.hasValue(R.styleable.MyTitleBar_title_main_color)){
             mTitle.setTextColor(a.getColor(R.styleable.MyTitleBar_title_main_color,0));
         }
         //右菜单
-        if (a.hasValue(3)){
-            mRightTitle.setText(a.getText(3));
+        if (a.hasValue(R.styleable.MyTitleBar_title_right)){
+            mRightTitle.setText(a.getText(R.styleable.MyTitleBar_title_right));
             mRightTitle.setVisibility(VISIBLE);
         }
         //背景颜色
-        if (a.hasValue(4)){
+        if (a.hasValue(R.styleable.MyTitleBar_backgroundColor)){
             Drawable background = a.getDrawable(R.styleable.MyTitleBar_backgroundColor);
             mBackground.setBackgroundDrawable(background);
         }
         //返回图片不可见false,默认可见true
-        if (!a.getBoolean(5,true)){
+        if (!a.getBoolean(R.styleable.MyTitleBar_back_img_visible,true)){
             mBackImg.setVisibility(INVISIBLE);
         }
 
         //返回图片资源
-        if (a.hasValue(6)){
+        if (a.hasValue(R.styleable.MyTitleBar_back_img_resource)){
             Drawable background = a.getDrawable(R.styleable.MyTitleBar_back_img_resource);
             mBackImg.setBackgroundDrawable(background);
         }
 
         //右菜单图片
-        if (a.hasValue(7)){
+        if (a.hasValue(R.styleable.MyTitleBar_right_icon)){
             Drawable background = a.getDrawable(R.styleable.MyTitleBar_right_icon);
             mRightIcon.setVisibility(VISIBLE);
             mRightIcon.setBackgroundDrawable(background);
         }
 
         //返回图片可见，才有点击事件
-        if (a.getBoolean(5,true)){
+        if (a.getBoolean(R.styleable.MyTitleBar_back_img_resource,true)){
             mBack.setOnClickListener(new OnClickListener() {
                 @Override
                 public void onClick(View v) {
