@@ -102,6 +102,8 @@ public class BaiduMapExampleActivity extends BaseActivity implements RoutePlanRe
         <attr name="back_img_resource" format="reference" />
         <!--右菜单图标，设置将可见，默认不可见-->
         <attr name="right_icon" format="reference"/>
+        <!--右菜单文字颜色-->
+        <attr name="titleRightColor" format="color"/>
    </declare-styleable>
 ```
 ## tablayoutlibrary
