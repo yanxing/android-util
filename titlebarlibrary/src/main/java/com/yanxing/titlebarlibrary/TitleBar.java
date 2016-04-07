@@ -71,7 +71,7 @@ public class TitleBar extends LinearLayout {
         }
         //右菜单文字颜色
         if (a.hasValue(R.styleable.MyTitleBar_titleRightColor)){
-            mTitle.setTextColor(a.getColor(R.styleable.MyTitleBar_titleRightColor,0));
+            mRightTitle.setTextColor(a.getColor(R.styleable.MyTitleBar_titleRightColor,0));
         }
         //背景颜色
         if (a.hasValue(R.styleable.MyTitleBar_backgroundColor)){
