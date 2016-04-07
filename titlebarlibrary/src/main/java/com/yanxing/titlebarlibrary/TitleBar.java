@@ -93,7 +93,7 @@ public class TitleBar extends LinearLayout {
         }
 
         //返回图片可见，才有点击事件
-        if (a.getBoolean(R.styleable.MyTitleBar_back_img_resource,true)){
+        if (a.getBoolean(R.styleable.MyTitleBar_back_img_visible,true)){
             mBack.setOnClickListener(new OnClickListener() {
                 @Override
                 public void onClick(View v) {
