@@ -101,15 +101,6 @@ public abstract class RecyclerViewAdapter<T> extends RecyclerView.Adapter<Recycl
             TextView view = findViewById(viewId);
             view.setText(text);
         }
-
-        /**
-         * 返回当前item View，用于外部设置onItemClick和onItemLongClick事件
-         *
-         * @return
-         */
-        public View getView() {
-            return mView;
-        }
     }
 }
 

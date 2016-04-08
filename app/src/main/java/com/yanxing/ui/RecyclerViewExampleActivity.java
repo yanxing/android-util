@@ -58,20 +58,19 @@ public class RecyclerViewExampleActivity extends BaseActivity {
 
             @Override
             public void onBindViewHolder(RecyclerViewAdapter.MyViewHolder holder, final int position) {
-                View view=holder.getView();
                 TextView textView= (TextView) holder.findViewById(R.id.text);
                 //瀑布流，动态设置item大小
                 ViewGroup.LayoutParams lp = textView.getLayoutParams();
                 lp.height = (int) (50+Math.random() * 300);
                 textView.setLayoutParams(lp);
                 textView.setText(mStrings.get(position));
-                view.setOnClickListener(new View.OnClickListener() {
+                holder.itemView.setOnClickListener(new View.OnClickListener() {
                     @Override
                     public void onClick(View v) {
                         showToast("你点击了第"+(position+1)+"个");
                     }
                 });
-                view.setOnLongClickListener(new View.OnLongClickListener() {
+                holder.itemView.setOnLongClickListener(new View.OnLongClickListener() {
                     @Override
                     public boolean onLongClick(View v) {
                         showToast("你长按了第"+(position+1)+"个");
