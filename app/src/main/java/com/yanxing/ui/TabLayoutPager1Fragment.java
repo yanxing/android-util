@@ -13,8 +13,8 @@ import de.greenrobot.event.EventBus;
 /**
  * Created by lishuangxiang on 2016/3/14.
  */
-@EFragment(R.layout.fragment_tablayoutpager)
-public class TabLayoutPagerFragment extends BaseFragment {
+@EFragment(R.layout.fragment_tablayoutpager1)
+public class TabLayoutPager1Fragment extends BaseFragment {
 
     @ViewById(R.id.text)
     TextView mTextView;
