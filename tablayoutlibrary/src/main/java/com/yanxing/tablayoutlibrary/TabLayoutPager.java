@@ -18,7 +18,7 @@ import java.util.List;
  * TabLayout+ViewPager选项卡
  * Created by lishuangxiang on 2016/3/14.
  */
-public class TabLayoutPager extends FrameLayout {
+public class TabLayoutPager extends FrameLayout{
 
     private TabLayout mTabLayout;
     private ViewPager mViewPager;
@@ -95,12 +95,10 @@ public class TabLayoutPager extends FrameLayout {
     }
 
     /**
-     * 设置选项卡选择事件
-     *
-     * @param onTabLayoutPagerListener
+     * @return
      */
-    public void setOnTabSelectedListener(OnTabLayoutPagerListener onTabLayoutPagerListener) {
-        mTabLayout.setOnTabSelectedListener(onTabLayoutPagerListener);
+    public ViewPager getViewPager(){
+        return mViewPager;
     }
 
 }

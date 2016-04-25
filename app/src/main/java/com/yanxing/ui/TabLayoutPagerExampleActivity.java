@@ -36,6 +36,24 @@ public class TabLayoutPagerExampleActivity extends BaseActivity {
         mStringList.add("菜单二");
         mStringList.add("菜单三");
         mTabLayoutPager.addTab(mFragmentList,mStringList);
+        mTabLayoutPager.getTabLayout().setOnTabSelectedListener(new TabLayout.OnTabSelectedListener() {
+            @Override
+            public void onTabSelected(TabLayout.Tab tab) {
+                mTabLayoutPager.getViewPager().setCurrentItem(tab.getPosition());
+                showToast("第"+(tab.getPosition()+1)+"个");
+
+            }
+
+            @Override
+            public void onTabUnselected(TabLayout.Tab tab) {
+
+            }
+
+            @Override
+            public void onTabReselected(TabLayout.Tab tab) {
+
+            }
+        });
 
     }
 }
