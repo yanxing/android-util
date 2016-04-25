@@ -118,24 +118,28 @@ TabLayout+ViewPager封装。[example](https://github.com/yanxing/android-util/bl
         app:tabLayoutSelectedTextColor="@color/colorPrimary"/>
 ```
 ```Java
-mFragmentList.add(new TabLayoutPagerFragment_());
-mFragmentList.add(new TabLayoutPagerFragment_());
-mFragmentList.add(new TabLayoutPagerFragment_());
+mFragmentList.add(new TabLayoutPager1Fragment_());
+mFragmentList.add(new TabLayoutPager2Fragment_());
+mFragmentList.add(new TabLayoutPager3Fragment_());
 mStringList.add("菜单一");
 mStringList.add("菜单二");
 mStringList.add("菜单三");
 mTabLayoutPager.addTab(mFragmentList,mStringList);
-mTabLayoutPager.setOnTabSelectedListener(new OnTabLayoutPagerListener() {
+mTabLayoutPager.getTabLayout().setOnTabSelectedListener(new TabLayout.OnTabSelectedListener() {
     @Override
     public void onTabSelected(TabLayout.Tab tab) {
-        int position=tab.getPosition();
-        if (position==0){
-            EventBus.getDefault().post("fragment一");
-        }else if (position==1){
-            EventBus.getDefault().post("fragment二");
-        }else if (position==2){
-            EventBus.getDefault().post("fragment三");
-        }
+        mTabLayoutPager.getViewPager().setCurrentItem(tab.getPosition());
+        showToast("第"+(tab.getPosition()+1)+"个");
+    }
+
+    @Override
+    public void onTabUnselected(TabLayout.Tab tab) {
+
+    }
+
+    @Override
+    public void onTabReselected(TabLayout.Tab tab) {
+
     }
 });
 ```
