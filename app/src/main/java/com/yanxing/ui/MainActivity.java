@@ -13,6 +13,7 @@ import com.facebook.drawee.view.SimpleDraweeView;
 import com.photo.ui.PhotoUtilsActivity;
 import com.yanxing.base.BaseActivity;
 import com.yanxing.model.FirstEventBus;
+import com.yanxing.sortlistviewlibrary.CityListActivity;
 import com.yanxing.util.ConstantValue;
 import com.yanxing.util.FileUtil;
 
@@ -29,7 +30,7 @@ import java.util.List;
 import de.greenrobot.event.EventBus;
 
 @EActivity(R.layout.activity_main)
-public class MainActivity extends BaseActivity{
+public class MainActivity extends BaseActivity {
 
     @ViewById(R.id.simple_drawee_view)
     SimpleDraweeView mSimpleDraweeView;
@@ -45,37 +46,37 @@ public class MainActivity extends BaseActivity{
         EventBus.getDefault().register(this);
     }
 
-    @Click(value = {R.id.adapter_button,R.id.list_dialog_button,R.id.confirm_dialog_button
-            ,R.id.loading_dialog_button,R.id.select_image,R.id.browse_image,R.id.map
-            ,R.id.fresco,R.id.eventbus,R.id.titleBar,R.id.tabLayoutPager,R.id.recyclerView})
+    @Click(value = {R.id.adapter_button, R.id.list_dialog_button, R.id.confirm_dialog_button
+            , R.id.loading_dialog_button, R.id.select_image, R.id.browse_image, R.id.map
+            , R.id.fresco, R.id.eventbus, R.id.titleBar, R.id.tabLayoutPager, R.id.recyclerView,R.id.sortListView})
     public void onClick(View v) {
-        Intent intent=new Intent();
+        Intent intent = new Intent();
         Bundle bundle = new Bundle();
-        switch (v.getId()){
+        switch (v.getId()) {
             //通用适配器
             case R.id.adapter_button:
-                intent.setClass(this,AdapterExampleActivity_.class);
+                intent.setClass(this, AdapterExampleActivity_.class);
                 startActivity(intent);
                 break;
             //列表适配器
             case R.id.list_dialog_button:
-                intent.setClass(this,ListDialogExampleActivity_.class);
+                intent.setClass(this, ListDialogExampleActivity_.class);
                 startActivity(intent);
                 break;
             //确定对话框
             case R.id.confirm_dialog_button:
-                intent.setClass(this,ConfirmExampleActivity_.class);
+                intent.setClass(this, ConfirmExampleActivity_.class);
                 startActivity(intent);
                 break;
             //进度框
             case R.id.loading_dialog_button:
-                intent.setClass(this,LoadingDialogExampleActivity_.class);
+                intent.setClass(this, LoadingDialogExampleActivity_.class);
                 startActivity(intent);
                 break;
             //本地图片选择
             case R.id.select_image:
-                long currentTime=System.currentTimeMillis();
-                intent.setClass(getApplicationContext(),PhotoUtilsActivity.class);
+                long currentTime = System.currentTimeMillis();
+                intent.setClass(getApplicationContext(), PhotoUtilsActivity.class);
                 mImageName = String.valueOf(currentTime) + ".png";
                 bundle.putString("path", FileUtil.getStoragePath() + ConstantValue.CACHE_IMAGE);
                 bundle.putString("name", mImageName);
@@ -85,8 +86,8 @@ public class MainActivity extends BaseActivity{
                 break;
             //图片浏览
             case R.id.browse_image:
-                intent.setClass(getApplicationContext(),BrowseImageExampleActivity_.class);
-                List<String> list=new ArrayList<String>();
+                intent.setClass(getApplicationContext(), BrowseImageExampleActivity_.class);
+                List<String> list = new ArrayList<String>();
                 list.add("http://www.loveq.cn/store/photo/144/546/1445460/2140998/1402789580862162351.png");
                 list.add("http://a0.att.hudong.com/15/08/300218769736132194086202411_950.jpg");
                 list.add("http://pic15.nipic.com/20110731/8022110_162804602317_2.jpg");
@@ -96,22 +97,22 @@ public class MainActivity extends BaseActivity{
                 break;
             //百度地图
             case R.id.map:
-                intent.setClass(getApplicationContext(),BaiduMapExampleActivity_.class);
+                intent.setClass(getApplicationContext(), BaiduMapExampleActivity_.class);
                 startActivity(intent);
                 break;
             //fresco使用
             case R.id.fresco:
-                intent.setClass(getApplicationContext(),FrescoExampleActivity_.class);
+                intent.setClass(getApplicationContext(), FrescoExampleActivity_.class);
                 startActivity(intent);
                 break;
             //eventBus测试
             case R.id.eventbus:
-                intent.setClass(getApplicationContext(),EventBusExampleActivity_.class);
+                intent.setClass(getApplicationContext(), EventBusExampleActivity_.class);
                 startActivity(intent);
                 break;
             //标题栏测试
             case R.id.titleBar:
-                intent.setClass(getApplicationContext(),TitleBarExampleActivity_.class);
+                intent.setClass(getApplicationContext(), TitleBarExampleActivity_.class);
                 startActivity(intent);
                 break;
             case R.id.tabLayoutPager:
@@ -120,6 +121,10 @@ public class MainActivity extends BaseActivity{
                 break;
             case R.id.recyclerView:
                 intent.setClass(getApplicationContext(), RecyclerViewExampleActivity_.class);
+                startActivity(intent);
+                break;
+            case R.id.sortListView:
+                intent.setClass(getApplicationContext(), CityListActivity.class);
                 startActivity(intent);
                 break;
         }
@@ -141,14 +146,14 @@ public class MainActivity extends BaseActivity{
     @Override
     protected void onActivityResult(int requestCode, int resultCode, Intent data) {
         super.onActivityResult(requestCode, resultCode, data);
-        if (requestCode==QUESTION_IMAGE_CODE&&resultCode==RESULT_OK){
-            Uri uri = Uri.parse(ConstantValue.FILE_CACHE_IMAGE+mImageName);
+        if (requestCode == QUESTION_IMAGE_CODE && resultCode == RESULT_OK) {
+            Uri uri = Uri.parse(ConstantValue.FILE_CACHE_IMAGE + mImageName);
             mSimpleDraweeView.setVisibility(View.VISIBLE);
             mSimpleDraweeView.setImageURI(uri);
         }
     }
 
-    public void onEvent(String msg){
+    public void onEvent(String msg) {
         showToast(msg);
     }
 
