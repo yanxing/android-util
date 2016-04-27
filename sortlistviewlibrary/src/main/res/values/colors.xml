@@ -6,4 +6,5 @@
     <color name="default_bg">#f0f0f5</color>
     <color name="line">#dfdfdf</color>
     <color name="colorGray">#e6e5e5</color>
+    <color name="colorHintGray">#cccccc</color>
 </resources>

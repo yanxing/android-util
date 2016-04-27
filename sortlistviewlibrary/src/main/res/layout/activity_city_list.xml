@@ -25,10 +25,10 @@
             android:paddingRight="@dimen/padding8"
             android:paddingTop="@dimen/padding8"
             android:singleLine="true"
-            android:textColorHint="@color/colorMainGray"
+            android:textColorHint="@color/colorHintGray"
             android:drawablePadding="@dimen/padding4"
             android:textCursorDrawable="@null"
-            android:textSize="@dimen/text_normal" />
+            android:textSize="@dimen/text_high" />
     </LinearLayout>
     <TextView
         android:layout_width="match_parent"
