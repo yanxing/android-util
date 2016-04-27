@@ -42,7 +42,7 @@ public class ClearEditText extends EditText implements
         mClearDrawable = getCompoundDrawables()[2];
         if (mClearDrawable == null) {
             mClearDrawable = getResources()
-                    .getDrawable(R.drawable.emotionstore_progresscancelbtn);
+                    .getDrawable(R.mipmap.emotionstore_progresscancelbtn);
         }
         mClearDrawable.setBounds(0, 0, mClearDrawable.getIntrinsicWidth(), mClearDrawable.getIntrinsicHeight());
         setClearIconVisible(false);

@@ -4,5 +4,6 @@
     <color name="colorMainDark">#323232</color>
     <color name="colorMainGray">#808080</color>
     <color name="default_bg">#f0f0f5</color>
-    <color name="line">#d2d2d2</color>
+    <color name="line">#dfdfdf</color>
+    <color name="colorGray">#e6e5e5</color>
 </resources>

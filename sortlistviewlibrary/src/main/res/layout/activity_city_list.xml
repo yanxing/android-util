@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    android:layout_width="fill_parent"
-    android:layout_height="fill_parent"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
     android:orientation="vertical"
               android:background="@color/default_bg">
 
@@ -14,27 +14,55 @@
         android:paddingBottom="@dimen/padding8">
         <com.yanxing.sortlistviewlibrary.ClearEditText
             android:id="@+id/filter_edit"
-            android:layout_width="fill_parent"
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginTop="5dip"
             android:background="@drawable/circle_white_shape"
             android:drawableLeft="@mipmap/search"
-            android:hint="请输入关键字"
+            android:hint="输入城市名、拼音或首字母查询"
             android:paddingLeft="@dimen/padding8"
             android:paddingBottom="@dimen/padding8"
+            android:paddingRight="@dimen/padding8"
             android:paddingTop="@dimen/padding8"
             android:singleLine="true"
-            android:textSize="15.0dip" />
+            android:textColorHint="@color/colorMainGray"
+            android:drawablePadding="@dimen/padding4"
+            android:textCursorDrawable="@null"
+            android:textSize="@dimen/text_normal" />
     </LinearLayout>
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="@color/colorGray"
+        android:paddingBottom="5dp"
+        android:textSize="@dimen/text_high"
+        android:paddingTop="@dimen/padding8"
+        android:text="当前城市"
+        android:paddingLeft="@dimen/padding16"
+        android:textColor="@color/colorMainGray" />
+
+    <TextView
+        android:id="@+id/current_city"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center_vertical"
+        android:paddingLeft="@dimen/padding16"
+        android:gravity="center_vertical"
+        android:paddingBottom="@dimen/padding14"
+        android:paddingTop="@dimen/padding14"
+        android:textSize="@dimen/text_high"
+        android:text="上海"
+        android:background="@drawable/click_white_dark_selector"
+        android:textColor="@color/colorMainDark" />
 
     <FrameLayout
-        android:layout_width="fill_parent"
-        android:layout_height="fill_parent" >
+        android:layout_width="match_parent"
+        android:layout_height="match_parent" >
 
         <ListView
             android:id="@+id/country_lvcountry"
-            android:layout_width="fill_parent"
-            android:layout_height="fill_parent"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
             android:layout_gravity="center"
             android:scrollbars="none"
             android:divider="@color/line"
@@ -44,19 +72,22 @@
             android:listSelector="@android:color/transparent" />
 
         <TextView
-            android:id="@+id/title_layout_no_friends"
-            android:layout_width="fill_parent"
-            android:layout_height="30dp"
+            android:id="@+id/title_layout_no_city"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
             android:layout_gravity="right|top"
             android:background="#E0E0E0"
+            android:paddingTop="@dimen/padding14"
+            android:paddingBottom="@dimen/padding14"
             android:gravity="center_vertical"
-            android:text="没有匹配的联系人"
+            android:text="没有匹配的城市"
             android:textColor="#454545"
+            android:paddingLeft="@dimen/padding16"
             android:visibility="gone" />
 
         <LinearLayout
             android:id="@+id/title_layout"
-            android:layout_width="fill_parent"
+            android:layout_width="match_parent"
             android:layout_height="30dp"
             android:layout_gravity="right|top"
             android:background="#ff303030"
@@ -64,8 +95,8 @@
 
             <TextView
                 android:id="@+id/title_layout_catalog"
-                android:layout_width="fill_parent"
-                android:layout_height="fill_parent"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
                 android:background="#E0E0E0"
                 android:paddingBottom="5dip"
                 android:paddingLeft="@dimen/padding16"
@@ -88,7 +119,7 @@
         <com.yanxing.sortlistviewlibrary.SideBar
             android:id="@+id/sidrbar"
             android:layout_width="30.0dip"
-            android:layout_height="fill_parent"
+            android:layout_height="match_parent"
             android:layout_gravity="right|center" />
     </FrameLayout>
 

@@ -4,6 +4,7 @@ import java.util.Collections;
 import java.util.List;
 
 import android.app.Activity;
+import android.content.Intent;
 import android.os.Bundle;
 import android.text.Editable;
 import android.text.TextUtils;
@@ -22,7 +23,7 @@ import android.widget.Toast;
 
 /**
  * 城市列表
- * 修改自http://blog.csdn.net/jdsjlzx/article/details/41052953
+ * 修改自http://blog.csdn.net/jdsjlzx/article/details/41052953,增加热门、当前城市
  * @author yanxing
  */
 public class CityListActivity extends Activity implements SectionIndexer {
@@ -34,7 +35,9 @@ public class CityListActivity extends Activity implements SectionIndexer {
 
 	private LinearLayout titleLayout;
 	private TextView title;
-	private TextView tvNofriends;
+	private TextView mNoCity;
+	//当前城市
+	private TextView mCurrentCity;
 	/**
 	 * 上次第一个可见元素，用于滚动时记录标识。
 	 */
@@ -59,9 +62,14 @@ public class CityListActivity extends Activity implements SectionIndexer {
 
 	private void initViews() {
 		titleLayout = (LinearLayout) findViewById(R.id.title_layout);
-		title = (TextView) this.findViewById(R.id.title_layout_catalog);
-		tvNofriends = (TextView) this
-				.findViewById(R.id.title_layout_no_friends);
+		title = (TextView) findViewById(R.id.title_layout_catalog);
+		mNoCity = (TextView) findViewById(R.id.title_layout_no_city);
+		mCurrentCity= (TextView) findViewById(R.id.current_city);
+		Intent intent=getIntent();
+		//当前地址
+		if (intent!=null&&intent.hasExtra("city")){
+			mCurrentCity.setText(intent.getStringExtra("city"));
+		}
 		// 实例化汉字转拼音类
 		characterParser = CharacterParser.getInstance();
 
@@ -92,14 +100,16 @@ public class CityListActivity extends Activity implements SectionIndexer {
 			public void onItemClick(AdapterView<?> parent, View view,
 									int position, long id) {
 				// 这里要利用adapter.getItem(position)来获取当前position所对应的对象
-				Toast.makeText(
-						getApplication(),
-						((GroupMemberBean) adapter.getItem(position)).getName(),
-						Toast.LENGTH_SHORT).show();
+				Bundle bundle=new Bundle();
+				bundle.putString("city",((GroupMemberBean) adapter.getItem(position)).getName());
+				Intent intent=new Intent();
+				intent.putExtras(bundle);
+				setResult(RESULT_OK,intent);
+				finish();
 			}
 		});
 
-		SourceDateList = filledData(getResources().getStringArray(R.array.date));
+		SourceDateList = filledData(getResources().getStringArray(R.array.hot),getResources().getStringArray(R.array.city));
 
 		// 根据a-z进行排序源数据
 		Collections.sort(SourceDateList, pinyinComparator);
@@ -170,22 +180,40 @@ public class CityListActivity extends Activity implements SectionIndexer {
 			public void afterTextChanged(Editable s) {
 			}
 		});
+		//选择当前城市
+		mCurrentCity.setOnClickListener(new View.OnClickListener() {
+			@Override
+			public void onClick(View v) {
+				Bundle bundle=new Bundle();
+				bundle.putString("city",mCurrentCity.getText().toString());
+				Intent intent=new Intent();
+				intent.putExtras(bundle);
+				setResult(RESULT_OK,intent);
+				finish();
+			}
+		});
 	}
 
 	/**
 	 * 为ListView填充数据
-	 *
-	 * @param date
+	 * @param hot 热门
+	 * @param city
 	 * @return
 	 */
-	private List<GroupMemberBean> filledData(String[] date) {
+	private List<GroupMemberBean> filledData(String[] hot,String[] city) {
 		List<GroupMemberBean> mSortList = new ArrayList<GroupMemberBean>();
-
-		for (int i = 0; i < date.length; i++) {
+		for (int i=0;i<hot.length;i++){
 			GroupMemberBean sortModel = new GroupMemberBean();
-			sortModel.setName(date[i]);
+			sortModel.setName(hot[i]);
+			sortModel.setSortLetters(SideBar.HOT);
+			mSortList.add(sortModel);
+		}
+
+		for (int i = 0; i < city.length; i++) {
+			GroupMemberBean sortModel = new GroupMemberBean();
+			sortModel.setName(city[i]);
 			// 汉字转换成拼音
-			String pinyin = characterParser.getSelling(date[i]);
+			String pinyin = characterParser.getSelling(city[i]);
 			String sortString = pinyin.substring(0, 1).toUpperCase();
 
 			// 正则表达式，判断首字母是否是英文字母
@@ -211,7 +239,7 @@ public class CityListActivity extends Activity implements SectionIndexer {
 
 		if (TextUtils.isEmpty(filterStr)) {
 			filterDateList = SourceDateList;
-			tvNofriends.setVisibility(View.GONE);
+			mNoCity.setVisibility(View.GONE);
 		} else {
 			filterDateList.clear();
 			for (GroupMemberBean sortModel : SourceDateList) {
@@ -228,7 +256,7 @@ public class CityListActivity extends Activity implements SectionIndexer {
 		Collections.sort(filterDateList, pinyinComparator);
 		adapter.updateListView(filterDateList);
 		if (filterDateList.size() == 0) {
-			tvNofriends.setVisibility(View.VISIBLE);
+			mNoCity.setVisibility(View.VISIBLE);
 		}
 	}
 

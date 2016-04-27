@@ -18,8 +18,9 @@ import android.widget.TextView;
 public class SideBar extends View {
 	// 触摸事件
 	private OnTouchingLetterChangedListener onTouchingLetterChangedListener;
+	public static final String HOT="热门";
 	// 26个字母
-	public static String[] b = { "A", "B", "C", "D", "E", "F", "G", "H", "I",
+	public static String[] b = { HOT,"A", "B", "C", "D", "E", "F", "G", "H", "I",
 			"J", "K", "L", "M", "N", "O", "P", "Q", "R", "S", "T", "U", "V",
 			"W", "X", "Y", "Z", "#" };
 	private int choose = -1;// 选中

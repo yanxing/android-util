@@ -11,7 +11,9 @@ public class PinyinComparator implements Comparator<GroupMemberBean> {
 		} else if (o1.getSortLetters().equals("#")
 				|| o2.getSortLetters().equals("@")) {
 			return 1;
-		} else {
+		} else if (o1.getSortLetters().equals(SideBar.HOT)||o2.getSortLetters().equals(SideBar.HOT)){
+			return 1;
+		}else{
 			return o1.getSortLetters().compareTo(o2.getSortLetters());
 		}
 	}

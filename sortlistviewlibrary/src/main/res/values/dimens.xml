@@ -6,4 +6,5 @@
     <dimen name="padding14">14dp</dimen>
     <dimen name="text_normal">15sp</dimen>
     <dimen name="text_high">16sp</dimen>
+    <dimen name="padding4">4dp</dimen>
 </resources>

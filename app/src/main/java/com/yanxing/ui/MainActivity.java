@@ -36,6 +36,7 @@ public class MainActivity extends BaseActivity {
     SimpleDraweeView mSimpleDraweeView;
 
     private static final int QUESTION_IMAGE_CODE = 1;
+    private static final int QUESTION_SORT_LISTVIEW_CODE = 2;
     //选择的图片名称
     private String mImageName;
 
@@ -125,7 +126,8 @@ public class MainActivity extends BaseActivity {
                 break;
             case R.id.sortListView:
                 intent.setClass(getApplicationContext(), CityListActivity.class);
-                startActivity(intent);
+                intent.putExtra("city","上海");
+                startActivityForResult(intent,QUESTION_SORT_LISTVIEW_CODE);
                 break;
         }
     }
@@ -146,10 +148,15 @@ public class MainActivity extends BaseActivity {
     @Override
     protected void onActivityResult(int requestCode, int resultCode, Intent data) {
         super.onActivityResult(requestCode, resultCode, data);
-        if (requestCode == QUESTION_IMAGE_CODE && resultCode == RESULT_OK) {
-            Uri uri = Uri.parse(ConstantValue.FILE_CACHE_IMAGE + mImageName);
-            mSimpleDraweeView.setVisibility(View.VISIBLE);
-            mSimpleDraweeView.setImageURI(uri);
+        if (resultCode == RESULT_OK) {
+            if (requestCode == QUESTION_IMAGE_CODE){
+                Uri uri = Uri.parse(ConstantValue.FILE_CACHE_IMAGE + mImageName);
+                mSimpleDraweeView.setVisibility(View.VISIBLE);
+                mSimpleDraweeView.setImageURI(uri);
+            }else if (requestCode==QUESTION_SORT_LISTVIEW_CODE){
+                showToast(data.getExtras().getString("city"));
+            }
+
         }
     }
 

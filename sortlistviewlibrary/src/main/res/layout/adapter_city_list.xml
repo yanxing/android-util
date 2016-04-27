@@ -7,10 +7,10 @@
 
     <TextView
         android:id="@+id/catalog"
-        android:layout_width="fill_parent"
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:background="#E0E0E0"
-        android:paddingBottom="5dip"
+        android:background="@color/colorGray"
+        android:paddingBottom="5dp"
         android:textSize="@dimen/text_high"
         android:paddingTop="@dimen/padding8"
         android:paddingLeft="@dimen/padding16"
@@ -18,15 +18,16 @@
 
     <TextView
         android:id="@+id/title"
-        android:layout_width="fill_parent"
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_gravity="center_vertical"
         android:paddingLeft="@dimen/padding16"
         android:gravity="center_vertical"
         android:paddingBottom="@dimen/padding14"
         android:paddingTop="@dimen/padding14"
+        android:background="@drawable/click_white_dark_selector"
         android:textSize="@dimen/text_high"
-        android:text="hhhh"
+        android:text="上海"
         android:textColor="@color/colorMainDark" />
 
 </LinearLayout>
