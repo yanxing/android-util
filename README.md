@@ -143,3 +143,12 @@ mTabLayoutPager.getTabLayout().setOnTabSelectedListener(new TabLayout.OnTabSelec
     }
 });
 ```
+## sortlistviewlibrary
+城市列表，修改自[http://blog.csdn.net/jdsjlzx/article/details/41052953](http://blog.csdn.net/jdsjlzx/article/details/41052953)。修改UI，增加当前和热门城市。
+```Java
+intent.setClass(getApplicationContext(), CityListActivity.class);
+//当前城市
+intent.putExtra("city","上海");
+startActivityForResult(intent,QUESTION_SORT_LISTVIEW_CODE);
+```
+![image](https://github.com/yanxing/android-util/raw/master/sortlistviewlibrary/1.png)
