@@ -2,6 +2,7 @@ package com.yanxing.base;
 
 import android.app.Application;
 import android.content.Context;
+import android.database.sqlite.SQLiteDatabase;
 
 import com.baidu.map.BaiduLoc;
 import com.baidu.mapapi.SDKInitializer;
@@ -15,6 +16,8 @@ import com.nostra13.universalimageloader.cache.disc.impl.UnlimitedDiskCache;
 import com.nostra13.universalimageloader.core.ImageLoader;
 import com.nostra13.universalimageloader.core.ImageLoaderConfiguration;
 import com.nostra13.universalimageloader.core.assist.QueueProcessingType;
+import com.yanxing.dao.DaoMaster;
+import com.yanxing.dao.DaoSession;
 import com.yanxing.util.ConstantValue;
 import com.yanxing.util.FileUtil;
 import com.yanxing.util.ImageNameGenerator;
@@ -29,12 +32,32 @@ public class MyApplication extends Application {
 
     public static BaiduLoc baiduLoc;
 
+    public DaoSession daoSession;
+    public SQLiteDatabase db;
+
     @Override
     public void onCreate() {
         super.onCreate();
         initImageLoader();
         initBaiduMap();
         initFresco();
+    }
+
+    /**
+     * 初始化GreenDao
+     */
+    public void initGreen(){
+        DaoMaster.DevOpenHelper helper = new DaoMaster.DevOpenHelper(this, "mingyi-db", null);
+        DaoMaster daoMaster = new DaoMaster(helper.getWritableDatabase());
+        daoSession = daoMaster.newSession();
+    }
+
+    public DaoSession getDaoSession() {
+        return daoSession;
+    }
+
+    public SQLiteDatabase getDb() {
+        return db;
     }
 
     /**
