@@ -80,7 +80,6 @@ public class TabLayoutPager extends FrameLayout{
         }
         mTabLayoutPagerAdapter = new TabLayoutPagerAdapter(mActivity.getSupportFragmentManager(), fragments, tabs);
         mViewPager.setAdapter(mTabLayoutPagerAdapter);
-        mViewPager.setOffscreenPageLimit(2);
         //将TabLayout和ViewPager关联起来
         mTabLayout.setupWithViewPager(mViewPager);
         //给Tabs设置适配器
