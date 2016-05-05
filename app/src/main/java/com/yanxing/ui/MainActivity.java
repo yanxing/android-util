@@ -50,7 +50,7 @@ public class MainActivity extends BaseActivity {
     @Click(value = {R.id.adapter_button, R.id.list_dialog_button, R.id.confirm_dialog_button
             , R.id.loading_dialog_button, R.id.select_image, R.id.browse_image, R.id.map
             , R.id.fresco, R.id.eventbus, R.id.titleBar, R.id.tabLayoutPager, R.id.recyclerView
-            ,R.id.sortListView,R.id.greenDao})
+            ,R.id.sortListView,R.id.greenDao,R.id.selectCity})
     public void onClick(View v) {
         Intent intent = new Intent();
         Bundle bundle = new Bundle();
@@ -136,6 +136,10 @@ public class MainActivity extends BaseActivity {
                 intent.setClass(getApplicationContext(), GreenDaoExampleActivity_.class);
                 startActivity(intent);
                 break;
+            case R.id.selectCity:
+                intent.setClass(getApplicationContext(), SelectCityActivity_.class);
+                intent.putExtra("currentCity","上海");
+                startActivity(intent);
         }
     }
 

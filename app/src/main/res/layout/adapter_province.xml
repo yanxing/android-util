@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+              android:layout_width="match_parent"
+              android:layout_height="wrap_content"
+              android:background="@drawable/single_choice_selector"
+              android:orientation="horizontal"
+              android:paddingBottom="@dimen/padding14"
+              android:paddingLeft="@dimen/padding16"
+              android:paddingTop="@dimen/padding14">
+
+    <ImageView
+        android:id="@+id/current"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="2dp"
+        android:visibility="gone"
+        android:background="@mipmap/current"/>
+
+    <TextView
+        android:id="@+id/province"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="@dimen/margin8"
+        android:text="当前位置"
+        android:textColor="@color/colorMainDark"
+        android:textSize="@dimen/text_normal_xx"/>
+
+</LinearLayout>

@@ -80,6 +80,9 @@
         <activity
             android:name=".GreenDaoExampleActivity_"
             android:theme="@style/SwipeBack"/>
+        <activity
+            android:name=".SelectCityActivity_"
+            android:theme="@style/SwipeBack"/>
     </application>
 
 </manifest>
