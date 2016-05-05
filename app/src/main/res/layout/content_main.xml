@@ -98,6 +98,11 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="sortListView"/>
+            <Button
+                android:id="@+id/greenDao"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="GreenDao"/>
         </LinearLayout>
 
         <LinearLayout

@@ -21,7 +21,7 @@ public class DaoGeneratorTest {
 
 //        addNote(schema);
 //        addCustomerOrder(schema);
-        addUser(schema);
+        addStudent(schema);
 //        addHospital(schema);
         // set dao class generate package
         schema.setDefaultJavaPackageDao("com.yanxing.dao");
@@ -66,13 +66,13 @@ public class DaoGeneratorTest {
         note.addDateProperty("date");
     }
 
-    private static void addUser(Schema schema) {
-        Entity user = schema.addEntity("User");
-        user.setTableName("user");
-        user.addIdProperty().primaryKey().autoincrement();
-        user.addStringProperty("name").unique();
-        user.addStringProperty("sex");
-        user.addStringProperty("birth");
+    private static void addStudent(Schema schema) {
+        Entity student = schema.addEntity("Student");
+        student.setTableName("user");
+        student.addIdProperty().primaryKey().autoincrement();
+        student.addStringProperty("name");
+        student.addStringProperty("sex");
+        student.addStringProperty("birth");
     }
 
     private static void addCustomerOrder(Schema schema) {

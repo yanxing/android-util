@@ -41,13 +41,14 @@ public class MyApplication extends Application {
         initImageLoader();
         initBaiduMap();
         initFresco();
+        initGreen();
     }
 
     /**
      * 初始化GreenDao
      */
     public void initGreen(){
-        DaoMaster.DevOpenHelper helper = new DaoMaster.DevOpenHelper(this, "mingyi-db", null);
+        DaoMaster.DevOpenHelper helper = new DaoMaster.DevOpenHelper(this, "yanxing-db", null);
         DaoMaster daoMaster = new DaoMaster(helper.getWritableDatabase());
         daoSession = daoMaster.newSession();
     }

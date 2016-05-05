@@ -49,7 +49,8 @@ public class MainActivity extends BaseActivity {
 
     @Click(value = {R.id.adapter_button, R.id.list_dialog_button, R.id.confirm_dialog_button
             , R.id.loading_dialog_button, R.id.select_image, R.id.browse_image, R.id.map
-            , R.id.fresco, R.id.eventbus, R.id.titleBar, R.id.tabLayoutPager, R.id.recyclerView,R.id.sortListView})
+            , R.id.fresco, R.id.eventbus, R.id.titleBar, R.id.tabLayoutPager, R.id.recyclerView
+            ,R.id.sortListView,R.id.greenDao})
     public void onClick(View v) {
         Intent intent = new Intent();
         Bundle bundle = new Bundle();
@@ -120,14 +121,20 @@ public class MainActivity extends BaseActivity {
                 intent.setClass(getApplicationContext(), TabLayoutPagerExampleActivity_.class);
                 startActivity(intent);
                 break;
+            //RecyclerViewAdapter test
             case R.id.recyclerView:
                 intent.setClass(getApplicationContext(), RecyclerViewExampleActivity_.class);
                 startActivity(intent);
                 break;
+            //城市列表
             case R.id.sortListView:
                 intent.setClass(getApplicationContext(), CityListActivity.class);
                 intent.putExtra("city","上海");
                 startActivityForResult(intent,QUESTION_SORT_LISTVIEW_CODE);
+                break;
+            case R.id.greenDao:
+                intent.setClass(getApplicationContext(), GreenDaoExampleActivity_.class);
+                startActivity(intent);
                 break;
         }
     }

@@ -5,6 +5,7 @@
     <color name="colorAccent">#37c14f</color>
     <color name="colorRed">#d61616</color>
     <color name="gery">#eee</color>
+    <color name="line_xx">#e6e6e6</color>
 
     <color name="colorDark">#2d2c2c</color>
 </resources>
