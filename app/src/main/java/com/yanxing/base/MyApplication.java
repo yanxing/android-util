@@ -16,6 +16,8 @@ import com.nostra13.universalimageloader.cache.disc.impl.UnlimitedDiskCache;
 import com.nostra13.universalimageloader.core.ImageLoader;
 import com.nostra13.universalimageloader.core.ImageLoaderConfiguration;
 import com.nostra13.universalimageloader.core.assist.QueueProcessingType;
+import com.squareup.leakcanary.LeakCanary;
+import com.squareup.leakcanary.RefWatcher;
 import com.yanxing.dao.DaoMaster;
 import com.yanxing.dao.DaoSession;
 import com.yanxing.util.ConstantValue;
@@ -32,8 +34,9 @@ public class MyApplication extends Application {
 
     public static BaiduLoc baiduLoc;
 
-    public DaoSession daoSession;
-    public SQLiteDatabase db;
+    private DaoSession daoSession;
+    private SQLiteDatabase db;
+    private RefWatcher refWatcher;
 
     @Override
     public void onCreate() {
@@ -42,6 +45,7 @@ public class MyApplication extends Application {
         initBaiduMap();
         initFresco();
         initGreen();
+        refWatcher=LeakCanary.install(this);
     }
 
     /**
@@ -115,5 +119,13 @@ public class MyApplication extends Application {
                 .writeDebugLogs()
                 .build();
         ImageLoader.getInstance().init(config);
+    }
+
+    public RefWatcher getRefWatcher() {
+        return refWatcher;
+    }
+
+    public void setRefWatcher(RefWatcher refWatcher) {
+        this.refWatcher = refWatcher;
     }
 }

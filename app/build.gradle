@@ -52,15 +52,18 @@ dependencies {
     compile 'com.readystatesoftware.systembartint:systembartint:1.0.3'
     apt "org.androidannotations:androidannotations:3.3.2"
     compile 'org.androidannotations:androidannotations-api:3.3.2'
+    debugCompile 'com.squareup.leakcanary:leakcanary-android:1.4-beta2'
+    releaseCompile 'com.squareup.leakcanary:leakcanary-android-no-op:1.4-beta2'
+    testCompile 'com.squareup.leakcanary:leakcanary-android-no-op:1.4-beta2'
+    compile 'me.imid.swipebacklayout.lib:library:1.0.0'
+    compile 'com.readystatesoftware.systembartint:systembartint:1.0.3'
+    compile project(path: ':sortlistviewlibrary')
     compile project(':adapterlibrary')
     compile project(':photolibrary')
     compile project(':photobrowselibrary')
     compile project(':baidumaplibrary')
     compile project(':titlebarlibrary')
     compile project(':tablayoutlibrary')
-    compile 'me.imid.swipebacklayout.lib:library:1.0.0'
-    compile 'com.readystatesoftware.systembartint:systembartint:1.0.3'
-    compile project(path: ':sortlistviewlibrary')
 }
 
 apt {
