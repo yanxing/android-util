@@ -20,3 +20,5 @@
 public void onEvent*(**);
 void onEvent*(**);
 }
+
+-dontwarn java.lang.invoke.*

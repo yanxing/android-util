@@ -1,9 +1,13 @@
 package com.yanxing.ui;
 
 import android.os.Handler;
+import android.view.LayoutInflater;
 import android.view.View;
+import android.view.ViewGroup;
 import android.widget.AdapterView;
+import android.widget.BaseAdapter;
 import android.widget.ListView;
+import android.widget.TextView;
 
 import com.yanxing.adapterlibrary.CommonAdapter;
 import com.yanxing.adapterlibrary.ViewHolder;
@@ -24,7 +28,7 @@ import java.util.List;
  * Created by lishuangxiang on 2016/4/12.
  */
 @EActivity(R.layout.activity_select_city)
-public class SelectCityActivity extends BaseActivity{
+public class SelectCityActivity extends BaseActivity implements AdapterView.OnItemClickListener{
 
     @ViewById(R.id.province)
     ListView mProvince;
@@ -33,11 +37,12 @@ public class SelectCityActivity extends BaseActivity{
     ListView mCity;
 
     //省份
-    private CommonAdapter<Area> mProvinceAdapter;
+    private ProvinceAdapter mProvinceAdapter;
     //市
     private CommonAdapter<Area.CityBean> mCityAdapter;
     private List<Area> mAreaList=new ArrayList<Area>();
     private static int mIndex=0;
+    private boolean mIsClick=false;
 
     @AfterViews
     @Override
@@ -53,35 +58,27 @@ public class SelectCityActivity extends BaseActivity{
         currentArea.setCity(currentCity);
         mAreaList.add(currentArea);
         mAreaList.addAll(ParseJson.getArea(getApplicationContext()));
-        mProvinceAdapter=new CommonAdapter<Area>(mAreaList,R.layout.adapter_province) {
-
-            @Override
-            public void onBindViewHolder(ViewHolder holder, int position) {
-                holder.setText(R.id.province,mAreaList.get(position).getName());
-            }
-
-        };
+        mProvinceAdapter=new ProvinceAdapter();
         mProvince.setAdapter(mProvinceAdapter);
-        new Handler().postDelayed(new Runnable() {
-            @Override
-            public void run() {
-                //选中第一项
-                mProvince.performItemClick(mProvince.getChildAt(0),0,mProvince.getItemIdAtPosition(0));
-            }
-        },500);
+        mProvince.setOnItemClickListener(this);
+        new Handler().postDelayed(() -> {
+            //选中第一项
+            mProvince.performItemClick(mProvince.getChildAt(0),0,mProvince.getItemIdAtPosition(0));
+        },700);
 
     }
 
-    @ItemClick(value = R.id.province)
-    public void onItemClick(final int position) {
+    @Override
+    public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
+        mIsClick=true;
+        mIndex=position;
         for (int i=0;i<mProvince.getChildCount();i++){
-            if (position!=i){
+            if (mIndex!=i){
                 View view1=mProvince.getChildAt(i);
                 view1.findViewById(R.id.current).setVisibility(View.GONE);
             }
         }
-        mProvince.getChildAt(position).findViewById(R.id.current).setVisibility(View.VISIBLE);
-        mIndex=position;
+        view.findViewById(R.id.current).setVisibility(View.VISIBLE);
         if (mCityAdapter==null){
             mCityAdapter=new CommonAdapter<Area.CityBean>(mAreaList.get(0).getCity(),R.layout.adapter_city) {
                 @Override
@@ -97,6 +94,40 @@ public class SelectCityActivity extends BaseActivity{
             mCity.setAdapter(mCityAdapter);
         }else {
             mCityAdapter.update(mAreaList.get(mIndex).getCity());
+        }
+    }
+
+    /**
+     * 城市适配器，view布局不重用
+     */
+    private class ProvinceAdapter extends BaseAdapter{
+
+        @Override
+        public int getCount() {
+            return mAreaList.size();
+        }
+
+        @Override
+        public Object getItem(int position) {
+            return mAreaList.get(position);
+        }
+
+        @Override
+        public long getItemId(int position) {
+            return position;
+        }
+
+        @Override
+        public View getView(int position, View convertView, ViewGroup parent) {
+            convertView= LayoutInflater.from(parent.getContext()).inflate(R.layout.adapter_province,null);
+            TextView province= (TextView) convertView.findViewById(R.id.province);
+            province.setText(mAreaList.get(position).getName());
+            if (mIsClick){
+                if (position==mIndex){
+                    convertView.findViewById(R.id.current).setVisibility(View.VISIBLE);
+                }
+            }
+            return convertView;
         }
     }
 }

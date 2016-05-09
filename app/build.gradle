@@ -1,5 +1,6 @@
 apply plugin: 'com.android.application'
 apply plugin: 'android-apt'
+apply plugin: 'me.tatarka.retrolambda'
 
 android {
     signingConfigs {
@@ -37,6 +38,10 @@ android {
         }
     }
 
+    compileOptions {
+        targetCompatibility 1.8
+        sourceCompatibility 1.8
+    }
 }
 
 dependencies {

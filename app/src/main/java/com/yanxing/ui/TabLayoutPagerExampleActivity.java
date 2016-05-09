@@ -54,6 +54,5 @@ public class TabLayoutPagerExampleActivity extends BaseActivity {
 
             }
         });
-
     }
 }
