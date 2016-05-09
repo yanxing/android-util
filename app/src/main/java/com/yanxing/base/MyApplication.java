@@ -32,7 +32,7 @@ import java.io.File;
  */
 public class MyApplication extends Application {
 
-    public static BaiduLoc baiduLoc;
+    public  BaiduLoc baiduLoc;
 
     private DaoSession daoSession;
     private SQLiteDatabase db;
@@ -127,5 +127,13 @@ public class MyApplication extends Application {
 
     public void setRefWatcher(RefWatcher refWatcher) {
         this.refWatcher = refWatcher;
+    }
+
+    public BaiduLoc getBaiduLoc() {
+        return baiduLoc;
+    }
+
+    public void setBaiduLoc(BaiduLoc baiduLoc) {
+        this.baiduLoc = baiduLoc;
     }
 }
