@@ -83,6 +83,12 @@
         <activity
             android:name=".SelectCityActivity_"
             android:theme="@style/SwipeBack"/>
+        <activity
+            android:name=".ShowImageActivity_"
+            android:theme="@style/SwipeBack"/>
+        <activity
+            android:name=".RxJavaExample_"
+            android:theme="@style/SwipeBack"/>
     </application>
 
 </manifest>

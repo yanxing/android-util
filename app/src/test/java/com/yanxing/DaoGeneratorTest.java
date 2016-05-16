@@ -19,51 +19,13 @@ public class DaoGeneratorTest {
         // first parameter for version, <span></span> second for default generate package
         Schema schema = new Schema(1, "com.yanxing.model");
 
-//        addNote(schema);
 //        addCustomerOrder(schema);
         addStudent(schema);
-//        addHospital(schema);
         // set dao class generate package
         schema.setDefaultJavaPackageDao("com.yanxing.dao");
         // keep custom code block
         schema.enableKeepSectionsByDefault();
         new DaoGenerator().generateAll(schema, "src/main/java-gen");
-    }
-
-    private static void addHospital(Schema schema){
-        Entity hospital = schema.addEntity("HospitalEntity");
-        hospital.addIdProperty().primaryKey().autoincrement();
-        hospital.addStringProperty("h_id").unique();
-        hospital.addStringProperty("secret_key");
-        hospital.addStringProperty("code");
-        hospital.addStringProperty("name");
-        hospital.addStringProperty("v_role_id");
-        hospital.addStringProperty("v_department_code");
-        hospital.addStringProperty("profile");
-        hospital.addStringProperty("features");
-        hospital.addStringProperty("phone");
-        hospital.addStringProperty("address");
-        hospital.addStringProperty("province");
-        hospital.addStringProperty("city");
-        hospital.addStringProperty("county");
-        hospital.addStringProperty("v_department_rank_id");
-        hospital.addStringProperty("v_department_mold_id");
-        hospital.addStringProperty("is_rec");
-        hospital.addStringProperty("sort");
-        hospital.addStringProperty("img");
-        hospital.addStringProperty("ratio");
-        hospital.addStringProperty("date_name");
-        hospital.addStringProperty("date_code");
-        hospital.addStringProperty("insert_time");
-    }
-
-
-    private static void addNote(Schema schema) {
-        Entity note = schema.addEntity("Note");
-        note.addIdProperty();
-        note.addStringProperty("text").notNull();
-        note.addStringProperty("comment");
-        note.addDateProperty("date");
     }
 
     private static void addStudent(Schema schema) {

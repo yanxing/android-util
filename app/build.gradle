@@ -62,7 +62,12 @@ dependencies {
     testCompile 'com.squareup.leakcanary:leakcanary-android-no-op:1.4-beta2'
     compile 'me.imid.swipebacklayout.lib:library:1.0.0'
     compile 'com.readystatesoftware.systembartint:systembartint:1.0.3'
-    compile project(path: ':sortlistviewlibrary')
+    compile 'io.reactivex:rxjava:1.0.14'
+    compile 'io.reactivex:rxandroid:1.1.0'
+    compile 'com.trello:rxlifecycle:0.4.0'
+    compile 'com.trello:rxlifecycle-components:0.4.0'
+    compile 'com.google.code.gson:gson:2.5'
+    compile project(':sortlistviewlibrary')
     compile project(':adapterlibrary')
     compile project(':photolibrary')
     compile project(':photobrowselibrary')

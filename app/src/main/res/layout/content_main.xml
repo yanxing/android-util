@@ -14,114 +14,83 @@
 
     <LinearLayout
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:orientation="horizontal">
+        android:layout_height="wrap_content"
+        android:orientation="vertical">
 
-        <LinearLayout
-            android:layout_width="wrap_content"
-            android:layout_height="match_parent"
-            android:orientation="vertical">
+        <Button
+            android:id="@+id/adapter_button"
+            style="@style/style_btn"
+            android:text="@string/adapterlibrary"/>
 
-            <Button
-                android:id="@+id/adapter_button"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="@string/adapterlibrary"/>
+        <Button
+            android:id="@+id/list_dialog_button"
+            style="@style/style_btn"
+            android:text="@string/list_dialog"/>
 
-            <Button
-                android:id="@+id/list_dialog_button"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="@string/list_dialog"/>
+        <Button
+            android:id="@+id/confirm_dialog_button"
+            style="@style/style_btn"
+            android:text="@string/confirm_dialog"/>
 
-            <Button
-                android:id="@+id/confirm_dialog_button"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="@string/confirm_dialog"/>
+        <Button
+            android:id="@+id/loading_dialog_button"
+            style="@style/style_btn"
+            android:text="@string/loading_dialog"/>
 
-            <Button
-                android:id="@+id/loading_dialog_button"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="@string/loading_dialog"/>
+        <Button
+            android:id="@+id/select_image"
+            style="@style/style_btn"
+            android:text="@string/select_image"/>
 
-            <Button
-                android:id="@+id/select_image"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="@string/select_image"/>
+        <Button
+            android:id="@+id/browse_image"
+            style="@style/style_btn"
+            android:text="@string/browse_image"/>
 
-            <Button
-                android:id="@+id/browse_image"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="@string/browse_image"/>
+        <Button
+            android:id="@+id/map"
+            style="@style/style_btn"
+            android:text="@string/map"/>
 
-            <Button
-                android:id="@+id/map"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="@string/map"/>
+        <Button
+            android:id="@+id/fresco"
+            style="@style/style_btn"
+            android:text="@string/fresco"/>
 
-            <Button
-                android:id="@+id/fresco"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="@string/fresco"/>
+        <Button
+            android:id="@+id/eventbus"
+            style="@style/style_btn"
+            android:text="@string/eventbus"/>
 
-            <Button
-                android:id="@+id/eventbus"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="@string/eventbus"/>
+        <Button
+            android:id="@+id/titleBar"
+            style="@style/style_btn"
+            android:text="@string/titleBar"/>
 
-            <Button
-                android:id="@+id/titleBar"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="@string/titleBar"/>
+        <Button
+            android:id="@+id/tabLayoutPager"
+            style="@style/style_btn"
+            android:text="tablayoutpagerlibrary"/>
 
-            <Button
-                android:id="@+id/tabLayoutPager"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="tablayoutpagerlibrary"/>
+        <Button
+            android:id="@+id/recyclerView"
+            style="@style/style_btn"
+            android:text="recyclerView"/>
 
-            <Button
-                android:id="@+id/recyclerView"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="recyclerView"/>
-            <Button
-                android:id="@+id/sortListView"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="sortListView"/>
-            <Button
-                android:id="@+id/greenDao"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="GreenDao"/>
-            <Button
-                android:id="@+id/selectCity"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="城市选择"/>
-        </LinearLayout>
-
-        <LinearLayout
+        <Button
+            android:id="@+id/sortListView"
             android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:layout_marginLeft="10dp"
-            android:orientation="vertical">
+            android:layout_height="wrap_content"
+            android:text="sortListView"/>
 
-            <com.facebook.drawee.view.SimpleDraweeView
-                android:id="@+id/simple_drawee_view"
-                android:layout_width="80dp"
-                android:layout_height="80dp"
-                android:visibility="gone"
-                app:placeholderImage="@mipmap/ic_launcher"/>
-        </LinearLayout>
+        <Button
+            android:id="@+id/greenDao"
+            style="@style/style_btn"
+            android:text="GreenDao"/>
+
+        <Button
+            android:id="@+id/selectCity"
+            style="@style/style_btn"
+            android:text="城市选择"/>
     </LinearLayout>
 </ScrollView>

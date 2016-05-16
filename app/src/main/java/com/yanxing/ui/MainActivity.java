@@ -32,9 +32,6 @@ import de.greenrobot.event.EventBus;
 @EActivity(R.layout.activity_main)
 public class MainActivity extends BaseActivity {
 
-    @ViewById(R.id.simple_drawee_view)
-    SimpleDraweeView mSimpleDraweeView;
-
     private static final int QUESTION_IMAGE_CODE = 1;
     private static final int QUESTION_SORT_LISTVIEW_CODE = 2;
     //选择的图片名称
@@ -161,9 +158,9 @@ public class MainActivity extends BaseActivity {
         super.onActivityResult(requestCode, resultCode, data);
         if (resultCode == RESULT_OK) {
             if (requestCode == QUESTION_IMAGE_CODE){
-                Uri uri = Uri.parse(ConstantValue.FILE_CACHE_IMAGE + mImageName);
-                mSimpleDraweeView.setVisibility(View.VISIBLE);
-                mSimpleDraweeView.setImageURI(uri);
+                Intent intent=new Intent(getApplicationContext(),ShowImageActivity_.class);
+                intent.putExtra("name",mImageName);
+                startActivity(intent);
             }else if (requestCode==QUESTION_SORT_LISTVIEW_CODE){
                 showToast(data.getExtras().getString("city"));
             }
@@ -175,24 +172,4 @@ public class MainActivity extends BaseActivity {
         showToast(msg);
     }
 
-    @Override
-    public boolean onCreateOptionsMenu(Menu menu) {
-        // Inflate the menu; this adds items to the action bar if it is present.
-        getMenuInflater().inflate(R.menu.menu_main, menu);
-        return true;
-    }
-
-    @Override
-    public boolean onOptionsItemSelected(MenuItem item) {
-        // Handle action bar item clicks here. The action bar will
-        // automatically handle clicks on the Home/Up button, so long
-        // as you specify a parent activity in AndroidManifest.xml.
-        int id = item.getItemId();
-
-        //noinspection SimplifiableIfStatement
-        if (id == R.id.action_settings) {
-            return true;
-        }
-        return super.onOptionsItemSelected(item);
-    }
 }
