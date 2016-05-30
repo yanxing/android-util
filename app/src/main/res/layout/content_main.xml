@@ -92,5 +92,13 @@
             android:id="@+id/selectCity"
             style="@style/style_btn"
             android:text="城市选择"/>
+        <Button
+            android:id="@+id/ultra_ptr"
+            style="@style/style_btn"
+            android:text="ultra_ptr"/>
+        <Button
+            android:id="@+id/xRecyclerView"
+            style="@style/style_btn"
+            android:text="xRecyclerView"/>
     </LinearLayout>
 </ScrollView>

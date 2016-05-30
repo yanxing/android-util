@@ -89,6 +89,12 @@
         <activity
             android:name=".RxJavaExample_"
             android:theme="@style/SwipeBack"/>
+        <activity
+            android:name=".XRecyclerViewActivity_"
+            android:theme="@style/SwipeBack"/>
+        <activity
+            android:name=".UltraPtrExampleActivity_"
+            android:theme="@style/SwipeBack"/>
     </application>
 
 </manifest>
