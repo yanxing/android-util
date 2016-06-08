@@ -1,15 +1,12 @@
 package com.yanxing.ui;
 
 import android.content.Intent;
-import android.net.Uri;
 import android.os.Bundle;
-import android.support.design.widget.TabLayout;
-import android.support.v7.widget.Toolbar;
 import android.view.View;
-import android.view.Menu;
-import android.view.MenuItem;
 
-import com.facebook.drawee.view.SimpleDraweeView;
+import com.amap.api.location.AMapLocation;
+import com.amap.location.AMapLoc;
+import com.amap.location.event.AMapLocListener;
 import com.photo.ui.PhotoUtilsActivity;
 import com.yanxing.base.BaseActivity;
 import com.yanxing.model.FirstEventBus;
@@ -20,9 +17,7 @@ import com.yanxing.util.FileUtil;
 import org.androidannotations.annotations.AfterViews;
 import org.androidannotations.annotations.Click;
 import org.androidannotations.annotations.EActivity;
-import org.androidannotations.annotations.ViewById;
 
-import java.io.File;
 import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
@@ -30,24 +25,29 @@ import java.util.List;
 import de.greenrobot.event.EventBus;
 
 @EActivity(R.layout.activity_main)
-public class MainActivity extends BaseActivity {
+public class MainActivity extends BaseActivity implements AMapLocListener {
 
     private static final int QUESTION_IMAGE_CODE = 1;
     private static final int QUESTION_SORT_LISTVIEW_CODE = 2;
     //选择的图片名称
     private String mImageName;
+    private String mCity;
+    private AMapLoc mAMapLoc;
 
     @Override
     @AfterViews
     protected void afterInstanceView() {
         getSwipeBackLayout().setEnableGesture(false);
         EventBus.getDefault().register(this);
+        mAMapLoc=new AMapLoc(getApplicationContext());
+        mAMapLoc.setAMapLocListener(this);
+        mAMapLoc.startLocation();
     }
 
     @Click(value = {R.id.adapter_button, R.id.list_dialog_button, R.id.confirm_dialog_button
             , R.id.loading_dialog_button, R.id.select_image, R.id.browse_image, R.id.map
             , R.id.fresco, R.id.eventbus, R.id.titleBar, R.id.tabLayoutPager, R.id.recyclerView
-            ,R.id.sortListView,R.id.greenDao,R.id.selectCity,R.id.xRecyclerView,R.id.ultra_ptr})
+            ,R.id.sortListView,R.id.greenDao,R.id.selectCity,R.id.xRecyclerView,R.id.ultra_ptr,R.id.amap})
     public void onClick(View v) {
         Intent intent = new Intent();
         Bundle bundle = new Bundle();
@@ -98,6 +98,9 @@ public class MainActivity extends BaseActivity {
             case R.id.map:
                 intent.setClass(getApplicationContext(), BaiduMapExampleActivity_.class);
                 startActivity(intent);
+                break;
+            case R.id.amap:
+                showToast(mCity);
                 break;
             //fresco使用
             case R.id.fresco:
@@ -158,8 +161,9 @@ public class MainActivity extends BaseActivity {
 
     @Override
     protected void onDestroy() {
-        super.onDestroy();
         EventBus.getDefault().unregister(this);
+        mAMapLoc.onDestroy();
+        super.onDestroy();
     }
 
     @Override
@@ -181,4 +185,12 @@ public class MainActivity extends BaseActivity {
         showToast(msg);
     }
 
+    @Override
+    public void onLocationChanged(AMapLocation aMapLocation) {
+        if (aMapLocation!=null){
+            mCity=getString(R.string.current_city_tip)+aMapLocation.getAddress();
+            mAMapLoc.stopLocation();
+        }
+
+    }
 }

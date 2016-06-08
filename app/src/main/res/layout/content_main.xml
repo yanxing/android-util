@@ -51,6 +51,10 @@
             android:id="@+id/map"
             style="@style/style_btn"
             android:text="@string/map"/>
+        <Button
+            android:id="@+id/amap"
+            style="@style/style_btn"
+            android:text="高德地图定位"/>
 
         <Button
             android:id="@+id/fresco"
