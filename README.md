@@ -70,6 +70,21 @@ public class BaiduMapExampleActivity extends BaseActivity implements RoutePlanRe
     }
     //回调略
   ```
+## amaploclibrary
+高德地图定位封装（先前以为用百度地图定位导致app包大小多了10多M，尝试换成高德定位，减下去1M多，觉得不是百度地图引起的，后来发现是没有配置bugly的ndk支持，它默认支持所有的CPU架构）。
+```Java
+   mAMapLoc=new AMapLoc(getApplicationContext());
+   mAMapLoc.setAMapLocListener(this);
+   mAMapLoc.startLocation();
+   
+   
+    @Override
+    public void onLocationChanged(AMapLocation aMapLocation) {
+        if (aMapLocation!=null){
+            
+        }
+    }
+```
 ## titlebarlibrary
 自定义标题栏。[example](https://github.com/yanxing/android-util/blob/master/app/src/main/java/com/yanxing/ui/TitleBarExampleActivity.java)
 ```XML
