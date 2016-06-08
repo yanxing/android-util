@@ -191,6 +191,5 @@ public class MainActivity extends BaseActivity implements AMapLocListener {
             mCity=getString(R.string.current_city_tip)+aMapLocation.getAddress();
             mAMapLoc.stopLocation();
         }
-
     }
 }
