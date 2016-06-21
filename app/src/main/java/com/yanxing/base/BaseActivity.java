@@ -21,6 +21,7 @@ public abstract class BaseActivity extends SwipeBackActivity {
     protected SystemBarTintManager mTintManager;
     //默认启动沉浸式通知栏
     protected boolean mUseStatus=true;
+    protected String TAG = getClass().getName();
 
 
     @Override

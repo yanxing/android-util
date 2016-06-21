@@ -47,7 +47,8 @@ public class MainActivity extends BaseActivity implements AMapLocListener {
     @Click(value = {R.id.adapter_button, R.id.list_dialog_button, R.id.confirm_dialog_button
             , R.id.loading_dialog_button, R.id.select_image, R.id.browse_image, R.id.map
             , R.id.fresco, R.id.eventbus, R.id.titleBar, R.id.tabLayoutPager, R.id.recyclerView
-            ,R.id.sortListView,R.id.greenDao,R.id.selectCity,R.id.xRecyclerView,R.id.ultra_ptr,R.id.amap})
+            , R.id.sortListView,R.id.greenDao,R.id.selectCity,R.id.xRecyclerView,R.id.ultra_ptr
+            , R.id.amap,R.id.threadTest})
     public void onClick(View v) {
         Intent intent = new Intent();
         Bundle bundle = new Bundle();
@@ -147,6 +148,10 @@ public class MainActivity extends BaseActivity implements AMapLocListener {
                 break;
             case R.id.xRecyclerView:
                 intent.setClass(getApplicationContext(), XRecyclerViewActivity_.class);
+                startActivity(intent);
+                break;
+            case R.id.threadTest:
+                intent.setClass(getApplicationContext(),ThreadTestActivity2.class);
                 startActivity(intent);
                 break;
         }

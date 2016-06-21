@@ -45,7 +45,7 @@ public class MyApplication extends Application {
         initBaiduMap();
         initFresco();
         initGreen();
-//        refWatcher=LeakCanary.install(this);
+        refWatcher=LeakCanary.install(this);
     }
 
     /**

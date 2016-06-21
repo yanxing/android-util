@@ -27,4 +27,5 @@
     <string name="tablayoutpager">tablayoutpager测试</string>
     <string name="current_city">上海</string>
     <string name="current_city_tip">你当前位置：</string>
+    <string name="finish_activity">关闭当前activity</string>
 </resources>

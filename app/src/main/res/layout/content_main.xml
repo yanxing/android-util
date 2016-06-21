@@ -104,5 +104,9 @@
             android:id="@+id/xRecyclerView"
             style="@style/style_btn"
             android:text="xRecyclerView"/>
+        <Button
+            android:id="@+id/threadTest"
+            style="@style/style_btn"
+            android:text="activityDestroyThread"/>
     </LinearLayout>
 </ScrollView>
