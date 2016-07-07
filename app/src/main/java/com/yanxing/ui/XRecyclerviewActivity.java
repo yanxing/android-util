@@ -97,12 +97,10 @@ public class XRecyclerViewActivity extends BaseActivity {
                 }else {
                     TextView textView= (TextView) viewHolder.itemView.findViewById(R.id.menu2);
                     textView.setVisibility(View.GONE);
-//                    textView.to
                 }
-//                int position = viewHolder.getAdapterPosition();
-//                mRecyclerViewAdapter.notifyItemRemoved(position);
-//                mStrings.remove(position-1);
-//                viewHolder.it
+                int position = viewHolder.getAdapterPosition();
+                mRecyclerViewAdapter.notifyItemRemoved(position);
+                mStrings.remove(position-1);
             }
 
             @Override

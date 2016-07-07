@@ -54,7 +54,7 @@
         <Button
             android:id="@+id/amap"
             style="@style/style_btn"
-            android:text="高德地图定位"/>
+            android:text="@string/gao_de"/>
 
         <Button
             android:id="@+id/fresco"
@@ -85,6 +85,7 @@
             android:id="@+id/sortListView"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            android:textAllCaps="false"
             android:text="sortListView"/>
 
         <Button
@@ -95,7 +96,7 @@
         <Button
             android:id="@+id/selectCity"
             style="@style/style_btn"
-            android:text="城市选择"/>
+            android:text="@string/city_select"/>
         <Button
             android:id="@+id/ultra_ptr"
             style="@style/style_btn"
@@ -108,5 +109,9 @@
             android:id="@+id/threadTest"
             style="@style/style_btn"
             android:text="activityDestroyThread"/>
+        <Button
+            android:id="@+id/animation"
+            style="@style/style_btn"
+            android:text="animation"/>
     </LinearLayout>
 </ScrollView>

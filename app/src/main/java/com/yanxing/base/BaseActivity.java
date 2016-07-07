@@ -3,7 +3,6 @@ package com.yanxing.base;
 import android.os.Build;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
-import android.support.v7.app.AppCompatActivity;
 import android.view.WindowManager;
 import android.widget.Toast;
 
@@ -13,6 +12,7 @@ import com.yanxing.view.LoadingDialog;
 import me.imid.swipebacklayout.lib.app.SwipeBackActivity;
 
 /**
+ * 基类
  * Created by lishuangxiang on 2016/1/21.
  */
 public abstract class BaseActivity extends SwipeBackActivity {
@@ -69,12 +69,12 @@ public abstract class BaseActivity extends SwipeBackActivity {
     /**
      * 隐藏加载框
      */
-    public void dismissLoading() {
+    public void dismissLoadingDialog() {
         try {
             if (mLoadingDialog != null && mLoadingDialog.isShowing()) {
                 mLoadingDialog.dismiss();
             }
-        } catch (Exception e) {
+        } catch (Exception ignored) {
         }
     }
 

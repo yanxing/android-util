@@ -13,7 +13,7 @@
     <string name="browse_image">图片浏览(放大缩小)</string>
     <string name="map">百度地图封装</string>
     <string name="map_lable">百度地图封装测试</string>
-    <string name="fresco">fresco使用</string>
+    <string name="fresco">Fresco使用</string>
     <string name="fresco_lable">fresco使用测试</string>
     <string name="eventBus">EventBus使用测试</string>
     <string name="eventbus">EventBus使用</string>
@@ -46,4 +46,10 @@
     <string name="menu2">菜单二</string>
     <string name="menu3">菜单三</string>
     <string name="di">第</string>
+    <string name="animation">动画学习</string>
+    <string name="alpha">透明动画</string>
+    <string name="gao_de">高德地图定位</string>
+    <string name="city_select">城市选择</string>
+    <string name="frame">帧动画</string>
+    <string name="layout_animation">LayoutAnimation</string>
 </resources>
