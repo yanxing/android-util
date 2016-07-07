@@ -28,4 +28,22 @@
     <string name="current_city">上海</string>
     <string name="current_city_tip">你当前位置：</string>
     <string name="finish_activity">关闭当前activity</string>
+    <string name="city_test">上海</string>
+    <string name="eventbus_tip">EventBus是一个发布 / 订阅的事件总线</string>
+    <string name="sorry_no_find">抱歉，未找到结果</string>
+    <string name="exit">确定退出吗？</string>
+    <string name="click_confirm">你点击了确定</string>
+    <string name="male">男</string>
+    <string name="operation">操作成功</string>
+    <string name="delete_success">删除成功</string>
+    <string name="you_select">你选择了</string>
+    <string name="load">加载中...</string>
+    <string name="you_click">你点击了第</string>
+    <string name="ge">个</string>
+    <string name="long_an">你长按了第</string>
+    <string name="current_area">当前地区</string>
+    <string name="menu1">菜单一</string>
+    <string name="menu2">菜单二</string>
+    <string name="menu3">菜单三</string>
+    <string name="di">第</string>
 </resources>

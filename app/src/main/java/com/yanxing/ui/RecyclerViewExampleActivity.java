@@ -67,11 +67,11 @@ public class RecyclerViewExampleActivity extends BaseActivity {
                 holder.itemView.setOnClickListener(new View.OnClickListener() {
                     @Override
                     public void onClick(View v) {
-                        showToast("你点击了第"+(position+1)+"个");
+                        showToast(getString(R.string.you_click)+(position+1)+getString(R.string.ge));
                     }
                 });
                 holder.itemView.setOnLongClickListener(v -> {
-                    showToast("你长按了第"+(position+1)+"个");
+                    showToast(getString(R.string.long_an)+(position+1)+getString(R.string.ge));
                     return true;
                 });
             }

@@ -49,7 +49,7 @@ public class SelectCityActivity extends BaseActivity implements AdapterView.OnIt
     protected void afterInstanceView() {
         //构造当前地区
         Area currentArea=new Area();
-        currentArea.setName("当前地区");
+        currentArea.setName(getString(R.string.current_area));
         ArrayList<Area.CityBean> currentCity=new ArrayList<Area.CityBean>();
         Area.CityBean cityBean=new Area.CityBean();
         String currentCityStr=getIntent().getStringExtra("currentCity");

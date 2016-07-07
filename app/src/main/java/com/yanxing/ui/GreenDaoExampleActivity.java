@@ -61,11 +61,11 @@ public class GreenDaoExampleActivity extends BaseActivity {
             case R.id.button:
                 Student student=new Student();
                 student.setName("yanxing"+i);
-                student.setSex("男");
+                student.setSex(getString(R.string.male));
                 mStudentDao.insert(student);
                 mStudentList.add(student);
                 mStudentCommonAdapter.update(mStudentList);
-                showToast("操作成功");
+                showToast(getString(R.string.operation));
                 i++;
                 break;
         }
@@ -76,6 +76,6 @@ public class GreenDaoExampleActivity extends BaseActivity {
         mStudentDao.delete(mStudentList.get(position));
         mStudentList.remove(position);
         mStudentCommonAdapter.update(mStudentList);
-        showToast("删除成功");
+        showToast(getString(R.string.delete_success));
     }
 }

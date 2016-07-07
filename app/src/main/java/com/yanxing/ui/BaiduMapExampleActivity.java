@@ -64,7 +64,7 @@ public class BaiduMapExampleActivity extends BaseActivity implements RoutePlanRe
     @Override
     public void onGetDrivingRouteResult(DrivingRouteResult result) {
         if (result == null || result.error != SearchResult.ERRORNO.NO_ERROR) {
-            showToast("抱歉，未找到结果");
+            showToast(getString(R.string.sorry_no_find));
         }
         if (result.error == SearchResult.ERRORNO.AMBIGUOUS_ROURE_ADDR) {
             //起终点或途经点地址有岐义，通过以下接口获取建议查询信息

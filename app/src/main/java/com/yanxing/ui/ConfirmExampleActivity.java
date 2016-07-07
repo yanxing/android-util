@@ -19,9 +19,9 @@ public class ConfirmExampleActivity extends BaseActivity {
     @Override
     @AfterViews
     protected void afterInstanceView() {
-        final ConfirmDialog confirmDialog=new ConfirmDialog(this,"确定退出吗？");
+        final ConfirmDialog confirmDialog=new ConfirmDialog(this,getString(R.string.exit));
         confirmDialog.setConfirmButton(v -> {
-            Toast.makeText(getApplicationContext(),"你点击了确定",Toast.LENGTH_LONG).show();
+            Toast.makeText(getApplicationContext(), R.string.click_confirm,Toast.LENGTH_LONG).show();
             confirmDialog.dismiss();
         });
     }

@@ -30,7 +30,7 @@ public class ListDialogExampleActivity extends BaseActivity {
         listDialog.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
-                Toast.makeText(getApplicationContext(),"你选择了"+list.get(position),Toast.LENGTH_LONG).show();
+                Toast.makeText(getApplicationContext(),getString(R.string.you_select)+list.get(position),Toast.LENGTH_LONG).show();
                 listDialog.dismiss();
             }
         });

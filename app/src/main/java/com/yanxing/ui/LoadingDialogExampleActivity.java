@@ -15,6 +15,6 @@ public class LoadingDialogExampleActivity extends BaseActivity{
     @AfterViews
     @Override
     protected void afterInstanceView() {
-        showLoadingDialog("加载中...");
+        showLoadingDialog(getString(R.string.load));
     }
 }

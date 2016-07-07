@@ -130,7 +130,7 @@ public class MainActivity extends BaseActivity implements AMapLocListener {
             //城市列表
             case R.id.sortListView:
                 intent.setClass(getApplicationContext(), CityListActivity.class);
-                intent.putExtra("city","上海");
+                intent.putExtra("city",getString(R.string.city_test));
                 startActivityForResult(intent,QUESTION_SORT_LISTVIEW_CODE);
                 break;
             case R.id.greenDao:
@@ -139,7 +139,7 @@ public class MainActivity extends BaseActivity implements AMapLocListener {
                 break;
             case R.id.selectCity:
                 intent.setClass(getApplicationContext(), SelectCityActivity_.class);
-                intent.putExtra("currentCity","上海");
+                intent.putExtra("currentCity",getString(R.string.city_test));
                 startActivity(intent);
                 break;
             case R.id.ultra_ptr:
@@ -160,8 +160,7 @@ public class MainActivity extends BaseActivity implements AMapLocListener {
     @Override
     protected void onStop() {
         super.onStop();
-        EventBus.getDefault().post(new FirstEventBus("EventBus是一个发布 / 订阅的事件总线"));
-//        EventBus.getDefault().post("EventBus是一个发布 / 订阅的事件总线");
+        EventBus.getDefault().post(new FirstEventBus(getString(R.string.eventbus_tip)));
     }
 
     @Override
