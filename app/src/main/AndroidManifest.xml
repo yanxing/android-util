@@ -104,12 +104,18 @@
         <activity
             android:name=".ThreadTestActivity_"
             android:theme="@style/SwipeBack"/>
-        <activity android:name=".ThreadTestActivity2"
-                  android:theme="@style/SwipeBack"/>
-        <activity android:name=".animation.AnimationMainActivity_"
-                  android:theme="@style/SwipeBack"/>
-        <activity android:name=".animation.LayoutAnimationExampleActivity_"
-                  android:theme="@style/SwipeBack"/>
+        <activity
+            android:name=".ThreadTestActivity2"
+            android:theme="@style/SwipeBack"/>
+        <activity
+            android:name=".animation.AnimationMainActivity_"
+            android:theme="@style/SwipeBack"/>
+        <activity
+            android:name=".animation.LayoutAnimationExampleActivity_"
+            android:theme="@style/SwipeBack"/>
+        <activity
+            android:name=".DialogActivity_"
+            android:theme="@style/MyDialogStyleSelect"/>
     </application>
 
 </manifest>

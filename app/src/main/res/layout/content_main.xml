@@ -113,5 +113,9 @@
             android:id="@+id/animation"
             style="@style/style_btn"
             android:text="animation"/>
+        <Button
+            android:id="@+id/dialog"
+            style="@style/style_btn"
+            android:text="activity对话框"/>
     </LinearLayout>
 </ScrollView>
