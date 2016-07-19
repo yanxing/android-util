@@ -7,6 +7,7 @@ import com.facebook.drawee.view.SimpleDraweeView;
 import com.yanxing.base.BaseActivity;
 import com.yanxing.util.ConstantValue;
 
+import org.androidannotations.annotations.AfterViews;
 import org.androidannotations.annotations.EActivity;
 import org.androidannotations.annotations.ViewById;
 
@@ -20,6 +21,7 @@ public class ShowImageActivity extends BaseActivity {
     @ViewById(R.id.simple_drawee_view)
     SimpleDraweeView mSimpleDraweeView;
 
+    @AfterViews
     @Override
     protected void afterInstanceView() {
         String imageName=getIntent().getStringExtra("name");

@@ -4,10 +4,15 @@
               android:orientation="vertical"
               android:layout_width="match_parent"
               android:layout_height="match_parent">
+    <com.yanxing.titlebarlibrary.TitleBar
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        app:title_main="@string/select_image"/>
     <com.facebook.drawee.view.SimpleDraweeView
         android:id="@+id/simple_drawee_view"
         android:layout_width="80dp"
         android:layout_height="80dp"
+        android:layout_gravity="center"
         android:visibility="gone"
         app:placeholderImage="@mipmap/ic_launcher"/>
 </LinearLayout>

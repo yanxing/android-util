@@ -15,7 +15,7 @@
         <ImageView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:background="@drawable/photo"
+            android:background="@drawable/photo_library"
             android:scaleType="centerCrop" />
         <TextView
             android:layout_width="wrap_content"

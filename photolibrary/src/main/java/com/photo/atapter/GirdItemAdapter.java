@@ -94,7 +94,7 @@ public class GirdItemAdapter extends BaseAdapter {
 				convertView.setTag(holder2);
 				break;
 			case TYPE_2:
-				convertView= LayoutInflater.from(context).inflate(R.layout.grid_item, null);
+				convertView= LayoutInflater.from(context).inflate(R.layout.grid_item_photo, null);
 				holder=new ViewHolder();
 				holder.id_item_image=(ImageView)convertView.findViewById(R.id.id_item_image);
 //				holder.id_item_select=(ImageButton)convertView.findViewById(R.id.id_item_select);
@@ -191,7 +191,16 @@ public class GirdItemAdapter extends BaseAdapter {
 	}
 	public  interface OnPhotoSelectedListener{
 		public void photoClick(List<String> number);
+
+		/**
+		 * 拍照
+		 */
 		public void takePhoto();
+
+		/**
+		 * 选择已存在照片
+		 * @param path
+         */
 		public void photoPath(String path);
 	}
 

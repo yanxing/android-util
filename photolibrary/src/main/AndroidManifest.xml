@@ -4,6 +4,7 @@
     <application>
         <activity
             android:name="com.photo.ui.PhotoUtilsActivity"
-            android:screenOrientation="portrait"></activity>
+            android:screenOrientation="portrait"
+            android:theme="@style/AppBaseLibrary"/>
     </application>
 </manifest>

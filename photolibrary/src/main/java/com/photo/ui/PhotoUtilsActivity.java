@@ -10,6 +10,7 @@ import android.graphics.Bitmap;
 import android.graphics.Rect;
 import android.graphics.drawable.BitmapDrawable;
 import android.net.Uri;
+import android.os.Build;
 import android.os.Bundle;
 import android.os.Environment;
 import android.os.Handler;
@@ -20,6 +21,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.View.OnClickListener;
 import android.view.Window;
+import android.view.WindowManager;
 import android.widget.AdapterView;
 import android.widget.AdapterView.OnItemClickListener;
 import android.widget.GridView;
@@ -35,6 +37,7 @@ import com.photo.R;
 import com.photo.atapter.GirdItemAdapter;
 import com.photo.atapter.ImageFloderAdapter;
 import com.photo.model.ImageFloder;
+import com.photo.util.AppUtil;
 import com.photo.util.ConstantUtils;
 
 import java.io.File;
@@ -108,7 +111,7 @@ public class PhotoUtilsActivity extends Activity implements OnClickListener {
 
     private boolean flag = false;//是否要剪切图片
 
-    private final static String CAMERA=Environment.getExternalStorageDirectory() + "/DCIM/Camera";
+    private final static String CAMERA = Environment.getExternalStorageDirectory() + "/DCIM/Camera";
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -126,9 +129,21 @@ public class PhotoUtilsActivity extends Activity implements OnClickListener {
             mName = extras.getString("name") == null ? "" : extras.getString("name");
             flag = extras.getBoolean("cut");
         }
+        initImmersionStatus();
         initView();
         initListener();
         getImages();
+    }
+
+    /**
+     * 沉浸式布局
+     */
+    public void initImmersionStatus(){
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.KITKAT) {
+            //透明状态栏
+            getWindow().addFlags(WindowManager.LayoutParams.FLAG_TRANSLUCENT_STATUS);
+        }
+        AppUtil.setStatusBarDarkMode(true,this);
     }
 
     private void initView() {
@@ -194,7 +209,7 @@ public class PhotoUtilsActivity extends Activity implements OnClickListener {
                         continue;
                     String dirPath = parentFile.getAbsolutePath();
                     ImageFloder imageFloder = null;
-                    // 利用一个HashSet防止多次扫描同一个文件夹（不加这个判断，图片多起来还是相当恐怖的~~）
+                    // 利用一个HashSet防止多次扫描同一个文件夹
                     if (mDirPaths.contains(dirPath)) {
                         continue;
                     } else {
@@ -211,8 +226,8 @@ public class PhotoUtilsActivity extends Activity implements OnClickListener {
                         public boolean accept(File dir, String filename) {
                             if (filename.endsWith(".jpg")
                                     || filename.endsWith(".png")
-                                    || filename.endsWith(".jpeg")){
-                                if (dir.getAbsolutePath().equals(CAMERA)){
+                                    || filename.endsWith(".jpeg")) {
+                                if (dir.getAbsolutePath().equals(CAMERA)) {
                                     camerList.add(filename);
                                 }
                                 return true;
@@ -239,9 +254,9 @@ public class PhotoUtilsActivity extends Activity implements OnClickListener {
 
     private Handler mHandler = new Handler() {
         public void handleMessage(android.os.Message msg) {
-            try{
+            try {
                 mProgressDialog.dismiss();
-            }catch (Exception e){
+            } catch (Exception e) {
             }
             setDataView();// 为View绑定数据
         }
@@ -262,61 +277,56 @@ public class PhotoUtilsActivity extends Activity implements OnClickListener {
                     Toast.LENGTH_SHORT).show();
             return;
         }
-//        if (mImgDir.exists()) {
-//            mImgs = Arrays.asList(mImgDir.list());
-//        }
         Collections.sort(camerList);
         Collections.reverse(camerList);//时间逆序显示
         girdItemAdapter = new GirdItemAdapter(this, camerList,
                 CAMERA);
 
 
-
         photoGrid.setAdapter(girdItemAdapter);
         girdItemAdapter.setOnPhotoSelectedListener(new GirdItemAdapter.OnPhotoSelectedListener() {
-                    @Override
-                    public void takePhoto() {
-                        imagename = getTimeName(System.currentTimeMillis())
-                                + ".jpg";
-                        String state = Environment.getExternalStorageState();
-                        if (state.equals(Environment.MEDIA_MOUNTED)) {
-                            Intent intent = new Intent(
-                                    MediaStore.ACTION_IMAGE_CAPTURE);// 用于拍照的Activity
-                            // 需要返回照片图像数据,
-                            File file = new File(Environment
-                                    .getExternalStoragePublicDirectory(Environment.DIRECTORY_DCIM), imagename);// localTempImgDir和localTempImageFileName是自己定义的名字
-                            if (!file.exists()) {
-                                file.delete();
-                            }
-                            try {
-                                file.createNewFile();
-                            } catch (IOException e) {
-                                e.printStackTrace();
-                            }
-                            fromFile = Uri.fromFile(file);
-                            intent.putExtra(
-                                    MediaStore.Images.Media.ORIENTATION, 0);
-                            intent.putExtra(MediaStore.EXTRA_OUTPUT, fromFile);
-                            startActivityForResult(intent,
-                                    ConstantUtils.CAMERA_REQUEST_CODE);
-                        } else {
-                            Toast.makeText(PhotoUtilsActivity.this, "请插入SD卡",
-                                    Toast.LENGTH_SHORT).show();
-                        }
+            @Override
+            public void takePhoto() {
+                imagename = getTimeName(System.currentTimeMillis())
+                        + ".jpg";
+                String state = Environment.getExternalStorageState();
+                if (state.equals(Environment.MEDIA_MOUNTED)) {
+                    Intent intent = new Intent(
+                            MediaStore.ACTION_IMAGE_CAPTURE);// 用于拍照的Activity
+                    // 需要返回照片图像数据,
+                    File file = new File(Environment
+                            .getExternalStoragePublicDirectory(Environment.DIRECTORY_DCIM), imagename);
+                    if (!file.exists()) {
+                        file.delete();
                     }
-
-                    @Override
-                    public void photoClick(List<String> number) {
-
+                    try {
+                        file.createNewFile();
+                    } catch (IOException e) {
+                        e.printStackTrace();
                     }
+                    fromFile = Uri.fromFile(file);
+                    intent.putExtra(
+                            MediaStore.Images.Media.ORIENTATION, 0);
+                    intent.putExtra(MediaStore.EXTRA_OUTPUT, fromFile);
+                    startActivityForResult(intent,
+                            ConstantUtils.CAMERA_REQUEST_CODE);
+                } else {
+                    Toast.makeText(PhotoUtilsActivity.this, "请插入SD卡",
+                            Toast.LENGTH_SHORT).show();
+                }
+            }
 
-                    @Override
-                    public void photoPath(String path) {
-                        decodeUriAsBitmap(Uri.fromFile(new File(path)),
-                                getCacheUri());
-                    }
+            @Override
+            public void photoClick(List<String> number) {
 
-                });
+            }
+
+            @Override
+            public void photoPath(String path) {
+                decodeUriAsBitmap(Uri.fromFile(new File(path)), getCacheUri());
+            }
+
+        });
     }
 
     private Uri getCacheUri() {
@@ -349,7 +359,9 @@ public class PhotoUtilsActivity extends Activity implements OnClickListener {
             dirListView = (ListView) dirview.findViewById(R.id.photo_file_list);
             Rect frame = new Rect();
             getWindow().getDecorView().getWindowVisibleDisplayFrame(frame);
-            popupWindow = new PopupWindow(dirview, mScreenWidth, mScreenHeight - (int) TypedValue.applyDimension(TypedValue.COMPLEX_UNIT_DIP, 48, getResources().getDisplayMetrics()) - frame.top);
+            popupWindow = new PopupWindow(dirview, mScreenWidth
+                    , mScreenHeight - (int) TypedValue.applyDimension(TypedValue.COMPLEX_UNIT_DIP, 48
+                    , getResources().getDisplayMetrics()) - frame.top);
             // 适配数据
             floderAdapter = new ImageFloderAdapter(PhotoUtilsActivity.this,
                     mImageFloders);
@@ -406,7 +418,7 @@ public class PhotoUtilsActivity extends Activity implements OnClickListener {
     }
 
     @Override
-    protected void onActivityResult(int requestCode, int resultCode, Intent data) {
+    protected void onActivityResult(int requestCode, int resultCode, final Intent data) {
         super.onActivityResult(requestCode, resultCode, data);
         if (resultCode != RESULT_OK) {
             return;
@@ -418,10 +430,23 @@ public class PhotoUtilsActivity extends Activity implements OnClickListener {
             sendBroadcast(intent);
         } else if (requestCode == ConstantUtils.PHOTO_REQUEST_CUT) {
             if (data != null) {
-                setResult(RESULT_OK);
-                finish();
-            } else {
-                return;
+                //解决有时文件没有写入完就返回bug
+                final File file = new File(mPath + mName);
+                mProgressDialog.setMessage("图片裁剪中...");
+                mProgressDialog.show();
+                new Thread(new Runnable() {
+                    @Override
+                    public void run() {
+                        while (true) {
+                            if (file.length() != 0) {
+                                setResult(RESULT_OK, data);
+                                mProgressDialog.dismiss();
+                                finish();
+                                break;
+                            }
+                        }
+                    }
+                }).start();
             }
         }
     }
@@ -431,25 +456,22 @@ public class PhotoUtilsActivity extends Activity implements OnClickListener {
         try {
             Intent intent = new Intent("com.android.camera.action.CROP");
             intent.setDataAndType(uri, "image/*");
-            intent.putExtra("crop", "true");
+            //进行裁剪
             if (flag) {
+                intent.putExtra("crop", "true");
                 intent.putExtra("aspectX", 1);
                 intent.putExtra("aspectY", 1);
-                intent.putExtra("outputX", 80);
-                intent.putExtra("outputY", 80);
+                intent.putExtra("outputX", 480);
+                intent.putExtra("outputY", 480);
                 intent.putExtra("scale", true);
-            } else {
             }
             intent.putExtra(MediaStore.EXTRA_OUTPUT, cacheUri);
-
             intent.putExtra("return-data", false);
-            intent.putExtra("outputFormat",
-                    Bitmap.CompressFormat.JPEG.toString());
+            intent.putExtra("outputFormat", Bitmap.CompressFormat.JPEG.toString());
             intent.putExtra("noFaceDetection", true);
             startActivityForResult(intent, ConstantUtils.PHOTO_REQUEST_CUT);
         } catch (Exception e) {
             e.printStackTrace();
         }
-
     }
 }

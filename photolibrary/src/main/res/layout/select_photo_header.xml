@@ -18,6 +18,7 @@
             android:layout_gravity="center"
             android:gravity="center"
             android:minWidth="50dp"
+            android:textSize="16dp"
             android:text="取消"
             android:textColor="@color/font_yellow_00" />
 
