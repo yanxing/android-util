@@ -52,4 +52,5 @@
     <string name="city_select">城市选择</string>
     <string name="frame">帧动画</string>
     <string name="layout_animation">LayoutAnimation</string>
+    <string name="bufferknife">butterknife</string>
 </resources>

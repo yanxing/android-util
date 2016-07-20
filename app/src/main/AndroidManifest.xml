@@ -116,6 +116,9 @@
         <activity
             android:name=".DialogActivity_"
             android:theme="@style/MyDialogStyleSelect"/>
+        <activity
+            android:name=".ButterKnifeExampleActivity"
+            android:theme="@style/SwipeBack"/>
     </application>
 
 </manifest>

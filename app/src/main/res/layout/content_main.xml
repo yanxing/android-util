@@ -117,5 +117,9 @@
             android:id="@+id/dialog"
             style="@style/style_btn"
             android:text="activity对话框"/>
+        <Button
+            android:id="@+id/ButterKnife"
+            style="@style/style_btn"
+            android:text="ButterKnife"/>
     </LinearLayout>
 </ScrollView>

@@ -28,6 +28,7 @@ import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
 /**
+ * 工具类
  * Created by lishuangxiang on 2016/2/19.
  */
 public class CommonUtil {
