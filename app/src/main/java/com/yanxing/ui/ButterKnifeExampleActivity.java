@@ -17,7 +17,7 @@ import butterknife.OnClick;
 /**
  * BufferKnife+Android ButterKnife Zelezny
  * androidannotations与ButterKnife使用心得：两者都有view注解、事件绑定，而androidannotations还有线程切换、网络访问等功能；
- * 两者都是预编译，比其他采用运行时反射View注解框架性能优些；androidannotations中布局可以通过@EActivity注解写到Activity类上面，而ButterKnife需要自己写代码
+ * 两者都是编译期生成代码，比其他采用运行时反射View注解框架性能高；androidannotations中布局可以通过@EActivity注解写到Activity类上面，而ButterKnife需要自己写代码
  * setContent或者LayoutInflater加载布局，从而两者的BaseActivity里面的代码量不同，使用ButterKnife子类Activity返回一个布局对象给BaseActivity，
  * 然后写上ButterKnife.bind(this)，所有的子类就不用重复写ButterKnife.bind(this)，而androidannotations不需要这些写代码，一个注解就行了，但是注册和启动
  * Activity需要给Activity类名加上后缀_;Android studio有ButterKnife插件，可以自动生成View注解和事件绑定，而androidannotations没有此类插件，这点ButterKnife
