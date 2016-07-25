@@ -4,22 +4,22 @@ import android.widget.TextView;
 
 import com.yanxing.base.BaseFragment;
 
-import org.androidannotations.annotations.AfterViews;
-import org.androidannotations.annotations.EFragment;
-import org.androidannotations.annotations.ViewById;
-
+import butterknife.BindView;
 import de.greenrobot.event.EventBus;
 
 /**
  * Created by lishuangxiang on 2016/3/14.
  */
-@EFragment(R.layout.fragment_tablayoutpager2)
 public class TabLayoutPager2Fragment extends BaseFragment {
 
-    @ViewById(R.id.text)
+    @BindView(R.id.text)
     TextView mTextView;
 
-    @AfterViews
+    @Override
+    protected int getLayoutResID() {
+        return R.layout.fragment_tablayoutpager2;
+    }
+
     @Override
     protected void afterInstanceView() {
         EventBus.getDefault().register(this);

@@ -5,10 +5,7 @@ import android.widget.TextView;
 import com.yanxing.base.BaseActivity;
 import com.yanxing.model.FirstEventBus;
 
-import org.androidannotations.annotations.AfterViews;
-import org.androidannotations.annotations.EActivity;
-import org.androidannotations.annotations.ViewById;
-
+import butterknife.BindView;
 import de.greenrobot.event.EventBus;
 
 /**
@@ -16,13 +13,16 @@ import de.greenrobot.event.EventBus;
  * http://blog.csdn.net/lyxtime/article/details/50601632
  * Created by lishuangxiang on 2016/1/28.
  */
-@EActivity(R.layout.activity_eventbus_example)
 public class EventBusExampleActivity extends BaseActivity {
 
-    @ViewById(R.id.eventbus)
+    @BindView(R.id.eventbus)
     TextView mEventBus;
 
-    @AfterViews
+    @Override
+    protected int getLayoutResID() {
+        return R.layout.activity_eventbus_example;
+    }
+
     @Override
     protected void afterInstanceView() {
         getSwipeBackLayout().setEnableGesture(false);

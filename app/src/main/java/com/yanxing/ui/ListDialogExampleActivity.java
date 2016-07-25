@@ -7,20 +7,20 @@ import android.widget.Toast;
 import com.yanxing.base.BaseActivity;
 import com.yanxing.view.ListDialog;
 
-import org.androidannotations.annotations.AfterViews;
-import org.androidannotations.annotations.EActivity;
-
 import java.util.ArrayList;
 import java.util.List;
 /**
  * ListDialog测试
  * Created by lishuangxiang on 2016/1/21.
  */
-@EActivity(R.layout.activity_list_dialog_example)
 public class ListDialogExampleActivity extends BaseActivity {
 
     @Override
-    @AfterViews
+    protected int getLayoutResID() {
+        return R.layout.activity_list_dialog_example;
+    }
+
+    @Override
     protected void afterInstanceView() {
         final List<String> list=new ArrayList<String>();
         for (int i=1;i<4;i++){

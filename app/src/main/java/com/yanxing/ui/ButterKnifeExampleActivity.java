@@ -1,14 +1,10 @@
 package com.yanxing.ui;
 
-import android.os.Build;
-import android.os.Bundle;
-import android.support.annotation.Nullable;
-import android.support.v4.app.FragmentActivity;
 import android.view.View;
-import android.view.WindowManager;
 import android.widget.TextView;
 
-import com.readystatesoftware.systembartint.SystemBarTintManager;
+
+import com.yanxing.base.BaseActivity;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
@@ -24,7 +20,7 @@ import butterknife.OnClick;
  * 更节省时间。
  * Created by lishuangxiang on 2016/7/20.
  */
-public class ButterKnifeExampleActivity extends FragmentActivity {
+public class ButterKnifeExampleActivity extends BaseActivity {
 
     @BindView(R.id.textview1)
     TextView mTextview1;
@@ -39,13 +35,13 @@ public class ButterKnifeExampleActivity extends FragmentActivity {
     TextView mTextView4;
 
     @Override
-    protected void onCreate(@Nullable Bundle savedInstanceState) {
-        super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_butter_knife_example);
-        ButterKnife.bind(this);
-        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.KITKAT) {
-            getWindow().addFlags(WindowManager.LayoutParams.FLAG_TRANSLUCENT_STATUS);
-        }
+    protected int getLayoutResID() {
+        return R.layout.activity_butter_knife_example;
+    }
+
+    @Override
+    protected void afterInstanceView() {
+
     }
 
     @OnClick({R.id.textview1, R.id.text_view_test, R.id.textView3, R.id.textView4})

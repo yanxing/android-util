@@ -2,7 +2,6 @@ package com.yanxing.ui;
 
 import android.os.Bundle;
 import android.support.annotation.Nullable;
-import android.support.v4.app.FragmentActivity;
 import android.support.v4.view.PagerAdapter;
 import android.support.v4.view.ViewPager;
 import android.view.View;
@@ -15,24 +14,21 @@ import com.photo.browse.widget.CustomPhotoViewPager;
 import com.photo.browse.widget.PhotoView;
 import com.yanxing.base.BaseActivity;
 
-import org.androidannotations.annotations.AfterViews;
-import org.androidannotations.annotations.EActivity;
-import org.androidannotations.annotations.ViewById;
-
 import java.util.ArrayList;
 import java.util.List;
+
+import butterknife.BindView;
 
 /**
  * 浏览图片
  * Created by lishuangxiang on 2016/1/26.
  */
-@EActivity(R.layout.activity_browse_image_example)
 public class BrowseImageExampleActivity extends BaseActivity{
 
-    @ViewById(R.id.custom_photo_viewpage)
+    @BindView(R.id.custom_photo_viewpage)
     CustomPhotoViewPager mCustomPhotoViewPager;
 
-    @ViewById(R.id.number)
+    @BindView(R.id.number)
     TextView mNumber;//记录当前张数
 
     private SamplePagerAdapter mPhotoAdapter;
@@ -45,7 +41,11 @@ public class BrowseImageExampleActivity extends BaseActivity{
         super.onCreate(savedInstanceState);
     }
 
-    @AfterViews
+    @Override
+    protected int getLayoutResID() {
+        return R.layout.activity_browse_image_example;
+    }
+
     protected void afterInstanceView() {
         mTintManager.setStatusBarTintEnabled(false);
         mNumber.getPaint().setFakeBoldText(true);

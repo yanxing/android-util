@@ -22,22 +22,24 @@ import com.baidu.mapapi.search.route.WalkingRouteResult;
 import com.yanxing.base.BaseActivity;
 import com.yanxing.base.MyApplication;
 
-import org.androidannotations.annotations.AfterViews;
-import org.androidannotations.annotations.EActivity;
-import org.androidannotations.annotations.ViewById;
+import butterknife.BindView;
 
 /**
  * 百度地图封装测试
  */
-@EActivity(R.layout.activity_baidu_map_example)
-public class BaiduMapExampleActivity extends BaseActivity implements RoutePlanResultListener,BaiduLocListener {
+public class BaiduMapExampleActivity extends BaseActivity
+        implements RoutePlanResultListener,BaiduLocListener {
 
-    @ViewById(R.id.map)
+    @BindView(R.id.map)
     LinearLayout mMap;
 
     private BaiduMapView mBaiduMapView;
 
-    @AfterViews
+    @Override
+    protected int getLayoutResID() {
+        return R.layout.activity_baidu_map_example;
+    }
+
     @Override
     protected void afterInstanceView() {
         mBaiduMapView=new BaiduMapView(this, mMap);
@@ -52,7 +54,8 @@ public class BaiduMapExampleActivity extends BaseActivity implements RoutePlanRe
         baiduLoc.startLocation();
         baiduLoc.setBaiduLocListener(this);
         //最短距离路线
-        mBaiduMapView.drivingSearch((new DrivingRoutePlanOption().policy(DrivingRoutePlanOption.DrivingPolicy.ECAR_DIS_FIRST))
+        mBaiduMapView.drivingSearch((new DrivingRoutePlanOption()
+                .policy(DrivingRoutePlanOption.DrivingPolicy.ECAR_DIS_FIRST))
                 .from(senderNode)
                 .to(receiverNode));
         //设置视角中心

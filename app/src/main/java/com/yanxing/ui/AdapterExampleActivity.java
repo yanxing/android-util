@@ -7,25 +7,26 @@ import com.yanxing.adapterlibrary.ViewHolder;
 import com.yanxing.base.BaseActivity;
 import com.yanxing.model.User;
 
-import org.androidannotations.annotations.AfterViews;
-import org.androidannotations.annotations.EActivity;
-import org.androidannotations.annotations.ViewById;
-
 import java.util.ArrayList;
 import java.util.List;
+
+import butterknife.BindView;
 
 /**
  * adapterlibrary测试
  * Created by lishuangxiang on 2016/1/20.
  */
-@EActivity(R.layout.activity_adapter_example)
 public class AdapterExampleActivity extends BaseActivity {
 
-    @ViewById(R.id.listview)
+    @BindView(R.id.listview)
     ListView mListView;
 
     @Override
-    @AfterViews
+    protected int getLayoutResID() {
+        return R.layout.activity_adapter_example;
+    }
+
+    @Override
     protected void afterInstanceView() {
         final List<User> list=new ArrayList<User>();
         for (int i=0;i<20;i++){

@@ -15,25 +15,22 @@ import com.yanxing.base.BaseActivity;
 import com.yanxing.model.Area;
 import com.yanxing.util.ParseJson;
 
-import org.androidannotations.annotations.AfterViews;
-import org.androidannotations.annotations.EActivity;
-import org.androidannotations.annotations.ItemClick;
-import org.androidannotations.annotations.ViewById;
-
 import java.util.ArrayList;
 import java.util.List;
+
+import butterknife.BindView;
 
 /**
  * 选择城市
  * Created by lishuangxiang on 2016/4/12.
  */
-@EActivity(R.layout.activity_select_city)
-public class SelectCityActivity extends BaseActivity implements AdapterView.OnItemClickListener{
+public class SelectCityActivity extends BaseActivity
+        implements AdapterView.OnItemClickListener{
 
-    @ViewById(R.id.province)
+    @BindView(R.id.province)
     ListView mProvince;
 
-    @ViewById(R.id.city)
+    @BindView(R.id.city)
     ListView mCity;
 
     //省份
@@ -44,7 +41,11 @@ public class SelectCityActivity extends BaseActivity implements AdapterView.OnIt
     private static int mIndex=0;
     private boolean mIsClick=false;
 
-    @AfterViews
+    @Override
+    protected int getLayoutResID() {
+        return R.layout.activity_select_city;
+    }
+
     @Override
     protected void afterInstanceView() {
         //构造当前地区

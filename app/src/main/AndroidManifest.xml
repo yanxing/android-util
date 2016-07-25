@@ -46,7 +46,7 @@
             android:process=":remote"/>
 
         <activity
-            android:name=".MainActivity_"
+            android:name=".MainActivity"
             android:theme="@style/AppTheme.NoActionBar">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN"/>
@@ -55,66 +55,66 @@
             </intent-filter>
         </activity>
         <activity
-            android:name=".AdapterExampleActivity_"
+            android:name=".AdapterExampleActivity"
             android:theme="@style/SwipeBack"/>
         <activity
-            android:name=".ListDialogExampleActivity_"
+            android:name=".ListDialogExampleActivity"
             android:theme="@style/SwipeBack"/>
         <activity
-            android:name=".ConfirmExampleActivity_"
+            android:name=".ConfirmExampleActivity"
             android:theme="@style/SwipeBack"/>
         <activity
-            android:name=".LoadingDialogExampleActivity_"
+            android:name=".LoadingDialogExampleActivity"
             android:theme="@style/SwipeBack"/>
         <activity
-            android:name=".BrowseImageExampleActivity_"
+            android:name=".BrowseImageExampleActivity"
             android:theme="@style/noTitle"/>
-        <activity android:name=".BaiduMapExampleActivity_"/>
+        <activity android:name=".BaiduMapExampleActivity"/>
         <activity
-            android:name=".FrescoExampleActivity_"
+            android:name=".FrescoExampleActivity"
             android:theme="@style/SwipeBack"/>
-        <activity android:name=".EventBusExampleActivity_"/>
+        <activity android:name=".EventBusExampleActivity"/>
         <activity
-            android:name=".TitleBarExampleActivity_"
-            android:theme="@style/SwipeBack"/>
-        <activity
-            android:name=".TabLayoutPagerExampleActivity_"
+            android:name=".TitleBarExampleActivity"
             android:theme="@style/SwipeBack"/>
         <activity
-            android:name=".RecyclerViewExampleActivity_"
+            android:name=".TabLayoutPagerExampleActivity"
             android:theme="@style/SwipeBack"/>
         <activity
-            android:name=".GreenDaoExampleActivity_"
+            android:name=".RecyclerViewExampleActivity"
             android:theme="@style/SwipeBack"/>
         <activity
-            android:name=".SelectCityActivity_"
+            android:name=".GreenDaoExampleActivity"
             android:theme="@style/SwipeBack"/>
         <activity
-            android:name=".ShowImageActivity_"
+            android:name=".SelectCityActivity"
             android:theme="@style/SwipeBack"/>
         <activity
-            android:name=".RxJavaExample_"
+            android:name=".ShowImageActivity"
             android:theme="@style/SwipeBack"/>
         <activity
-            android:name=".XRecyclerViewActivity_"
+            android:name=".RxJavaExample"
             android:theme="@style/SwipeBack"/>
         <activity
-            android:name=".UltraPtrExampleActivity_"
+            android:name=".XRecyclerViewActivity"
             android:theme="@style/SwipeBack"/>
         <activity
-            android:name=".ThreadTestActivity_"
+            android:name=".UltraPtrExampleActivity"
+            android:theme="@style/SwipeBack"/>
+        <activity
+            android:name=".ThreadTestActivity"
             android:theme="@style/SwipeBack"/>
         <activity
             android:name=".ThreadTestActivity2"
             android:theme="@style/SwipeBack"/>
         <activity
-            android:name=".animation.AnimationMainActivity_"
+            android:name=".animation.AnimationMainActivity"
             android:theme="@style/SwipeBack"/>
         <activity
-            android:name=".animation.LayoutAnimationExampleActivity_"
+            android:name=".animation.LayoutAnimationExampleActivity"
             android:theme="@style/SwipeBack"/>
         <activity
-            android:name=".DialogActivity_"
+            android:name=".DialogActivity"
             android:theme="@style/MyDialogStyleSelect"/>
         <activity
             android:name=".ButterKnifeExampleActivity"

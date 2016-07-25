@@ -1,9 +1,6 @@
 package com.yanxing.ui;
 
 
-import android.support.v7.widget.DefaultItemAnimator;
-import android.support.v7.widget.GridLayoutManager;
-import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.support.v7.widget.StaggeredGridLayoutManager;
 import android.view.View;
@@ -13,27 +10,28 @@ import android.widget.TextView;
 import com.yanxing.adapterlibrary.RecyclerViewAdapter;
 import com.yanxing.base.BaseActivity;
 
-import org.androidannotations.annotations.AfterViews;
-import org.androidannotations.annotations.EActivity;
-import org.androidannotations.annotations.ViewById;
-
 import java.util.ArrayList;
 import java.util.List;
+
+import butterknife.BindView;
 
 /**
  *
  * Created by gxianglishuan on 2016/3/23.
  */
-@EActivity(R.layout.activity_recyclerview_example)
 public class RecyclerViewExampleActivity extends BaseActivity {
 
-    @ViewById(R.id.recyclerView)
+    @BindView(R.id.recyclerView)
     RecyclerView mRecyclerView;
 
     RecyclerViewAdapter mRecyclerViewAdapter;
     private List<String> mStrings=new ArrayList<String>();
 
-    @AfterViews
+    @Override
+    protected int getLayoutResID() {
+        return R.layout.activity_recyclerview_example;
+    }
+
     @Override
     protected void afterInstanceView() {
         mStrings.add("0");

@@ -13,27 +13,28 @@ import com.yanxing.adapterlibrary.CommonAdapter;
 import com.yanxing.adapterlibrary.ViewHolder;
 import com.yanxing.base.BaseActivity;
 
-import org.androidannotations.annotations.AfterViews;
-import org.androidannotations.annotations.EActivity;
-import org.androidannotations.annotations.ViewById;
-
 import java.util.ArrayList;
 import java.util.List;
+
+import butterknife.BindView;
 
 /**
  * fresco使用
  * Created by lishuangxiang on 2016/1/28.
  */
-@EActivity(R.layout.activity_fresco_example)
 public class FrescoExampleActivity extends BaseActivity {
 
-    @ViewById(R.id.gridView)
+    @BindView(R.id.gridView)
     GridView mGridView;
 
     private CommonAdapter<String> mCommonAdapter;
     private List<String> mList=new ArrayList<String>();
 
-    @AfterViews
+    @Override
+    protected int getLayoutResID() {
+        return R.layout.activity_fresco_example;
+    }
+
     @Override
     protected void afterInstanceView() {
         mList.add("http://npic7.edushi.com/cn/zixun/zh-chs/2015-12/24/9fb3600ebd60a7504bcd9acf1d6ab40b.gif");

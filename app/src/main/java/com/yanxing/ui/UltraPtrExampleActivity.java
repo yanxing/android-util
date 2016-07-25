@@ -6,34 +6,35 @@ import com.swipelistviewlibrary.view.SwipeListView;
 import com.yanxing.adapter.SwipeAdapter;
 import com.yanxing.base.BaseActivity;
 
-import org.androidannotations.annotations.AfterViews;
-import org.androidannotations.annotations.EActivity;
-import org.androidannotations.annotations.ViewById;
-
 import java.util.ArrayList;
 import java.util.List;
 
+import butterknife.BindView;
 import in.srain.cube.views.ptr.PtrDefaultHandler;
 import in.srain.cube.views.ptr.PtrFrameLayout;
 import in.srain.cube.views.ptr.PtrHandler;
 import in.srain.cube.views.ptr.header.StoreHouseHeader;
 
 /**
+ * UltraPtr
  * Created by lishuangxiang on 2016/5/30.
  */
-@EActivity(R.layout.activity_ultra_ptr)
 public class UltraPtrExampleActivity extends BaseActivity {
 
-    @ViewById(R.id.swipeListView)
+    @BindView(R.id.swipeListView)
     SwipeListView mSwipeListView;
 
-    @ViewById(R.id.store_house_ptr_frame)
+    @BindView(R.id.store_house_ptr_frame)
     PtrFrameLayout mPtrFrameLayout;
 
     private List<String> mList = new ArrayList<String>();
     private SwipeAdapter mSwipeAdapter;
 
-    @AfterViews
+    @Override
+    protected int getLayoutResID() {
+        return R.layout.activity_ultra_ptr;
+    }
+
     @Override
     protected void afterInstanceView() {
         mPtrFrameLayout.setPullToRefresh(true);

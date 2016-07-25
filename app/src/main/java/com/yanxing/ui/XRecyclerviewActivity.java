@@ -12,27 +12,28 @@ import com.jcodecraeer.xrecyclerview.XRecyclerView;
 import com.yanxing.adapterlibrary.RecyclerViewAdapter;
 import com.yanxing.base.BaseActivity;
 
-import org.androidannotations.annotations.AfterViews;
-import org.androidannotations.annotations.EActivity;
-import org.androidannotations.annotations.ViewById;
-
 import java.util.ArrayList;
 import java.util.List;
+
+import butterknife.BindView;
 
 /**
  * Created by lishuangxiang on 2016/5/24.
  */
-@EActivity(R.layout.activity_xrecyclerview)
 public class XRecyclerViewActivity extends BaseActivity {
 
-    @ViewById(R.id.recyclerview)
+    @BindView(R.id.recyclerview)
     XRecyclerView mXRecyclerView;
 
     private RecyclerViewAdapter mRecyclerViewAdapter;
     private List<String> mStrings;
 
 
-    @AfterViews
+    @Override
+    protected int getLayoutResID() {
+        return R.layout.activity_xrecyclerview;
+    }
+
     @Override
     protected void afterInstanceView() {
         LinearLayoutManager layoutManager = new LinearLayoutManager(this);
@@ -118,6 +119,5 @@ public class XRecyclerViewActivity extends BaseActivity {
             }
         });
         itemTouchHelper.attachToRecyclerView(mXRecyclerView);
-
     }
 }

@@ -1,7 +1,5 @@
 package com.yanxing.ui;
 
-import android.os.Bundle;
-import android.support.annotation.Nullable;
 import android.util.DisplayMetrics;
 import android.view.Gravity;
 import android.view.MotionEvent;
@@ -10,18 +8,18 @@ import android.view.WindowManager;
 
 import com.yanxing.base.BaseActivity;
 
-import org.androidannotations.annotations.AfterViews;
-import org.androidannotations.annotations.EActivity;
-
 /**
  * 对话框activity，4.4.系统
  * Created by lishuangxiang on 2016/7/13.
  */
-@EActivity(R.layout.activity_dialog)
 public class DialogActivity extends BaseActivity {
 
 
-    @AfterViews
+    @Override
+    protected int getLayoutResID() {
+        return R.layout.activity_dialog;
+    }
+
     @Override
     protected void afterInstanceView() {
 

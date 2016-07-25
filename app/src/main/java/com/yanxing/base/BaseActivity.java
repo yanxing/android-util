@@ -9,6 +9,7 @@ import android.widget.Toast;
 import com.readystatesoftware.systembartint.SystemBarTintManager;
 import com.yanxing.view.LoadingDialog;
 
+import butterknife.ButterKnife;
 import me.imid.swipebacklayout.lib.app.SwipeBackActivity;
 
 /**
@@ -27,20 +28,27 @@ public abstract class BaseActivity extends SwipeBackActivity {
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        setContentView(getLayoutResID());
+        ButterKnife.bind(this);
         initImmersionStatus(mUseStatus);
         mTintManager = new SystemBarTintManager(this);
         mTintManager .setStatusBarTintEnabled(true);
         mTintManager.setTintColor(0xff37c14f);
+        afterInstanceView();
     }
 
     /**
-     * 在androidannotations实例化控件后执行(onCreate之后，onStart之前)，子类需要加上@AfterViews注解
+     * 子类布局ID
+     */
+    protected abstract int getLayoutResID();
+
+    /**
+     * 实例化控件之后操作
      */
     protected abstract void afterInstanceView();
 
     /**
      * 显示toast消息
-     * @param toast
      */
     public void showToast(String toast){
         Toast.makeText(this,toast,Toast.LENGTH_LONG).show();

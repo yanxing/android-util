@@ -1,7 +1,6 @@
 package com.yanxing.base;
 
 import android.app.Application;
-import android.content.Context;
 import android.database.sqlite.SQLiteDatabase;
 
 import com.baidu.map.BaiduLoc;
@@ -22,7 +21,6 @@ import com.yanxing.dao.DaoMaster;
 import com.yanxing.dao.DaoSession;
 import com.yanxing.util.ConstantValue;
 import com.yanxing.util.FileUtil;
-import com.yanxing.util.ImageNameGenerator;
 
 import java.io.File;
 

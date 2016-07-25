@@ -10,25 +10,21 @@ import com.yanxing.base.MyApplication;
 import com.yanxing.dao.StudentDao;
 import com.yanxing.model.Student;
 
-import org.androidannotations.annotations.AfterViews;
-import org.androidannotations.annotations.Click;
-import org.androidannotations.annotations.EActivity;
-import org.androidannotations.annotations.ItemClick;
-import org.androidannotations.annotations.ViewById;
-
 import java.util.ArrayList;
 import java.util.List;
 
+import butterknife.BindView;
+import butterknife.OnClick;
+import butterknife.OnItemClick;
 import de.greenrobot.dao.query.Query;
 
 /**
  * GreenDao例子
  * Created by lishuangxiang on 2016/5/5.
  */
-@EActivity(R.layout.activity_greendao_example)
 public class GreenDaoExampleActivity extends BaseActivity {
 
-    @ViewById(R.id.listview)
+    @BindView(R.id.listview)
     ListView mListView;
 
     private List<Student> mStudentList=new ArrayList<Student>();
@@ -37,7 +33,11 @@ public class GreenDaoExampleActivity extends BaseActivity {
 
     private static int i=0;
 
-    @AfterViews
+    @Override
+    protected int getLayoutResID() {
+        return R.layout.activity_greendao_example;
+    }
+
     @Override
     protected void afterInstanceView() {
         mStudentDao=((MyApplication)getApplicationContext()).getDaoSession().getStudentDao();
@@ -55,7 +55,7 @@ public class GreenDaoExampleActivity extends BaseActivity {
         mListView.setAdapter(mStudentCommonAdapter);
     }
 
-    @Click(value = R.id.button)
+    @OnClick(value = R.id.button)
     public void onClick(View view){
         switch (view.getId()){
             case R.id.button:
@@ -71,7 +71,7 @@ public class GreenDaoExampleActivity extends BaseActivity {
         }
     }
 
-    @ItemClick(value = R.id.listview)
+    @OnItemClick(value = R.id.listview)
     public void onItemClick(int position){
         mStudentDao.delete(mStudentList.get(position));
         mStudentList.remove(position);

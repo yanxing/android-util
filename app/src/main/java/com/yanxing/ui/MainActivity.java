@@ -12,21 +12,16 @@ import com.yanxing.base.BaseActivity;
 import com.yanxing.model.FirstEventBus;
 import com.yanxing.sortlistviewlibrary.CityListActivity;
 import com.yanxing.ui.animation.AnimationMainActivity;
-import com.yanxing.ui.animation.AnimationMainActivity_;
 import com.yanxing.util.ConstantValue;
 import com.yanxing.util.FileUtil;
-
-import org.androidannotations.annotations.AfterViews;
-import org.androidannotations.annotations.Click;
-import org.androidannotations.annotations.EActivity;
 
 import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
 
+import butterknife.OnClick;
 import de.greenrobot.event.EventBus;
 
-@EActivity(R.layout.activity_main)
 public class MainActivity extends BaseActivity implements AMapLocListener {
 
     private static final int QUESTION_IMAGE_CODE = 1;
@@ -37,7 +32,11 @@ public class MainActivity extends BaseActivity implements AMapLocListener {
     private AMapLoc mAMapLoc;
 
     @Override
-    @AfterViews
+    protected int getLayoutResID() {
+        return R.layout.activity_main;
+    }
+
+    @Override
     protected void afterInstanceView() {
         getSwipeBackLayout().setEnableGesture(false);
         EventBus.getDefault().register(this);
@@ -46,7 +45,7 @@ public class MainActivity extends BaseActivity implements AMapLocListener {
         mAMapLoc.startLocation();
     }
 
-    @Click(value = {R.id.adapter_button, R.id.list_dialog_button, R.id.confirm_dialog_button
+    @OnClick(value = {R.id.adapter_button, R.id.list_dialog_button, R.id.confirm_dialog_button
             , R.id.loading_dialog_button, R.id.select_image, R.id.browse_image, R.id.map
             , R.id.fresco, R.id.eventbus, R.id.titleBar, R.id.tabLayoutPager, R.id.recyclerView
             , R.id.sortListView,R.id.greenDao,R.id.selectCity,R.id.xRecyclerView,R.id.ultra_ptr
@@ -57,22 +56,22 @@ public class MainActivity extends BaseActivity implements AMapLocListener {
         switch (v.getId()) {
             //通用适配器
             case R.id.adapter_button:
-                intent.setClass(this, AdapterExampleActivity_.class);
+                intent.setClass(this, AdapterExampleActivity.class);
                 startActivity(intent);
                 break;
             //列表适配器
             case R.id.list_dialog_button:
-                intent.setClass(this, ListDialogExampleActivity_.class);
+                intent.setClass(this, ListDialogExampleActivity.class);
                 startActivity(intent);
                 break;
             //确定对话框
             case R.id.confirm_dialog_button:
-                intent.setClass(this, ConfirmExampleActivity_.class);
+                intent.setClass(this, ConfirmExampleActivity.class);
                 startActivity(intent);
                 break;
             //进度框
             case R.id.loading_dialog_button:
-                intent.setClass(this, LoadingDialogExampleActivity_.class);
+                intent.setClass(this, LoadingDialogExampleActivity.class);
                 startActivity(intent);
                 break;
             //本地图片选择
@@ -88,7 +87,7 @@ public class MainActivity extends BaseActivity implements AMapLocListener {
                 break;
             //图片浏览
             case R.id.browse_image:
-                intent.setClass(getApplicationContext(), BrowseImageExampleActivity_.class);
+                intent.setClass(getApplicationContext(), BrowseImageExampleActivity.class);
                 List<String> list = new ArrayList<String>();
                 list.add("http://www.loveq.cn/store/photo/144/546/1445460/2140998/1402789580862162351.png");
                 list.add("http://a0.att.hudong.com/15/08/300218769736132194086202411_950.jpg");
@@ -99,7 +98,7 @@ public class MainActivity extends BaseActivity implements AMapLocListener {
                 break;
             //百度地图
             case R.id.map:
-                intent.setClass(getApplicationContext(), BaiduMapExampleActivity_.class);
+                intent.setClass(getApplicationContext(), BaiduMapExampleActivity.class);
                 startActivity(intent);
                 break;
             case R.id.amap:
@@ -107,26 +106,26 @@ public class MainActivity extends BaseActivity implements AMapLocListener {
                 break;
             //fresco使用
             case R.id.fresco:
-                intent.setClass(getApplicationContext(), FrescoExampleActivity_.class);
+                intent.setClass(getApplicationContext(), FrescoExampleActivity.class);
                 startActivity(intent);
                 break;
             //eventBus测试
             case R.id.eventbus:
-                intent.setClass(getApplicationContext(), EventBusExampleActivity_.class);
+                intent.setClass(getApplicationContext(), EventBusExampleActivity.class);
                 startActivity(intent);
                 break;
             //标题栏测试
             case R.id.titleBar:
-                intent.setClass(getApplicationContext(), TitleBarExampleActivity_.class);
+                intent.setClass(getApplicationContext(), TitleBarExampleActivity.class);
                 startActivity(intent);
                 break;
             case R.id.tabLayoutPager:
-                intent.setClass(getApplicationContext(), TabLayoutPagerExampleActivity_.class);
+                intent.setClass(getApplicationContext(), TabLayoutPagerExampleActivity.class);
                 startActivity(intent);
                 break;
             //RecyclerViewAdapter test
             case R.id.recyclerView:
-                intent.setClass(getApplicationContext(), RecyclerViewExampleActivity_.class);
+                intent.setClass(getApplicationContext(), RecyclerViewExampleActivity.class);
                 startActivity(intent);
                 break;
             //城市列表
@@ -136,20 +135,20 @@ public class MainActivity extends BaseActivity implements AMapLocListener {
                 startActivityForResult(intent,QUESTION_SORT_LISTVIEW_CODE);
                 break;
             case R.id.greenDao:
-                intent.setClass(getApplicationContext(), GreenDaoExampleActivity_.class);
+                intent.setClass(getApplicationContext(), GreenDaoExampleActivity.class);
                 startActivity(intent);
                 break;
             case R.id.selectCity:
-                intent.setClass(getApplicationContext(), SelectCityActivity_.class);
+                intent.setClass(getApplicationContext(), SelectCityActivity.class);
                 intent.putExtra("currentCity",getString(R.string.city_test));
                 startActivity(intent);
                 break;
             case R.id.ultra_ptr:
-                intent.setClass(getApplicationContext(), UltraPtrExampleActivity_.class);
+                intent.setClass(getApplicationContext(), UltraPtrExampleActivity.class);
                 startActivity(intent);
                 break;
             case R.id.xRecyclerView:
-                intent.setClass(getApplicationContext(), XRecyclerViewActivity_.class);
+                intent.setClass(getApplicationContext(), XRecyclerViewActivity.class);
                 startActivity(intent);
                 break;
             case R.id.threadTest:
@@ -157,11 +156,11 @@ public class MainActivity extends BaseActivity implements AMapLocListener {
                 startActivity(intent);
                 break;
             case R.id.animation:
-                intent.setClass(getApplicationContext(), AnimationMainActivity_.class);
+                intent.setClass(getApplicationContext(), AnimationMainActivity.class);
                 startActivity(intent);
                 break;
             case R.id.dialog:
-                intent.setClass(getApplicationContext(),DialogActivity_.class);
+                intent.setClass(getApplicationContext(),DialogActivity.class);
                 startActivity(intent);
                 break;
             case R.id.ButterKnife:
@@ -189,7 +188,7 @@ public class MainActivity extends BaseActivity implements AMapLocListener {
         super.onActivityResult(requestCode, resultCode, data);
         if (resultCode == RESULT_OK) {
             if (requestCode == QUESTION_IMAGE_CODE){
-                Intent intent=new Intent(getApplicationContext(),ShowImageActivity_.class);
+                Intent intent=new Intent(getApplicationContext(),ShowImageActivity.class);
                 intent.putExtra("name",mImageName);
                 startActivity(intent);
             }else if (requestCode==QUESTION_SORT_LISTVIEW_CODE){
