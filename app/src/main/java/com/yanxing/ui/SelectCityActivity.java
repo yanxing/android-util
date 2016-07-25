@@ -1,13 +1,9 @@
 package com.yanxing.ui;
 
 import android.os.Handler;
-import android.view.LayoutInflater;
 import android.view.View;
-import android.view.ViewGroup;
 import android.widget.AdapterView;
-import android.widget.BaseAdapter;
 import android.widget.ListView;
-import android.widget.TextView;
 
 import com.yanxing.adapterlibrary.CommonAdapter;
 import com.yanxing.adapterlibrary.ViewHolder;
@@ -34,12 +30,14 @@ public class SelectCityActivity extends BaseActivity
     ListView mCity;
 
     //省份
-    private ProvinceAdapter mProvinceAdapter;
+    private CommonAdapter<Area> mProvinceAdapter;
     //市
     private CommonAdapter<Area.CityBean> mCityAdapter;
     private List<Area> mAreaList=new ArrayList<Area>();
-    private static int mIndex=0;
-    private boolean mIsClick=false;
+    /**
+     * 记录上次选择的省索引
+     */
+    private int mIndex=0;
 
     @Override
     protected int getLayoutResID() {
@@ -59,27 +57,31 @@ public class SelectCityActivity extends BaseActivity
         currentArea.setCity(currentCity);
         mAreaList.add(currentArea);
         mAreaList.addAll(ParseJson.getArea(getApplicationContext()));
-        mProvinceAdapter=new ProvinceAdapter();
+        mProvinceAdapter=new CommonAdapter<Area>(mAreaList,R.layout.adapter_province) {
+            @Override
+            public void onBindViewHolder(ViewHolder viewHolder, int position) {
+                if (mAreaList.get(position).isCheck()){
+                    viewHolder.findViewById(R.id.current).setVisibility(View.VISIBLE);
+                }else {
+                    viewHolder.findViewById(R.id.current).setVisibility(View.GONE);
+                }
+                viewHolder.setText(R.id.province,mAreaList.get(position).getName());
+            }
+        };
         mProvince.setAdapter(mProvinceAdapter);
         mProvince.setOnItemClickListener(this);
         new Handler().postDelayed(() -> {
             //选中第一项
             mProvince.performItemClick(mProvince.getChildAt(0),0,mProvince.getItemIdAtPosition(0));
         },700);
-
     }
 
     @Override
     public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
-        mIsClick=true;
+        mAreaList.get(mIndex).setCheck(false);
+        mAreaList.get(position).setCheck(true);
         mIndex=position;
-        for (int i=0;i<mProvince.getChildCount();i++){
-            if (mIndex!=i){
-                View view1=mProvince.getChildAt(i);
-                view1.findViewById(R.id.current).setVisibility(View.GONE);
-            }
-        }
-        view.findViewById(R.id.current).setVisibility(View.VISIBLE);
+        mProvinceAdapter.update(mAreaList);
         if (mCityAdapter==null){
             mCityAdapter=new CommonAdapter<Area.CityBean>(mAreaList.get(0).getCity(),R.layout.adapter_city) {
                 @Override
@@ -95,40 +97,6 @@ public class SelectCityActivity extends BaseActivity
             mCity.setAdapter(mCityAdapter);
         }else {
             mCityAdapter.update(mAreaList.get(mIndex).getCity());
-        }
-    }
-
-    /**
-     * 城市适配器，view布局不重用
-     */
-    private class ProvinceAdapter extends BaseAdapter{
-
-        @Override
-        public int getCount() {
-            return mAreaList.size();
-        }
-
-        @Override
-        public Object getItem(int position) {
-            return mAreaList.get(position);
-        }
-
-        @Override
-        public long getItemId(int position) {
-            return position;
-        }
-
-        @Override
-        public View getView(int position, View convertView, ViewGroup parent) {
-            convertView= LayoutInflater.from(parent.getContext()).inflate(R.layout.adapter_province,null);
-            TextView province= (TextView) convertView.findViewById(R.id.province);
-            province.setText(mAreaList.get(position).getName());
-            if (mIsClick){
-                if (position==mIndex){
-                    convertView.findViewById(R.id.current).setVisibility(View.VISIBLE);
-                }
-            }
-            return convertView;
         }
     }
 }

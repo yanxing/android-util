@@ -23,8 +23,11 @@ public class Area implements Parcelable {
      * name : 北京
      * area : ["东城区","西城区","崇文区","宣武区","朝阳区","丰台区","石景山区","海淀区","门头沟区","房山区","通州区","顺义区","昌平区","大兴区","平谷区","怀柔区","密云县","延庆县"]
      */
-
     private List<CityBean> city;
+    /**
+     * 标记选中状态，默认false
+     */
+    private boolean check;
 
     public String getName() {
         return name;
@@ -40,6 +43,14 @@ public class Area implements Parcelable {
 
     public void setCity(List<CityBean> city) {
         this.city = city;
+    }
+
+    public boolean isCheck() {
+        return check;
+    }
+
+    public void setCheck(boolean check) {
+        this.check = check;
     }
 
     public static class CityBean implements Parcelable {
@@ -104,7 +115,8 @@ public class Area implements Parcelable {
     @Override
     public void writeToParcel(Parcel dest, int flags) {
         dest.writeString(this.name);
-        dest.writeList(this.city);
+        dest.writeTypedList(this.city);
+        dest.writeByte(this.check ? (byte) 1 : (byte) 0);
     }
 
     public Area() {
@@ -112,11 +124,11 @@ public class Area implements Parcelable {
 
     protected Area(Parcel in) {
         this.name = in.readString();
-        this.city = new ArrayList<CityBean>();
-        in.readList(this.city, CityBean.class.getClassLoader());
+        this.city = in.createTypedArrayList(CityBean.CREATOR);
+        this.check = in.readByte() != 0;
     }
 
-    public static final Creator<Area> CREATOR = new Creator<Area>() {
+    public static final Parcelable.Creator<Area> CREATOR = new Parcelable.Creator<Area>() {
         @Override
         public Area createFromParcel(Parcel source) {
             return new Area(source);
