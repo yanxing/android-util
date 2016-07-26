@@ -121,5 +121,9 @@
             android:id="@+id/ButterKnife"
             style="@style/style_btn"
             android:text="ButterKnife"/>
+        <Button
+            android:id="@+id/expandableListViewCheck"
+            style="@style/style_btn"
+            android:text="ExpandableListView+CheckBox"/>
     </LinearLayout>
 </ScrollView>

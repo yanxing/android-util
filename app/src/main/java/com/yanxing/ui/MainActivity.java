@@ -3,6 +3,8 @@ package com.yanxing.ui;
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
+import android.widget.AdapterView;
+import android.widget.Toast;
 
 import com.amap.api.location.AMapLocation;
 import com.amap.location.AMapLoc;
@@ -14,6 +16,8 @@ import com.yanxing.sortlistviewlibrary.CityListActivity;
 import com.yanxing.ui.animation.AnimationMainActivity;
 import com.yanxing.util.ConstantValue;
 import com.yanxing.util.FileUtil;
+import com.yanxing.view.ConfirmDialog;
+import com.yanxing.view.ListDialog;
 
 import java.io.Serializable;
 import java.util.ArrayList;
@@ -49,7 +53,7 @@ public class MainActivity extends BaseActivity implements AMapLocListener {
             , R.id.loading_dialog_button, R.id.select_image, R.id.browse_image, R.id.map
             , R.id.fresco, R.id.eventbus, R.id.titleBar, R.id.tabLayoutPager, R.id.recyclerView
             , R.id.sortListView,R.id.greenDao,R.id.selectCity,R.id.xRecyclerView,R.id.ultra_ptr
-            , R.id.amap,R.id.threadTest,R.id.animation,R.id.dialog,R.id.ButterKnife})
+            , R.id.amap,R.id.threadTest,R.id.animation,R.id.dialog,R.id.ButterKnife,R.id.expandableListViewCheck})
     public void onClick(View v) {
         Intent intent = new Intent();
         Bundle bundle = new Bundle();
@@ -59,20 +63,17 @@ public class MainActivity extends BaseActivity implements AMapLocListener {
                 intent.setClass(this, AdapterExampleActivity.class);
                 startActivity(intent);
                 break;
-            //列表适配器
+            //列表对话框
             case R.id.list_dialog_button:
-                intent.setClass(this, ListDialogExampleActivity.class);
-                startActivity(intent);
+                showItemDialog();
                 break;
             //确定对话框
             case R.id.confirm_dialog_button:
-                intent.setClass(this, ConfirmExampleActivity.class);
-                startActivity(intent);
+                showConfirmDialog();
                 break;
             //进度框
             case R.id.loading_dialog_button:
-                intent.setClass(this, LoadingDialogExampleActivity.class);
-                startActivity(intent);
+                showLoadingDialog(getString(R.string.load));
                 break;
             //本地图片选择
             case R.id.select_image:
@@ -167,7 +168,40 @@ public class MainActivity extends BaseActivity implements AMapLocListener {
                 intent.setClass(getApplicationContext(),ButterKnifeExampleActivity.class);
                 startActivity(intent);
                 break;
+            case R.id.expandableListViewCheck:
+                intent.setClass(getApplicationContext(),ExpandableListViewCheckActivity.class);
+                startActivity(intent);
+                break;
         }
+    }
+
+    /**
+     * 显示确认对话框
+     */
+    public void showConfirmDialog(){
+        final ConfirmDialog confirmDialog=new ConfirmDialog(this,getString(R.string.exit));
+        confirmDialog.setConfirmButton(v -> {
+            Toast.makeText(getApplicationContext(), R.string.click_confirm,Toast.LENGTH_LONG).show();
+            confirmDialog.dismiss();
+        });
+    }
+
+    /**
+     * 显示Item对话框
+     */
+    public void showItemDialog(){
+        final List<String> list=new ArrayList<String>();
+        for (int i=1;i<4;i++){
+            list.add("yanxing"+i);
+        }
+        final ListDialog listDialog=new ListDialog(this,list);
+        listDialog.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+            @Override
+            public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
+                Toast.makeText(getApplicationContext(),getString(R.string.you_select)+list.get(position),Toast.LENGTH_LONG).show();
+                listDialog.dismiss();
+            }
+        });
     }
 
     @Override

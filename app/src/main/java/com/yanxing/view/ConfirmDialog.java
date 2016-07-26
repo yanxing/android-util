@@ -27,15 +27,15 @@ public final class ConfirmDialog {
      * @param content 显示内容
      */
     public ConfirmDialog(Activity activity, String content) {
-        myDialog = new AlertDialog.Builder(activity).create();
+        myDialog = new AlertDialog.Builder(activity,R.style.loading_dialog).create();
         myDialog.show();
         //获取屏幕宽度
         DisplayMetrics metric = new DisplayMetrics();
         activity.getWindowManager().getDefaultDisplay().getMetrics(metric);
-        int width = metric.widthPixels;     //屏幕宽度（像素）
+        int width = metric.widthPixels;
         //动态设置对话框的大小
         WindowManager.LayoutParams params = myDialog.getWindow().getAttributes();
-        params.width = width*4/5;
+        params.width = width*7/10;
         myDialog.getWindow().setAttributes(params);
         myDialog.setContentView(R.layout.confirm_dialog);
         TextView msg= (TextView) myDialog.findViewById(R.id.content);
@@ -69,18 +69,14 @@ public final class ConfirmDialog {
 
     /**
      * 圆角边框
-     * @return
      */
     public GradientDrawable getShape(){
-        int strokeWidth = 1; //边框宽度
-        int roundRadius = 30; //圆角半径
-        int strokeColor = Color.parseColor("#eeeeee");//边框颜色
-        int fillColor = Color.parseColor("#f5f5f5");//内部填充颜色
+        int roundRadius = 17; //圆角半径
+        int fillColor = Color.parseColor("#ffffff");//内部填充颜色
         GradientDrawable gd = new GradientDrawable();
         gd.setColor(fillColor);
         gd.setShape(GradientDrawable.RECTANGLE);
         gd.setCornerRadius(roundRadius);
-        gd.setStroke(strokeWidth, strokeColor);
         return gd;
     }
 }

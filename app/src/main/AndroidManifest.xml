@@ -58,15 +58,6 @@
             android:name=".AdapterExampleActivity"
             android:theme="@style/SwipeBack"/>
         <activity
-            android:name=".ListDialogExampleActivity"
-            android:theme="@style/SwipeBack"/>
-        <activity
-            android:name=".ConfirmExampleActivity"
-            android:theme="@style/SwipeBack"/>
-        <activity
-            android:name=".LoadingDialogExampleActivity"
-            android:theme="@style/SwipeBack"/>
-        <activity
             android:name=".BrowseImageExampleActivity"
             android:theme="@style/noTitle"/>
         <activity android:name=".BaiduMapExampleActivity"/>
@@ -118,6 +109,9 @@
             android:theme="@style/MyDialogStyleSelect"/>
         <activity
             android:name=".ButterKnifeExampleActivity"
+            android:theme="@style/SwipeBack"/>
+        <activity
+            android:name=".ExpandableListViewCheckActivity"
             android:theme="@style/SwipeBack"/>
     </application>
 

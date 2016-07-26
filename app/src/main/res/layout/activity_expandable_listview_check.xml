@@ -2,11 +2,14 @@
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
               android:layout_width="match_parent"
               android:layout_height="match_parent"
-              xmlns:app="http://schemas.android.com/apk/res-auto"
+              android:background="@color/default_bg"
+              android:fitsSystemWindows="true"
               android:orientation="vertical">
-    <com.yanxing.titlebarlibrary.TitleBar
+
+    <ExpandableListView
+        android:id="@+id/expandableListView"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        app:title_main="@string/title_activity_loading_dialog_example"/>
-
+        android:divider="#DDDDDD"
+        android:dividerHeight="1px"/>
 </LinearLayout>

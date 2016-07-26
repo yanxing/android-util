@@ -36,14 +36,12 @@ public class ListDialog {
         //获取屏幕宽度
         DisplayMetrics metric = new DisplayMetrics();
         activity.getWindowManager().getDefaultDisplay().getMetrics(metric);
-        int width = metric.widthPixels;     //屏幕宽度（像素）
+        int width = metric.widthPixels;
         //动态设置对话框的大小
         WindowManager.LayoutParams params = mListDialog.getWindow().getAttributes();
         params.width = width*9/10;
         mListDialog.getWindow().setAttributes(params);
         mListDialog.setContentView(R.layout.list_dialog);
-        LinearLayout root= (LinearLayout) mListDialog.findViewById(R.id.root);
-        root.setBackgroundDrawable(getShape());
         mListView= (ListView) mListDialog.findViewById(R.id.listview);
         mListView.setAdapter(new ArrayAdapter<String>(activity.getApplicationContext(), R.layout.list_dialog_textview, list));
     }
@@ -57,22 +55,5 @@ public class ListDialog {
 
     public void setOnItemClickListener(AdapterView.OnItemClickListener onItemClickListener){
         mListView.setOnItemClickListener(onItemClickListener);
-    }
-
-    /**
-     * 圆角边框
-     * @return
-     */
-    public GradientDrawable getShape(){
-        int strokeWidth = 1; //边框宽度
-        int roundRadius = 6; //圆角半径
-        int strokeColor = Color.parseColor("#eeeeee");//边框颜色
-        int fillColor = Color.parseColor("#f5f5f5");//内部填充颜色
-        GradientDrawable gd = new GradientDrawable();
-        gd.setColor(fillColor);
-        gd.setShape(GradientDrawable.RECTANGLE);
-        gd.setCornerRadius(roundRadius);
-        gd.setStroke(strokeWidth, strokeColor);
-        return gd;
     }
 }
