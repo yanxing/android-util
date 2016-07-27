@@ -60,7 +60,7 @@ public class BrowseImageExampleActivity extends BaseActivity{
             mNumber.setText((index + 1) + "/" + mPathList.size());
         }
         mCustomPhotoViewPager.setCurrentItem(index);
-        mCustomPhotoViewPager.addOnPageChangeListener(new ViewPager.OnPageChangeListener() {
+        mCustomPhotoViewPager.setOnPageChangeListener(new ViewPager.OnPageChangeListener() {
             @Override
             public void onPageScrolled(int position, float positionOffset, int positionOffsetPixels) {
 

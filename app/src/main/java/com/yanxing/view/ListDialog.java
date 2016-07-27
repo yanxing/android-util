@@ -2,13 +2,10 @@ package com.yanxing.view;
 
 import android.app.Activity;
 import android.app.AlertDialog;
-import android.graphics.Color;
-import android.graphics.drawable.GradientDrawable;
 import android.util.DisplayMetrics;
 import android.view.WindowManager;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
-import android.widget.LinearLayout;
 import android.widget.ListView;
 
 

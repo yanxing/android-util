@@ -45,7 +45,7 @@ android {
 }
 
 dependencies {
-    compile fileTree(dir: 'libs', include: ['*.jar'])
+    compile fileTree(include: ['*.jar'], dir: 'libs')
     testCompile 'junit:junit:4.12'
     compile 'com.android.support:appcompat-v7:23.1.1'
     compile 'com.android.support:design:23.1.1'
@@ -71,6 +71,7 @@ dependencies {
     compile 'com.jcodecraeer:xrecyclerview:1.2.7'
     compile 'com.google.code.gson:gson:2.5'
     compile 'in.srain.cube:ultra-ptr:1.0.11'
+    compile 'in.srain.cube:clog:1.0.2'
     compile project(':sortlistviewlibrary')
     compile project(':adapterlibrary')
     compile project(':photolibrary')
@@ -78,8 +79,8 @@ dependencies {
     compile project(':baidumaplibrary')
     compile project(':titlebarlibrary')
     compile project(':tablayoutlibrary')
-    compile project(path: ':swipelistviewlibrary')
-    compile project(path: ':amaploclibrary')
+    compile project(':swipelistviewlibrary')
+    compile project(':amaploclibrary')
 }
 
 apt {

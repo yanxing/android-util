@@ -1,15 +1,18 @@
 package com.yanxing.ui;
 
 import android.view.View;
+import android.widget.ListView;
 
-import com.swipelistviewlibrary.view.SwipeListView;
-import com.yanxing.adapter.SwipeAdapter;
+import com.yanxing.adapterlibrary.CommonAdapter;
+import com.yanxing.adapterlibrary.ViewHolder;
 import com.yanxing.base.BaseActivity;
+import com.yanxing.util.CommonUtil;
 
 import java.util.ArrayList;
 import java.util.List;
 
 import butterknife.BindView;
+import in.srain.cube.views.ptr.PtrClassicFrameLayout;
 import in.srain.cube.views.ptr.PtrDefaultHandler;
 import in.srain.cube.views.ptr.PtrFrameLayout;
 import in.srain.cube.views.ptr.PtrHandler;
@@ -21,14 +24,14 @@ import in.srain.cube.views.ptr.header.StoreHouseHeader;
  */
 public class UltraPtrExampleActivity extends BaseActivity {
 
-    @BindView(R.id.swipeListView)
-    SwipeListView mSwipeListView;
+    @BindView(R.id.listview)
+    ListView mListView;
 
     @BindView(R.id.store_house_ptr_frame)
-    PtrFrameLayout mPtrFrameLayout;
+    PtrClassicFrameLayout mPtrClassicFrameLayout;
 
     private List<String> mList = new ArrayList<String>();
-    private SwipeAdapter mSwipeAdapter;
+    private CommonAdapter<String> mCommonAdapter;
 
     @Override
     protected int getLayoutResID() {
@@ -37,32 +40,34 @@ public class UltraPtrExampleActivity extends BaseActivity {
 
     @Override
     protected void afterInstanceView() {
-        mPtrFrameLayout.setPullToRefresh(true);
-        StoreHouseHeader header = new StoreHouseHeader(UltraPtrExampleActivity.this);
-//        header.setPadding(0, LocalDisplay.dp2px(20), 0, LocalDisplay.dp2px(20));
-        header.initWithString("Ultra PTR");
-
-        mPtrFrameLayout.setDurationToCloseHeader(1500);
-        mPtrFrameLayout.setHeaderView(header);
-        mPtrFrameLayout.addPtrUIHandler(header);
-        mPtrFrameLayout.setPtrHandler(new PtrHandler() {
+        CommonUtil.setStatusBarDarkMode(true,this);
+        mPtrClassicFrameLayout.setLastUpdateTimeRelateObject(this);
+        mPtrClassicFrameLayout.setPtrHandler(new PtrHandler() {
             @Override
             public void onRefreshBegin(PtrFrameLayout frame) {
-                frame.postDelayed(new Runnable() {
+                mPtrClassicFrameLayout.postDelayed(new Runnable() {
                     @Override
                     public void run() {
                         load();
-                        mPtrFrameLayout.refreshComplete();
+                        mPtrClassicFrameLayout.refreshComplete();
                     }
-                }, 1800);
+                }, 500);
             }
 
             @Override
             public boolean checkCanDoRefresh(PtrFrameLayout frame, View content, View header) {
-                // 默认实现，根据实际情况做改动
                 return PtrDefaultHandler.checkContentCanBePulledDown(frame, content, header);
             }
         });
+        // the following are default settings
+        mPtrClassicFrameLayout.setResistance(1.7f);
+        mPtrClassicFrameLayout.setRatioOfHeaderHeightToRefresh(1.2f);
+        mPtrClassicFrameLayout.setDurationToClose(200);
+        mPtrClassicFrameLayout.setDurationToCloseHeader(1000);
+        // default is false
+        mPtrClassicFrameLayout.setPullToRefresh(false);
+        // default is true
+        mPtrClassicFrameLayout.setKeepHeaderWhenRefresh(true);
     }
 
     //test
@@ -77,7 +82,12 @@ public class UltraPtrExampleActivity extends BaseActivity {
         mList.add("0");
         mList.add("0");
         mList.add("0");
-        mSwipeAdapter = new SwipeAdapter(mList);
-        mSwipeListView.setAdapter(mSwipeAdapter);
+        mCommonAdapter = new CommonAdapter<String>(mList,R.layout.adapter_content) {
+            @Override
+            public void onBindViewHolder(ViewHolder viewHolder, int position) {
+                viewHolder.setText(R.id.name,mList.get(position));
+            }
+        };
+        mListView.setAdapter(mCommonAdapter);
     }
 }

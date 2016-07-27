@@ -12,7 +12,7 @@ import com.yanxing.ui.R;
 import java.util.List;
 
 /**
- * xRecycler适配器
+ * Created by lishuangxiang on 2016/5/30.
  */
 public class SwipeAdapter extends BaseAdapter {
 
