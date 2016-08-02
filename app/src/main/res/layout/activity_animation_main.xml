@@ -1,43 +1,50 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
               xmlns:app="http://schemas.android.com/apk/res-auto"
-              android:orientation="vertical"
               android:layout_width="match_parent"
-              android:layout_height="match_parent">
+              android:layout_height="match_parent"
+              android:orientation="vertical">
+
     <com.yanxing.titlebarlibrary.TitleBar
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         app:title_main="@string/animation"/>
+
     <Button
         android:id="@+id/alpha"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:text="@string/alpha"
-        android:layout_marginTop="@dimen/margin20"
-        android:layout_marginLeft="@dimen/margin20"
-        android:layout_marginRight="@dimen/margin20"/>
+        style="@style/Animation_Button"
+        android:text="@string/alpha"/>
+
     <Button
         android:id="@+id/frame"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:text="@string/frame"
-        android:layout_marginTop="@dimen/margin8"
-        android:layout_marginLeft="@dimen/margin20"
-        android:layout_marginRight="@dimen/margin20"/>
+        style="@style/Animation_Button"
+        android:text="@string/frame"/>
+
     <ImageView
         android:id="@+id/frame_img"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginTop="@dimen/margin8"
         android:layout_marginLeft="@dimen/margin20"
-        android:layout_marginRight="@dimen/margin20"/>
+        android:layout_marginRight="@dimen/margin20"
+        android:layout_marginTop="@dimen/margin8"/>
+
     <Button
         android:id="@+id/layout_animation"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:textAllCaps="false"
-        android:text="@string/layout_animation"
-        android:layout_marginTop="@dimen/margin8"
-        android:layout_marginLeft="@dimen/margin20"
-        android:layout_marginRight="@dimen/margin20"/>
+        style="@style/Animation_Button"
+        android:text="@string/layout_animation"/>
+
+    <Button
+        android:id="@+id/object_animation"
+        style="@style/Animation_Button"
+        android:text="@string/object_animation"/>
+
+    <Button
+        android:id="@+id/health_animation"
+        style="@style/Animation_Button"
+        android:text="@string/health_animation"/>
+
+    <Button
+        android:id="@+id/path_animation"
+        style="@style/Animation_Button"
+        android:text="@string/path_animation"/>
 </LinearLayout>

@@ -84,7 +84,7 @@
             android:name=".ShowImageActivity"
             android:theme="@style/SwipeBack"/>
         <activity
-            android:name=".RxJavaExample"
+            android:name=".RxJavaExampleActivity"
             android:theme="@style/SwipeBack"/>
         <activity
             android:name=".XRecyclerViewActivity"
@@ -112,6 +112,15 @@
             android:theme="@style/SwipeBack"/>
         <activity
             android:name=".ExpandableListViewCheckActivity"
+            android:theme="@style/SwipeBack"/>
+        <activity
+            android:name=".animation.ObjectAnimationActivity"
+            android:theme="@style/SwipeBack"/>
+        <activity
+            android:name=".animation.QQHealthActivity"
+            android:theme="@style/SwipeBack"/>
+        <activity
+            android:name=".animation.PathExampleActivity"
             android:theme="@style/SwipeBack"/>
     </application>
 

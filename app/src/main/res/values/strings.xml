@@ -53,4 +53,7 @@
     <string name="frame">帧动画</string>
     <string name="layout_animation">LayoutAnimation</string>
     <string name="bufferknife">butterknife</string>
+    <string name="object_animation">属性动画</string>
+    <string name="health_animation">仿QQ健康（来自网上）</string>
+    <string name="path_animation">path类</string>
 </resources>

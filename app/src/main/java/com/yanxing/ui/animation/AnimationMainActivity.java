@@ -2,6 +2,7 @@ package com.yanxing.ui.animation;
 
 import android.content.Intent;
 import android.graphics.drawable.AnimationDrawable;
+import android.os.Bundle;
 import android.os.Handler;
 import android.view.View;
 import android.view.animation.AlphaAnimation;
@@ -12,13 +13,14 @@ import com.yanxing.base.BaseActivity;
 import com.yanxing.ui.R;
 
 import butterknife.BindView;
+import butterknife.ButterKnife;
 import butterknife.OnClick;
 
 /**
  * 动画学习
  * Created by lishuangxiang on 2016/7/7.
  */
-public class AnimationMainActivity extends BaseActivity{
+public class AnimationMainActivity extends BaseActivity {
 
     @BindView(R.id.alpha)
     Button mAlpha;
@@ -41,20 +43,20 @@ public class AnimationMainActivity extends BaseActivity{
 
     //透明动画
     @OnClick(R.id.alpha)
-    public void onClickAlpha(){
-        AlphaAnimation alphaAnimation=new AlphaAnimation(0,1);
+    public void onClickAlpha() {
+        AlphaAnimation alphaAnimation = new AlphaAnimation(0, 1);
         alphaAnimation.setDuration(1000);
         mAlpha.startAnimation(alphaAnimation);
     }
 
     //帧动画
     @OnClick(R.id.frame)
-    public void onClickFrame(){
+    public void onClickFrame() {
         mFrameImg.setBackgroundResource(R.drawable.frame_anim);
-        AnimationDrawable animationDrawable= (AnimationDrawable) mFrameImg.getBackground();
+        AnimationDrawable animationDrawable = (AnimationDrawable) mFrameImg.getBackground();
         animationDrawable.start();
         int duration = 0;
-        for(int i=0;i<animationDrawable.getNumberOfFrames();i++){
+        for (int i = 0; i < animationDrawable.getNumberOfFrames(); i++) {
             duration += animationDrawable.getDuration(i);
         }
         Handler handler = new Handler();
@@ -67,8 +69,27 @@ public class AnimationMainActivity extends BaseActivity{
     }
 
     @OnClick(R.id.layout_animation)
-    public void onClickLayoutAnimation(){
-        Intent intent=new Intent(getApplicationContext(),LayoutAnimationExampleActivity.class);
+    public void onClickLayoutAnimation() {
+        Intent intent = new Intent(getApplicationContext(), LayoutAnimationExampleActivity.class);
+        startActivity(intent);
+    }
+
+    @OnClick(R.id.object_animation)
+    public void onClick() {
+        Intent intent = new Intent(getApplicationContext(), ObjectAnimationActivity.class);
+        startActivity(intent);
+    }
+
+
+    @OnClick(R.id.health_animation)
+    public void onClickHealth() {
+        Intent intent=new Intent(getApplicationContext(),QQHealthActivity.class);
+        startActivity(intent);
+    }
+
+    @OnClick(R.id.path_animation)
+    public void onClickPath(){
+        Intent intent=new Intent(getApplicationContext(),PathExampleActivity.class);
         startActivity(intent);
     }
 }
