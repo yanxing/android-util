@@ -13,8 +13,10 @@ import android.os.IBinder;
 import android.support.v4.app.Fragment;
 import android.telephony.TelephonyManager;
 import android.text.TextUtils;
+import android.view.Display;
 import android.view.View;
 import android.view.Window;
+import android.view.WindowManager;
 import android.view.inputmethod.InputMethodManager;
 import android.widget.EditText;
 
@@ -382,6 +384,48 @@ public class CommonUtil {
     public static int px2sp(Context context, float pxValue) {
         float fontScale = context.getResources().getDisplayMetrics().scaledDensity;
         return (int) (pxValue / fontScale + 0.5f);
+    }
+
+    /**
+     * 获取屏幕参数
+     *
+     * @param context
+     * @return
+     */
+    public static Display getScreenDisplay(Context context) {
+        WindowManager wm = null;
+        try {
+            wm = (WindowManager) context.getSystemService(Context.WINDOW_SERVICE);
+            return wm.getDefaultDisplay();
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        return null;
+    }
+
+    /**
+     * 过滤html标签
+     * @param content
+     * @return
+     */
+    public static String removeHtml(String content){
+        String regExScript="<script[^>]*?>[\\s\\S]*?<\\/script>"; //定义script的正则表达式
+        String regExStyle="<style[^>]*?>[\\s\\S]*?<\\/style>"; //定义style的正则表达式
+        String regExHtml="<[^>]+>"; //定义HTML标签的正则表达式
+
+        Pattern pScript=Pattern.compile(regExScript,Pattern.CASE_INSENSITIVE);
+        Matcher mScript=pScript.matcher(content);
+        content=mScript.replaceAll(""); //过滤script标签
+
+        Pattern p_style=Pattern.compile(regExStyle,Pattern.CASE_INSENSITIVE);
+        Matcher m_style=p_style.matcher(content);
+        content=m_style.replaceAll(""); //过滤style标签
+
+        Pattern p_html=Pattern.compile(regExHtml,Pattern.CASE_INSENSITIVE);
+        Matcher m_html=p_html.matcher(content);
+        content=m_html.replaceAll(""); //过滤html标签
+
+        return content.trim(); //返回文本字符串
     }
 
 }

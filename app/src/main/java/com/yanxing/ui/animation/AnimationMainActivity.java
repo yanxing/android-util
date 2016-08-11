@@ -1,5 +1,7 @@
 package com.yanxing.ui.animation;
 
+import android.animation.Animator;
+import android.animation.ObjectAnimator;
 import android.content.Intent;
 import android.graphics.drawable.AnimationDrawable;
 import android.os.Bundle;
@@ -11,6 +13,7 @@ import android.widget.ImageView;
 
 import com.yanxing.base.BaseActivity;
 import com.yanxing.ui.R;
+import com.yanxing.util.CommonUtil;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
@@ -30,6 +33,9 @@ public class AnimationMainActivity extends BaseActivity {
 
     @BindView(R.id.frame_img)
     ImageView mFrameImg;
+
+    @BindView(R.id.object_animation)
+    Button mObjectAnimation;
 
     @Override
     protected int getLayoutResID() {
@@ -76,8 +82,32 @@ public class AnimationMainActivity extends BaseActivity {
 
     @OnClick(R.id.object_animation)
     public void onClick() {
-        Intent intent = new Intent(getApplicationContext(), ObjectAnimationActivity.class);
-        startActivity(intent);
+        ViewWrapper viewWrapper=new ViewWrapper(mObjectAnimation);
+        ObjectAnimator objectAnimator=ObjectAnimator.ofInt(viewWrapper,"width"
+                ,CommonUtil.getScreenDisplay(this).getWidth()-20).setDuration(3000);
+        objectAnimator.start();
+        objectAnimator.addListener(new Animator.AnimatorListener() {
+            @Override
+            public void onAnimationStart(Animator animation) {
+
+            }
+
+            @Override
+            public void onAnimationEnd(Animator animation) {
+                Intent intent = new Intent(getApplicationContext(), ObjectAnimationActivity.class);
+                startActivity(intent);
+            }
+
+            @Override
+            public void onAnimationCancel(Animator animation) {
+
+            }
+
+            @Override
+            public void onAnimationRepeat(Animator animation) {
+
+            }
+        });
     }
 
 
@@ -91,5 +121,22 @@ public class AnimationMainActivity extends BaseActivity {
     public void onClickPath(){
         Intent intent=new Intent(getApplicationContext(),PathExampleActivity.class);
         startActivity(intent);
+    }
+
+    public static class ViewWrapper{
+        private View mView;
+
+        ViewWrapper(View view){
+            this.mView=view;
+        }
+
+        public int getWidth(){
+            return mView.getLayoutParams().width;
+        }
+
+        public void setWidth(int width){
+            mView.getLayoutParams().width=width;
+            mView.requestLayout();
+        }
     }
 }
