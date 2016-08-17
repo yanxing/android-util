@@ -125,5 +125,9 @@
             android:id="@+id/expandableListViewCheck"
             style="@style/style_btn"
             android:text="ExpandableListView+CheckBox"/>
+        <Button
+            android:id="@+id/RxJava"
+            style="@style/style_btn"
+            android:text="RxJava"/>
     </LinearLayout>
 </ScrollView>

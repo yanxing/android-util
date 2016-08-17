@@ -56,4 +56,5 @@
     <string name="object_animation">属性动画</string>
     <string name="health_animation">仿QQ健康（来自网上）</string>
     <string name="path_animation">path类</string>
+    <string name="get_data">获取数据</string>
 </resources>
