@@ -14,7 +14,11 @@ import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;
 import retrofit2.Retrofit;
+import retrofit2.adapter.rxjava.RxJavaCallAdapterFactory;
 import retrofit2.converter.gson.GsonConverterFactory;
+import rx.Subscriber;
+import rx.android.schedulers.AndroidSchedulers;
+import rx.schedulers.Schedulers;
 
 /**
  * RxJava使用
@@ -53,28 +57,35 @@ public class RxJavaExampleActivity extends BaseActivity {
         Retrofit retrofit = new Retrofit.Builder()
                 .baseUrl(baseUrl)
                 .addConverterFactory(GsonConverterFactory.create())
+                .addCallAdapterFactory(RxJavaCallAdapterFactory.create())
                 .build();
 
         DouBanDao douBanDao = retrofit.create(DouBanDao.class);
-        Call<DouBan> call = douBanDao.getTopMovie(0, 10);
-        call.enqueue(new Callback<DouBan>() {
-            @Override
-            public void onResponse(Call<DouBan> call, Response<DouBan> response) {
-                DouBan douBan=response.body();
-                StringBuilder stringBuilder=new StringBuilder();
-                for (int i=0;i<douBan.getSubjects().size();i++){
-                    stringBuilder.append(String.valueOf(i));
-                    stringBuilder.append(".");
-                    stringBuilder.append(douBan.getSubjects().get(i).getTitle());
-                    stringBuilder.append("\n");
-                }
-                mData.setText(stringBuilder.toString());
-            }
+        douBanDao.getTopMovie(0, 10)
+                .subscribeOn(Schedulers.io())
+                .observeOn(AndroidSchedulers.mainThread())
+                .subscribe(new Subscriber<DouBan>() {
+                    @Override
+                    public void onCompleted() {
 
-            @Override
-            public void onFailure(Call<DouBan> call, Throwable t) {
-                mData.setText(t.getMessage());
-            }
-        });
+                    }
+
+                    @Override
+                    public void onError(Throwable e) {
+
+                    }
+
+                    @Override
+                    public void onNext(DouBan douBan) {
+                        StringBuilder stringBuilder=new StringBuilder();
+                        for (int i=0;i<douBan.getSubjects().size();i++){
+                            stringBuilder.append(String.valueOf(i));
+                            stringBuilder.append(".");
+                            stringBuilder.append(douBan.getSubjects().get(i).getTitle());
+                            stringBuilder.append("\n");
+                        }
+                        mData.setText(stringBuilder.toString());
+                    }
+                });
     }
 }
