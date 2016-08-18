@@ -12,6 +12,7 @@ import com.facebook.imagepipeline.request.ImageRequestBuilder;
 import com.yanxing.adapterlibrary.CommonAdapter;
 import com.yanxing.adapterlibrary.ViewHolder;
 import com.yanxing.base.BaseActivity;
+import com.yanxing.util.FileUtil;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -27,6 +28,9 @@ public class FrescoExampleActivity extends BaseActivity {
     @BindView(R.id.gridView)
     GridView mGridView;
 
+//    @BindView(R.id.simple_drawee_view)
+//    SimpleDraweeView mSimpleDraweeView;
+
     private CommonAdapter<String> mCommonAdapter;
     private List<String> mList=new ArrayList<String>();
 
@@ -37,6 +41,7 @@ public class FrescoExampleActivity extends BaseActivity {
 
     @Override
     protected void afterInstanceView() {
+//        mSimpleDraweeView.setImageURI(Uri.parse("asset:///g2.png"));
         mList.add("http://npic7.edushi.com/cn/zixun/zh-chs/2015-12/24/9fb3600ebd60a7504bcd9acf1d6ab40b.gif");
         mList.add("http://upload.qianhuaweb.com/2015/1203/1449107626255.gif");
         mList.add("http://jiangsu.china.com.cn/uploadfile/2015/1201/1448961827412987.jpg");
