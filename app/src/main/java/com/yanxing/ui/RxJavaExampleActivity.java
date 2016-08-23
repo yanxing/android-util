@@ -10,9 +10,6 @@ import com.yanxing.model.DouBan;
 
 import butterknife.BindView;
 import butterknife.OnClick;
-import retrofit2.Call;
-import retrofit2.Callback;
-import retrofit2.Response;
 import retrofit2.Retrofit;
 import retrofit2.adapter.rxjava.RxJavaCallAdapterFactory;
 import retrofit2.converter.gson.GsonConverterFactory;
@@ -34,12 +31,12 @@ public class RxJavaExampleActivity extends BaseActivity {
 
     @Override
     protected int getLayoutResID() {
-        return R.layout.activity_rejava_example;
+        return R.layout.activity_rxjava_example;
     }
 
     @Override
     protected void afterInstanceView() {
-        AppUtil.setStatusBarDarkMode(true,this);
+        AppUtil.setStatusBarDarkMode(true, this);
 
     }
 
@@ -51,7 +48,7 @@ public class RxJavaExampleActivity extends BaseActivity {
     /**
      * 获取数据
      */
-    public void getData(){
+    public void getData() {
         String baseUrl = "https://api.douban.com/v2/movie/";
 
         Retrofit retrofit = new Retrofit.Builder()
@@ -59,7 +56,6 @@ public class RxJavaExampleActivity extends BaseActivity {
                 .addConverterFactory(GsonConverterFactory.create())
                 .addCallAdapterFactory(RxJavaCallAdapterFactory.create())
                 .build();
-
         DouBanDao douBanDao = retrofit.create(DouBanDao.class);
         douBanDao.getTopMovie(0, 10)
                 .subscribeOn(Schedulers.io())
@@ -77,8 +73,8 @@ public class RxJavaExampleActivity extends BaseActivity {
 
                     @Override
                     public void onNext(DouBan douBan) {
-                        StringBuilder stringBuilder=new StringBuilder();
-                        for (int i=0;i<douBan.getSubjects().size();i++){
+                        StringBuilder stringBuilder = new StringBuilder();
+                        for (int i = 0; i < douBan.getSubjects().size(); i++) {
                             stringBuilder.append(String.valueOf(i));
                             stringBuilder.append(".");
                             stringBuilder.append(douBan.getSubjects().get(i).getTitle());

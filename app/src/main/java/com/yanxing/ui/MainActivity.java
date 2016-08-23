@@ -54,7 +54,7 @@ public class MainActivity extends BaseActivity implements AMapLocListener {
             , R.id.fresco, R.id.eventbus, R.id.titleBar, R.id.tabLayoutPager, R.id.recyclerView
             , R.id.sortListView,R.id.greenDao,R.id.selectCity,R.id.xRecyclerView,R.id.ultra_ptr
             , R.id.amap,R.id.threadTest,R.id.animation,R.id.dialog,R.id.ButterKnife
-            , R.id.expandableListViewCheck,R.id.RxJava})
+            , R.id.expandableListViewCheck,R.id.RxJava,R.id.inputEditButton})
     public void onClick(View v) {
         Intent intent = new Intent();
         Bundle bundle = new Bundle();
@@ -175,6 +175,10 @@ public class MainActivity extends BaseActivity implements AMapLocListener {
                 break;
             case R.id.RxJava:
                 intent.setClass(getApplicationContext(),RxJavaExampleActivity.class);
+                startActivity(intent);
+                break;
+            case R.id.inputEditButton:
+                intent.setClass(getApplicationContext(),InputEditButtonActivity.class);
                 startActivity(intent);
                 break;
         }

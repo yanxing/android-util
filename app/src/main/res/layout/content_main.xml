@@ -129,5 +129,9 @@
             android:id="@+id/RxJava"
             style="@style/style_btn"
             android:text="RxJava"/>
+        <Button
+            android:id="@+id/inputEditButton"
+            style="@style/style_btn"
+            android:text="inputEditButton"/>
     </LinearLayout>
 </ScrollView>
