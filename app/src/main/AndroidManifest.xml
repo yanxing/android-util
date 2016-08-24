@@ -124,7 +124,8 @@
             android:theme="@style/SwipeBack"/>
         <activity
             android:name=".InputEditButtonActivity"
-            android:windowSoftInputMode="stateAlwaysHidden|adjustResize"/>
+            android:theme="@style/SwipeBack"
+            android:windowSoftInputMode="adjustResize|stateAlwaysHidden"/>
     </application>
 
 </manifest>

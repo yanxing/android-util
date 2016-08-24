@@ -1,30 +1,30 @@
 package com.yanxing.ui;
 
+import android.os.Handler;
+import android.view.MotionEvent;
 import android.view.View;
-import android.widget.Button;
+import android.widget.EditText;
+import android.widget.ScrollView;
 
 import com.yanxing.base.BaseActivity;
-import com.yanxing.util.LogUtil;
 
 import butterknife.BindView;
 
 /**
+ * 编辑框下按钮被键盘遮挡问题，Activity注册添加属性windowSoftInputMode="adjustResize"
+ * 当使用沉浸式通知栏，布局文件中根节点没有加android:fitsSystemWindows="true"属性，
+ * 窗口不会调整大小，即布局不变；而子节点中有android:fitsSystemWindows="true"属性
+ * 布局会出现一片空白（颜色为使用了那个属性的View的背景颜色），看不到其他View，
+ * 加不加都会影响通知栏着色（通知栏颜色不能和标题栏颜色一致）。
  * Created by lishuangxiang on 2016/8/23.
  */
-public class InputEditButtonActivity extends BaseActivity
-        implements View.OnLayoutChangeListener {
+public class InputEditButtonActivity extends BaseActivity{
 
-    @BindView(R.id.next)
-    Button mNext;
+    @BindView(R.id.edit)
+    EditText mEditText;
 
-    @BindView(R.id.root)
-    View mRoot;
-
-    @BindView(R.id.edit_layout)
-    View mEditLayout;
-
-    private int mKeyHigh = 30;
-
+    @BindView(R.id.scrollView)
+    ScrollView mScrollView;
 
     @Override
     protected int getLayoutResID() {
@@ -33,21 +33,23 @@ public class InputEditButtonActivity extends BaseActivity
 
     @Override
     protected void afterInstanceView() {
-        mTintManager.setStatusBarTintEnabled(false);
-        mRoot.addOnLayoutChangeListener(this);
+        mEditText.setOnTouchListener(new View.OnTouchListener() {
+            @Override
+            public boolean onTouch(View v, MotionEvent event) {
+                changeScrollView();
+                return false;
+            }
+        });
     }
 
-    @Override
-    public void onLayoutChange(View v, int left, int top, int right, int bottom, int oldLeft, int oldTop, int oldRight, int oldBottom) {
-        LogUtil.d(TAG,bottom+"  "+oldBottom);
-        //软键盘弹起
-        if (oldBottom != 0 && bottom != 0 && (oldBottom - bottom > mKeyHigh)) {
-            mEditLayout.scrollBy(0,400);
-            LogUtil.d(TAG,"键盘谈起");
-
-        } else if (oldBottom != 0 && bottom != 0 && (bottom - oldBottom > mKeyHigh)) {
-            LogUtil.d(TAG,"键盘收起");
-            mEditLayout.scrollBy(0,-400);
-        }
+    private void changeScrollView(){
+        //延迟过短过长，都达不到Button在键盘上面效果，由此另外思路监听View大小变化来判断键盘谈起收起（onsizechanged或
+        //onLayoutChange）也需要延迟移动View
+        new Handler().postDelayed(new Runnable() {
+            @Override
+            public void run() {
+                mScrollView.scrollTo(0, mScrollView.getHeight());
+            }
+        }, 200);
     }
 }
