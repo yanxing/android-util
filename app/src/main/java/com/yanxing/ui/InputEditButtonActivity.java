@@ -16,6 +16,9 @@ import butterknife.BindView;
  * 窗口不会调整大小，即布局不变；而子节点中有android:fitsSystemWindows="true"属性
  * 布局会出现一片空白（颜色为使用了那个属性的View的背景颜色），看不到其他View，
  * 加不加都会影响通知栏着色（通知栏颜色不能和标题栏颜色一致）。
+ *
+ * 更新：在一个项目中看到，只需要把Button放到ScrollView外下面（层级并列），就可以实现Button不被输入法遮挡，
+ * 不需要写代码移动布局。
  * Created by lishuangxiang on 2016/8/23.
  */
 public class InputEditButtonActivity extends BaseActivity{
@@ -33,13 +36,13 @@ public class InputEditButtonActivity extends BaseActivity{
 
     @Override
     protected void afterInstanceView() {
-        mEditText.setOnTouchListener(new View.OnTouchListener() {
+        /*mEditText.setOnTouchListener(new View.OnTouchListener() {
             @Override
             public boolean onTouch(View v, MotionEvent event) {
                 changeScrollView();
                 return false;
             }
-        });
+        });*/
     }
 
     private void changeScrollView(){

@@ -8,7 +8,8 @@
     <ScrollView
         android:id="@+id/scrollView"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
+        android:layout_height="0dp"
+        android:layout_weight="1"
         android:scrollbars="none">
 
         <LinearLayout
@@ -55,13 +56,22 @@
                     android:layout_height="wrap_content"/>
             </LinearLayout>
 
-            <Button
+           <!-- <Button
                 android:id="@+id/next"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginLeft="@dimen/padding14"
                 android:layout_marginRight="@dimen/padding14"
-                android:text="下一步"/>
+                android:text="下一步"/>-->
         </LinearLayout>
     </ScrollView>
+    <!-- Button放到这里，就不要写代码移动布局也可以实现这个效果-->
+    <Button
+        android:id="@+id/next"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="@dimen/padding14"
+        android:layout_marginRight="@dimen/padding14"
+        android:layout_marginBottom="@dimen/margin20"
+        android:text="下一步"/>
 </LinearLayout>
