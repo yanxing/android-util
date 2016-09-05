@@ -22,7 +22,7 @@ import java.util.Random;
 
 /**
  * 类似直播送心效果
- * 修改自https://github.com/AlanCheen/PeriscopeLayout
+ * https://github.com/AlanCheen/PeriscopeLayout
  * Created by lishuangxiang on 2016/9/5.
  */
 public class HeartBubbleView extends RelativeLayout {
