@@ -47,4 +47,9 @@
         android:id="@+id/path_animation"
         style="@style/Animation_Button"
         android:text="@string/path_animation"/>
+
+    <Button
+        android:id="@+id/heartBubbleView"
+        style="@style/Animation_Button"
+        android:text="heartBubbleView"/>
 </LinearLayout>

@@ -129,6 +129,9 @@
         <activity
             android:name=".TextImageActivity"
             android:theme="@style/SwipeBack"/>
+        <activity
+            android:name=".animation.HeartBubbleViewActivity"
+            android:theme="@style/SwipeBack"/>
     </application>
 
 </manifest>

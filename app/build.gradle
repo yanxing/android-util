@@ -82,6 +82,7 @@ dependencies {
     compile project(':tablayoutlibrary')
     compile project(':swipelistviewlibrary')
     compile project(':amaploclibrary')
+    compile project(path: ':heartbubblelibrary')
 }
 
 apt {

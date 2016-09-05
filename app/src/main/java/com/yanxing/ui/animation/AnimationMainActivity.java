@@ -110,6 +110,12 @@ public class AnimationMainActivity extends BaseActivity {
         });
     }
 
+    @OnClick(R.id.heartBubbleView)
+    public void onClickHeartBubbleView(){
+        Intent intent=new Intent(getApplicationContext(),HeartBubbleViewActivity.class);
+        startActivity(intent);
+    }
+
 
     @OnClick(R.id.health_animation)
     public void onClickHealth() {
@@ -122,6 +128,8 @@ public class AnimationMainActivity extends BaseActivity {
         Intent intent=new Intent(getApplicationContext(),PathExampleActivity.class);
         startActivity(intent);
     }
+
+
 
     public static class ViewWrapper{
         private View mView;
