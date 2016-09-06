@@ -41,6 +41,10 @@
             android:id="@+id/select_image"
             style="@style/style_btn"
             android:text="@string/select_image"/>
+        <Button
+            android:id="@+id/select_image_dialog"
+            style="@style/style_btn"
+            android:text="@string/select_image_dialog"/>
 
         <Button
             android:id="@+id/browse_image"

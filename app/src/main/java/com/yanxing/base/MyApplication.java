@@ -28,7 +28,7 @@ import java.io.File;
  * APP初始化配置
  * Created by lishuangxiang on 2016/1/26.
  */
-public class MyApplication extends Application {
+public class  MyApplication extends Application {
 
     public  BaiduLoc baiduLoc;
 

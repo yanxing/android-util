@@ -10,6 +10,8 @@ import com.amap.api.location.AMapLocation;
 import com.amap.location.AMapLoc;
 import com.amap.location.event.AMapLocListener;
 import com.photo.ui.PhotoUtilsActivity;
+import com.yanxing.dialog.PhotoParam;
+import com.yanxing.dialog.SelectPhotoActivity;
 import com.yanxing.base.BaseActivity;
 import com.yanxing.model.FirstEventBus;
 import com.yanxing.sortlistviewlibrary.CityListActivity;
@@ -54,7 +56,8 @@ public class MainActivity extends BaseActivity implements AMapLocListener {
             , R.id.fresco, R.id.eventbus, R.id.titleBar, R.id.tabLayoutPager, R.id.recyclerView
             , R.id.sortListView,R.id.greenDao,R.id.selectCity,R.id.xRecyclerView,R.id.ultra_ptr
             , R.id.amap,R.id.threadTest,R.id.animation,R.id.dialog,R.id.ButterKnife
-            , R.id.expandableListViewCheck,R.id.RxJava,R.id.inputEditButton,R.id.textImage})
+            , R.id.expandableListViewCheck,R.id.RxJava,R.id.inputEditButton,R.id.textImage,
+            R.id.select_image_dialog})
     public void onClick(View v) {
         Intent intent = new Intent();
         Bundle bundle = new Bundle();
@@ -85,6 +88,21 @@ public class MainActivity extends BaseActivity implements AMapLocListener {
                 bundle.putString("name", mImageName);
                 bundle.putBoolean("cut", true);
                 intent.putExtras(bundle);
+                startActivityForResult(intent, QUESTION_IMAGE_CODE);
+                break;
+            case R.id.select_image_dialog:
+                long currentTime_dialog = System.currentTimeMillis();
+                intent.setClass(getApplicationContext(), SelectPhotoActivity.class);
+                mImageName = currentTime_dialog + ".png";
+                PhotoParam photoParam=new PhotoParam();
+                photoParam.setName(mImageName);
+                photoParam.setPath(FileUtil.getStoragePath() + ConstantValue.CACHE_IMAGE);
+                photoParam.setCut(true);
+                photoParam.setOutputX(480);
+                photoParam.setOutputY(480);
+                Bundle bundle1=new Bundle();
+                bundle1.putParcelable("photoParam",photoParam);
+                intent.putExtras(bundle1);
                 startActivityForResult(intent, QUESTION_IMAGE_CODE);
                 break;
             //图片浏览
@@ -241,7 +259,6 @@ public class MainActivity extends BaseActivity implements AMapLocListener {
             }else if (requestCode==QUESTION_SORT_LISTVIEW_CODE){
                 showToast(data.getExtras().getString("city"));
             }
-
         }
     }
 

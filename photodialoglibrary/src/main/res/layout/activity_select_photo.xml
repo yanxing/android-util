@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+              android:orientation="vertical"
+              android:layout_width="match_parent"
+              android:layout_height="match_parent"
+    android:background="@color/white">
+    <TextView
+        android:id="@+id/take_photo"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="@string/take_photo"
+        android:paddingTop="@dimen/padding12"
+        android:paddingBottom="@dimen/padding12"
+        android:textSize="@dimen/text_normal_x"
+        android:textColor="@color/colorMainDark"
+        android:gravity="center"/>
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="1px"
+        android:background="@color/colorLine"/>
+    <TextView
+        android:id="@+id/from_picture"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:gravity="center"
+        android:paddingTop="@dimen/padding12"
+        android:paddingBottom="@dimen/padding12"
+        android:textSize="@dimen/text_normal_x"
+        android:textColor="@color/colorMainDark"
+        android:text="@string/from_picture"/>
+
+</LinearLayout>
