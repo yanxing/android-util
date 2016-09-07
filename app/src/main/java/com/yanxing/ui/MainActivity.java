@@ -91,9 +91,9 @@ public class MainActivity extends BaseActivity implements AMapLocListener {
                 startActivityForResult(intent, QUESTION_IMAGE_CODE);
                 break;
             case R.id.select_image_dialog:
-                long currentTime_dialog = System.currentTimeMillis();
+                long currentTimeDialog = System.currentTimeMillis();
                 intent.setClass(getApplicationContext(), SelectPhotoActivity.class);
-                mImageName = currentTime_dialog + ".png";
+                mImageName = currentTimeDialog + ".png";
                 PhotoParam photoParam=new PhotoParam();
                 photoParam.setName(mImageName);
                 photoParam.setPath(FileUtil.getStoragePath() + ConstantValue.CACHE_IMAGE);
