@@ -167,3 +167,19 @@ intent.putExtra("city","上海");
 startActivityForResult(intent,QUESTION_SORT_LISTVIEW_CODE);
 ```
 ![image](https://github.com/yanxing/android-util/raw/master/sortlistviewlibrary/1.png)
+##photodialoglibrary
+图片选择（拍照和从图库选择）。
+```Java
+Intent intent=new Intent(getApplicationContext(), SelectPhotoActivity.class);
+mImageName = System.currentTimeMillis() + ".png";
+PhotoParam photoParam=new PhotoParam();
+photoParam.setName(mImageName);
+photoParam.setPath(FileUtil.getStoragePath() + ConstantValue.CACHE_IMAGE);
+photoParam.setCut(true);
+photoParam.setOutputX(480);
+photoParam.setOutputY(480);
+Bundle bundle=new Bundle();
+bundle.putParcelable("photoParam",photoParam);
+intent.putExtras(bundle);
+startActivityForResult(intent, QUESTION_IMAGE_CODE);
+```
