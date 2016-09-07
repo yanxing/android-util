@@ -33,9 +33,9 @@ public class SelectPhotoActivity extends FragmentActivity implements View.OnClic
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_select_photo);
-        Intent intent=getIntent();
-        Bundle bundle=intent.getExtras();
-        mPhotoParam=bundle.getParcelable("photoParam");
+        Intent intent = getIntent();
+        Bundle bundle = intent.getExtras();
+        mPhotoParam = bundle.getParcelable("photoParam");
         TextView takePhoto = (TextView) findViewById(R.id.take_photo);
         TextView fromPicture = (TextView) findViewById(R.id.from_picture);
         takePhoto.setOnClickListener(this);
@@ -56,7 +56,7 @@ public class SelectPhotoActivity extends FragmentActivity implements View.OnClic
      */
     private void takePhoto() {
         Intent intent = new Intent(MediaStore.ACTION_IMAGE_CAPTURE);
-        File file = new File(mPhotoParam.getPath(),mPhotoParam.getName());
+        File file = new File(mPhotoParam.getPath(), mPhotoParam.getName());
         sendBroadcast(new Intent(Intent.ACTION_MEDIA_SCANNER_SCAN_FILE,
                 Uri.fromFile(file)));
         intent.putExtra(MediaStore.EXTRA_OUTPUT, Uri.fromFile(file));
@@ -64,17 +64,26 @@ public class SelectPhotoActivity extends FragmentActivity implements View.OnClic
     }
 
     /**
-     * 从图库中选择图片
+     * 从图库中选择图片并裁剪，与拍照并裁剪配置crop不同，不设置不保存图片
      */
     private void selectPicture() {
         Intent intent = new Intent(Intent.ACTION_GET_CONTENT);
         intent.setType("image/*");
-        intent.putExtra("crop", "true");
-        intent.putExtra("aspectX", 1);
-        intent.putExtra("aspectY", 1);
-        intent.putExtra("outputX", 480);
-        intent.putExtra("outputY", 480);
+        if (mPhotoParam.isCut()){
+            intent.putExtra("crop", "true");
+            intent.putExtra("aspectX", 1);
+            intent.putExtra("aspectY", 1);
+            intent.putExtra("outputX", mPhotoParam.getOutputX());
+            intent.putExtra("outputY", mPhotoParam.getOutputY());
+            intent.putExtra("scale", true);
+        }else {
+            intent.putExtra("crop", "false");
+        }
         intent.putExtra("return-data", false);
+        intent.putExtra("noFaceDetection", true);
+        intent.putExtra("outputFormat", Bitmap.CompressFormat.JPEG.toString());
+        File file = new File(mPhotoParam.getPath(), mPhotoParam.getName());
+        intent.putExtra(MediaStore.EXTRA_OUTPUT, Uri.fromFile(file));
         startActivityForResult(intent, FROM_PICTURE);
     }
 
@@ -82,7 +91,7 @@ public class SelectPhotoActivity extends FragmentActivity implements View.OnClic
     protected void onActivityResult(int requestCode, int resultCode, Intent data) {
         super.onActivityResult(requestCode, resultCode, data);
         if (resultCode == RESULT_OK) {
-            File file = new File(mPhotoParam.getPath(),mPhotoParam.getName());
+            File file = new File(mPhotoParam.getPath(), mPhotoParam.getName());
             //拍照返回
             if (requestCode == TAKE_PHOTO) {
                 sendBroadcast(new Intent(Intent.ACTION_MEDIA_SCANNER_SCAN_FILE,
@@ -93,9 +102,8 @@ public class SelectPhotoActivity extends FragmentActivity implements View.OnClic
                 setResult(RESULT_OK);
                 finish();
             } else if (requestCode == FROM_PICTURE) {
-//                cutPhoto(Uri.fromFile(file));
-//                setResult(RESULT_OK);
-//                finish();
+                setResult(RESULT_OK);
+                finish();
             }
         }
     }
@@ -135,7 +143,7 @@ public class SelectPhotoActivity extends FragmentActivity implements View.OnClic
         View view = getWindow().getDecorView();
         WindowManager.LayoutParams lp = (WindowManager.LayoutParams) view.getLayoutParams();
         lp.gravity = Gravity.CENTER;
-        lp.width = dm.widthPixels*3/4;
+        lp.width = dm.widthPixels * 3 / 4;
         getWindowManager().updateViewLayout(view, lp);
     }
 

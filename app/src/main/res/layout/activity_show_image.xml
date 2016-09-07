@@ -7,7 +7,7 @@
     <com.yanxing.titlebarlibrary.TitleBar
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        app:title_main="@string/select_image"/>
+        app:title_main="@string/select_image1"/>
     <com.facebook.drawee.view.SimpleDraweeView
         android:id="@+id/simple_drawee_view"
         android:layout_width="80dp"

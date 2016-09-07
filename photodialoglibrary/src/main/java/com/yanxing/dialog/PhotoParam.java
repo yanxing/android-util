@@ -18,7 +18,7 @@ public class PhotoParam implements Parcelable {
      */
     private String name;
     /**
-     * 图片裁剪x,cut为true才有效
+     * 图片裁剪x,cut为true有效
      */
     private int outputX;
     private int outputY;
