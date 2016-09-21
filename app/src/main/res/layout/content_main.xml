@@ -141,5 +141,9 @@
             android:id="@+id/textImage"
             style="@style/style_btn"
             android:text="textImage"/>
+        <Button
+            android:id="@+id/downloadlibrary"
+            style="@style/style_btn"
+            android:text="downloadlibrary"/>
     </LinearLayout>
 </ScrollView>

@@ -9,15 +9,18 @@ public interface DownloadListener {
     /**
      * 下载之前
      */
-    void onBefore();
+    void onStart();
 
     /**
      * 下载进度
+     *
+     * @param progress  当前下载大小
+     * @param totalSize 文件总大小
      */
-    void onProgress(int progress);
+    void onProgress(int progress, int totalSize);
 
     /**
      * 下载完成
      */
-    void onAfter();
+    void onFinish();
 }

@@ -1,6 +1,7 @@
 package com.yanxing.downloadlibrary;
 
 import android.content.Context;
+import android.util.Log;
 
 import com.yanxing.downloadlibrary.model.DownloadMessage;
 
@@ -24,11 +25,11 @@ public class DownloadUtils {
     private static DownloadUtils mOurInstance = new DownloadUtils();
     private DownloadListener mDownloadListener;
     //CPU核心数
-    private final static int CORE_NUM = Runtime.getRuntime().availableProcessors();
+    private int CORE_NUM = Runtime.getRuntime().availableProcessors();
     private ExecutorService mExecutorService = Executors.newFixedThreadPool(CORE_NUM);
     private DownloadConfiguration mDownloadConfiguration;
     // 记录各线程下载长度
-    private Map<Integer, Integer> mData = new ConcurrentHashMap<Integer, Integer>();
+    private Map<Integer, Integer> mData = new ConcurrentHashMap<>();
     private DownloadDao mDownloadDao;
     /**
      * 文件总大小
@@ -67,18 +68,17 @@ public class DownloadUtils {
      * @param url
      * @param downloadListener 下载监听
      */
-    public void startDownload(Context context, final String url, DownloadListener downloadListener) {
+    public void startDownload(Context context,String url, DownloadListener downloadListener) {
         this.mDownloadListener = downloadListener;
-        this.mDownloadListener.onBefore();
+        this.mDownloadListener.onStart();
         this.mUrl = url;
         mDownloadDao = new DownloadDao(context);
-        computeDownloadTask(url);
         for (int i = 1; i <= CORE_NUM; i++) {
             final int finalI = i;
             mExecutorService.submit(new Runnable() {
                 @Override
                 public void run() {
-                    download(url, finalI);
+                    download(mUrl, finalI);
                 }
             });
         }
@@ -90,7 +90,7 @@ public class DownloadUtils {
      * @param urlPath
      * @param index
      */
-    public void download(String urlPath, int index) {
+    private void download(String urlPath, int index) {
         try {
             URL url = new URL(urlPath);
             HttpURLConnection conn = (HttpURLConnection) url.openConnection();
@@ -98,15 +98,22 @@ public class DownloadUtils {
             conn.setRequestMethod("GET");
             conn.setRequestProperty("Charset", "UTF-8");
             List<DownloadMessage> downloadMessageList = mDownloadDao.getDownloadMessage(urlPath);
+            //没有记录
+            if (downloadMessageList.size()==0){
+                conn.connect();
+                mFileSize=conn.getContentLength();
+                Log.d("DownloadUtils","文件总大小"+mFileSize/1024.0/1024+"兆");
+                computeDownloadTask(urlPath);
+            }
             int startPosition = downloadMessageList.get(index).getStartDownload();
             int endPosition = downloadMessageList.get(index).getEndDownload();
             conn.setRequestProperty("Range", "bytes=" + startPosition + "-" + endPosition);
-            conn.connect();
             InputStream inStream = conn.getInputStream();
             byte[] buffer = new byte[1024];
             int offset;
             if (conn.getResponseCode() == 200) {
-                mFileSize = conn.getContentLength();
+                int size=conn.getContentLength();
+                Log.d("DownloadUtils","此线程下载的文件总大小"+size/1024.0/1024+"兆");
                 File file = new File(getSavePath() + getFileName(urlPath));
                 RandomAccessFile randomAccessFile = new RandomAccessFile(file, "rwd");
                 randomAccessFile.seek(startPosition);
@@ -115,6 +122,12 @@ public class DownloadUtils {
                     mData.put(index, mData.get(index) + offset);
                     updateData(index, mData.get(index), urlPath);
                     addDownloadSize(offset);
+                    mDownloadListener.onProgress(mDownloadSize,mFileSize);
+                }
+                if (mFileSize==mDownloadSize){
+                    mDownloadDao.delete(urlPath);
+                    mDownloadDao.close();
+                    mDownloadListener.onFinish();
                 }
                 randomAccessFile.close();
                 inStream.close();
@@ -131,7 +144,7 @@ public class DownloadUtils {
      * @param downloadLength
      * @param url
      */
-    public synchronized void updateData(int threadId, int downloadLength, String url) {
+    private synchronized void updateData(int threadId, int downloadLength, String url) {
         DownloadMessage downloadMessage = new DownloadMessage();
         downloadMessage.setThreadId(threadId);
         downloadMessage.setDownloadLength(downloadLength);
@@ -170,7 +183,7 @@ public class DownloadUtils {
      *
      * @return
      */
-    public boolean isStop() {
+    private boolean isStop() {
         return mIsStop;
     }
 
@@ -178,9 +191,9 @@ public class DownloadUtils {
      * 计算每个线程需要下载的文件长度，并保存到数据库，同一threadId和url不会被保存
      * 如果已经存在，则不作修改，每条线程已经下载的长度保存到变量mData中
      */
-    public void computeDownloadTask(String urlPath) {
+    private void computeDownloadTask(String urlPath) {
         try {
-            URL url = new URL(urlPath);
+           /* URL url = new URL(urlPath);
             HttpURLConnection conn = (HttpURLConnection) url.openConnection();
             conn.setConnectTimeout(10000);
             conn.setRequestMethod("GET");
@@ -189,8 +202,9 @@ public class DownloadUtils {
             InputStream inStream = conn.getInputStream();
             if (conn.getResponseCode() == 200) {
                 mFileSize = conn.getContentLength();
+                return;
             }
-            inStream.close();
+            inStream.close();*/
             DownloadMessage downloadMessage = new DownloadMessage();
             downloadMessage.setUrl(urlPath);
             downloadMessage.setThreadId(0);
@@ -227,14 +241,14 @@ public class DownloadUtils {
      *
      * @param size
      */
-    protected synchronized void addDownloadSize(int size) {
+    private synchronized void addDownloadSize(int size) {
         mDownloadSize += size;
     }
 
     /**
      * 获取文件名,从下载路径的字符串中获取文件名称
      */
-    public String getFileName(String url) {
+    private String getFileName(String url) {
         String fileName = url.substring(url.lastIndexOf('/') + 1);
         return fileName;
     }
@@ -244,7 +258,7 @@ public class DownloadUtils {
      *
      * @return
      */
-    public File getSavePath() {
+    private File getSavePath() {
         return mDownloadConfiguration.getSavePath();
     }
 }

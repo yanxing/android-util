@@ -84,6 +84,7 @@ dependencies {
     compile project(':amaploclibrary')
     compile project(path: ':heartbubblelibrary')
     compile project(path: ':photodialoglibrary')
+    compile project(':downloadlibrary')
 }
 
 apt {

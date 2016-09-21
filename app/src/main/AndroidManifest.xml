@@ -132,6 +132,9 @@
         <activity
             android:name=".animation.HeartBubbleViewActivity"
             android:theme="@style/SwipeBack"/>
+        <activity
+            android:name=".DownloadLibraryActivity"
+            android:theme="@style/SwipeBack"/>
     </application>
 
 </manifest>
