@@ -108,12 +108,12 @@ public class DownloadUtils {
             int startPosition = downloadMessageList.get(index).getStartDownload();
             int endPosition = downloadMessageList.get(index).getEndDownload();
             conn.setRequestProperty("Range", "bytes=" + startPosition + "-" + endPosition);
+            conn.connect();
             InputStream inStream = conn.getInputStream();
             byte[] buffer = new byte[1024];
             int offset;
             if (conn.getResponseCode() == 200) {
-                int size=conn.getContentLength();
-                Log.d("DownloadUtils","此线程下载的文件总大小"+size/1024.0/1024+"兆");
+                Log.d("DownloadUtils","第"+index+"此线程下载的文件大小"+(endPosition-startPosition+1)/1024.0/1024+"兆");
                 File file = new File(getSavePath() + getFileName(urlPath));
                 RandomAccessFile randomAccessFile = new RandomAccessFile(file, "rwd");
                 randomAccessFile.seek(startPosition);
@@ -192,47 +192,31 @@ public class DownloadUtils {
      * 如果已经存在，则不作修改，每条线程已经下载的长度保存到变量mData中
      */
     private void computeDownloadTask(String urlPath) {
-        try {
-           /* URL url = new URL(urlPath);
-            HttpURLConnection conn = (HttpURLConnection) url.openConnection();
-            conn.setConnectTimeout(10000);
-            conn.setRequestMethod("GET");
-            conn.setRequestProperty("Charset", "UTF-8");
-            conn.connect();
-            InputStream inStream = conn.getInputStream();
-            if (conn.getResponseCode() == 200) {
-                mFileSize = conn.getContentLength();
-                return;
+        DownloadMessage downloadMessage = new DownloadMessage();
+        downloadMessage.setUrl(urlPath);
+        downloadMessage.setThreadId(0);
+        //已经存在此条下载记录
+        if (mDownloadDao.isExist(downloadMessage)) {
+            List<DownloadMessage> downloadMessageList = mDownloadDao.getDownloadMessage(urlPath);
+            for (int i = 1; i <= downloadMessageList.size(); i++) {
+                mData.put(i, downloadMessageList.get(i).getDownloadLength());
             }
-            inStream.close();*/
-            DownloadMessage downloadMessage = new DownloadMessage();
-            downloadMessage.setUrl(urlPath);
-            downloadMessage.setThreadId(0);
-            //已经存在此条下载记录
-            if (mDownloadDao.isExist(downloadMessage)) {
-                List<DownloadMessage> downloadMessageList = mDownloadDao.getDownloadMessage(urlPath);
-                for (int i = 1; i <= downloadMessageList.size(); i++) {
-                    mData.put(i, downloadMessageList.get(i).getDownloadLength());
+        } else {
+            int block = mFileSize / CORE_NUM;
+            List<DownloadMessage> downloadMessageList = new ArrayList<DownloadMessage>();
+            for (int i = 1; i <= CORE_NUM; i++) {
+                int startDownload = (i - 1) * block + 1;
+                int endDownload;
+                if (i != CORE_NUM) {
+                    endDownload = i * block;
+                } else {
+                    endDownload = i * block + mFileSize % CORE_NUM;
                 }
-            } else {
-                int block = mFileSize / CORE_NUM;
-                List<DownloadMessage> downloadMessageList = new ArrayList<DownloadMessage>();
-                for (int i = 1; i <= CORE_NUM; i++) {
-                    int startDownload = (i - 1) * block + 1;
-                    int endDownload;
-                    if (i != CORE_NUM) {
-                        endDownload = i * block;
-                    } else {
-                        endDownload = i * block + mFileSize % CORE_NUM;
-                    }
-                    DownloadMessage downloadMessage1 = new DownloadMessage(i, 0, startDownload, endDownload, urlPath);
-                    downloadMessageList.add(downloadMessage1);
-                    mData.put(i, 0);
-                }
-                mDownloadDao.save(downloadMessageList);
+                DownloadMessage downloadMessage1 = new DownloadMessage(i, 0, startDownload, endDownload, urlPath);
+                downloadMessageList.add(downloadMessage1);
+                mData.put(i, 0);
             }
-        } catch (Exception e) {
-            e.printStackTrace();
+            mDownloadDao.save(downloadMessageList);
         }
     }
 

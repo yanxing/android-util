@@ -79,7 +79,7 @@ public class DownloadDao {
      * @param url
      * @return 返回此url各个线程下载集合
      */
-    public List<DownloadMessage> getDownloadMessage(String url) {
+    public synchronized List<DownloadMessage> getDownloadMessage(String url) {
         mCursor = db.rawQuery("select * from file_download where url=?", new String[]{url});
         List<DownloadMessage> list = new ArrayList<DownloadMessage>();
         while (mCursor.moveToNext()) {
@@ -89,6 +89,7 @@ public class DownloadDao {
             downloadMessage.setDownloadLength(mCursor.getInt(2));
             downloadMessage.setStartDownload(mCursor.getInt(3));
             downloadMessage.setEndDownload(mCursor.getInt(4));
+            list.add(downloadMessage);
         }
         return list;
     }
