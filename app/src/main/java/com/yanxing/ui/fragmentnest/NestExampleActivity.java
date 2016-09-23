@@ -1,7 +1,6 @@
 package com.yanxing.ui.fragmentnest;
 
 
-
 import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentTransaction;
 
@@ -23,10 +22,10 @@ public class NestExampleActivity extends BaseActivity {
 
     @Override
     protected void afterInstanceView() {
-        FragmentManager fragmentManager=getSupportFragmentManager();
-        FragmentTransaction fragmentTransaction=fragmentManager.beginTransaction();
-        NestFragment nestFragment=new NestFragment();
-        fragmentTransaction.add(R.id.fragment,nestFragment);
+        FragmentManager fragmentManager = getSupportFragmentManager();
+        FragmentTransaction fragmentTransaction = fragmentManager.beginTransaction();
+        NestFragment nestFragment = new NestFragment();
+        fragmentTransaction.add(R.id.fragment, nestFragment);
         fragmentTransaction.commit();
     }
 }

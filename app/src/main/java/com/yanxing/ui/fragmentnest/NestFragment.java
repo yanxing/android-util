@@ -16,9 +16,11 @@ import butterknife.OnClick;
 public class NestFragment extends BaseFragment {
 
     //显示AFragment
-    private boolean mIsA=true;
-    private AFragment mAFragment=new AFragment();
-    private BFragment mBFragment=new BFragment();
+    private boolean mIsA = true;
+    private AFragment mAFragment = new AFragment();
+    private BFragment mBFragment = new BFragment();
+
+    FragmentManager fragmentManager;
 
     @Override
     protected int getLayoutResID() {
@@ -27,22 +29,21 @@ public class NestFragment extends BaseFragment {
 
     @Override
     protected void afterInstanceView() {
-        FragmentManager fragmentManager=getChildFragmentManager();
-        FragmentTransaction fragmentTransaction=fragmentManager.beginTransaction();
-        fragmentTransaction.add(R.id.fragment,mAFragment);
+        fragmentManager = getChildFragmentManager();
+        FragmentTransaction fragmentTransaction = fragmentManager.beginTransaction();
+        fragmentTransaction.add(R.id.fragment, mAFragment);
         fragmentTransaction.commit();
     }
 
     @OnClick(R.id.change)
-    public void click(){
-        FragmentManager fragmentManager=getChildFragmentManager();
-        FragmentTransaction fragmentTransaction=fragmentManager.beginTransaction();
-        if (mIsA){
-           fragmentTransaction.replace(R.id.fragment,mBFragment);
-        }else {
-            fragmentTransaction.replace(R.id.fragment,mAFragment);
+    public void click() {
+        FragmentTransaction fragmentTransaction = fragmentManager.beginTransaction();
+        if (mIsA) {
+            fragmentTransaction.replace(R.id.fragment, mBFragment);
+        } else {
+            fragmentTransaction.replace(R.id.fragment, mAFragment);
         }
-        mIsA=!mIsA;
+        mIsA = !mIsA;
         fragmentTransaction.commit();
     }
 }
