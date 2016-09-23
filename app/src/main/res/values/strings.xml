@@ -62,4 +62,5 @@
     <string name="start_download">开始下载</string>
     <string name="stop_download">暂停下载</string>
     <string name="resume_download">恢复下载</string>
+    <string name="fragment_fragment">fragment嵌套fragment</string>
 </resources>

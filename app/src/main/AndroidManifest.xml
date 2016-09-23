@@ -135,6 +135,9 @@
         <activity
             android:name=".DownloadLibraryActivity"
             android:theme="@style/SwipeBack"/>
+        <activity
+            android:name=".fragmentnest.NestExampleActivity"
+            android:theme="@style/SwipeBack"/>
     </application>
 
 </manifest>

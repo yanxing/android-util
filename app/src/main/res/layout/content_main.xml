@@ -145,5 +145,9 @@
             android:id="@+id/downloadlibrary"
             style="@style/style_btn"
             android:text="downloadlibrary"/>
+        <Button
+            android:id="@+id/nestFragment"
+            style="@style/style_btn"
+            android:text="@string/fragment_fragment"/>
     </LinearLayout>
 </ScrollView>
