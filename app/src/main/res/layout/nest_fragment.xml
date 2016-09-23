@@ -7,6 +7,8 @@
         android:id="@+id/change"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        android:layout_marginLeft="@dimen/padding16"
+        android:layout_marginRight="@dimen/padding16"
         android:text="切换fragment"/>
 <FrameLayout
     android:id="@+id/fragment"
