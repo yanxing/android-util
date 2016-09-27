@@ -55,6 +55,7 @@ public class DownloadDao {
             }
             db.setTransactionSuccessful();// 事务执行成功的标志
         } catch (Exception e) {
+            e.printStackTrace();
             db.close();
         } finally {
             db.endTransaction();// 结束一个事务，如果事务设置了成功标志，则提交事务，否则会回滚事务

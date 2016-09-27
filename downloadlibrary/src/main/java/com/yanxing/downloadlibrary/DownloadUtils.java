@@ -1,6 +1,8 @@
 package com.yanxing.downloadlibrary;
 
 import android.content.Context;
+import android.os.Handler;
+import android.os.Looper;
 import android.util.Log;
 
 import com.yanxing.downloadlibrary.model.DownloadMessage;
@@ -16,6 +18,8 @@ import java.util.Map;
 import java.util.concurrent.ConcurrentHashMap;
 import java.util.concurrent.ExecutorService;
 import java.util.concurrent.Executors;
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
 
 /**
  * 下载
@@ -29,12 +33,13 @@ public class DownloadUtils {
     private ExecutorService mExecutorService = Executors.newFixedThreadPool(CORE_NUM);
     private DownloadConfiguration mDownloadConfiguration;
     // 记录各线程下载长度
-    private Map<Integer, Integer> mData = new ConcurrentHashMap<>();
+    private static Map<Integer, Integer> mData = new ConcurrentHashMap<>();
+    private static List<DownloadMessage> mDownloadMessageList=new ArrayList<>();
     private DownloadDao mDownloadDao;
     /**
      * 文件总大小
      */
-    private int mFileSize;
+    private static int mFileSize;
     /**
      * 已经下载文件长度
      */
@@ -97,16 +102,18 @@ public class DownloadUtils {
             conn.setConnectTimeout(10000);
             conn.setRequestMethod("GET");
             conn.setRequestProperty("Charset", "UTF-8");
-            List<DownloadMessage> downloadMessageList = mDownloadDao.getDownloadMessage(urlPath);
             //没有记录
-            if (downloadMessageList.size()==0){
-                conn.connect();
-                mFileSize=conn.getContentLength();
-                Log.d("DownloadUtils","文件总大小"+mFileSize/1024.0/1024+"兆");
-                computeDownloadTask(urlPath);
+            synchronized (mDownloadMessageList){
+                if (mDownloadMessageList.size()==0){
+                    conn.connect();
+                    mFileSize=conn.getContentLength();
+                    Log.d("DownloadUtils","文件总大小"+mFileSize/1024.0/1024+"兆");
+                    computeDownloadTask(urlPath,index);
+                }
             }
-            int startPosition = downloadMessageList.get(index).getStartDownload();
-            int endPosition = downloadMessageList.get(index).getEndDownload();
+            int startPosition = mDownloadMessageList.get(index-1).getStartDownload();
+            int endPosition = mDownloadMessageList.get(index-1).getEndDownload();
+            conn.disconnect();
             conn.setRequestProperty("Range", "bytes=" + startPosition + "-" + endPosition);
             conn.connect();
             InputStream inStream = conn.getInputStream();
@@ -114,7 +121,7 @@ public class DownloadUtils {
             int offset;
             if (conn.getResponseCode() == 200) {
                 Log.d("DownloadUtils","第"+index+"此线程下载的文件大小"+(endPosition-startPosition+1)/1024.0/1024+"兆");
-                File file = new File(getSavePath() + getFileName(urlPath));
+                File file = new File(getSavePath() + getFileName(conn,urlPath));
                 RandomAccessFile randomAccessFile = new RandomAccessFile(file, "rwd");
                 randomAccessFile.seek(startPosition);
                 while (!isStop() && (offset = inStream.read(buffer, 0, 1024)) != -1) {
@@ -122,9 +129,14 @@ public class DownloadUtils {
                     mData.put(index, mData.get(index) + offset);
                     updateData(index, mData.get(index), urlPath);
                     addDownloadSize(offset);
-                    mDownloadListener.onProgress(mDownloadSize,mFileSize);
+                    new Handler(Looper.getMainLooper()).post(new Runnable() {
+                        @Override
+                        public void run() {
+                            mDownloadListener.onProgress(mDownloadSize,mFileSize);
+                        }
+                    });
                 }
-                if (mFileSize==mDownloadSize){
+                if (mFileSize<=mDownloadSize){
                     mDownloadDao.delete(urlPath);
                     mDownloadDao.close();
                     mDownloadListener.onFinish();
@@ -191,19 +203,18 @@ public class DownloadUtils {
      * 计算每个线程需要下载的文件长度，并保存到数据库，同一threadId和url不会被保存
      * 如果已经存在，则不作修改，每条线程已经下载的长度保存到变量mData中
      */
-    private void computeDownloadTask(String urlPath) {
+    private void computeDownloadTask(String urlPath,int index) {
         DownloadMessage downloadMessage = new DownloadMessage();
         downloadMessage.setUrl(urlPath);
-        downloadMessage.setThreadId(0);
+        downloadMessage.setThreadId(index);
         //已经存在此条下载记录
         if (mDownloadDao.isExist(downloadMessage)) {
-            List<DownloadMessage> downloadMessageList = mDownloadDao.getDownloadMessage(urlPath);
-            for (int i = 1; i <= downloadMessageList.size(); i++) {
-                mData.put(i, downloadMessageList.get(i).getDownloadLength());
+            mDownloadMessageList= mDownloadDao.getDownloadMessage(urlPath);
+            for (int i = 1; i <= mDownloadMessageList.size(); i++) {
+                mData.put(i, mDownloadMessageList.get(i-1).getDownloadLength());
             }
         } else {
             int block = mFileSize / CORE_NUM;
-            List<DownloadMessage> downloadMessageList = new ArrayList<DownloadMessage>();
             for (int i = 1; i <= CORE_NUM; i++) {
                 int startDownload = (i - 1) * block + 1;
                 int endDownload;
@@ -213,10 +224,10 @@ public class DownloadUtils {
                     endDownload = i * block + mFileSize % CORE_NUM;
                 }
                 DownloadMessage downloadMessage1 = new DownloadMessage(i, 0, startDownload, endDownload, urlPath);
-                downloadMessageList.add(downloadMessage1);
+                mDownloadMessageList.add(downloadMessage1);
                 mData.put(i, 0);
             }
-            mDownloadDao.save(downloadMessageList);
+            mDownloadDao.save(mDownloadMessageList);
         }
     }
 
@@ -232,8 +243,23 @@ public class DownloadUtils {
     /**
      * 获取文件名,从下载路径的字符串中获取文件名称
      */
-    private String getFileName(String url) {
+    private String getFileName(HttpURLConnection conn,String url) {
         String fileName = url.substring(url.lastIndexOf('/') + 1);
+        if (fileName.isEmpty()||!fileName.contains(".")){
+            for (int i = 0;; i++) {
+                String mine = conn.getHeaderField(i);// 从返回的流中获取特定索引的头字段值
+                if (mine == null)
+                    break;
+                if ("content-disposition".equals(conn.getHeaderField(i)
+                        .toLowerCase())) {
+                    Matcher matcher = Pattern.compile(".*fileName=(.*)")
+                            .matcher(mine.toLowerCase());
+                    if (matcher.find()) {
+                        return matcher.group();
+                    }
+                }
+            }
+        }
         return fileName;
     }
 

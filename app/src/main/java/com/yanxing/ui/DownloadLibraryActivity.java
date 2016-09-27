@@ -1,6 +1,5 @@
 package com.yanxing.ui;
 
-import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
 import android.widget.Button;
@@ -34,6 +33,10 @@ public class DownloadLibraryActivity extends BaseActivity {
 
     @BindView(R.id.start)
     Button mStart;
+
+    @BindView(R.id.progress)
+    TextView mProgress;
+
     //true停止下载
     private boolean isStopDownload;
 
@@ -80,7 +83,10 @@ public class DownloadLibraryActivity extends BaseActivity {
 
             @Override
             public void onProgress(int progress, int totalSize) {
+                mProgressBar.setMax(totalSize);
+                mProgressBar.setProgress(progress);
                 Log.d("DownloadUtils",progress+"  "+totalSize);
+                mProgress.setText(Math.floor(progress*1.0/totalSize)*100+"%");
             }
 
             @Override
