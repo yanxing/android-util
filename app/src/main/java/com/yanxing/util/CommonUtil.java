@@ -8,6 +8,7 @@ import android.content.pm.PackageManager;
 import android.content.pm.Signature;
 import android.graphics.Bitmap;
 import android.graphics.Rect;
+import android.media.MediaMetadataRetriever;
 import android.media.ThumbnailUtils;
 import android.net.Uri;
 import android.os.IBinder;
@@ -26,6 +27,7 @@ import java.lang.reflect.Field;
 import java.lang.reflect.Method;
 import java.security.MessageDigest;
 import java.security.NoSuchAlgorithmException;
+import java.util.HashMap;
 import java.util.List;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
@@ -430,7 +432,19 @@ public class CommonUtil {
     }
 
     /**
-     * 获取视频的缩略图
+     * 获取视频缩略图
+     * @param path
+     * @return
+     */
+    public Bitmap getFrameAtTime(String path){
+        MediaMetadataRetriever retriever = new MediaMetadataRetriever();
+        //获取网络视频
+        retriever.setDataSource(path, new HashMap<String, String>());
+        return retriever.getFrameAtTime();
+    }
+
+    /**
+     * 获取视频的缩略图,格式有限制
      * 先通过ThumbnailUtils来创建一个视频的缩略图，然后再利用ThumbnailUtils来生成指定大小的缩略图。
      * 如果想要的缩略图的宽和高都小于MICRO_KIND，则类型要使用MICRO_KIND作为kind的值，这样会节省内存。
      * @param videoPath 视频的路径
