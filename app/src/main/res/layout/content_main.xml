@@ -149,5 +149,9 @@
             android:id="@+id/nestFragment"
             style="@style/style_btn"
             android:text="@string/fragment_fragment"/>
+        <Button
+            android:id="@+id/surfaceView"
+            style="@style/style_btn"
+            android:text="SurfaceView+MediaPlayer"/>
     </LinearLayout>
 </ScrollView>

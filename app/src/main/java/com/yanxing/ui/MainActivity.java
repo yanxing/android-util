@@ -58,7 +58,7 @@ public class MainActivity extends BaseActivity implements AMapLocListener {
             , R.id.sortListView,R.id.greenDao,R.id.selectCity,R.id.xRecyclerView,R.id.ultra_ptr
             , R.id.amap,R.id.threadTest,R.id.animation,R.id.dialog,R.id.ButterKnife
             , R.id.expandableListViewCheck,R.id.RxJava,R.id.inputEditButton,R.id.textImage,
-            R.id.select_image_dialog,R.id.downloadlibrary,R.id.nestFragment})
+            R.id.select_image_dialog,R.id.downloadlibrary,R.id.nestFragment,R.id.surfaceView})
     public void onClick(View v) {
         Intent intent = new Intent();
         Bundle bundle = new Bundle();
@@ -210,6 +210,10 @@ public class MainActivity extends BaseActivity implements AMapLocListener {
                 break;
             case R.id.nestFragment:
                 intent.setClass(getApplicationContext(),NestExampleActivity.class);
+                startActivity(intent);
+                break;
+            case R.id.surfaceView:
+                intent.setClass(getApplicationContext(),SurfaceViewMediaPlayerActivity.class);
                 startActivity(intent);
                 break;
         }

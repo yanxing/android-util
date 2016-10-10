@@ -138,6 +138,9 @@
         <activity
             android:name=".fragmentnest.NestExampleActivity"
             android:theme="@style/SwipeBack"/>
+        <activity
+            android:name=".SurfaceViewMediaPlayerActivity"
+            android:theme="@style/SwipeBack"/>
     </application>
 
 </manifest>
