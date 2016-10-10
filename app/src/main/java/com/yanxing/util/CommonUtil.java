@@ -14,7 +14,6 @@ import android.net.Uri;
 import android.os.IBinder;
 import android.support.v4.app.Fragment;
 import android.telephony.TelephonyManager;
-import android.text.TextUtils;
 import android.view.Display;
 import android.view.View;
 import android.view.Window;
@@ -141,15 +140,6 @@ public class CommonUtil {
             imm.hideSoftInputFromWindow(windowToken, 0);
         } catch (Exception e) {
         }
-    }
-
-    /*
-	 * 判断字串是否为空
-     * @param String
-     * @return boolean
-     */
-    public static boolean isNull(String str) {
-        return TextUtils.isEmpty(str) ? true : false;
     }
 
     /**
