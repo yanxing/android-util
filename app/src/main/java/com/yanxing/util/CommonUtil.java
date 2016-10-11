@@ -12,7 +12,6 @@ import android.media.MediaMetadataRetriever;
 import android.media.ThumbnailUtils;
 import android.net.Uri;
 import android.os.IBinder;
-import android.support.v4.app.Fragment;
 import android.telephony.TelephonyManager;
 import android.view.Display;
 import android.view.View;
@@ -37,9 +36,9 @@ import java.util.regex.Pattern;
  */
 public class CommonUtil {
     /**
-     * 获取版本号
+     * 获取版本名称
      *
-     * @return 当前应用的版本号
+     * @return 当前应用的版本名称
      */
     public static String getVersion(Context context) {
         try {
@@ -52,6 +51,24 @@ public class CommonUtil {
             return "";
         }
     }
+
+    /**
+     * 获取版本号
+     *
+     * @return 当前应用的版本号
+     */
+    public static int getVersionCode(Context context) {
+        try {
+            PackageManager manager = context.getPackageManager();
+            PackageInfo info = manager.getPackageInfo(context.getPackageName(), 0);
+            int version = info.versionCode;
+            return version;
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        return 0;
+    }
+
 
     /**
      * @param mobile 手机号
@@ -161,21 +178,7 @@ public class CommonUtil {
                 Object localObject = localClass.newInstance();
                 int i5 = Integer.parseInt(localClass.getField("status_bar_height").get(localObject).toString());
                 statusHeight = activity.getResources().getDimensionPixelSize(i5);
-            } catch (ClassNotFoundException e) {
-                e.printStackTrace();
-            } catch (IllegalAccessException e) {
-                e.printStackTrace();
-            } catch (Fragment.InstantiationException e) {
-                e.printStackTrace();
-            } catch (NumberFormatException e) {
-                e.printStackTrace();
-            } catch (IllegalArgumentException e) {
-                e.printStackTrace();
-            } catch (SecurityException e) {
-                e.printStackTrace();
-            } catch (NoSuchFieldException e) {
-                e.printStackTrace();
-            } catch (java.lang.InstantiationException e) {
+            } catch (Exception e) {
                 e.printStackTrace();
             }
         }
@@ -329,6 +332,32 @@ public class CommonUtil {
     }
 
     /**
+     * 获取字符串的MD5编码.
+     */
+    public static String getStringByMD5(String string) {
+        String md5String = null;
+        try {
+            MessageDigest messageDigest = MessageDigest.getInstance("MD5");
+            messageDigest.update(string.getBytes());
+            byte messageDigestByteArray[] = messageDigest.digest();
+            if (messageDigestByteArray == null || messageDigestByteArray.length == 0) {
+                return md5String;
+            }
+            StringBuilder hexadecimalStringBuffer = new StringBuilder();
+            int length = messageDigestByteArray.length;
+            for (int i = 0; i < length; i++) {
+                hexadecimalStringBuffer.append(Integer.toHexString(0xFF & messageDigestByteArray[i]));
+            }
+            md5String = hexadecimalStringBuffer.toString();
+            return md5String;
+        } catch (NoSuchAlgorithmException e) {
+            e.printStackTrace();
+        }
+        return md5String;
+    }
+
+
+    /**
      * MIUI6以上设置状态栏字体为灰色
      *
      * @param darkMode
@@ -386,7 +415,7 @@ public class CommonUtil {
      * @return
      */
     public static Display getScreenDisplay(Context context) {
-        WindowManager wm = null;
+        WindowManager wm;
         try {
             wm = (WindowManager) context.getSystemService(Context.WINDOW_SERVICE);
             return wm.getDefaultDisplay();
@@ -426,9 +455,8 @@ public class CommonUtil {
      * @param path
      * @return
      */
-    public Bitmap getFrameAtTime(String path){
+    public static Bitmap getFrameAtTime(String path){
         MediaMetadataRetriever retriever = new MediaMetadataRetriever();
-        //获取网络视频
         retriever.setDataSource(path, new HashMap<String, String>());
         return retriever.getFrameAtTime();
     }
@@ -444,10 +472,8 @@ public class CommonUtil {
      *            其中，MINI_KIND: 512 x 384，MICRO_KIND: 96 x 96
      * @return 指定大小的视频缩略图 格式不正确，返回null
      */
-    public static Bitmap getVideoThumbnail(String videoPath, int width, int height,
-                                           int kind) {
-        Bitmap bitmap = null;
-        // 获取视频的缩略图
+    public static Bitmap getVideoThumbnail(String videoPath, int width, int height,int kind) {
+        Bitmap bitmap;
         bitmap = ThumbnailUtils.createVideoThumbnail(videoPath, kind);
         bitmap = ThumbnailUtils.extractThumbnail(bitmap, width, height,
                 ThumbnailUtils.OPTIONS_RECYCLE_INPUT);

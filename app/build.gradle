@@ -73,6 +73,7 @@ dependencies {
     compile 'com.google.code.gson:gson:2.5'
     compile 'in.srain.cube:ultra-ptr:1.0.11'
     compile 'in.srain.cube:clog:1.0.2'
+    compile 'com.jakewharton:disklrucache:2.0.2'
     compile project(':sortlistviewlibrary')
     compile project(':adapterlibrary')
     compile project(':photolibrary')
