@@ -105,6 +105,7 @@ public class TitleBar extends LinearLayout {
                 }
             });
         }
+        a.recycle();
     }
 
     /**
