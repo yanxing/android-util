@@ -153,5 +153,9 @@
             android:id="@+id/surfaceView"
             style="@style/style_btn"
             android:text="SurfaceView+MediaPlayer"/>
+        <Button
+            android:id="@+id/progressBar"
+            style="@style/style_btn"
+            android:text="progressBar"/>
     </LinearLayout>
 </ScrollView>

@@ -14,5 +14,22 @@
         <attr name="matProg_barWidth" format="dimension" />
         <attr name="matProg_linearProgress" format="boolean" />
     </declare-styleable>
+    
+    <declare-styleable name="ProgressBar">
+        <!--外圆环颜色-->
+        <attr name="roundColor" format="color"/>
+        <!--外圆环宽度-->
+        <attr name="roundWidth" format="dimension"/>
+        <!--百分比颜色-->
+        <attr name="textColor" format="color"/>
+        <!--百分比字体大小-->
+        <attr name="textSize" format="dimension"/>
+        <!--百分比字体可见性-->
+        <attr name="textVisible" format="boolean"/>
+        <!--外圆环进度颜色-->
+        <attr name="progressColor" format="color"/>
+        <!--进度的风格,空心0，实心1-->
+        <attr name="style" format="integer"/>
+    </declare-styleable>
 
 </resources>
