@@ -65,4 +65,5 @@
     <string name="fragment_fragment">fragment嵌套fragment</string>
     <string name="play">播放</string>
     <string name="pause">暂停</string>
+    <string name="no_found_file">本地文件不存在</string>
 </resources>

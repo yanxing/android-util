@@ -13,6 +13,8 @@ import com.yanxing.base.BaseActivity;
 import com.yanxing.util.CommonUtil;
 import com.yanxing.util.FileUtil;
 
+import java.io.File;
+
 import butterknife.BindView;
 import butterknife.OnClick;
 
@@ -38,6 +40,10 @@ public class SurfaceViewMediaPlayerActivity extends BaseActivity
 
     @Override
     public void surfaceCreated(SurfaceHolder holder) {
+        File file=new File(URL);
+        if (!file.exists()){
+            showToast(getString(R.string.no_found_file));
+        }
         //必须在surface创建后才能初始化MediaPlayer,否则不会显示图像
         mMediaPlayer=new MediaPlayer();
         mMediaPlayer.setAudioStreamType(AudioManager.STREAM_MUSIC);
@@ -72,6 +78,7 @@ public class SurfaceViewMediaPlayerActivity extends BaseActivity
     protected void afterInstanceView() {
         mSurfaceHolder=mSurface.getHolder();
         mSurfaceHolder.addCallback(this);
+        getSwipeBackLayout().setEnableGesture(false);
     }
 
     @OnClick({R.id.play, R.id.pause})

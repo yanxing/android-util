@@ -86,15 +86,17 @@ public class ProgressBar extends View {
         //圆弧
         mPaint.setStrokeWidth(mRoundWidth);
         mPaint.setColor(mProgressColor);
-        RectF oval = new RectF(center - r, center - r, center + r, center + r);
+        RectF oval = new RectF();
         switch (mStyle) {
             case STROKE: {
                 mPaint.setStyle(Paint.Style.STROKE);
+                oval.set(center - r, center - r, center + r, center + r);
                 canvas.drawArc(oval, 0, 360 * mProgress / mMax, false, mPaint);
                 break;
             }
             case FILL: {
                 mPaint.setStyle(Paint.Style.FILL_AND_STROKE);
+                oval.set(center - r+16, center - r+16, center + r-16, center + r-16);
                 canvas.drawArc(oval, 0, 360 * mProgress / mMax, true, mPaint);
                 break;
             }

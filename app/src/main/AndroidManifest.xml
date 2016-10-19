@@ -140,7 +140,7 @@
             android:theme="@style/SwipeBack"/>
         <activity
             android:name=".SurfaceViewMediaPlayerActivity"
-            android:theme="@style/SwipeBack"/>
+            />
         <activity
             android:name=".ProgressBarActivity"
             android:theme="@style/SwipeBack"/>

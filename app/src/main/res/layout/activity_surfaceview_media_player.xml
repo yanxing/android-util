@@ -4,6 +4,7 @@
               android:layout_height="fill_parent"
               android:fitsSystemWindows="true"
               android:orientation="vertical"
+              android:background="@color/default_bg"
               android:weightSum="1">
 
     <FrameLayout
