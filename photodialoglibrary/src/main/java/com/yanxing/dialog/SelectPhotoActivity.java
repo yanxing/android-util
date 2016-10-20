@@ -1,6 +1,7 @@
 package com.yanxing.dialog;
 
 import android.content.Intent;
+import android.database.Cursor;
 import android.graphics.Bitmap;
 import android.net.Uri;
 import android.os.Bundle;
@@ -64,27 +65,12 @@ public class SelectPhotoActivity extends FragmentActivity implements View.OnClic
     }
 
     /**
-     * 从图库中选择图片并裁剪，与拍照并裁剪配置crop不同，不设置不保存图片
+     * 从图库中选择图片
      */
     private void selectPicture() {
-        Intent intent = new Intent(Intent.ACTION_GET_CONTENT);
-        intent.setType("image/*");
-        if (mPhotoParam.isCut()){
-            intent.putExtra("crop", "true");
-            intent.putExtra("aspectX", 1);
-            intent.putExtra("aspectY", 1);
-            intent.putExtra("outputX", mPhotoParam.getOutputX());
-            intent.putExtra("outputY", mPhotoParam.getOutputY());
-            intent.putExtra("scale", true);
-        }else {
-            intent.putExtra("crop", "false");
-        }
-        intent.putExtra("return-data", false);
-        intent.putExtra("noFaceDetection", true);
-        intent.putExtra("outputFormat", Bitmap.CompressFormat.JPEG.toString());
-        File file = new File(mPhotoParam.getPath(), mPhotoParam.getName());
-        intent.putExtra(MediaStore.EXTRA_OUTPUT, Uri.fromFile(file));
-        startActivityForResult(intent, FROM_PICTURE);
+        Intent i = new Intent(Intent.ACTION_PICK
+                , android.provider.MediaStore.Images.Media.EXTERNAL_CONTENT_URI);
+        startActivityForResult(i, FROM_PICTURE);
     }
 
     @Override
@@ -94,24 +80,34 @@ public class SelectPhotoActivity extends FragmentActivity implements View.OnClic
             File file = new File(mPhotoParam.getPath(), mPhotoParam.getName());
             //拍照返回
             if (requestCode == TAKE_PHOTO) {
-                sendBroadcast(new Intent(Intent.ACTION_MEDIA_SCANNER_SCAN_FILE,
-                        Uri.fromFile(file)));
-                cutPhoto(Uri.fromFile(file));
+                cutPhoto(Uri.fromFile(file), Uri.fromFile(file));
                 //裁剪返回
             } else if (requestCode == CUT_PHOTO) {
                 setResult(RESULT_OK);
                 finish();
-            } else if (requestCode == FROM_PICTURE) {
-                setResult(RESULT_OK);
-                finish();
+            } else if (requestCode == FROM_PICTURE) {//图库选择
+                Uri selectedImage = data.getData();
+                if (selectedImage == null) {
+                    return;
+                }
+                String[] filePathColumn = {MediaStore.Images.Media.DATA};
+                Cursor cursor = getContentResolver().query(selectedImage, filePathColumn, null, null, null);
+                cursor.moveToFirst();
+                int columnIndex = cursor.getColumnIndex(filePathColumn[0]);
+                String picturePath = cursor.getString(columnIndex);
+                cutPhoto(Uri.fromFile(new File(picturePath)), Uri.fromFile(file));
+                cursor.close();
             }
         }
     }
 
     /**
      * 裁剪图片
+     *
+     * @param uri    图片路径
+     * @param newUri 输出的路径
      */
-    public void cutPhoto(Uri uri) {
+    public void cutPhoto(Uri uri, Uri newUri) {
         Intent intent = new Intent("com.android.camera.action.CROP");
         intent.setDataAndType(uri, "image/*");
         //进行裁剪
@@ -123,7 +119,7 @@ public class SelectPhotoActivity extends FragmentActivity implements View.OnClic
             intent.putExtra("outputY", mPhotoParam.getOutputY());
             intent.putExtra("scale", true);
         }
-        intent.putExtra(MediaStore.EXTRA_OUTPUT, uri);
+        intent.putExtra(MediaStore.EXTRA_OUTPUT, newUri);
         intent.putExtra("return-data", false);
         intent.putExtra("outputFormat", Bitmap.CompressFormat.JPEG.toString());
         intent.putExtra("noFaceDetection", true);
