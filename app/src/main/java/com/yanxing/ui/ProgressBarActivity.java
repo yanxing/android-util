@@ -1,5 +1,6 @@
 package com.yanxing.ui;
 
+
 import com.yanxing.base.BaseActivity;
 import com.yanxing.view.ProgressBar;
 
@@ -10,7 +11,7 @@ import butterknife.BindView;
  * Created by lishuangxiang on 2016/10/18.
  */
 
-public class ProgressBarActivity extends BaseActivity {
+public class ProgressBarActivity extends BaseActivity{
 
     @BindView(R.id.progressBar1)
     ProgressBar mProgressBar1;

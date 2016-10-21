@@ -139,10 +139,15 @@
             android:name=".fragmentnest.NestExampleActivity"
             android:theme="@style/SwipeBack"/>
         <activity
-            android:name=".SurfaceViewMediaPlayerActivity"
-            />
+            android:name=".SurfaceViewMediaPlayerActivity"/>
         <activity
             android:name=".ProgressBarActivity"
+            android:theme="@style/SwipeBack"/>
+        <activity
+            android:name=".CircleProgressBarActivity"
+            android:theme="@style/SwipeBack"/>
+        <activity
+            android:name=".HorizontalScrollViewListViewActivity"
             android:theme="@style/SwipeBack"/>
     </application>
 

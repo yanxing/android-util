@@ -157,5 +157,9 @@
             android:id="@+id/progressBar"
             style="@style/style_btn"
             android:text="progressBar"/>
+        <Button
+            android:id="@+id/circleProgressBar"
+            style="@style/style_btn"
+            android:text="circleProgressBar"/>
     </LinearLayout>
 </ScrollView>
