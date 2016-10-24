@@ -19,6 +19,7 @@ import com.yanxing.ui.animation.AnimationMainActivity;
 import com.yanxing.ui.fragmentnest.NestExampleActivity;
 import com.yanxing.util.ConstantValue;
 import com.yanxing.util.FileUtil;
+import com.yanxing.view.CircleDotProgressBar;
 import com.yanxing.view.ConfirmDialog;
 import com.yanxing.view.ListDialog;
 

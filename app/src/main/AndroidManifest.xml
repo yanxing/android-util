@@ -146,9 +146,6 @@
         <activity
             android:name=".CircleProgressBarActivity"
             android:theme="@style/SwipeBack"/>
-        <activity
-            android:name=".HorizontalScrollViewListViewActivity"
-            android:theme="@style/SwipeBack"/>
     </application>
 
 </manifest>
