@@ -1,6 +1,7 @@
 package com.yanxing.view;
 
 import android.content.Context;
+import android.graphics.Bitmap;
 import android.graphics.Canvas;
 import android.graphics.Color;
 import android.graphics.Paint;
@@ -25,6 +26,8 @@ public class CircleDotProgressBar extends View {
     private int mProgressMax;
     //当前进度百分比
     private int mPercent;
+    private Bitmap mBitmap;
+    private Canvas mCanvas;
 
     public CircleDotProgressBar(Context context, AttributeSet attrs) {
         this(context, attrs, 0);
@@ -40,11 +43,19 @@ public class CircleDotProgressBar extends View {
         mPaint.setAntiAlias(true);
         mSin_1 = (float) Math.sin(Math.toRadians(1));
     }
+    @Override
+    protected void onSizeChanged(int w, int h, int oldw, int oldh) {
+        super.onSizeChanged(w, h, oldw, oldh);
+
+        mBitmap = Bitmap.createBitmap(w, h, Bitmap.Config.ARGB_8888);
+        mCanvas = new Canvas(mBitmap);
+    }
+
 
     @Override
     protected void onDraw(Canvas canvas) {
         super.onDraw(canvas);
-        float outerRadius = (getWidth() > getHeight() ? getHeight() : getWidth()) / 2.f;
+        float outerRadius = (getWidth() > getHeight() ? getHeight() : getWidth()) / 2f;
         mCenterX = getWidth() / 2;
         mCenterY = getHeight() / 2;
 
@@ -54,16 +65,17 @@ public class CircleDotProgressBar extends View {
         int count = 0;
         //当前进度
         while (count < mPercent) {
-            canvas.drawCircle(mCenterX, mCenterY - outerRadius + dotRadius, dotRadius, mPaint);
-            canvas.rotate(3.6f, mCenterX, mCenterY);
+            mCanvas.drawCircle(mCenterX, mCenterY - outerRadius + dotRadius, dotRadius, mPaint);
+            mCanvas.rotate(3.6f, mCenterX, mCenterY);
         }
         //未完成进度
         mPaint.setColor(Color.GRAY);
         count--;
         while (count++ < 100) {
-            canvas.drawCircle(mCenterX, mCenterY - outerRadius + dotRadius, dotRadius, mPaint);
-            canvas.rotate(3.6f, mCenterX, mCenterY);
+            mCanvas.drawCircle(mCenterX, mCenterY - outerRadius + dotRadius, dotRadius, mPaint);
+            mCanvas.rotate(3.6f, mCenterX, mCenterY);
         }
+        canvas.drawBitmap(mBitmap, 0, 0, null);
     }
 
     public int getProgress() {
@@ -71,7 +83,7 @@ public class CircleDotProgressBar extends View {
     }
 
     public synchronized void setProgress(int progress) {
-        if (progress>mProgressMax){
+        if (progress<=mProgressMax){
             mProgress = progress;
             mPercent = progress * 100 / mProgressMax;
             postInvalidate();

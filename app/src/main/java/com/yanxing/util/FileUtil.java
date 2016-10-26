@@ -30,7 +30,7 @@ public class FileUtil {
     }
 
     /**
-     * 检查SD是否存在，存在返回true
+     * 检查外存设备是否存在，存在返回true
      *
      * @return
      */

@@ -19,7 +19,6 @@ import com.yanxing.ui.animation.AnimationMainActivity;
 import com.yanxing.ui.fragmentnest.NestExampleActivity;
 import com.yanxing.util.ConstantValue;
 import com.yanxing.util.FileUtil;
-import com.yanxing.view.CircleDotProgressBar;
 import com.yanxing.view.ConfirmDialog;
 import com.yanxing.view.ListDialog;
 
@@ -223,11 +222,13 @@ public class MainActivity extends BaseActivity implements AMapLocListener {
                 startActivity(intent);
                 break;
             case R.id.circleProgressBar:
-                intent.setClass(getApplicationContext(),CircleProgressBarActivity.class);
+                intent.setClass(getApplicationContext(),HorizontalScrollviewActivity.class);
                 startActivity(intent);
                 break;
+
         }
     }
+
 
     /**
      * 显示确认对话框

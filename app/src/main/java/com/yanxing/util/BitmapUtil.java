@@ -69,7 +69,7 @@ public class BitmapUtil {
     }
 
     /**
-     * 根据路径获得突破并压缩返回bitmap
+     * 根据图片路径返回bitmap
      *
      * @param filePath
      * @return

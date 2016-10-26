@@ -66,4 +66,5 @@
     <string name="play">播放</string>
     <string name="pause">暂停</string>
     <string name="no_found_file">本地文件不存在</string>
+    <string name="take_photo_no_cut">拍照压缩不经过裁剪</string>
 </resources>
