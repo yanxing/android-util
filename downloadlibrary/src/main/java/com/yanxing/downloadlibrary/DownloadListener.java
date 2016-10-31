@@ -23,4 +23,11 @@ public interface DownloadListener {
      * 下载完成
      */
     void onFinish();
+
+    /**
+     * 下载错误
+     *
+     * @param state 返回码
+     */
+    void onError(int state);
 }

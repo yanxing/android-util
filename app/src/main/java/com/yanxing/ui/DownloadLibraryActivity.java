@@ -1,6 +1,5 @@
 package com.yanxing.ui;
 
-import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.ProgressBar;
@@ -8,10 +7,11 @@ import android.widget.TextView;
 
 import com.yanxing.base.BaseActivity;
 import com.yanxing.downloadlibrary.DownloadConfiguration;
-import com.yanxing.downloadlibrary.DownloadListener;
 import com.yanxing.downloadlibrary.DownloadUtils;
+import com.yanxing.downloadlibrary.SimpleDownloadListener;
 import com.yanxing.util.ConstantValue;
 import com.yanxing.util.FileUtil;
+import com.yanxing.util.LogUtil;
 
 import java.io.File;
 
@@ -47,8 +47,8 @@ public class DownloadLibraryActivity extends BaseActivity {
 
     @Override
     protected void afterInstanceView() {
-        File file=new File(FileUtil.getStoragePath()+ ConstantValue.CACHE_IMAGE);
-        DownloadConfiguration downloadConfiguration=new DownloadConfiguration.Builder()
+        File file = new File(FileUtil.getStoragePath() + ConstantValue.CACHE_IMAGE);
+        DownloadConfiguration downloadConfiguration = new DownloadConfiguration.Builder()
                 .savePath(file)
                 .builder();
         DownloadUtils.getInstance().init(downloadConfiguration);
@@ -58,15 +58,15 @@ public class DownloadLibraryActivity extends BaseActivity {
     public void onClick(View view) {
         switch (view.getId()) {
             case R.id.start:
-                if (isStopDownload){
+                if (isStopDownload) {
                     DownloadUtils.getInstance().resumeDownload();
-                }else {
+                } else {
                     download();
                 }
                 break;
             case R.id.stop:
                 DownloadUtils.getInstance().stopDownload();
-                isStopDownload=true;
+                isStopDownload = true;
                 break;
         }
     }
@@ -74,24 +74,34 @@ public class DownloadLibraryActivity extends BaseActivity {
     /**
      * 下载
      */
-    public void download(){
-        DownloadUtils.getInstance().startDownload(this, mUrl.getText().toString(), new DownloadListener() {
+    public void download() {
+        DownloadUtils.getInstance().startDownload(this, mUrl.getText().toString(), new SimpleDownloadListener() {
             @Override
             public void onStart() {
-                Log.d("DownloadUtils","下载开始...");
+                LogUtil.d("DownloadUtils", "下载开始...");
             }
 
             @Override
             public void onProgress(int progress, int totalSize) {
                 mProgressBar.setMax(totalSize);
                 mProgressBar.setProgress(progress);
-                Log.d("DownloadUtils",progress+"  "+totalSize);
-                mProgress.setText(Math.floor(progress*1.0/totalSize)*100+"%");
+                LogUtil.d("DownloadUtils", progress + "  " + totalSize);
+                mProgress.setText((int) ((progress * 1.0 / totalSize) * 100) + "%");
+            }
+
+            @Override
+            public void onError(int state) {
+                super.onError(state);
+                if (state == 404) {
+                    showToast("文件不存在");
+                } else {
+                    showToast("错误代码" + state);
+                }
             }
 
             @Override
             public void onFinish() {
-                Log.d("DownloadUtils","下载完成...");
+                LogUtil.d("DownloadUtils", "下载完成...");
             }
         });
     }

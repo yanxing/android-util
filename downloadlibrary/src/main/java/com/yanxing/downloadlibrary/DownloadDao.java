@@ -63,14 +63,14 @@ public class DownloadDao {
     }
 
     /**
-     * url和threadId都相同认为同一条记录
+     * url相同认为同一条下载任务
      *
      * @param downloadMessage
      * @return
      */
     public boolean isExist(DownloadMessage downloadMessage) {
-        mCursor = db.rawQuery("select * from file_download where url=? and threadId=?"
-                , new String[]{downloadMessage.getUrl(), String.valueOf(downloadMessage.getThreadId())});
+        mCursor = db.rawQuery("select * from file_download where url=?"
+                , new String[]{downloadMessage.getUrl()});
         return mCursor.moveToNext();
     }
 

@@ -29,9 +29,9 @@ public class TextImageActivity extends BaseActivity {
     protected void afterInstanceView() {
 //      //前面,如果保留图片大小，用new ImageSpan（this，bitmap）
         ImageSpan start = new ImageSpan(BitmapFactory.decodeResource(getResources(),R.mipmap.ic_launcher));
-        String str = " TextView前后添加图片TextView前后添加图片TextView前后添加图片TextView前后" +
+        String str = "TextView前后添加图片TextView前后添加图片TextView前后添加图片TextView前后" +
                 "添加图片TextView前后添加图片TextView前后添加图片TextView前后添加图片TextView前后添加图片" +
-                "TextView前后添加图片TextView前后添加图片TextView前后添加图片TextView前后添加图片 ";
+                "TextView前后添加图片TextView前后添加图片TextView前后添加图片TextView前后添加图片";
         SpannableString ss = new SpannableString(str);
         ss.setSpan(start,0, 1, Spannable.SPAN_INCLUSIVE_INCLUSIVE);
         mText.setText(ss);
