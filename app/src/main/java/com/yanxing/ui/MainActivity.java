@@ -222,7 +222,7 @@ public class MainActivity extends BaseActivity implements AMapLocListener {
                 startActivity(intent);
                 break;
             case R.id.circleProgressBar:
-                intent.setClass(getApplicationContext(),HorizontalScrollviewActivity.class);
+                intent.setClass(getApplicationContext(),CircleProgressBarActivity.class);
                 startActivity(intent);
                 break;
 
