@@ -114,7 +114,11 @@ public class DownloadDao {
      * @param url
      */
     public void delete(String url) {
-        db.delete("file_download", "url=?", new String[]{url});
+        DownloadMessage downloadMessage=new DownloadMessage();
+        downloadMessage.setUrl(url);
+        if (isExist(downloadMessage)){
+            db.delete("file_download", "url=?", new String[]{url});
+        }
     }
 
 

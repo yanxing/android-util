@@ -10,9 +10,15 @@ final public class DownloadConfiguration {
 
     //下载保存到的路径
     private File mSavePath;
+    private boolean mLog;
 
     public DownloadConfiguration(Builder builder) {
         this.mSavePath = builder.mSavePath;
+        this.mLog=builder.mLog;
+    }
+
+    public boolean isLog() {
+        return mLog;
     }
 
     /**
@@ -27,6 +33,10 @@ final public class DownloadConfiguration {
     public static class Builder {
 
         private File mSavePath;
+        /**
+         * true打印日志
+         */
+        private boolean mLog;
 
         public DownloadConfiguration builder() {
             return new DownloadConfiguration(this);
@@ -46,6 +56,11 @@ final public class DownloadConfiguration {
             if (!saveDir.exists()) {
                 saveDir.mkdirs();
             }
+            return this;
+        }
+
+        public Builder setLog(boolean print){
+            this.mLog=print;
             return this;
         }
     }

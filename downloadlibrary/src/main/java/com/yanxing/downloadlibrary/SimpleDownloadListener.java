@@ -22,7 +22,7 @@ public class SimpleDownloadListener implements DownloadListener {
     }
 
     @Override
-    public void onError(int state) {
+    public void onError(int state,String message) {
 
     }
 }

@@ -3,7 +3,6 @@ package com.yanxing.downloadlibrary;
 import android.content.Context;
 import android.os.Handler;
 import android.os.Looper;
-import android.util.Log;
 
 import com.yanxing.downloadlibrary.model.DownloadMessage;
 
@@ -29,7 +28,8 @@ public class DownloadUtils {
     private static DownloadUtils mOurInstance = new DownloadUtils();
     private DownloadListener mDownloadListener;
     //CPU核心数
-    private int CORE_NUM = Runtime.getRuntime().availableProcessors();
+//    private int CORE_NUM = Runtime.getRuntime().availableProcessors();
+    private int CORE_NUM = 6;
     private ExecutorService mExecutorService = Executors.newFixedThreadPool(CORE_NUM);
     private DownloadConfiguration mDownloadConfiguration;
     // 记录各线程下载长度
@@ -67,6 +67,7 @@ public class DownloadUtils {
             throw new IllegalArgumentException("downloadConfiguration argument must be not null");
         }
         this.mDownloadConfiguration = downloadConfiguration;
+        LogUtil.setmAllow(mDownloadConfiguration.isLog());
     }
 
     /**
@@ -107,17 +108,23 @@ public class DownloadUtils {
             conn.setRequestProperty("Charset", "UTF-8");
             int startPosition = mDownloadMessageList.get(index - 1).getStartDownload();
             int endPosition = mDownloadMessageList.get(index - 1).getEndDownload();
-            conn.setRequestProperty("Range", "bytes=" + startPosition + "-" + endPosition);
+            if (index==4){
+                conn.setRequestProperty("Range", "bytes=" + startPosition + "-");
+            }else {
+                conn.setRequestProperty("Range", "bytes=" + startPosition + "-" + endPosition);
+            }
             conn.connect();
             InputStream inStream = conn.getInputStream();
-            byte[] buffer = new byte[1024];
+            byte[] buffer = new byte[8898715];
             int offset;
             if (conn.getResponseCode() == 200 || conn.getResponseCode() == 206) {
-                Log.d("DownloadUtils", "第" + index + "此线程下载的文件大小" + (endPosition - startPosition + 1) / 1024.0 / 1024 + "兆");
+                LogUtil.d("DownloadUtils", Thread.currentThread().getName() + "线程需要下载的文件大小" + (endPosition - startPosition + 1)
+                +"   开始位置"+startPosition+"  结束位置"+endPosition);
                 File file = new File(getSavePath() + getFileName(conn, urlPath));
                 RandomAccessFile randomAccessFile = new RandomAccessFile(file, "rwd");
                 randomAccessFile.seek(startPosition);
-                while (!isStop() && (offset = inStream.read(buffer, 0, 1024)) != -1 && mFileSize > mDownloadSize) {
+                while (!isStop() && (offset = inStream.read(buffer)) != -1 && mFileSize >=mDownloadSize) {
+//                    LogUtil.d("DownloadUtils","线程"+Thread.currentThread().getName()+"offset="+offset);
                     randomAccessFile.write(buffer, 0, offset);
                     mData.put(index, mData.get(index) + offset);
                     updateData(index, mData.get(index), urlPath);
@@ -129,15 +136,22 @@ public class DownloadUtils {
                         }
                     });
                 }
-                Log.d("DownloadUtils", "文件大小mFileSize=" + mFileSize + "   已下载大小mDownloadSize=" + mDownloadSize);
-                mIsStop = true;
-                mDownloadDao.delete(urlPath);
-                mDownloadDao.close();
-                mDownloadListener.onFinish();
-                randomAccessFile.close();
-                inStream.close();
+                LogUtil.d("DownloadUtils","状态码"+conn.getResponseCode()+" inStream.read(buffer))="+inStream.read(buffer)+
+                        "   当前线程"+Thread.currentThread().getName());
+
+                LogUtil.d("DownloadUtils", "总文件大小mFileSize=" + mFileSize + "    "+Thread.currentThread().getName()+"线程已下载大小" + mData.get(index));
+                //所有线程已经下载完
+//                if (!mIsStop&&mDownloadSize>0&&mFileSize<=mDownloadSize){
+//                    mIsStop = true;
+//                    mDownloadDao.delete(urlPath);
+//                    mDownloadDao.close();
+//                    mDownloadListener.onFinish();
+//                    randomAccessFile.close();
+//                    inStream.close();
+//                }
             } else {
-                mDownloadListener.onError(conn.getResponseCode());
+                LogUtil.d("DownloadUtils",conn.getResponseCode()+"  "+conn.getResponseMessage());
+                mDownloadListener.onError(conn.getResponseCode(),conn.getResponseMessage());
             }
         } catch (Exception e) {
             e.printStackTrace();
@@ -235,10 +249,9 @@ public class DownloadUtils {
                             }
                             mDownloadDao.save(mDownloadMessageList);
                         } else {
-                            mDownloadListener.onError(conn.getResponseCode());
+                            mDownloadListener.onError(conn.getResponseCode(),conn.getResponseMessage());
                         }
                     }
-
                 } catch (Exception e) {
                     e.printStackTrace();
                 }

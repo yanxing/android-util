@@ -28,6 +28,7 @@ public interface DownloadListener {
      * 下载错误
      *
      * @param state 返回码
+     * @param message 错误信息
      */
-    void onError(int state);
+    void onError(int state,String message);
 }

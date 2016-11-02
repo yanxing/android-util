@@ -50,6 +50,7 @@ public class DownloadLibraryActivity extends BaseActivity {
         File file = new File(FileUtil.getStoragePath() + ConstantValue.CACHE_IMAGE);
         DownloadConfiguration downloadConfiguration = new DownloadConfiguration.Builder()
                 .savePath(file)
+                .setLog(true)
                 .builder();
         DownloadUtils.getInstance().init(downloadConfiguration);
     }
@@ -85,13 +86,12 @@ public class DownloadLibraryActivity extends BaseActivity {
             public void onProgress(int progress, int totalSize) {
                 mProgressBar.setMax(totalSize);
                 mProgressBar.setProgress(progress);
-                LogUtil.d("DownloadUtils", progress + "  " + totalSize);
                 mProgress.setText((int) ((progress * 1.0 / totalSize) * 100) + "%");
             }
 
             @Override
-            public void onError(int state) {
-                super.onError(state);
+            public void onError(int state,String message) {
+                super.onError(state,message);
                 if (state == 404) {
                     showToast("文件不存在");
                 } else {
