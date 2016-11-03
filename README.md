@@ -183,3 +183,32 @@ bundle.putParcelable("photoParam",photoParam);
 intent.putExtras(bundle);
 startActivityForResult(intent, QUESTION_IMAGE_CODE);
 ```
+##downloadlibrary
+多线程下载，支持断点续传。
+```Java
+DownloadUtils.getInstance().startDownload(getApplicationContext(),url
+        , new SimpleDownloadListener() {
+    @Override
+    public void onStart() {
+    }
+
+    @Override
+    public void onProgress(int progress, int totalSize) {
+    }
+
+    @Override
+    public void onError(int state, String message) {
+    }
+
+    @Override
+    public void onFinish() {
+    }
+});
+```
+其他方法:
+```Java
+stopDownload();//停止下载
+resumeDownload();//恢复下载
+delete(Context context, String url);//删除下载记录
+getDownloadProgressByUrl(Context context, String url);//获取已下载的进度，用作刚进入界面显示用
+```
