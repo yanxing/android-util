@@ -178,7 +178,7 @@ public class DownloadUtils {
      * @param url
      * @return -2没有记录，-1下载的文件已删除， 0-100
      */
-    public int getUrlDownloadProgress(Context context, String url) {
+    public int getDownloadProgressByUrl(Context context, String url) {
         int progress = -2;
         DownloadDao downloadDao = new DownloadDao(context);
         List<DownloadMessage> downloadMessageList = downloadDao.getDownloadMessage(url);

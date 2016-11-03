@@ -55,7 +55,7 @@ public class DownloadLibraryActivity extends BaseActivity {
                 .setLog(true)
                 .builder();
         DownloadUtils.getInstance().init(downloadConfiguration);
-        int progress = DownloadUtils.getInstance().getUrlDownloadProgress(getApplicationContext(), mUrl.getText().toString());
+        int progress = DownloadUtils.getInstance().getDownloadProgressByUrl(getApplicationContext(), mUrl.getText().toString());
         if (progress == -1) {
             showToast("文件已被删除，点击下载将重新下载");
         } else if (progress >= 0) {
