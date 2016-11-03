@@ -24,11 +24,12 @@ public class DBOpenHelper extends SQLiteOpenHelper {
     @Override
     public void onCreate(SQLiteDatabase sqLiteDatabase) {
         //threadId线程索引，url文件下载地址，downloadLength已经下载的长度，
-        //[startDownload,endDownload]下载的开始位置和结束位置,
+        //[startDownload,endDownload]下载的开始位置和结束位置,流从0开始
+        //storagePath 本地存储的路径
         //threadId，url联合主键
         String sql = "create table if not exists file_download" +
                 "(threadId integer,url varchar(100),downloadLength integer," +
-                "startDownload integer,endDownload integer,PRIMARY KEY(threadId,url))";
+                "startDownload integer,endDownload integer,storagePath varchar(100),PRIMARY KEY(threadId,url))";
         sqLiteDatabase.execSQL(sql);
     }
 

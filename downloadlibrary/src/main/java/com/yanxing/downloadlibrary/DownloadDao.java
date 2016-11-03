@@ -49,9 +49,10 @@ public class DownloadDao {
             for (DownloadMessage downloadMessage : messageList) {
                 db.execSQL(
                         "insert into file_download(threadId,url,downloadLength,startDownload," +
-                                "endDownload) values(?,?,?,?,?)",
-                        new Object[]{downloadMessage.getThreadId(), downloadMessage.getUrl(),
-                                downloadMessage.getDownloadLength(), downloadMessage.getStartDownload(), downloadMessage.getEndDownload()});
+                                "endDownload,storagePath) values(?,?,?,?,?,?)",
+                        new Object[]{downloadMessage.getThreadId(), downloadMessage.getUrl()
+                                , downloadMessage.getDownloadLength(), downloadMessage.getStartDownload()
+                                , downloadMessage.getEndDownload(),downloadMessage.getStoragePath()});
             }
             db.setTransactionSuccessful();// 事务执行成功的标志
         } catch (Exception e) {
@@ -65,12 +66,12 @@ public class DownloadDao {
     /**
      * url相同认为同一条下载任务
      *
-     * @param downloadMessage
+     * @param url
      * @return
      */
-    public boolean isExist(DownloadMessage downloadMessage) {
+    public boolean isExist(String url) {
         mCursor = db.rawQuery("select * from file_download where url=?"
-                , new String[]{downloadMessage.getUrl()});
+                , new String[]{url});
         return mCursor.moveToNext();
     }
 
@@ -90,6 +91,7 @@ public class DownloadDao {
             downloadMessage.setDownloadLength(mCursor.getInt(2));
             downloadMessage.setStartDownload(mCursor.getInt(3));
             downloadMessage.setEndDownload(mCursor.getInt(4));
+            downloadMessage.setStoragePath(mCursor.getString(5));
             list.add(downloadMessage);
         }
         return list;
@@ -114,9 +116,7 @@ public class DownloadDao {
      * @param url
      */
     public void delete(String url) {
-        DownloadMessage downloadMessage=new DownloadMessage();
-        downloadMessage.setUrl(url);
-        if (isExist(downloadMessage)){
+        if (isExist(url)){
             db.delete("file_download", "url=?", new String[]{url});
         }
     }

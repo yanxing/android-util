@@ -9,6 +9,7 @@ import com.yanxing.base.BaseActivity;
 import com.yanxing.downloadlibrary.DownloadConfiguration;
 import com.yanxing.downloadlibrary.DownloadUtils;
 import com.yanxing.downloadlibrary.SimpleDownloadListener;
+import com.yanxing.util.CommonUtil;
 import com.yanxing.util.ConstantValue;
 import com.yanxing.util.FileUtil;
 import com.yanxing.util.LogUtil;
@@ -47,12 +48,21 @@ public class DownloadLibraryActivity extends BaseActivity {
 
     @Override
     protected void afterInstanceView() {
+        CommonUtil.setStatusBarDarkMode(true, this);
         File file = new File(FileUtil.getStoragePath() + ConstantValue.CACHE_IMAGE);
         DownloadConfiguration downloadConfiguration = new DownloadConfiguration.Builder()
                 .savePath(file)
                 .setLog(true)
                 .builder();
         DownloadUtils.getInstance().init(downloadConfiguration);
+        int progress = DownloadUtils.getInstance().getUrlDownloadProgress(getApplicationContext(), mUrl.getText().toString());
+        if (progress == -1) {
+            showToast("文件已被删除，点击下载将重新下载");
+        } else if (progress >= 0) {
+            mProgress.setText(progress + "%");
+            mProgressBar.setMax(100);
+            mProgressBar.setProgress(progress);
+        }
     }
 
     @OnClick({R.id.start, R.id.stop})
@@ -90,8 +100,8 @@ public class DownloadLibraryActivity extends BaseActivity {
             }
 
             @Override
-            public void onError(int state,String message) {
-                super.onError(state,message);
+            public void onError(int state, String message) {
+                super.onError(state, message);
                 if (state == 404) {
                     showToast("文件不存在");
                 } else {
