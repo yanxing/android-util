@@ -196,13 +196,13 @@ DownloadUtils.getInstance().startDownload(getApplicationContext(),url
     public void onProgress(int progress, int totalSize) {
     }
 
-     @Override
-     public void onError(int state, String message) {
-     }
+    @Override
+    public void onError(int state, String message) {
+    }
 
-     @Override
-     public void onFinish() {
-     }
+    @Override
+    public void onFinish() {
+    }
 });
 ```
 其他方法:
