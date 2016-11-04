@@ -105,7 +105,7 @@ public class DownloadLibraryActivity extends BaseActivity {
                 if (state == 404) {
                     showToast("文件不存在");
                 } else {
-                    showToast("错误代码" + state);
+                    showToast("错误代码" + state + "  " + message);
                 }
             }
 

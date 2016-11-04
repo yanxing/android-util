@@ -27,7 +27,7 @@ public interface DownloadListener {
     /**
      * 下载错误
      *
-     * @param state 返回码
+     * @param state 返回码 -1为自定义错误码，代表网络错误
      * @param message 错误信息
      */
     void onError(int state,String message);

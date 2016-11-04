@@ -83,15 +83,16 @@ public class DownloadUtils {
         this.mDownloadListener.onStart();
         this.mUrl = url;
         mDownloadDao = new DownloadDao(context);
-        computeDownloadTask(mUrl);
-        for (int i = 1; i <= CORE_NUM; i++) {
-            final int finalI = i;
-            mExecutorService.submit(new Runnable() {
-                @Override
-                public void run() {
-                    download(mUrl, finalI);
-                }
-            });
+        if (computeDownloadTask(mUrl)){
+            for (int i = 1; i <= CORE_NUM; i++) {
+                final int finalI = i;
+                mExecutorService.submit(new Runnable() {
+                    @Override
+                    public void run() {
+                        download(mUrl, finalI);
+                    }
+                });
+            }
         }
     }
 
@@ -149,7 +150,13 @@ public class DownloadUtils {
                 LogUtil.d("DownloadUtils", conn.getResponseCode() + "  " + conn.getResponseMessage());
                 mDownloadListener.onError(conn.getResponseCode(), conn.getResponseMessage());
             }
-        } catch (Exception e) {
+        } catch (final Exception e) {
+            new Handler(Looper.getMainLooper()).post(new Runnable() {
+                @Override
+                public void run() {
+                    mDownloadListener.onError(-1,e.getMessage());
+                }
+            });
             e.printStackTrace();
         }
     }
@@ -262,7 +269,8 @@ public class DownloadUtils {
      * 如果数据库已经存在，则不作修改，每条线程已经下载的长度保存到变量mData中
      * 考虑到本次的断点续下载传入的保存路径和上次的不一样，这时将重新下载并更新数据库
      */
-    private void computeDownloadTask(final String urlPath) {
+    private boolean computeDownloadTask(final String urlPath) {
+        final boolean[] isSuccess = {true};
         mThread = new Thread(new Runnable() {
             @Override
             public void run() {
@@ -321,7 +329,14 @@ public class DownloadUtils {
                             mDownloadListener.onError(conn.getResponseCode(), conn.getResponseMessage());
                         }
                     }
-                } catch (Exception e) {
+                } catch (final Exception e) {
+                    isSuccess[0] =false;
+                    new Handler(Looper.getMainLooper()).post(new Runnable() {
+                        @Override
+                        public void run() {
+                            mDownloadListener.onError(-1,e.getMessage());
+                        }
+                    });
                     e.printStackTrace();
                 }
             }
@@ -332,6 +347,7 @@ public class DownloadUtils {
         } catch (InterruptedException e) {
             e.printStackTrace();
         }
+        return isSuccess[0];
     }
 
     /**
