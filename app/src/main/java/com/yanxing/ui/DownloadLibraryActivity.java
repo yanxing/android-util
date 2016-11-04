@@ -86,7 +86,8 @@ public class DownloadLibraryActivity extends BaseActivity {
      * 下载
      */
     public void download() {
-        DownloadUtils.getInstance().startDownload(this, mUrl.getText().toString(), new SimpleDownloadListener() {
+        DownloadUtils.getInstance().startDownload(getApplicationContext(), mUrl.getText().toString()
+                , new SimpleDownloadListener() {
             @Override
             public void onStart() {
                 LogUtil.d("DownloadUtils", "下载开始...");
