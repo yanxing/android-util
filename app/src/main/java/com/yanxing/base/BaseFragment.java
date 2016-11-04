@@ -20,6 +20,7 @@ import butterknife.ButterKnife;
 public abstract class BaseFragment extends Fragment{
 
     public LoadingDialog loadingDialog;
+    protected String TAG = getClass().getName();
 
     @Nullable
     @Override
