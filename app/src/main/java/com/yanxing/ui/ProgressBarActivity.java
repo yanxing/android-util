@@ -37,15 +37,17 @@ public class ProgressBarActivity extends BaseActivity{
         new Thread(new Runnable() {
             @Override
             public void run() {
-                while (mProgress <= 100) {
-                    mProgress += 10;
-                    mProgressBar1.setProgress(mProgress);
-                    mProgressBar2.setProgress(mProgress);
-                    mProgressBar3.setProgress(mProgress);
-                    try {
-                        Thread.sleep(800);
-                    } catch (InterruptedException e) {
-                        e.printStackTrace();
+                if (!isFinishing()){
+                    while (mProgress <= 100) {
+                        mProgress += 10;
+                        mProgressBar1.setProgress(mProgress);
+                        mProgressBar2.setProgress(mProgress);
+                        mProgressBar3.setProgress(mProgress);
+                        try {
+                            Thread.sleep(800);
+                        } catch (InterruptedException e) {
+                            e.printStackTrace();
+                        }
                     }
                 }
             }

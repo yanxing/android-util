@@ -59,7 +59,7 @@ public class MainActivity extends BaseActivity implements AMapLocListener {
             , R.id.amap,R.id.threadTest,R.id.animation,R.id.dialog,R.id.ButterKnife
             , R.id.expandableListViewCheck,R.id.RxJava,R.id.inputEditButton,R.id.textImage
             , R.id.select_image_dialog,R.id.downloadlibrary,R.id.nestFragment,R.id.surfaceView
-            , R.id.progressBar,R.id.circleProgressBar})
+            , R.id.progressBar,R.id.circleProgressBar,R.id.textChangeImage})
     public void onClick(View v) {
         Intent intent = new Intent();
         Bundle bundle = new Bundle();
@@ -223,6 +223,10 @@ public class MainActivity extends BaseActivity implements AMapLocListener {
                 break;
             case R.id.circleProgressBar:
                 intent.setClass(getApplicationContext(),CircleProgressBarActivity.class);
+                startActivity(intent);
+                break;
+            case R.id.textChangeImage:
+                intent.setClass(getApplicationContext(),TextChangeImageActivity.class);
                 startActivity(intent);
                 break;
 
