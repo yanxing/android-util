@@ -125,6 +125,13 @@ public class TextChangeImageActivity extends BaseActivity {
         return (int) (Math.abs(fm.ascent));
     }
 
+    /**
+     * 保存bitmap到外存设备
+     *
+     * @param bitmap
+     * @param fileName
+     * @return
+     */
     public String save(Bitmap bitmap, String fileName) {
         File file = new File(FileUtil.getStoragePath(), fileName);
         String path = file.getAbsolutePath();
