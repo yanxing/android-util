@@ -1,6 +1,7 @@
 package com.yanxing.ui;
 
 import com.yanxing.base.BaseActivity;
+import com.yanxing.util.CommonUtil;
 import com.yanxing.view.CircleDotProgressBar;
 
 import butterknife.BindView;
@@ -24,6 +25,7 @@ public class CircleProgressBarActivity extends BaseActivity {
 
     @Override
     protected void afterInstanceView() {
+        CommonUtil.setStatusBarDarkMode(true,this);
         mCircleDotProgressBar.setProgressMax(100);
         new Thread(new Runnable() {
             @Override

@@ -46,7 +46,6 @@ public class CircleDotProgressBar extends View {
     @Override
     protected void onSizeChanged(int w, int h, int oldw, int oldh) {
         super.onSizeChanged(w, h, oldw, oldh);
-
         mBitmap = Bitmap.createBitmap(w, h, Bitmap.Config.ARGB_8888);
         mCanvas = new Canvas(mBitmap);
     }
@@ -59,12 +58,12 @@ public class CircleDotProgressBar extends View {
         mCenterX = getWidth() / 2;
         mCenterY = getHeight() / 2;
 
-        float dotRadius = mSin_1 * outerRadius / (1 + mSin_1);
+        float dotRadius = mSin_1 * outerRadius / (1 + mSin_1)+1;
         mPaint.setColor(Color.RED);
         mPaint.setStyle(Paint.Style.FILL);
         int count = 0;
         //当前进度
-        while (count < mPercent) {
+        while (count++< mPercent) {
             mCanvas.drawCircle(mCenterX, mCenterY - outerRadius + dotRadius, dotRadius, mPaint);
             mCanvas.rotate(3.6f, mCenterX, mCenterY);
         }

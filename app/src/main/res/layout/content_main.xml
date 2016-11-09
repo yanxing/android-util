@@ -160,7 +160,6 @@
         <Button
             android:id="@+id/circleProgressBar"
             style="@style/style_btn"
-            android:visibility="gone"
             android:text="circleProgressBar"/>
         <Button
             android:id="@+id/textChangeImage"
