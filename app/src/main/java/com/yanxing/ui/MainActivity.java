@@ -59,7 +59,7 @@ public class MainActivity extends BaseActivity implements AMapLocListener {
             , R.id.amap,R.id.threadTest,R.id.animation,R.id.dialog,R.id.ButterKnife
             , R.id.expandableListViewCheck,R.id.RxJava,R.id.inputEditButton,R.id.textImage
             , R.id.select_image_dialog,R.id.downloadlibrary,R.id.nestFragment,R.id.surfaceView
-            , R.id.progressBar,R.id.circleProgressBar,R.id.textChangeImage})
+            , R.id.progressBar,R.id.circleProgressBar,R.id.textChangeImage,R.id.extendRecyclerView})
     public void onClick(View v) {
         Intent intent = new Intent();
         Bundle bundle = new Bundle();
@@ -148,6 +148,10 @@ public class MainActivity extends BaseActivity implements AMapLocListener {
             //RecyclerViewAdapter test
             case R.id.recyclerView:
                 intent.setClass(getApplicationContext(), RecyclerViewExampleActivity.class);
+                startActivity(intent);
+                break;
+            case R.id.extendRecyclerView:
+                intent.setClass(getApplicationContext(), ExtendRecyclerViewActivity.class);
                 startActivity(intent);
                 break;
             //城市列表

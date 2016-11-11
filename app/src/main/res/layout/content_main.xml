@@ -84,6 +84,10 @@
             android:id="@+id/recyclerView"
             style="@style/style_btn"
             android:text="recyclerView"/>
+        <Button
+            android:id="@+id/extendRecyclerView"
+            style="@style/style_btn"
+            android:text="extendRecyclerView"/>
 
         <Button
             android:id="@+id/sortListView"

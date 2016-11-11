@@ -40,8 +40,7 @@ public class UltraPtrExampleActivity extends BaseActivity {
     @Override
     protected void afterInstanceView() {
         CommonUtil.setStatusBarDarkMode(true,this);
-        mPtrClassicFrameLayout.setLastUpdateTimeRelateObject(this);
-        mPtrClassicFrameLayout.setPtrHandler(new PtrHandler() {
+        mPtrClassicFrameLayout.setPtrHandler(new PtrDefaultHandler() {
             @Override
             public void onRefreshBegin(PtrFrameLayout frame) {
                 mPtrClassicFrameLayout.postDelayed(new Runnable() {
@@ -50,23 +49,10 @@ public class UltraPtrExampleActivity extends BaseActivity {
                         load();
                         mPtrClassicFrameLayout.refreshComplete();
                     }
-                }, 500);
-            }
-
-            @Override
-            public boolean checkCanDoRefresh(PtrFrameLayout frame, View content, View header) {
-                return PtrDefaultHandler.checkContentCanBePulledDown(frame, content, header);
+                }, 1000);
             }
         });
-        // the following are default settings
-        mPtrClassicFrameLayout.setResistance(1.7f);
-        mPtrClassicFrameLayout.setRatioOfHeaderHeightToRefresh(1.2f);
-        mPtrClassicFrameLayout.setDurationToClose(200);
-        mPtrClassicFrameLayout.setDurationToCloseHeader(1000);
-        // default is false
-        mPtrClassicFrameLayout.setPullToRefresh(false);
-        // default is true
-        mPtrClassicFrameLayout.setKeepHeaderWhenRefresh(true);
+        mPtrClassicFrameLayout.setPullToRefresh(true);
     }
 
     //test
