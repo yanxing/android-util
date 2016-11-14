@@ -4,10 +4,29 @@
               android:layout_width="match_parent"
               android:layout_height="match_parent"
     android:fitsSystemWindows="true">
-    <TextView
+    <LinearLayout
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"/>
-    <com.yanxing.view.ExtendRecyclerView
+        android:layout_height="wrap_content"
+        android:gravity="center_horizontal">
+        <Button
+            android:id="@+id/canScroll"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="启用上下滑动"/>
+        <Button
+            android:id="@+id/noScroll"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="禁止上下滑动"/>
+        <Button
+            android:id="@+id/scrollPosition"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="跳到20"/>
+    </LinearLayout>
+    <View
+        style="@style/Line"/>
+    <android.support.v7.widget.RecyclerView
         android:id="@+id/recyclerView"
         android:layout_width="match_parent"
         android:layout_height="match_parent" />
