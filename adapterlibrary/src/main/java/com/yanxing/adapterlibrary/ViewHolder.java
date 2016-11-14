@@ -16,7 +16,7 @@ public class ViewHolder {
     private SparseArray<View> mViews;
     private View mConvertView;
 
-    private ViewHolder(ViewGroup parent, int layoutId,int position){
+    private ViewHolder(ViewGroup parent, int layoutId){
         this.mViews = new SparseArray<View>();
         mConvertView = LayoutInflater.from(parent.getContext()).inflate(layoutId, parent,
                 false);
@@ -28,12 +28,11 @@ public class ViewHolder {
      * @param convertView 布局view
      * @param parent
      * @param layoutID 布局文件ID
-     * @param position
      * @return
      */
-    public static ViewHolder getViewHolder(View convertView,ViewGroup parent,int layoutID,int position){
+    public static ViewHolder getViewHolder(View convertView,ViewGroup parent,int layoutID){
         if (convertView==null){
-            return new ViewHolder(parent,layoutID,position);
+            return new ViewHolder(parent,layoutID);
         }else {
             return (ViewHolder) convertView.getTag();
         }
