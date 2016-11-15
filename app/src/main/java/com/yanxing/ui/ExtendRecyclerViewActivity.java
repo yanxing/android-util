@@ -2,10 +2,13 @@ package com.yanxing.ui;
 
 import android.support.v7.widget.RecyclerView;
 import android.view.View;
+import android.widget.LinearLayout;
 import android.widget.TextView;
 
+import com.refresh.lib.RefreshLayout;
 import com.yanxing.adapterlibrary.RecyclerViewAdapter;
 import com.yanxing.base.BaseActivity;
+import com.yanxing.util.ScrollViewUtils;
 import com.yanxing.view.CustomLinearLayoutManager;
 
 import java.util.ArrayList;
@@ -23,6 +26,15 @@ public class ExtendRecyclerViewActivity extends BaseActivity {
     @BindView(R.id.recyclerView)
     RecyclerView mRecyclerView;
 
+    @BindView(R.id.top)
+    LinearLayout mTop;
+
+    @BindView(R.id.bottom)
+    LinearLayout mBottom;
+
+    @BindView(R.id.refresh)
+    RefreshLayout mRefresh;
+
     private RecyclerViewAdapter mRecyclerViewAdapter;
     private CustomLinearLayoutManager mLayoutManager;
     private boolean mNeedScroll;
@@ -36,7 +48,7 @@ public class ExtendRecyclerViewActivity extends BaseActivity {
 
     @Override
     protected void afterInstanceView() {
-        for (int i = 0; i < 50; i++) {
+        for (int i = 0; i < 80; i++) {
             mStrings.add(String.valueOf(i));
         }
         mLayoutManager = new CustomLinearLayoutManager(this);
@@ -60,7 +72,8 @@ public class ExtendRecyclerViewActivity extends BaseActivity {
             }
         };
         mRecyclerView.setAdapter(mRecyclerViewAdapter);
-        mRecyclerView.addOnScrollListener(new RecyclerViewListener());
+        ScrollViewUtils.initHideShowAnimation(this,mRecyclerView,mTop,mBottom,mRefresh);
+//        mRecyclerView.addOnScrollListener(new RecyclerViewListener());
     }
 
     @OnClick({R.id.canScroll, R.id.noScroll, R.id.scrollPosition})
