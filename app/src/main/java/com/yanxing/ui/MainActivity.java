@@ -47,7 +47,7 @@ public class MainActivity extends BaseActivity implements AMapLocListener {
     protected void afterInstanceView() {
         getSwipeBackLayout().setEnableGesture(false);
         EventBus.getDefault().register(this);
-        mAMapLoc=new AMapLoc(getApplicationContext());
+        mAMapLoc = new AMapLoc(getApplicationContext());
         mAMapLoc.setAMapLocListener(this);
         mAMapLoc.startLocation();
     }
@@ -55,11 +55,11 @@ public class MainActivity extends BaseActivity implements AMapLocListener {
     @OnClick(value = {R.id.adapter_button, R.id.list_dialog_button, R.id.confirm_dialog_button
             , R.id.loading_dialog_button, R.id.select_image, R.id.browse_image, R.id.map
             , R.id.fresco, R.id.eventbus, R.id.titleBar, R.id.tabLayoutPager, R.id.recyclerView
-            , R.id.sortListView,R.id.greenDao,R.id.selectCity,R.id.xRecyclerView,R.id.ultra_ptr
-            , R.id.amap,R.id.threadTest,R.id.animation,R.id.dialog,R.id.ButterKnife
-            , R.id.expandableListViewCheck,R.id.RxJava,R.id.inputEditButton,R.id.textImage
-            , R.id.select_image_dialog,R.id.downloadlibrary,R.id.nestFragment,R.id.surfaceView
-            , R.id.progressBar,R.id.circleProgressBar,R.id.textChangeImage,R.id.extendRecyclerView})
+            , R.id.sortListView, R.id.greenDao, R.id.selectCity, R.id.xRecyclerView, R.id.ultra_ptr
+            , R.id.amap, R.id.threadTest, R.id.animation, R.id.dialog, R.id.ButterKnife
+            , R.id.expandableListViewCheck, R.id.RxJava, R.id.inputEditButton, R.id.textImage
+            , R.id.select_image_dialog, R.id.downloadlibrary, R.id.nestFragment, R.id.surfaceView
+            , R.id.progressBar, R.id.circleProgressBar, R.id.textChangeImage, R.id.extendRecyclerView})
     public void onClick(View v) {
         Intent intent = new Intent();
         Bundle bundle = new Bundle();
@@ -96,14 +96,14 @@ public class MainActivity extends BaseActivity implements AMapLocListener {
                 long currentTimeDialog = System.currentTimeMillis();
                 intent.setClass(getApplicationContext(), SelectPhotoActivity.class);
                 mImageName = currentTimeDialog + ".png";
-                PhotoParam photoParam=new PhotoParam();
+                PhotoParam photoParam = new PhotoParam();
                 photoParam.setName(mImageName);
                 photoParam.setPath(FileUtil.getStoragePath() + ConstantValue.CACHE_IMAGE);
                 photoParam.setCut(true);
                 photoParam.setOutputX(480);
                 photoParam.setOutputY(480);
-                Bundle bundle1=new Bundle();
-                bundle1.putParcelable("photoParam",photoParam);
+                Bundle bundle1 = new Bundle();
+                bundle1.putParcelable("photoParam", photoParam);
                 intent.putExtras(bundle1);
                 startActivityForResult(intent, QUESTION_IMAGE_CODE);
                 break;
@@ -157,8 +157,8 @@ public class MainActivity extends BaseActivity implements AMapLocListener {
             //城市列表
             case R.id.sortListView:
                 intent.setClass(getApplicationContext(), CityListActivity.class);
-                intent.putExtra("city",getString(R.string.city_test));
-                startActivityForResult(intent,QUESTION_SORT_LISTVIEW_CODE);
+                intent.putExtra("city", getString(R.string.city_test));
+                startActivityForResult(intent, QUESTION_SORT_LISTVIEW_CODE);
                 break;
             case R.id.greenDao:
                 intent.setClass(getApplicationContext(), GreenDaoExampleActivity.class);
@@ -166,7 +166,7 @@ public class MainActivity extends BaseActivity implements AMapLocListener {
                 break;
             case R.id.selectCity:
                 intent.setClass(getApplicationContext(), SelectCityActivity.class);
-                intent.putExtra("currentCity",getString(R.string.city_test));
+                intent.putExtra("currentCity", getString(R.string.city_test));
                 startActivity(intent);
                 break;
             case R.id.ultra_ptr:
@@ -178,7 +178,7 @@ public class MainActivity extends BaseActivity implements AMapLocListener {
                 startActivity(intent);
                 break;
             case R.id.threadTest:
-                intent.setClass(getApplicationContext(),ThreadTestActivity2.class);
+                intent.setClass(getApplicationContext(), ThreadTestActivity2.class);
                 startActivity(intent);
                 break;
             case R.id.animation:
@@ -186,51 +186,51 @@ public class MainActivity extends BaseActivity implements AMapLocListener {
                 startActivity(intent);
                 break;
             case R.id.dialog:
-                intent.setClass(getApplicationContext(),DialogActivity.class);
+                intent.setClass(getApplicationContext(), DialogActivity.class);
                 startActivity(intent);
                 break;
             case R.id.ButterKnife:
-                intent.setClass(getApplicationContext(),ButterKnifeExampleActivity.class);
+                intent.setClass(getApplicationContext(), ButterKnifeExampleActivity.class);
                 startActivity(intent);
                 break;
             case R.id.expandableListViewCheck:
-                intent.setClass(getApplicationContext(),ExpandableListViewCheckActivity.class);
+                intent.setClass(getApplicationContext(), ExpandableListViewCheckActivity.class);
                 startActivity(intent);
                 break;
             case R.id.RxJava:
-                intent.setClass(getApplicationContext(),RxJavaExampleActivity.class);
+                intent.setClass(getApplicationContext(), RxJavaExampleActivity.class);
                 startActivity(intent);
                 break;
             case R.id.inputEditButton:
-                intent.setClass(getApplicationContext(),InputEditButtonActivity.class);
+                intent.setClass(getApplicationContext(), InputEditButtonActivity.class);
                 startActivity(intent);
                 break;
             case R.id.textImage:
-                intent.setClass(getApplicationContext(),TextImageActivity.class);
+                intent.setClass(getApplicationContext(), TextImageActivity.class);
                 startActivity(intent);
                 break;
             case R.id.downloadlibrary:
-                intent.setClass(getApplicationContext(),DownloadLibraryActivity.class);
+                intent.setClass(getApplicationContext(), DownloadLibraryActivity.class);
                 startActivity(intent);
                 break;
             case R.id.nestFragment:
-                intent.setClass(getApplicationContext(),NestExampleActivity.class);
+                intent.setClass(getApplicationContext(), NestExampleActivity.class);
                 startActivity(intent);
                 break;
             case R.id.surfaceView:
-                intent.setClass(getApplicationContext(),SurfaceViewMediaPlayerActivity.class);
+                intent.setClass(getApplicationContext(), SurfaceViewMediaPlayerActivity.class);
                 startActivity(intent);
                 break;
             case R.id.progressBar:
-                intent.setClass(getApplicationContext(),ProgressBarActivity.class);
+                intent.setClass(getApplicationContext(), ProgressBarActivity.class);
                 startActivity(intent);
                 break;
             case R.id.circleProgressBar:
-                intent.setClass(getApplicationContext(),CircleProgressBarActivity.class);
+                intent.setClass(getApplicationContext(), CircleProgressBarActivity.class);
                 startActivity(intent);
                 break;
             case R.id.textChangeImage:
-                intent.setClass(getApplicationContext(),TextChangeImageActivity.class);
+                intent.setClass(getApplicationContext(), TextChangeImageActivity.class);
                 startActivity(intent);
                 break;
 
@@ -241,10 +241,10 @@ public class MainActivity extends BaseActivity implements AMapLocListener {
     /**
      * 显示确认对话框
      */
-    public void showConfirmDialog(){
-        final ConfirmDialog confirmDialog=new ConfirmDialog(this,getString(R.string.exit));
+    public void showConfirmDialog() {
+        final ConfirmDialog confirmDialog = new ConfirmDialog(this, getString(R.string.exit));
         confirmDialog.setConfirmButton(v -> {
-            Toast.makeText(getApplicationContext(), R.string.click_confirm,Toast.LENGTH_LONG).show();
+            Toast.makeText(getApplicationContext(), R.string.click_confirm, Toast.LENGTH_LONG).show();
             confirmDialog.dismiss();
         });
     }
@@ -252,16 +252,16 @@ public class MainActivity extends BaseActivity implements AMapLocListener {
     /**
      * 显示Item对话框
      */
-    public void showItemDialog(){
-        final List<String> list=new ArrayList<String>();
-        for (int i=1;i<4;i++){
-            list.add("yanxing"+i);
+    public void showItemDialog() {
+        final List<String> list = new ArrayList<String>();
+        for (int i = 1; i < 4; i++) {
+            list.add("yanxing" + i);
         }
-        final ListDialog listDialog=new ListDialog(this,list);
+        final ListDialog listDialog = new ListDialog(this, list);
         listDialog.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
-                Toast.makeText(getApplicationContext(),getString(R.string.you_select)+list.get(position),Toast.LENGTH_LONG).show();
+                Toast.makeText(getApplicationContext(), getString(R.string.you_select) + list.get(position), Toast.LENGTH_LONG).show();
                 listDialog.dismiss();
             }
         });
@@ -284,11 +284,11 @@ public class MainActivity extends BaseActivity implements AMapLocListener {
     protected void onActivityResult(int requestCode, int resultCode, Intent data) {
         super.onActivityResult(requestCode, resultCode, data);
         if (resultCode == RESULT_OK) {
-            if (requestCode == QUESTION_IMAGE_CODE){
-                Intent intent=new Intent(getApplicationContext(),ShowImageActivity.class);
-                intent.putExtra("name",mImageName);
+            if (requestCode == QUESTION_IMAGE_CODE) {
+                Intent intent = new Intent(getApplicationContext(), ShowImageActivity.class);
+                intent.putExtra("name", mImageName);
                 startActivity(intent);
-            }else if (requestCode==QUESTION_SORT_LISTVIEW_CODE){
+            } else if (requestCode == QUESTION_SORT_LISTVIEW_CODE) {
                 showToast(data.getExtras().getString("city"));
             }
         }
@@ -300,8 +300,8 @@ public class MainActivity extends BaseActivity implements AMapLocListener {
 
     @Override
     public void onLocationChanged(AMapLocation aMapLocation) {
-        if (aMapLocation!=null){
-            mCity=getString(R.string.current_city_tip)+aMapLocation.getAddress();
+        if (aMapLocation != null) {
+            mCity = getString(R.string.current_city_tip) + aMapLocation.getAddress();
             mAMapLoc.stopLocation();
         }
     }
