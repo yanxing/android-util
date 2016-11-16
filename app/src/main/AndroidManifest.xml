@@ -153,6 +153,9 @@
         <activity
             android:name=".ExtendRecyclerViewActivity"
             android:theme="@style/SwipeBack"/>
+        <activity
+            android:name=".HideTitleBottomActivity"
+            android:theme="@style/SwipeBack"/>
     </application>
 
 </manifest>

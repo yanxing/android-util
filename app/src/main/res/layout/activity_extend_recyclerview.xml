@@ -1,12 +1,11 @@
 <?xml version="1.0" encoding="utf-8"?>
-<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
-                android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                android:fitsSystemWindows="true"
-                android:orientation="vertical">
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+              android:layout_width="match_parent"
+              android:layout_height="match_parent"
+              android:fitsSystemWindows="true"
+              android:orientation="vertical">
 
     <LinearLayout
-        android:id="@+id/top"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:gravity="center_horizontal">
@@ -29,42 +28,10 @@
             android:layout_height="wrap_content"
             android:text="跳到20"/>
     </LinearLayout>
+    <View style="@style/Line"/>
 
-    <com.refresh.lib.RefreshLayout
-        android:id="@+id/refresh"
+    <android.support.v7.widget.RecyclerView
+        android:id="@+id/recyclerView"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_below="@id/top">
-
-        <android.support.v7.widget.RecyclerView
-            android:id="@+id/recyclerView"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            />
-    </com.refresh.lib.RefreshLayout>
-
-    <LinearLayout
-        android:id="@+id/bottom"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_alignParentBottom="true">
-
-        <Button
-            android:id="@+id/canScroll1"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="启用上下滑动"/>
-
-        <Button
-            android:id="@+id/noScroll1"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="禁止上下滑动"/>
-
-        <Button
-            android:id="@+id/scrollPosition1"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="跳到20"/>
-    </LinearLayout>
-</RelativeLayout>
+        android:layout_height="match_parent"/>
+</LinearLayout>
