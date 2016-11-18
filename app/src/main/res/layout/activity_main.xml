@@ -6,6 +6,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     tools:context="com.yanxing.ui.MainActivity"
+    android:background="@color/default_bg"
     android:orientation="vertical">
     <com.yanxing.titlebarlibrary.TitleBar
         android:layout_width="match_parent"

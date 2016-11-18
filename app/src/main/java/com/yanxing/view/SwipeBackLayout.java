@@ -12,15 +12,16 @@ import android.widget.ScrollView;
 import android.widget.Scroller;
 
 /**
+ * 作为学习用，按照http://blog.csdn.net/xiaanming/article/details/20934541
+ * 重新写了一遍
  * Created by lishuangxiang on 2016/11/15.
  */
-
 public class SwipeBackLayout extends RelativeLayout implements View.OnTouchListener {
 
     /**
      * SwipeBackLayout父布局
      */
-    private ViewGroup mSwipBackParent;
+    private ViewGroup mSwipeBackParent;
     /**
      * 处理滑动逻辑的View
      */
@@ -48,7 +49,7 @@ public class SwipeBackLayout extends RelativeLayout implements View.OnTouchListe
     /**
      * SwipeBackLayout宽度
      */
-    private int mSwipBackLayoutWidth;
+    private int mSwipeBackLayoutWidth;
     /**
      * 是否正在滑动
      */
@@ -61,10 +62,6 @@ public class SwipeBackLayout extends RelativeLayout implements View.OnTouchListe
      * 滑动监听
      */
     private OnSlidingFinishListener mOnSlidingFinishListener;
-
-    public SwipeBackLayout(Context context) {
-        this(context, null);
-    }
 
     public SwipeBackLayout(Context context, AttributeSet attrs) {
         this(context, attrs, 0);
@@ -80,8 +77,8 @@ public class SwipeBackLayout extends RelativeLayout implements View.OnTouchListe
     protected void onLayout(boolean changed, int l, int t, int r, int b) {
         super.onLayout(changed, l, t, r, b);
         if (changed){
-            mSwipBackParent= (ViewGroup) this.getParent();
-            mSwipBackLayoutWidth=getWidth();
+            mSwipeBackParent = (ViewGroup) this.getParent();
+            mSwipeBackLayoutWidth =this.getWidth();
         }
     }
 
@@ -110,18 +107,18 @@ public class SwipeBackLayout extends RelativeLayout implements View.OnTouchListe
      * 向右滑出界面
      */
     private void scrollRight(){
-        int x=mSwipBackLayoutWidth+mSwipBackParent.getScrollX();
+        int x= mSwipeBackLayoutWidth + mSwipeBackParent.getScrollX();
         //向右为负
-        mScroller.startScroll(mSwipBackParent.getScrollX(),0,-x+1,0,Math.abs(x));
+        mScroller.startScroll(mSwipeBackParent.getScrollX(),0,-x+1,0,Math.abs(x));
         postInvalidate();
     }
 
     /**
-     * 滚动其实位置
+     * 滚动起始位置
      */
     public void scrollOrigin(){
-        int x=mSwipBackParent.getScrollX();
-        mScroller.startScroll(mSwipBackParent.getScrollX(),0,-x,0,Math.abs(x));
+        int x= mSwipeBackParent.getScrollX();
+        mScroller.startScroll(mSwipeBackParent.getScrollX(),0,-x,0,Math.abs(x));
         postInvalidate();
     }
 
@@ -144,15 +141,69 @@ public class SwipeBackLayout extends RelativeLayout implements View.OnTouchListe
     @Override
     public boolean onTouch(View v, MotionEvent event) {
         switch (event.getAction()){
+            case MotionEvent.ACTION_DOWN:
+                mDownX= mTempX = (int) event.getRawX();
+                mDownY= (int) event.getRawY();
+                break;
+            case MotionEvent.ACTION_MOVE:
+                int moveX= (int) event.getRawX();
+                int deltaX=mTempX-moveX;
+                mTempX=moveX;
+                if (Math.abs(moveX-mDownX)>mTouchSlop&&
+                        Math.abs((int) event.getRawY()-mDownY)<mTouchSlop){
+                    mIsSliding=true;
+                    //如果是AbListView,禁用item点击事件
+                    if (isTouchOnAbsListView()){
+                        MotionEvent motionEvent=MotionEvent.obtain(event);
+                        motionEvent.setAction(MotionEvent.ACTION_CANCEL
+                                |(event.getActionIndex()<<MotionEvent.ACTION_POINTER_INDEX_SHIFT));
+                        v.onTouchEvent(motionEvent);
+                    }
+                }
 
+                if (moveX-mDownX>=0&&mIsSliding){
+                    mSwipeBackParent.scrollBy(deltaX,0);
+                    //屏蔽AbsListView和ScrollView自己的滑动事件
+                    if (isTouchOnAbsListView()||isTouchOnScrollView()){
+                        return true;
+                    }
+                }
+                break;
+            case MotionEvent.ACTION_UP:
+                mIsSliding=false;
+                if (mSwipeBackParent.getScrollX()<=-mSwipeBackLayoutWidth /2){
+                    mIsFinish=true;
+                    scrollRight();
+                }else {
+                    scrollOrigin();
+                    mIsFinish=false;
+                }
+                break;
         }
-        return false;
+        //ScrollView和AbsListView处理自己的事件
+        if (isTouchOnScrollView()||isTouchOnAbsListView()){
+            return v.onTouchEvent(event);
+        }
+        return true;
+    }
+
+    @Override
+    public void computeScroll(){
+        if (mScroller.computeScrollOffset()){
+            mSwipeBackParent.scrollTo(mScroller.getCurrX(),mScroller.getCurrY());
+            postInvalidate();
+            if (mScroller.isFinished()){
+                if (mOnSlidingFinishListener!=null&&mIsFinish){
+                    mOnSlidingFinishListener.onSlidingFinish();
+                }
+            }
+        }
     }
 
     /**
      * Activity滑动监听
      */
     public interface OnSlidingFinishListener {
-        public void onSlidingFinish();
+        void onSlidingFinish();
     }
 }

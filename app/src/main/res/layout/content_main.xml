@@ -173,5 +173,9 @@
             android:id="@+id/hideTitleBottom"
             style="@style/style_btn"
             android:text="@string/hide_title_bottom"/>
+        <Button
+            android:id="@+id/swipeBackLayout"
+            style="@style/style_btn"
+            android:text="swipeBackLayout"/>
     </LinearLayout>
 </ScrollView>

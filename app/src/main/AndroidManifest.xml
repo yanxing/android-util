@@ -156,6 +156,18 @@
         <activity
             android:name=".HideTitleBottomActivity"
             android:theme="@style/SwipeBack"/>
+        <activity
+            android:name=".swipebacklayout.SwipeBackLayoutActivity"
+            android:theme="@style/SwipeBack"/>
+        <activity
+            android:name=".swipebacklayout.NormalActivity"
+            android:theme="@android:style/Theme.Translucent"/>
+        <activity
+            android:name=".swipebacklayout.ScrollViewActivity"
+            android:theme="@android:style/Theme.Translucent"/>
+        <activity
+            android:name=".swipebacklayout.AbsListViewActivity"
+            android:theme="@android:style/Theme.Translucent"/>
     </application>
 
 </manifest>

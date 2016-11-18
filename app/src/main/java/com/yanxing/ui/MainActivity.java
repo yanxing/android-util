@@ -17,6 +17,7 @@ import com.yanxing.model.FirstEventBus;
 import com.yanxing.sortlistviewlibrary.CityListActivity;
 import com.yanxing.ui.animation.AnimationMainActivity;
 import com.yanxing.ui.fragmentnest.NestExampleActivity;
+import com.yanxing.ui.swipebacklayout.SwipeBackLayoutActivity;
 import com.yanxing.util.ConstantValue;
 import com.yanxing.util.FileUtil;
 import com.yanxing.view.ConfirmDialog;
@@ -60,7 +61,7 @@ public class MainActivity extends BaseActivity implements AMapLocListener {
             , R.id.expandableListViewCheck, R.id.RxJava, R.id.inputEditButton, R.id.textImage
             , R.id.select_image_dialog, R.id.downloadlibrary, R.id.nestFragment, R.id.surfaceView
             , R.id.progressBar, R.id.circleProgressBar, R.id.textChangeImage, R.id.extendRecyclerView
-            , R.id.hideTitleBottom})
+            , R.id.hideTitleBottom,R.id.swipeBackLayout})
     public void onClick(View v) {
         Intent intent = new Intent();
         Bundle bundle = new Bundle();
@@ -238,7 +239,10 @@ public class MainActivity extends BaseActivity implements AMapLocListener {
                 intent.setClass(getApplicationContext(),HideTitleBottomActivity.class);
                 startActivity(intent);
                 break;
-
+            case R.id.swipeBackLayout:
+                intent.setClass(getApplicationContext(), SwipeBackLayoutActivity.class);
+                startActivity(intent);
+                break;
         }
     }
 
