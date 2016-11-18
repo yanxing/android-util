@@ -36,7 +36,6 @@ public class SwipeBackLayoutActivity extends BaseActivity {
             case R.id.absListview:
                 intent.setClass(getApplicationContext(),AbsListViewActivity.class);
                 startActivity(intent);
-
                 break;
             case R.id.scrollView:
                 intent.setClass(getApplicationContext(),ScrollViewActivity.class);

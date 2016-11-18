@@ -1,7 +1,9 @@
 package com.yanxing.ui;
 
 import android.content.Intent;
+import android.graphics.Color;
 import android.os.Bundle;
+import android.support.design.widget.CollapsingToolbarLayout;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.Toast;
@@ -27,10 +29,14 @@ import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
 
+import butterknife.BindView;
 import butterknife.OnClick;
 import de.greenrobot.event.EventBus;
 
 public class MainActivity extends BaseActivity implements AMapLocListener {
+
+    @BindView(R.id.collapsing_toolbar_layout)
+    CollapsingToolbarLayout mCollapsingToolbarLayout;
 
     private static final int QUESTION_IMAGE_CODE = 1;
     private static final int QUESTION_SORT_LISTVIEW_CODE = 2;
@@ -46,6 +52,9 @@ public class MainActivity extends BaseActivity implements AMapLocListener {
 
     @Override
     protected void afterInstanceView() {
+        mCollapsingToolbarLayout.setTitle("android-util");
+        mCollapsingToolbarLayout.setExpandedTitleColor(Color.WHITE);
+        mCollapsingToolbarLayout.setCollapsedTitleTextColor(Color.RED);
         getSwipeBackLayout().setEnableGesture(false);
         EventBus.getDefault().register(this);
         mAMapLoc = new AMapLoc(getApplicationContext());
@@ -61,7 +70,7 @@ public class MainActivity extends BaseActivity implements AMapLocListener {
             , R.id.expandableListViewCheck, R.id.RxJava, R.id.inputEditButton, R.id.textImage
             , R.id.select_image_dialog, R.id.downloadlibrary, R.id.nestFragment, R.id.surfaceView
             , R.id.progressBar, R.id.circleProgressBar, R.id.textChangeImage, R.id.extendRecyclerView
-            , R.id.hideTitleBottom,R.id.swipeBackLayout})
+            , R.id.hideTitleBottom,R.id.swipeBackLayout,R.id.design})
     public void onClick(View v) {
         Intent intent = new Intent();
         Bundle bundle = new Bundle();
@@ -241,6 +250,10 @@ public class MainActivity extends BaseActivity implements AMapLocListener {
                 break;
             case R.id.swipeBackLayout:
                 intent.setClass(getApplicationContext(), SwipeBackLayoutActivity.class);
+                startActivity(intent);
+                break;
+            case R.id.design:
+                intent.setClass(getApplicationContext(),DesignActivity.class);
                 startActivity(intent);
                 break;
         }

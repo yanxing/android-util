@@ -168,6 +168,9 @@
         <activity
             android:name=".swipebacklayout.AbsListViewActivity"
             android:theme="@android:style/Theme.Translucent"/>
+        <activity
+            android:name=".DesignActivity"
+            android:theme="@style/SwipeBack"/>
     </application>
 
 </manifest>
