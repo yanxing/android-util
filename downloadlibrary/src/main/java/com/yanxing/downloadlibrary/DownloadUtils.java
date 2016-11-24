@@ -115,10 +115,10 @@ public class DownloadUtils {
             //位置和数组下标一样，0到总大小减1
             conn.setRequestProperty("Range", "bytes=" + startPosition + "-" + endPosition);
             conn.connect();
-            InputStream inStream = conn.getInputStream();
             byte[] buffer = new byte[1024];
             int offset;
             if (conn.getResponseCode() == 200 || conn.getResponseCode() == 206) {
+                InputStream inStream = conn.getInputStream();
                 LogUtil.d("DownloadUtils", Thread.currentThread().getName() + "线程需要下载的文件大小" + (endPosition - startPosition + 1)
                         + "   开始位置" + startPosition + "  结束位置" + endPosition);
                 File file = new File(getSavePath() + getFileName(conn, urlPath));
