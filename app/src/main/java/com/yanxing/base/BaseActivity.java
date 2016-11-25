@@ -51,7 +51,7 @@ public abstract class BaseActivity extends SwipeBackActivity {
      * 显示toast消息
      */
     public void showToast(String toast){
-        Toast.makeText(this,toast,Toast.LENGTH_LONG).show();
+        Toast.makeText(getApplicationContext(),toast,Toast.LENGTH_LONG).show();
     }
 
     /**
