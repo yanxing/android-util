@@ -11,6 +11,7 @@ import com.jakewharton.disklrucache.DiskLruCache;
 import java.io.IOException;
 import java.io.InputStream;
 import java.io.OutputStream;
+import java.lang.ref.WeakReference;
 import java.util.concurrent.ExecutorService;
 import java.util.concurrent.Executors;
 
@@ -62,10 +63,11 @@ public class VideoFrameLoader {
      * @param imageView
      */
     public void displayVideoFrame(final String url, final ImageView imageView) {
+        final WeakReference<ImageView> viewRef = new WeakReference<>(imageView);
         //检查内存是否有缓存
         Bitmap bitmap = mLruCache.get(url);
         if (bitmap != null) {
-            imageView.setImageBitmap(bitmap);
+            viewRef.get().setImageBitmap(bitmap);
             return;
         }
 
@@ -76,7 +78,7 @@ public class VideoFrameLoader {
             if (snapshot != null) {
                 InputStream inputStream = snapshot.getInputStream(0);
                 Bitmap diskBitmap = BitmapFactory.decodeStream(inputStream);
-                imageView.setImageBitmap(diskBitmap);
+                viewRef.get().setImageBitmap(diskBitmap);
                 return;
             }
         } catch (IOException e) {
@@ -84,7 +86,7 @@ public class VideoFrameLoader {
         }
 
         //重新下载
-        imageView.setTag(url);
+        viewRef.get().setTag(url);
         mExecutorService.submit(new Runnable() {
             @Override
             public void run() {
@@ -92,8 +94,8 @@ public class VideoFrameLoader {
                 if (bitmap == null) {
                     return;
                 }
-                if (imageView.getTag().equals(url)) {
-                    imageView.setImageBitmap(bitmap);
+                if (viewRef.get().getTag().equals(url)) {
+                    viewRef.get().setImageBitmap(bitmap);
                 }
                 mLruCache.put(url, bitmap);
                 try {
