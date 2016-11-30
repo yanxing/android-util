@@ -68,8 +68,9 @@ public class SelectPhotoActivity extends FragmentActivity implements View.OnClic
      * 从图库中选择图片
      */
     private void selectPicture() {
-        Intent i = new Intent(Intent.ACTION_PICK
-                , android.provider.MediaStore.Images.Media.EXTERNAL_CONTENT_URI);
+        Intent i = new Intent(Intent.ACTION_GET_CONTENT);
+        i.setType("image/*");
+        i.putExtra("return-data", true);
         startActivityForResult(i, FROM_PICTURE);
     }
 
@@ -90,13 +91,7 @@ public class SelectPhotoActivity extends FragmentActivity implements View.OnClic
                 if (selectedImage == null) {
                     return;
                 }
-                String[] filePathColumn = {MediaStore.Images.Media.DATA};
-                Cursor cursor = getContentResolver().query(selectedImage, filePathColumn, null, null, null);
-                cursor.moveToFirst();
-                int columnIndex = cursor.getColumnIndex(filePathColumn[0]);
-                String picturePath = cursor.getString(columnIndex);
-                cutPhoto(Uri.fromFile(new File(picturePath)), Uri.fromFile(file));
-                cursor.close();
+                cutPhoto(selectedImage, Uri.fromFile(file));
             }
         }
     }
