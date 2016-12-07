@@ -7,6 +7,7 @@ import java.util.List;
 import rx.Observable;
 import rx.Subscriber;
 import rx.functions.Action1;
+import rx.functions.Action2;
 import rx.functions.Func1;
 
 
@@ -59,7 +60,13 @@ public class RxJavaTest {
                 System.out.println(s);
             }
         };
-        observable.subscribe(action1);
+        Action2<String,String> action2=new Action2<String,String>() {
+            @Override
+            public void call(String s,String s2) {
+                System.out.println(s);
+            }
+        };
+//        observable.subscribe((Action1<? super String>) action2);
     }
 
     @Test

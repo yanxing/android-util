@@ -181,5 +181,13 @@
             android:id="@+id/design"
             style="@style/style_btn"
             android:text="design"/>
+        <Button
+            android:id="@+id/ripple_layout"
+            style="@style/style_btn"
+            android:text="ripple_layout"/>
+        <Button
+            android:id="@+id/time"
+            style="@style/style_btn"
+            android:text="列表中的定时器"/>
     </LinearLayout>
 </android.support.v4.widget.NestedScrollView>

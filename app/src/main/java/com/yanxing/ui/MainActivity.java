@@ -22,6 +22,7 @@ import com.yanxing.ui.fragmentnest.NestExampleActivity;
 import com.yanxing.ui.swipebacklayout.SwipeBackLayoutActivity;
 import com.yanxing.util.ConstantValue;
 import com.yanxing.util.FileUtil;
+import com.yanxing.util.LogUtil;
 import com.yanxing.view.ConfirmDialog;
 import com.yanxing.view.ListDialog;
 
@@ -70,7 +71,7 @@ public class MainActivity extends BaseActivity implements AMapLocListener {
             , R.id.expandableListViewCheck, R.id.RxJava, R.id.inputEditButton, R.id.textImage
             , R.id.select_image_dialog, R.id.downloadlibrary, R.id.nestFragment, R.id.surfaceView
             , R.id.progressBar, R.id.circleProgressBar, R.id.textChangeImage, R.id.extendRecyclerView
-            , R.id.hideTitleBottom,R.id.swipeBackLayout,R.id.design})
+            , R.id.hideTitleBottom,R.id.swipeBackLayout,R.id.design,R.id.ripple_layout,R.id.time})
     public void onClick(View v) {
         Intent intent = new Intent();
         Bundle bundle = new Bundle();
@@ -256,6 +257,14 @@ public class MainActivity extends BaseActivity implements AMapLocListener {
                 intent.setClass(getApplicationContext(),DesignActivity.class);
                 startActivity(intent);
                 break;
+            case R.id.ripple_layout:
+                intent.setClass(getApplicationContext(),RippleLayoutActivity.class);
+                startActivity(intent);
+                break;
+            case R.id.time:
+                intent.setClass(getApplicationContext(),TimingActivity.class);
+                startActivity(intent);
+                break;
         }
     }
 
@@ -291,8 +300,15 @@ public class MainActivity extends BaseActivity implements AMapLocListener {
 
     @Override
     protected void onStop() {
+        LogUtil.d(TAG,"onStop");
         super.onStop();
         EventBus.getDefault().post(new FirstEventBus(getString(R.string.eventbus_tip)));
+    }
+
+    @Override
+    protected void onPause() {
+        LogUtil.d(TAG,"onPause");
+        super.onPause();
     }
 
     @Override

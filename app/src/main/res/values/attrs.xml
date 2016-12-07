@@ -31,5 +31,14 @@
         <!--进度的风格,空心0，实心1-->
         <attr name="style" format="integer"/>
     </declare-styleable>
+    
+    <declare-styleable name="SesameView">
+        <!--最大数值-->
+        <attr name="maxNum" format="integer"/>
+        <!--圆盘起始的角度-->
+        <attr name="startAngle" format="integer"/>
+        <!--圆盘扫过的角度-->
+        <attr name="sweepAngle" format="integer"/>
+    </declare-styleable>
 
 </resources>

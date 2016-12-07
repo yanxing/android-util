@@ -68,7 +68,6 @@ public class XRecyclerViewActivity extends BaseActivity {
 
             @Override
             public void onLoadMore() {
-                // load more data here
             }
         });
         ItemTouchHelper itemTouchHelper=new ItemTouchHelper(new ItemTouchHelper.Callback() {

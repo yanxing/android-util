@@ -27,7 +27,7 @@
         android:allowBackup="true"
         android:icon="@mipmap/ic_launcher"
         android:supportsRtl="true"
-        android:theme="@style/AppTheme">
+        android:theme="@style/SwipeBack">
 
         <!-- 高德地图key -->
         <meta-data
@@ -170,6 +170,12 @@
             android:theme="@android:style/Theme.Translucent"/>
         <activity
             android:name=".DesignActivity"
+            android:theme="@style/SwipeBack"/>
+        <activity
+            android:name=".RippleLayoutActivity"
+            android:theme="@style/SwipeBack"/>
+        <activity
+            android:name=".TimingActivity"
             android:theme="@style/SwipeBack"/>
     </application>
 

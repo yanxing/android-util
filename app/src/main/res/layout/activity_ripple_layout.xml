@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+              android:layout_width="match_parent"
+              android:layout_height="match_parent"
+              android:orientation="vertical">
+
+    <com.yanxing.view.SesameView
+        android:id="@+id/sesameView"
+        android:layout_width="match_parent"
+        android:layout_height="300dp"/>
+
+    <EditText
+        android:id="@+id/edit"
+        android:layout_width="200dp"
+        android:layout_height="wrap_content"
+        android:inputType="number"
+        android:paddingLeft="@dimen/padding16"
+        android:text="400"
+        android:textSize="20sp"/>
+
+    <com.yanxing.view.RippleLayout
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center_horizontal">
+
+        <Button
+            android:id="@+id/button"
+            android:layout_width="300dp"
+            android:layout_height="wrap_content"
+            android:background="#0ac39e"
+            android:textColor="@color/white"
+            android:text="确定"/>
+    </com.yanxing.view.RippleLayout>
+
+</LinearLayout>
