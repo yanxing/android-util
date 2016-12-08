@@ -56,7 +56,6 @@ public class MainActivity extends BaseActivity implements AMapLocListener {
         mCollapsingToolbarLayout.setTitle("android-util");
         mCollapsingToolbarLayout.setExpandedTitleColor(Color.WHITE);
         mCollapsingToolbarLayout.setCollapsedTitleTextColor(Color.RED);
-        getSwipeBackLayout().setEnableGesture(false);
         EventBus.getDefault().register(this);
         mAMapLoc = new AMapLoc(getApplicationContext());
         mAMapLoc.setAMapLocListener(this);
@@ -300,15 +299,8 @@ public class MainActivity extends BaseActivity implements AMapLocListener {
 
     @Override
     protected void onStop() {
-        LogUtil.d(TAG,"onStop");
         super.onStop();
         EventBus.getDefault().post(new FirstEventBus(getString(R.string.eventbus_tip)));
-    }
-
-    @Override
-    protected void onPause() {
-        LogUtil.d(TAG,"onPause");
-        super.onPause();
     }
 
     @Override

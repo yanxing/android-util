@@ -37,7 +37,6 @@ public class BrowseImageExampleActivity extends BaseActivity{
 
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
-        mUseStatus=false;
         super.onCreate(savedInstanceState);
     }
 

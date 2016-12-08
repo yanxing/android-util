@@ -7,7 +7,7 @@
         android:id="@+id/text"
         android:layout_width="match_parent"
         android:layout_height="50dp"
-        android:text="test"
+        android:text="0"
         android:layout_gravity="center"
         android:gravity="center"/>
     <View

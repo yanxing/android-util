@@ -32,33 +32,4 @@ public class NestExampleActivity extends BaseActivity {
         fragmentTransaction.commit();
     }
 
-    @Override
-    protected void onCreate(@Nullable Bundle savedInstanceState) {
-        LogUtil.d(TAG,"onCreate");
-        super.onCreate(savedInstanceState);
-    }
-
-    @Override
-    protected void onPause() {
-        LogUtil.d(TAG,"onPause");
-        super.onPause();
-    }
-
-    @Override
-    protected void onResume() {
-        LogUtil.d(TAG,"onResume");
-        super.onResume();
-    }
-
-    @Override
-    protected void onStart() {
-        LogUtil.d(TAG,"onStart");
-        super.onStart();
-    }
-
-    @Override
-    protected void onStop() {
-        LogUtil.d(TAG,"onStop");
-        super.onStop();
-    }
 }

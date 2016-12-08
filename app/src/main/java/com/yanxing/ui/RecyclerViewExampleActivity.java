@@ -16,8 +16,7 @@ import java.util.List;
 import butterknife.BindView;
 
 /**
- *
- * Created by gxianglishuan on 2016/3/23.
+ * Created by lishuangxiang on 2016/3/23.
  */
 public class RecyclerViewExampleActivity extends BaseActivity {
 

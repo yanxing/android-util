@@ -78,7 +78,6 @@ public class SurfaceViewMediaPlayerActivity extends BaseActivity
     protected void afterInstanceView() {
         mSurfaceHolder=mSurface.getHolder();
         mSurfaceHolder.addCallback(this);
-        getSwipeBackLayout().setEnableGesture(false);
     }
 
     @OnClick({R.id.play, R.id.pause})

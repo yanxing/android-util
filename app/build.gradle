@@ -11,7 +11,7 @@ android {
             storePassword 'yanxing'
         }
     }
-    compileSdkVersion 25
+    compileSdkVersion 24
     buildToolsVersion "25.0.1"
     defaultConfig {
         applicationId "com.yanxing.ui"
@@ -47,8 +47,8 @@ android {
 dependencies {
     compile fileTree(include: ['*.jar'], dir: 'libs')
     testCompile 'junit:junit:4.12'
-    compile 'com.android.support:appcompat-v7:25.0.1'
-    compile 'com.android.support:design:25.0.1'
+    compile 'com.android.support:appcompat-v7:24.0.0'
+    compile 'com.android.support:design:24.0.0'
     compile 'com.facebook.fresco:fresco:0.9.0'
     compile 'de.greenrobot:eventbus:2.4.0'
     compile 'de.greenrobot:greendao:2.0.0'

@@ -25,7 +25,6 @@ public class EventBusExampleActivity extends BaseActivity {
 
     @Override
     protected void afterInstanceView() {
-        getSwipeBackLayout().setEnableGesture(false);
         EventBus.getDefault().register(this);
     }
 
