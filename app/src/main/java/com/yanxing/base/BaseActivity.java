@@ -20,8 +20,6 @@ public abstract class BaseActivity extends SwipeBackActivity {
 
     private LoadingDialog mLoadingDialog;
     protected SystemBarTintManager mTintManager;
-    //默认启动沉浸式通知栏
-    protected boolean mUseStatus=true;
     protected String TAG = getClass().getName();
 
 
@@ -30,7 +28,7 @@ public abstract class BaseActivity extends SwipeBackActivity {
         super.onCreate(savedInstanceState);
         setContentView(getLayoutResID());
         ButterKnife.bind(this);
-        initImmersionStatus(mUseStatus);
+        initImmersionStatus();
         mTintManager = new SystemBarTintManager(this);
         mTintManager .setStatusBarTintEnabled(true);
         mTintManager.setTintColor(0xff37c14f);
@@ -89,12 +87,10 @@ public abstract class BaseActivity extends SwipeBackActivity {
     /**
      * 使用沉浸式状态栏
      */
-    public void initImmersionStatus(boolean use) {
-        if (use){
-            if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.KITKAT) {
-                //透明状态栏
-                getWindow().addFlags(WindowManager.LayoutParams.FLAG_TRANSLUCENT_STATUS);
-            }
+    public void initImmersionStatus() {
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.KITKAT) {
+            //透明状态栏
+            getWindow().addFlags(WindowManager.LayoutParams.FLAG_TRANSLUCENT_STATUS);
         }
     }
 }
