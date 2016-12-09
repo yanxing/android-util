@@ -216,8 +216,9 @@ public class SesameView extends View {
         float y = (float) ((mRadius + dp2px(10)) * Math.sin(Math.toRadians(mStartAngle + sweep)));
         mPaint2.setStyle(Paint.Style.FILL);
         mPaint2.setColor(0xffffffff);
-        mPaint2.setMaskFilter(new BlurMaskFilter(dp2px(3), BlurMaskFilter.Blur.SOLID)); //需关闭硬件加速
-        canvas.drawCircle(x, y, dp2px(3), mPaint2);
+        //内外模糊处理，发光效果
+        mPaint2.setMaskFilter(new BlurMaskFilter(dp2px(3), BlurMaskFilter.Blur.NORMAL)); //需关闭硬件加速
+        canvas.drawCircle(x, y, dp2px(5), mPaint2);
         canvas.restore();
     }
 

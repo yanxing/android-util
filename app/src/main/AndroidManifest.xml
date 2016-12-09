@@ -173,6 +173,7 @@
             android:theme="@style/SwipeBack"/>
         <activity
             android:name=".RippleLayoutActivity"
+            android:hardwareAccelerated="false"
             android:theme="@style/SwipeBack"/>
         <activity
             android:name=".TimingActivity"
