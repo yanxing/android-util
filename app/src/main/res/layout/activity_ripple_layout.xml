@@ -2,6 +2,7 @@
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
               android:layout_width="match_parent"
               android:layout_height="match_parent"
+              xmlns:circle="http://schemas.android.com/apk/res-auto"
               android:orientation="vertical">
 
     <com.yanxing.view.SesameView
@@ -21,7 +22,6 @@
     <com.yanxing.view.RippleLayout
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:visibility="gone"
         android:layout_gravity="center_horizontal">
 
         <Button
@@ -32,5 +32,19 @@
             android:textColor="@color/white"
             android:text="确定"/>
     </com.yanxing.view.RippleLayout>
+
+    <com.yanxing.view.CircleProgressView
+        android:id="@+id/circle_progress_view"
+        android:layout_width="150dp"
+        android:layout_height="150dp"
+        android:layout_gravity="center"
+        android:layout_margin="20dp"
+        circle:circleLineBorderWidth="10dp"
+        circle:circleLineColor="#FFC38B"
+        circle:circleLinePadding="5dp"
+        android:background="#0ac39e"
+        circle:circleProgressLineColor="#FFFFFF"
+        circle:circleTextColor="@color/white"
+        circle:circleTextSize="8sp" />
 
 </LinearLayout>

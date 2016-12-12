@@ -1,21 +1,24 @@
 package com.yanxing.ui;
 
+import android.content.Intent;
 import android.os.Handler;
 import android.os.Message;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
+import android.view.View;
 import android.widget.TextView;
 
 import com.yanxing.adapterlibrary.RecyclerViewAdapter;
 import com.yanxing.base.BaseActivity;
-import com.yanxing.util.LogUtil;
 
 import java.lang.ref.WeakReference;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Random;
-import java.util.Timer;
 import java.util.TimerTask;
+import java.util.concurrent.Executors;
+import java.util.concurrent.ScheduledExecutorService;
+import java.util.concurrent.TimeUnit;
 
 import butterknife.BindView;
 
@@ -29,8 +32,8 @@ public class TimingActivity extends BaseActivity {
     RecyclerView mRecyclerView;
 
     private RecyclerViewAdapter<Integer> mRecyclerViewAdapter;
+    private ScheduledExecutorService mScheduledExecutorService = Executors.newSingleThreadScheduledExecutor();
     private List<Integer> mList = new ArrayList<Integer>();
-    private Timer mTimer = new Timer();
     private static final int UPDATE = 0;
     private static final int FINISH = 1;
     private int mMaxIndex = 0;
@@ -51,7 +54,7 @@ public class TimingActivity extends BaseActivity {
             if (msg.what == UPDATE) {
                 timingActivity.mRecyclerViewAdapter.update(timingActivity.mList);
             } else if (msg.what == FINISH) {
-                timingActivity.mTimer.cancel();
+                timingActivity.mScheduledExecutorService.shutdown();
                 timingActivity.showToast(timingActivity.getString(R.string.ji_shi_quan_finish));
             }
         }
@@ -71,11 +74,23 @@ public class TimingActivity extends BaseActivity {
             public void onBindViewHolder(RecyclerViewAdapter.MyViewHolder holder, final int position) {
                 TextView textView = (TextView) holder.findViewById(R.id.text);
                 textView.setText(String.valueOf(mList.get(position)));
+                holder.itemView.setOnClickListener(new View.OnClickListener() {
+                    @Override
+                    public void onClick(View v) {
+                        startActivity(new Intent(getApplicationContext(),ProgressBarActivity.class));
+                    }
+                });
             }
         };
         mRecyclerView.setAdapter(mRecyclerViewAdapter);
+        countDown();
+    }
 
-        mTimer.schedule(new TimerTask() {
+    /**
+     * 倒计时
+     */
+    public void countDown() {
+        mScheduledExecutorService.scheduleAtFixedRate(new TimerTask() {
             @Override
             public void run() {
                 if (mList.get(mMaxIndex) == 0) {
@@ -93,7 +108,7 @@ public class TimingActivity extends BaseActivity {
                 }
                 mHandler.sendEmptyMessage(UPDATE);
             }
-        }, 0, 1000);
+        }, 0, 1000, TimeUnit.MILLISECONDS);
     }
 
     public void addTestData() {
@@ -112,6 +127,6 @@ public class TimingActivity extends BaseActivity {
     @Override
     protected void onDestroy() {
         super.onDestroy();
-        mTimer.cancel();
+        mScheduledExecutorService.shutdown();
     }
 }

@@ -41,4 +41,22 @@
         <attr name="sweepAngle" format="integer"/>
     </declare-styleable>
 
+    <declare-styleable name="CircleProgressView">
+        <!--圆内刻度线宽度-->
+        <attr name="circleLineBorderWidth" format="reference|dimension|integer" />
+        <!--圆内刻度线内边距-->
+        <attr name="circleLinePadding" format="reference|dimension|integer" />
+        <!--线条颜色-->
+        <attr name="circleLineColor" format="reference|color" />
+        <!--进度条线条颜色-->
+        <attr name="circleProgressLineColor" format="reference|color" />
+        <!--文本字体大小-->
+        <attr name="circleTextSize" format="reference|dimension|integer" />
+        <!--文本字体颜色-->
+        <attr name="circleTextColor" format="reference|color" />
+        <!--进度最大值-->
+        <attr name="circleMaxProgress" format="reference|dimension|integer" />
+    </declare-styleable>
+
+
 </resources>
