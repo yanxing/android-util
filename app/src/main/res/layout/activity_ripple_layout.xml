@@ -6,7 +6,6 @@
 
     <com.yanxing.view.SesameView
         android:id="@+id/sesameView"
-        android:visibility="gone"
         android:layout_width="match_parent"
         android:layout_height="300dp"/>
 
@@ -33,10 +32,5 @@
             android:textColor="@color/white"
             android:text="确定"/>
     </com.yanxing.view.RippleLayout>
-    <com.yanxing.view.CircleProgressView
-        android:layout_width="200dp"
-        android:layout_height="200dp"
-        android:layout_gravity="center_horizontal"
-        android:background="#0ac39e"/>
 
 </LinearLayout>
