@@ -6,7 +6,10 @@ import android.widget.ImageView;
 import com.facebook.drawee.view.SimpleDraweeView;
 import com.nostra13.universalimageloader.core.ImageLoader;
 import com.yanxing.base.BaseActivity;
+import com.yanxing.util.CommonUtil;
 import com.yanxing.util.ConstantValue;
+
+import java.io.File;
 
 import butterknife.BindView;
 
@@ -32,6 +35,6 @@ public class ShowImageActivity extends BaseActivity {
         String imageName=getIntent().getStringExtra("name");
         Uri uri = Uri.parse(ConstantValue.FILE_CACHE_IMAGE + imageName);
         mSimpleDraweeView.setImageURI(uri);
-        ImageLoader.getInstance().displayImage(ConstantValue.FILE_CACHE_IMAGE + imageName,mImageView);
+        ImageLoader.getInstance().displayImage(ConstantValue.FILE_CACHE_IMAGE+imageName,mImageView);
     }
 }

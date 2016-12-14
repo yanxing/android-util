@@ -1,0 +1,7 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources> xmlns:android="http://schemas.android.com/apk/res/android">
+    <paths>
+        <!--外置存储卡保存图片的路径-->yanxing/image/
+        <external-path  path="" name="photo" />
+    </paths>
+</resources>

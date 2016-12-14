@@ -1,13 +1,16 @@
 package com.yanxing.dialog;
 
+import android.content.ContentValues;
 import android.content.Intent;
 import android.database.Cursor;
 import android.graphics.Bitmap;
 import android.net.Uri;
+import android.os.Build;
 import android.os.Bundle;
 import android.provider.MediaStore;
 import android.support.annotation.Nullable;
 import android.support.v4.app.FragmentActivity;
+import android.support.v4.content.FileProvider;
 import android.util.DisplayMetrics;
 import android.view.Gravity;
 import android.view.MotionEvent;
@@ -29,6 +32,9 @@ public class SelectPhotoActivity extends FragmentActivity implements View.OnClic
     private static final int TAKE_PHOTO = 1;
     private static final int FROM_PICTURE = 2;
     private static final int CUT_PHOTO = 3;
+    private String mTempPhoto;
+    //和清单文件中provider一致
+    private static final String AUTHORITY = "com.yanxing.ui.provider";
 
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
@@ -37,6 +43,10 @@ public class SelectPhotoActivity extends FragmentActivity implements View.OnClic
         Intent intent = getIntent();
         Bundle bundle = intent.getExtras();
         mPhotoParam = bundle.getParcelable("photoParam");
+        File file = new File(mPhotoParam.getPath());
+        if (!file.exists()) {
+            file.mkdirs();
+        }
         TextView takePhoto = (TextView) findViewById(R.id.take_photo);
         TextView fromPicture = (TextView) findViewById(R.id.from_picture);
         takePhoto.setOnClickListener(this);
@@ -57,10 +67,17 @@ public class SelectPhotoActivity extends FragmentActivity implements View.OnClic
      */
     private void takePhoto() {
         Intent intent = new Intent(MediaStore.ACTION_IMAGE_CAPTURE);
-        File file = new File(mPhotoParam.getPath(), mPhotoParam.getName());
-        sendBroadcast(new Intent(Intent.ACTION_MEDIA_SCANNER_SCAN_FILE,
-                Uri.fromFile(file)));
-        intent.putExtra(MediaStore.EXTRA_OUTPUT, Uri.fromFile(file));
+        mTempPhoto = System.currentTimeMillis() + ".png";
+        //file文件夹，和filepaths.xml中目录符合，或者是其子文件夹
+        File file = new File(mPhotoParam.getPath(), mTempPhoto);
+        if (Build.VERSION.SDK_INT >= 24) { //判读版本是否在7.0以上
+            sendBroadcast(new Intent(Intent.ACTION_MEDIA_SCANNER_SCAN_FILE,
+                    FileProvider.getUriForFile(this, AUTHORITY, file)));
+            intent.putExtra(MediaStore.EXTRA_OUTPUT, FileProvider.getUriForFile(this, AUTHORITY, file));
+        } else {
+            sendBroadcast(new Intent(Intent.ACTION_MEDIA_SCANNER_SCAN_FILE, Uri.fromFile(file)));
+            intent.putExtra(MediaStore.EXTRA_OUTPUT, Uri.fromFile(file));
+        }
         startActivityForResult(intent, TAKE_PHOTO);
     }
 
@@ -78,12 +95,21 @@ public class SelectPhotoActivity extends FragmentActivity implements View.OnClic
     protected void onActivityResult(int requestCode, int resultCode, Intent data) {
         super.onActivityResult(requestCode, resultCode, data);
         if (resultCode == RESULT_OK) {
-            File file = new File(mPhotoParam.getPath(), mPhotoParam.getName());
             //拍照返回
             if (requestCode == TAKE_PHOTO) {
-                cutPhoto(Uri.fromFile(file), Uri.fromFile(file));
-                //裁剪返回
-            } else if (requestCode == CUT_PHOTO) {
+                //判读版本是否在7.0以上
+                if (Build.VERSION.SDK_INT >= 24) {
+                    cutPhoto(getImageContentUri(new File(mPhotoParam.getPath(), mTempPhoto))
+                            , Uri.fromFile(new File(mPhotoParam.getPath() + mPhotoParam.getName())));
+                } else {
+                    cutPhoto(Uri.fromFile(new File(mPhotoParam.getPath(), mTempPhoto))
+                            , Uri.fromFile(new File(mPhotoParam.getPath(), mPhotoParam.getName())));
+                }
+            } else if (requestCode == CUT_PHOTO) {//裁剪返回
+                if (mTempPhoto != null) {
+                    File file = new File(mPhotoParam.getPath(), mTempPhoto);
+                    file.delete();
+                }
                 setResult(RESULT_OK);
                 finish();
             } else if (requestCode == FROM_PICTURE) {//图库选择
@@ -91,6 +117,7 @@ public class SelectPhotoActivity extends FragmentActivity implements View.OnClic
                 if (selectedImage == null) {
                     return;
                 }
+                File file = new File(mPhotoParam.getPath(), mPhotoParam.getName());
                 cutPhoto(selectedImage, Uri.fromFile(file));
             }
         }
@@ -100,7 +127,7 @@ public class SelectPhotoActivity extends FragmentActivity implements View.OnClic
      * 裁剪图片
      *
      * @param uri    图片路径
-     * @param newUri 输出的路径
+     * @param newUri 输出的路径 为何用file： 见http://www.open-open.com/lib/view/open1474615893731.html
      */
     public void cutPhoto(Uri uri, Uri newUri) {
         Intent intent = new Intent("com.android.camera.action.CROP");
@@ -114,11 +141,45 @@ public class SelectPhotoActivity extends FragmentActivity implements View.OnClic
             intent.putExtra("outputY", mPhotoParam.getOutputY());
             intent.putExtra("scale", true);
         }
+        if (Build.VERSION.SDK_INT >= 24) {
+            intent.setFlags(Intent.FLAG_GRANT_READ_URI_PERMISSION);
+        }
         intent.putExtra(MediaStore.EXTRA_OUTPUT, newUri);
         intent.putExtra("return-data", false);
         intent.putExtra("outputFormat", Bitmap.CompressFormat.JPEG.toString());
         intent.putExtra("noFaceDetection", true);
         startActivityForResult(intent, CUT_PHOTO);
+    }
+
+    /**
+     * file转化成content
+     *
+     * @param imageFile
+     * @return
+     */
+    public Uri getImageContentUri(File imageFile) {
+        String filePath = imageFile.getAbsolutePath();
+        Cursor cursor = getContentResolver().query(
+                MediaStore.Images.Media.EXTERNAL_CONTENT_URI,
+                new String[]{MediaStore.Images.Media._ID},
+                MediaStore.Images.Media.DATA + "=? ",
+                new String[]{filePath}, null);
+
+        if (cursor != null && cursor.moveToFirst()) {
+            int id = cursor.getInt(cursor
+                    .getColumnIndex(MediaStore.MediaColumns._ID));
+            Uri baseUri = Uri.parse("content://media/external/images/media");
+            return Uri.withAppendedPath(baseUri, "" + id);
+        } else {
+            if (imageFile.exists()) {
+                ContentValues values = new ContentValues();
+                values.put(MediaStore.Images.Media.DATA, filePath);
+                return getContentResolver().insert(
+                        MediaStore.Images.Media.EXTERNAL_CONTENT_URI, values);
+            } else {
+                return null;
+            }
+        }
     }
 
     /**

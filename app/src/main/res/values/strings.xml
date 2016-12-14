@@ -69,4 +69,6 @@
     <string name="take_photo_no_cut">拍照压缩不经过裁剪</string>
     <string name="hide_title_bottom">上滑隐藏标题栏和底部导航菜单</string>
     <string name="ji_shi_quan_finish">计时全部结束</string>
+    <string name="location">定位授权失败</string>
+    <string name="operater_error">操作失败</string>
 </resources>

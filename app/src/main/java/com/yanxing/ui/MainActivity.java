@@ -1,7 +1,10 @@
 package com.yanxing.ui;
 
+import android.Manifest;
 import android.content.Intent;
+import android.content.pm.PackageManager;
 import android.graphics.Color;
+import android.os.Build;
 import android.os.Bundle;
 import android.support.design.widget.CollapsingToolbarLayout;
 import android.view.View;
@@ -23,6 +26,7 @@ import com.yanxing.ui.swipebacklayout.SwipeBackLayoutActivity;
 import com.yanxing.util.ConstantValue;
 import com.yanxing.util.FileUtil;
 import com.yanxing.util.LogUtil;
+import com.yanxing.util.PermissionUtil;
 import com.yanxing.view.ConfirmDialog;
 import com.yanxing.view.ListDialog;
 
@@ -41,6 +45,7 @@ public class MainActivity extends BaseActivity implements AMapLocListener {
 
     private static final int QUESTION_IMAGE_CODE = 1;
     private static final int QUESTION_SORT_LISTVIEW_CODE = 2;
+    private static final int QUESTION_LOCATION = 3;
     //选择的图片名称
     private String mImageName;
     private String mCity;
@@ -57,9 +62,24 @@ public class MainActivity extends BaseActivity implements AMapLocListener {
         mCollapsingToolbarLayout.setExpandedTitleColor(Color.WHITE);
         mCollapsingToolbarLayout.setCollapsedTitleTextColor(Color.RED);
         EventBus.getDefault().register(this);
+        checkPermission();
         mAMapLoc = new AMapLoc(getApplicationContext());
         mAMapLoc.setAMapLocListener(this);
         mAMapLoc.startLocation();
+    }
+
+    /**
+     * 检查并申请定位权限
+     */
+    public void checkPermission() {
+        if (Build.VERSION.SDK_INT<23){
+            return;
+        }
+        PermissionUtil.checkSelfPermission(this, new String[]{
+                Manifest.permission.CAMERA,Manifest.permission.ACCESS_FINE_LOCATION
+                ,Manifest.permission.ACCESS_COARSE_LOCATION,Manifest.permission.WRITE_EXTERNAL_STORAGE
+                ,Manifest.permission.MANAGE_DOCUMENTS,Manifest.permission.READ_EXTERNAL_STORAGE
+                ,Manifest.permission.READ_PHONE_STATE,Manifest.permission.WRITE_SETTINGS}, QUESTION_LOCATION);
     }
 
     @OnClick(value = {R.id.adapter_button, R.id.list_dialog_button, R.id.confirm_dialog_button
@@ -70,7 +90,7 @@ public class MainActivity extends BaseActivity implements AMapLocListener {
             , R.id.expandableListViewCheck, R.id.RxJava, R.id.inputEditButton, R.id.textImage
             , R.id.select_image_dialog, R.id.downloadlibrary, R.id.nestFragment, R.id.surfaceView
             , R.id.progressBar, R.id.circleProgressBar, R.id.textChangeImage, R.id.extendRecyclerView
-            , R.id.hideTitleBottom,R.id.swipeBackLayout,R.id.design,R.id.ripple_layout,R.id.time})
+            , R.id.hideTitleBottom, R.id.swipeBackLayout, R.id.design, R.id.ripple_layout, R.id.time})
     public void onClick(View v) {
         Intent intent = new Intent();
         Bundle bundle = new Bundle();
@@ -245,7 +265,7 @@ public class MainActivity extends BaseActivity implements AMapLocListener {
                 startActivity(intent);
                 break;
             case R.id.hideTitleBottom:
-                intent.setClass(getApplicationContext(),HideTitleBottomActivity.class);
+                intent.setClass(getApplicationContext(), HideTitleBottomActivity.class);
                 startActivity(intent);
                 break;
             case R.id.swipeBackLayout:
@@ -253,15 +273,15 @@ public class MainActivity extends BaseActivity implements AMapLocListener {
                 startActivity(intent);
                 break;
             case R.id.design:
-                intent.setClass(getApplicationContext(),DesignActivity.class);
+                intent.setClass(getApplicationContext(), DesignActivity.class);
                 startActivity(intent);
                 break;
             case R.id.ripple_layout:
-                intent.setClass(getApplicationContext(),RippleLayoutActivity.class);
+                intent.setClass(getApplicationContext(), RippleLayoutActivity.class);
                 startActivity(intent);
                 break;
             case R.id.time:
-                intent.setClass(getApplicationContext(),TimingActivity.class);
+                intent.setClass(getApplicationContext(), TimingActivity.class);
                 startActivity(intent);
                 break;
         }
@@ -321,6 +341,8 @@ public class MainActivity extends BaseActivity implements AMapLocListener {
             } else if (requestCode == QUESTION_SORT_LISTVIEW_CODE) {
                 showToast(data.getExtras().getString("city"));
             }
+        }else {
+            showToast(getString(R.string.operater_error));
         }
     }
 
@@ -334,5 +356,16 @@ public class MainActivity extends BaseActivity implements AMapLocListener {
             mCity = getString(R.string.current_city_tip) + aMapLocation.getAddress();
             mAMapLoc.stopLocation();
         }
+    }
+
+    @Override
+    public void onRequestPermissionsResult(int requestCode, String[] permissions, int[] grantResults) {
+        if (requestCode == QUESTION_LOCATION) {
+            if (grantResults[0] != PackageManager.PERMISSION_GRANTED) {
+                showToast(getString(R.string.location));
+            }
+            return;
+        }
+        super.onRequestPermissionsResult(requestCode, permissions, grantResults);
     }
 }
