@@ -1,5 +1,6 @@
 package com.yanxing.ui;
 
+import android.os.Handler;
 import android.widget.Button;
 
 import com.yanxing.base.BaseActivity;
@@ -26,18 +27,18 @@ public class ThreadTestActivity extends BaseActivity {
 
     @Override
     protected void afterInstanceView() {
-//        new Handler().postDelayed(new Runnable() {
-//            @Override
-//            public void run() {
-//                LogUtil.d(TAG,"thread finish");
-//                if (mButton!=null){
-//                    LogUtil.d(TAG,"button is not null");
-//                }else {
-//                    LogUtil.d(TAG,"button is null");
-//                }
-//                mButton.setText(getString(R.string.app_name));
-//            }
-//        },5000);
+        new Handler().postDelayed(new Runnable() {
+            @Override
+            public void run() {
+                LogUtil.d(TAG,"thread finish");
+                if (mButton!=null){
+                    LogUtil.d(TAG,"button is not null");
+                }else {
+                    LogUtil.d(TAG,"button is null");
+                }
+                mButton.setText(getString(R.string.app_name));
+            }
+        },5000);
     }
 
     @OnClick(R.id.finish)

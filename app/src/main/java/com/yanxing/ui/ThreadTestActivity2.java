@@ -1,5 +1,6 @@
 package com.yanxing.ui;
 
+import android.os.SystemClock;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.View;
@@ -22,6 +23,14 @@ public class ThreadTestActivity2 extends AppCompatActivity {
                 finish();
             }
         });
+        new Thread() {
+            @Override
+            public void run() {
+                while (true) {
+                    SystemClock.sleep(1000);
+                }
+            }
+        }.start();
     }
 
     @Override
