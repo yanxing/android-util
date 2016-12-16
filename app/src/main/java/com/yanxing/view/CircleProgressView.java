@@ -1,5 +1,6 @@
 package com.yanxing.view;
 
+import android.animation.ValueAnimator;
 import android.content.Context;
 import android.content.res.TypedArray;
 import android.graphics.BlurMaskFilter;
@@ -314,7 +315,16 @@ public class CircleProgressView extends View {
 
     public void setProgressNotInUiThread(int progress) {
         this.mProgress = progress;
-        this.postInvalidate();
+        ValueAnimator percentAnimator = ValueAnimator.ofInt(0, mProgress);
+        percentAnimator.addUpdateListener(new ValueAnimator.AnimatorUpdateListener() {
+            @Override
+            public void onAnimationUpdate(ValueAnimator animation) {
+                mProgress = (int) animation.getAnimatedValue();
+                invalidate();
+            }
+        });
+        percentAnimator.setDuration(1000);
+        percentAnimator.start();
     }
 
     public void setCircleLineColor(int circleLineColor) {
