@@ -1,5 +1,6 @@
 package com.yanxing.ui;
 
+import android.widget.GridView;
 import android.widget.ListView;
 
 import com.yanxing.adapterlibrary.CommonAdapter;
@@ -18,8 +19,11 @@ import butterknife.BindView;
  */
 public class AdapterExampleActivity extends BaseActivity {
 
-    @BindView(R.id.listview)
+    @BindView(R.id.listView)
     ListView mListView;
+
+    @BindView(R.id.gridView)
+    GridView mGridView;
 
     @Override
     protected int getLayoutResID() {
@@ -29,7 +33,7 @@ public class AdapterExampleActivity extends BaseActivity {
     @Override
     protected void afterInstanceView() {
         final List<User> list=new ArrayList<User>();
-        for (int i=0;i<20;i++){
+        for (int i=0;i<6;i++){
             User user=new User("1","yanxing");
             list.add(user);
 
@@ -42,5 +46,7 @@ public class AdapterExampleActivity extends BaseActivity {
             }
         };
         mListView.setAdapter(adapter);
+
+        mGridView.setAdapter(adapter);
     }
 }

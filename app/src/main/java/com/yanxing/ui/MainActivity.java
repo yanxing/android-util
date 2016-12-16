@@ -7,6 +7,7 @@ import android.graphics.Color;
 import android.os.Build;
 import android.os.Bundle;
 import android.support.design.widget.CollapsingToolbarLayout;
+import android.text.format.Time;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.Toast;
@@ -23,9 +24,9 @@ import com.yanxing.sortlistviewlibrary.CityListActivity;
 import com.yanxing.ui.animation.AnimationMainActivity;
 import com.yanxing.ui.fragmentnest.NestExampleActivity;
 import com.yanxing.ui.swipebacklayout.SwipeBackLayoutActivity;
+import com.yanxing.util.CommonUtil;
 import com.yanxing.util.ConstantValue;
 import com.yanxing.util.FileUtil;
-import com.yanxing.util.LogUtil;
 import com.yanxing.util.PermissionUtil;
 import com.yanxing.view.ConfirmDialog;
 import com.yanxing.view.ListDialog;
@@ -39,9 +40,6 @@ import butterknife.OnClick;
 import de.greenrobot.event.EventBus;
 
 public class MainActivity extends BaseActivity implements AMapLocListener {
-
-    @BindView(R.id.collapsing_toolbar_layout)
-    CollapsingToolbarLayout mCollapsingToolbarLayout;
 
     private static final int QUESTION_IMAGE_CODE = 1;
     private static final int QUESTION_SORT_LISTVIEW_CODE = 2;
@@ -58,9 +56,6 @@ public class MainActivity extends BaseActivity implements AMapLocListener {
 
     @Override
     protected void afterInstanceView() {
-        mCollapsingToolbarLayout.setTitle("android-util");
-        mCollapsingToolbarLayout.setExpandedTitleColor(Color.WHITE);
-        mCollapsingToolbarLayout.setCollapsedTitleTextColor(Color.RED);
         EventBus.getDefault().register(this);
         checkPermission();
         mAMapLoc = new AMapLoc(getApplicationContext());
@@ -78,7 +73,7 @@ public class MainActivity extends BaseActivity implements AMapLocListener {
         PermissionUtil.checkSelfPermission(this, new String[]{
                 Manifest.permission.CAMERA,Manifest.permission.ACCESS_FINE_LOCATION
                 ,Manifest.permission.ACCESS_COARSE_LOCATION,Manifest.permission.WRITE_EXTERNAL_STORAGE
-                ,Manifest.permission.MANAGE_DOCUMENTS,Manifest.permission.READ_EXTERNAL_STORAGE
+                ,Manifest.permission.READ_EXTERNAL_STORAGE
                 ,Manifest.permission.READ_PHONE_STATE,Manifest.permission.WRITE_SETTINGS}, QUESTION_LOCATION);
     }
 
@@ -362,7 +357,9 @@ public class MainActivity extends BaseActivity implements AMapLocListener {
     public void onRequestPermissionsResult(int requestCode, String[] permissions, int[] grantResults) {
         if (requestCode == QUESTION_LOCATION) {
             if (grantResults[0] != PackageManager.PERMISSION_GRANTED) {
-                showToast(getString(R.string.location));
+                for (int i=0;i<permissions.length;i++){
+                    PermissionUtil.getPermissionTip(permissions[i]);
+                }
             }
             return;
         }

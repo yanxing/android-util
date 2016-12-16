@@ -23,7 +23,6 @@
     <uses-permission android:name="android.permission.CAMERA"/>
     <uses-permission android:name="android.permission.MANAGE_DOCUMENTS"/>
     <uses-permission android:name="android.permission.WRITE_SETTINGS"/>
-    <uses-permission android:name="com.google.android.gallery3d.permission.GALLERY_PROVIDER"/>
 
     <application
         android:name="com.yanxing.base.MyApplication"

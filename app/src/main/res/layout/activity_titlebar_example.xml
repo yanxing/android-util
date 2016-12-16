@@ -14,6 +14,8 @@
     <com.yanxing.titlebarlibrary.TitleBar
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        app:title_main_color="@color/white"
+        app:back_img_resource="@mipmap/goback_normal"
         app:backgroundColor="@android:color/holo_red_light"
         app:title_main="@string/title2"/>
 
@@ -35,10 +37,7 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         app:title_main_center="true"
-        app:back_img_resource="@mipmap/goback_dark"
-        app:backgroundColor="@color/gery"
         app:right_icon="@mipmap/share"
-        app:title_main_color="@android:color/black"
         app:title_main="@string/title5"/>
 
 

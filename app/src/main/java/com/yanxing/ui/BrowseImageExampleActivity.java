@@ -46,7 +46,6 @@ public class BrowseImageExampleActivity extends BaseActivity{
     }
 
     protected void afterInstanceView() {
-        mTintManager.setStatusBarTintEnabled(false);
         mNumber.getPaint().setFakeBoldText(true);
         Bundle bundle = getIntent().getExtras();
         mPathList = (List<String>) bundle.getSerializable("images");

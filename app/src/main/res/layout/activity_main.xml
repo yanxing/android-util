@@ -1,37 +1,11 @@
 <?xml version="1.0" encoding="utf-8"?>
-<android.support.design.widget.CoordinatorLayout
+<LinearLayout
     xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
-    xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context="com.yanxing.ui.MainActivity"
-    android:background="@color/default_bg"
+    android:fitsSystemWindows="true"
     android:orientation="vertical">
-    <android.support.design.widget.AppBarLayout
-        android:layout_width="match_parent"
-        android:layout_height="80dp">
 
-    <android.support.design.widget.CollapsingToolbarLayout
-        android:id="@+id/collapsing_toolbar_layout"
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        app:contentScrim="@color/colorPrimary"
-        app:expandedTitleMarginStart="20dp"
-        app:layout_scrollFlags="scroll|exitUntilCollapsed">
+    <include layout="@layout/content_main"/>
 
-    <com.yanxing.titlebarlibrary.TitleBar
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        app:back_img_visible="false"
-        app:title_main_center="true"
-        app:title_main="@string/app_name"
-        app:layout_collapseMode="parallax"
-        app:layout_collapseParallaxMultiplier="0.7"/>
-    </android.support.design.widget.CollapsingToolbarLayout>
-    </android.support.design.widget.AppBarLayout>
-
-    <include layout="@layout/content_main"
-             app:layout_behavior="@string/appbar_scrolling_view_behavior"/>
-
-</android.support.design.widget.CoordinatorLayout>
+</LinearLayout>

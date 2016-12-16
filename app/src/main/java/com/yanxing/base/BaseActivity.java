@@ -6,7 +6,7 @@ import android.support.annotation.Nullable;
 import android.view.WindowManager;
 import android.widget.Toast;
 
-import com.readystatesoftware.systembartint.SystemBarTintManager;
+import com.yanxing.util.CommonUtil;
 import com.yanxing.view.LoadingDialog;
 
 import butterknife.ButterKnife;
@@ -19,19 +19,16 @@ import me.imid.swipebacklayout.lib.app.SwipeBackActivity;
 public abstract class BaseActivity extends SwipeBackActivity {
 
     private LoadingDialog mLoadingDialog;
-    protected SystemBarTintManager mTintManager;
     protected String TAG = getClass().getName();
 
 
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
+        CommonUtil.setStatusBarDarkMode(true,this);
         super.onCreate(savedInstanceState);
         setContentView(getLayoutResID());
         ButterKnife.bind(this);
         initImmersionStatus();
-        mTintManager = new SystemBarTintManager(this);
-        mTintManager .setStatusBarTintEnabled(true);
-        mTintManager.setTintColor(0xff37c14f);
         afterInstanceView();
     }
 

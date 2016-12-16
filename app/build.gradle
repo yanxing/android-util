@@ -54,7 +54,6 @@ dependencies {
     compile 'de.greenrobot:greendao:2.0.0'
     compile 'de.greenrobot:greendao-generator:2.1.0'
     compile 'com.nostra13.universalimageloader:universal-image-loader:1.9.5'
-    compile 'com.readystatesoftware.systembartint:systembartint:1.0.3'
     compile 'com.jakewharton:butterknife:8.2.1'
     apt 'com.jakewharton:butterknife-compiler:8.2.1'
     debugCompile 'com.squareup.leakcanary:leakcanary-android:1.5'
@@ -86,18 +85,4 @@ dependencies {
     compile project(path: ':heartbubblelibrary')
     compile project(path: ':photodialoglibrary')
     compile project(':downloadlibrary')
-}
-
-apt {
-    arguments {
-        androidManifestFile variant.outputs[0]?.processResources?.manifestFile
-        // if you have multiple outputs (when using splits), you may want to have other index than 0
-
-        // you should set your package name here if you are using different application IDs
-        // resourcePackageName "your.package.name"
-
-        // You can set optional annotation processing options here, like these commented options:
-        // logLevel 'INFO'
-        // logFile '/var/log/aa.log'
-    }
 }
