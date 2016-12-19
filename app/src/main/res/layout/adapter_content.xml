@@ -3,7 +3,6 @@
               android:orientation="vertical"
               android:layout_width="match_parent"
               android:layout_height="match_parent"
-              android:background="@color/default_bg"
               android:paddingLeft="@dimen/padding16"
               android:paddingTop="@dimen/padding14"
               android:paddingBottom="@dimen/padding16">

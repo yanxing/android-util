@@ -1,38 +1,34 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-              xmlns:app="http://schemas.android.com/apk/res-auto"
               android:layout_width="match_parent"
               android:layout_height="match_parent"
+              android:fitsSystemWindows="true"
               android:orientation="vertical">
-
-    <com.yanxing.titlebarlibrary.TitleBar
-        android:id="@+id/titleBar"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        app:title_main="选择地区"/>
 
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:orientation="horizontal">
+
         <ListView
             android:id="@+id/province"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
+            android:layout_weight="2"
             android:cacheColorHint="@android:color/transparent"
+            android:choiceMode="singleChoice"
             android:divider="@color/line_xx"
             android:dividerHeight="1px"
-            android:layout_weight="2"
-            android:choiceMode="singleChoice"
             android:scrollbars="none"/>
+
         <ListView
             android:id="@+id/city"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
+            android:layout_weight="1"
             android:cacheColorHint="@android:color/transparent"
             android:divider="@color/line_xx"
             android:dividerHeight="1px"
-            android:layout_weight="1"
             android:scrollbars="none"/>
     </LinearLayout>
 

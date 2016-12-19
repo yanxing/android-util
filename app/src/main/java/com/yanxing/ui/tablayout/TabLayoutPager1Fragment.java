@@ -1,8 +1,9 @@
-package com.yanxing.ui;
+package com.yanxing.ui.tablayout;
 
 import android.widget.TextView;
 
 import com.yanxing.base.BaseFragment;
+import com.yanxing.ui.R;
 
 import butterknife.BindView;
 import de.greenrobot.event.EventBus;
@@ -10,14 +11,14 @@ import de.greenrobot.event.EventBus;
 /**
  * Created by lishuangxiang on 2016/3/14.
  */
-public class TabLayoutPager2Fragment extends BaseFragment {
+public class TabLayoutPager1Fragment extends BaseFragment {
 
     @BindView(R.id.text)
     TextView mTextView;
 
     @Override
     protected int getLayoutResID() {
-        return R.layout.fragment_tablayoutpager2;
+        return R.layout.fragment_tablayoutpager1;
     }
 
     @Override

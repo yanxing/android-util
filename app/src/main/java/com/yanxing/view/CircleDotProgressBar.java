@@ -18,7 +18,7 @@ public class CircleDotProgressBar extends View {
     private Paint mPaint;
     private float mCenterX;
     private float mCenterY;
-    private float mSin_1;
+    private float mSin1;
 
     //当前进度
     private int mProgress;
@@ -41,7 +41,7 @@ public class CircleDotProgressBar extends View {
         super(context, attrs, defStyleAttr);
         mPaint = new Paint();
         mPaint.setAntiAlias(true);
-        mSin_1 = (float) Math.sin(Math.toRadians(1));
+        mSin1 = (float) Math.sin(Math.toRadians(1));
     }
     @Override
     protected void onSizeChanged(int w, int h, int oldw, int oldh) {
@@ -58,7 +58,7 @@ public class CircleDotProgressBar extends View {
         mCenterX = getWidth() / 2;
         mCenterY = getHeight() / 2;
 
-        float dotRadius = mSin_1 * outerRadius / (1 + mSin_1)+1;
+        float dotRadius = mSin1 * outerRadius / (1 + mSin1)+1;
         mPaint.setColor(Color.RED);
         mPaint.setStyle(Paint.Style.FILL);
         int count = 0;

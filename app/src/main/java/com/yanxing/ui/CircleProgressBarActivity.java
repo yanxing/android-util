@@ -4,6 +4,8 @@ import com.yanxing.base.BaseActivity;
 import com.yanxing.util.CommonUtil;
 import com.yanxing.view.CircleDotProgressBar;
 
+import java.lang.ref.WeakReference;
+
 import butterknife.BindView;
 
 /**
@@ -25,21 +27,31 @@ public class CircleProgressBarActivity extends BaseActivity {
 
     @Override
     protected void afterInstanceView() {
-        CommonUtil.setStatusBarDarkMode(true,this);
+        CommonUtil.setStatusBarDarkMode(true, this);
         mCircleDotProgressBar.setProgressMax(100);
-        new Thread(new Runnable() {
-            @Override
-            public void run() {
-                while (mProgress <= 100) {
-                    mProgress += 10;
-                    mCircleDotProgressBar.setProgress(mProgress);
-                    try {
-                        Thread.sleep(800);
-                    } catch (InterruptedException e) {
-                        e.printStackTrace();
-                    }
+        MyThread myThread = new MyThread(this);
+        myThread.start();
+    }
+
+    private static class MyThread extends Thread {
+
+        WeakReference<CircleProgressBarActivity> mReference;
+
+        private MyThread(CircleProgressBarActivity activity) {
+            mReference = new WeakReference<>(activity);
+        }
+
+        @Override
+        public void run() {
+            while (mReference.get()!=null&&mReference.get().mProgress <= 100) {
+                mReference.get().mProgress += 10;
+                mReference.get().mCircleDotProgressBar.setProgress(mReference.get().mProgress);
+                try {
+                    Thread.sleep(800);
+                } catch (InterruptedException e) {
+                    e.printStackTrace();
                 }
             }
-        }).start();
+        }
     }
 }

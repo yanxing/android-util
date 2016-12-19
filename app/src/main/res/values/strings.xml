@@ -2,7 +2,7 @@
     <string name="app_name">android-util</string>
     <string name="action_settings">Settings</string>
     <string name="title_activity_adapter">通用适配器测试</string>
-    <string name="adapterlibrary">通用适配器</string>
+    <string name="adapterlibrary">ListView、GridView和RecycleView适配器封装</string>
     <string name="title_activity_list_dialog_example">自定义列表对话框测试</string>
     <string name="list_dialog">列表对话框</string>
     <string name="title_activity_confirm_example">自定义确定对话框测试</string>
@@ -49,7 +49,7 @@
     <string name="animation">动画学习</string>
     <string name="alpha">透明动画</string>
     <string name="gao_de">高德地图定位</string>
-    <string name="city_select">城市选择</string>
+    <string name="city_select">城市选择2</string>
     <string name="frame">帧动画</string>
     <string name="layout_animation">LayoutAnimation</string>
     <string name="bufferknife">butterknife</string>
@@ -71,4 +71,20 @@
     <string name="ji_shi_quan_finish">计时全部结束</string>
     <string name="location">授权失败</string>
     <string name="operater_error">操作失败</string>
+    <string name="tablayout">TabLayout封装</string>
+    <string name="sortlistview">城市选择1</string>
+    <string name="recyclerview">RecyclerView禁止上下滑动和滑动到指定位置</string>
+    <string name="greendao">GreenDao</string>
+    <string name="ultra_ptr">ultra_ptr</string>
+    <string name="edittext_edittext_botton">输入法弹起EditText，同时不遮挡EditText下面的Botton</string>
+    <string name="textview">TextView前后添加图片</string>
+    <string name="countdown_time">列表中的倒计时</string>
+    <string name="swipebacklayout">swipeBackLayout</string>
+    <string name="design">design</string>
+    <string name="text_change_picture">文字转化为图片，宽度一致</string>
+    <string name="downloadlibrary">downloadlibrary</string>
+    <string name="surfaceview_mediaplayer">SurfaceView+MediaPlayer</string>
+    <string name="rxjava">RxJava</string>
+    <string name="expandablelistview_checkbox">ExpandableListView+CheckBox</string>
+    <string name="activity">Activity对话框</string>
 </resources>

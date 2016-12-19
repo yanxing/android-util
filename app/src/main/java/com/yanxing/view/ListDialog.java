@@ -1,7 +1,7 @@
 package com.yanxing.view;
 
 import android.app.Activity;
-import android.app.AlertDialog;
+import android.support.v7.app.AlertDialog;
 import android.util.DisplayMetrics;
 import android.view.WindowManager;
 import android.widget.AdapterView;
@@ -36,7 +36,7 @@ public class ListDialog {
         int width = metric.widthPixels;
         //动态设置对话框的大小
         WindowManager.LayoutParams params = mListDialog.getWindow().getAttributes();
-        params.width = width*9/10;
+        params.width = width*4/5;
         mListDialog.getWindow().setAttributes(params);
         mListDialog.setContentView(R.layout.list_dialog);
         mListView= (ListView) mListDialog.findViewById(R.id.listview);

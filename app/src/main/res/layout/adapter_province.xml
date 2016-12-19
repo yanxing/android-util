@@ -23,6 +23,6 @@
         android:layout_marginLeft="@dimen/margin8"
         android:text="当前位置"
         android:textColor="@color/colorMainDark"
-        android:textSize="@dimen/text_normal_xx"/>
+        android:textSize="@dimen/text_normal_x"/>
 
 </LinearLayout>

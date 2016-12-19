@@ -1,10 +1,11 @@
-package com.yanxing.ui;
+package com.yanxing.ui.tablayout;
 
 import android.support.design.widget.TabLayout;
 import android.support.v4.app.Fragment;
 
 import com.yanxing.base.BaseActivity;
 import com.yanxing.tablayoutlibrary.TabLayoutPager;
+import com.yanxing.ui.R;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -37,7 +38,7 @@ public class TabLayoutPagerExampleActivity extends BaseActivity {
         mStringList.add(getString(R.string.menu2));
         mStringList.add(getString(R.string.menu3));
         mTabLayoutPager.addTab(mFragmentList,mStringList);
-        mTabLayoutPager.getTabLayout().setOnTabSelectedListener(new TabLayout.OnTabSelectedListener() {
+        mTabLayoutPager.getTabLayout().addOnTabSelectedListener(new TabLayout.OnTabSelectedListener() {
             @Override
             public void onTabSelected(TabLayout.Tab tab) {
                 mTabLayoutPager.getViewPager().setCurrentItem(tab.getPosition());

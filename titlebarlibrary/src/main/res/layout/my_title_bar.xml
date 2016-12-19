@@ -4,7 +4,7 @@
               android:layout_width="match_parent"
               android:layout_height="wrap_content"
               android:clipToPadding="true"
-              android:background="@color/colorDefault"
+              android:background="@color/titleBarColorGreen"
               android:fitsSystemWindows="true"
               android:orientation="vertical">
 

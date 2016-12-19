@@ -5,7 +5,6 @@ import android.widget.ListView;
 import com.yanxing.adapterlibrary.CommonAdapter;
 import com.yanxing.adapterlibrary.ViewHolder;
 import com.yanxing.base.BaseActivity;
-import com.yanxing.model.User;
 import com.yanxing.ui.R;
 
 import java.util.ArrayList;
@@ -29,17 +28,16 @@ public class LayoutAnimationExampleActivity extends BaseActivity {
 
     @Override
     protected void afterInstanceView() {
-        final List<User> list=new ArrayList<User>();
+        final List<Integer> list=new ArrayList<>();
         for (int i=0;i<20;i++){
-            User user=new User("1","yanxing");
-            list.add(user);
+            list.add(i);
 
         }
-        CommonAdapter<User> adapter = new CommonAdapter<User>(list,R.layout.list_dialog_textview)
+        CommonAdapter<Integer> adapter = new CommonAdapter<Integer>(list,R.layout.list_dialog_textview)
         {
             @Override
             public void onBindViewHolder(ViewHolder viewHolder, int position) {
-                viewHolder.setText(R.id.text, list.get(position).getUsername());
+                viewHolder.setText(R.id.text, String.valueOf(list.get(position)));
             }
         };
         mListView.setAdapter(adapter);

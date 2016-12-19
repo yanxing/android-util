@@ -1,6 +1,5 @@
 package com.yanxing.ui;
 
-import android.view.View;
 import android.widget.ListView;
 
 import com.yanxing.adapterlibrary.CommonAdapter;
@@ -15,7 +14,6 @@ import butterknife.BindView;
 import in.srain.cube.views.ptr.PtrClassicFrameLayout;
 import in.srain.cube.views.ptr.PtrDefaultHandler;
 import in.srain.cube.views.ptr.PtrFrameLayout;
-import in.srain.cube.views.ptr.PtrHandler;
 
 /**
  * UltraPtr
@@ -52,21 +50,14 @@ public class UltraPtrExampleActivity extends BaseActivity {
                 }, 1000);
             }
         });
-        mPtrClassicFrameLayout.setPullToRefresh(true);
+        mPtrClassicFrameLayout.autoRefresh(true);
     }
 
     //test
     public void load() {
-        mList.add("0");
-        mList.add("0");
-        mList.add("0");
-        mList.add("0");
-        mList.add("0");
-        mList.add("0");
-        mList.add("0");
-        mList.add("0");
-        mList.add("0");
-        mList.add("0");
+        for (int i=0;i<10;i++){
+            mList.add(String.valueOf(i));
+        }
         mCommonAdapter = new CommonAdapter<String>(mList,R.layout.adapter_content) {
             @Override
             public void onBindViewHolder(ViewHolder viewHolder, int position) {

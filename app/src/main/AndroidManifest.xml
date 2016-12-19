@@ -58,109 +58,67 @@
             </intent-filter>
         </activity>
         <activity
-            android:name=".AdapterExampleActivity"
-            android:theme="@style/SwipeBack"/>
+            android:name=".AdapterExampleActivity"/>
         <activity
             android:name=".BrowseImageExampleActivity"
             android:theme="@style/noTitle"/>
         <activity android:name=".BaiduMapExampleActivity"/>
         <activity
-            android:name=".FrescoExampleActivity"
-            android:theme="@style/SwipeBack"/>
-        <activity android:name=".EventBusExampleActivity"/>
+            android:name=".FrescoExampleActivity"/>
         <activity
-            android:name=".TitleBarExampleActivity"
-            android:theme="@style/SwipeBack"/>
+            android:name=".TitleBarExampleActivity"/>
         <activity
-            android:name=".TabLayoutPagerExampleActivity"
-            android:theme="@style/SwipeBack"/>
+            android:name=".tablayout.TabLayoutPagerExampleActivity"/>
         <activity
-            android:name=".RecyclerViewExampleActivity"
-            android:theme="@style/SwipeBack"/>
+            android:name=".GreenDaoExampleActivity"/>
         <activity
-            android:name=".GreenDaoExampleActivity"
-            android:theme="@style/SwipeBack"/>
+            android:name=".SelectCityActivity"/>
         <activity
-            android:name=".SelectCityActivity"
-            android:theme="@style/SwipeBack"/>
+            android:name=".ShowImageActivity"/>
         <activity
-            android:name=".ShowImageActivity"
-            android:theme="@style/SwipeBack"/>
+            android:name=".RxJavaExampleActivity"/>
         <activity
-            android:name=".RxJavaExampleActivity"
-            android:theme="@style/SwipeBack"/>
+            android:name=".UltraPtrExampleActivity"/>
         <activity
-            android:name=".XRecyclerViewActivity"
-            android:theme="@style/SwipeBack"/>
+            android:name=".animation.AnimationMainActivity"/>
         <activity
-            android:name=".UltraPtrExampleActivity"
-            android:theme="@style/SwipeBack"/>
-        <activity
-            android:name=".ThreadTestActivity"
-            android:theme="@style/SwipeBack"/>
-        <activity
-            android:name=".ThreadTestActivity2"
-            android:theme="@style/SwipeBack"/>
-        <activity
-            android:name=".animation.AnimationMainActivity"
-            android:theme="@style/SwipeBack"/>
-        <activity
-            android:name=".animation.LayoutAnimationExampleActivity"
-            android:theme="@style/SwipeBack"/>
+            android:name=".animation.LayoutAnimationExampleActivity"/>
         <activity
             android:name=".DialogActivity"
             android:theme="@style/MyDialogStyleSelect"/>
         <activity
-            android:name=".ButterKnifeExampleActivity"
-            android:theme="@style/SwipeBack"/>
-        <activity
             android:name=".ExpandableListViewCheckActivity"
-            android:theme="@style/SwipeBack"/>
+            android:theme="@style/AppTheme"/>
         <activity
-            android:name=".animation.ObjectAnimationActivity"
-            android:theme="@style/SwipeBack"/>
+            android:name=".animation.ObjectAnimationActivity"/>
         <activity
-            android:name=".animation.QQHealthActivity"
-            android:theme="@style/SwipeBack"/>
+            android:name=".animation.QQHealthActivity"/>
         <activity
-            android:name=".animation.PathExampleActivity"
-            android:theme="@style/SwipeBack"/>
+            android:name=".animation.PathExampleActivity"/>
         <activity
             android:name=".InputEditButtonActivity"
-            android:theme="@style/SwipeBack"
             android:windowSoftInputMode="adjustResize|stateAlwaysHidden"/>
         <activity
-            android:name=".TextImageActivity"
-            android:theme="@style/SwipeBack"/>
+            android:name=".TextImageActivity"/>
         <activity
-            android:name=".animation.HeartBubbleViewActivity"
-            android:theme="@style/SwipeBack"/>
+            android:name=".animation.HeartBubbleViewActivity"/>
         <activity
-            android:name=".DownloadLibraryActivity"
-            android:theme="@style/SwipeBack"/>
+            android:name=".DownloadLibraryActivity"/>
         <activity
-            android:name=".fragmentnest.NestExampleActivity"
-            android:theme="@style/SwipeBack"/>
+            android:name=".SurfaceViewMediaPlayerActivity"
+            android:theme="@style/AppTheme"/>
         <activity
-            android:name=".SurfaceViewMediaPlayerActivity"/>
+            android:name=".ProgressBarActivity"/>
         <activity
-            android:name=".ProgressBarActivity"
-            android:theme="@style/SwipeBack"/>
+            android:name=".CircleProgressBarActivity"/>
         <activity
-            android:name=".CircleProgressBarActivity"
-            android:theme="@style/SwipeBack"/>
+            android:name=".TextChangeImageActivity"/>
         <activity
-            android:name=".TextChangeImageActivity"
-            android:theme="@style/SwipeBack"/>
+            android:name=".ExtendRecyclerViewActivity"/>
         <activity
-            android:name=".ExtendRecyclerViewActivity"
-            android:theme="@style/SwipeBack"/>
+            android:name=".HideTitleBottomActivity"/>
         <activity
-            android:name=".HideTitleBottomActivity"
-            android:theme="@style/SwipeBack"/>
-        <activity
-            android:name=".swipebacklayout.SwipeBackLayoutActivity"
-            android:theme="@style/SwipeBack"/>
+            android:name=".swipebacklayout.SwipeBackLayoutActivity"/>
         <activity
             android:name=".swipebacklayout.NormalActivity"
             android:theme="@android:style/Theme.Translucent"/>
@@ -171,15 +129,12 @@
             android:name=".swipebacklayout.AbsListViewActivity"
             android:theme="@android:style/Theme.Translucent"/>
         <activity
-            android:name=".DesignActivity"
-            android:theme="@style/SwipeBack"/>
+            android:name=".DesignActivity"/>
         <activity
             android:name=".RippleLayoutActivity"
-            android:hardwareAccelerated="false"
-            android:theme="@style/SwipeBack"/>
+            android:hardwareAccelerated="false"/>
         <activity
-            android:name=".TimingActivity"
-            android:theme="@style/SwipeBack"/>
+            android:name=".TimingActivity"/>
     </application>
 
 </manifest>

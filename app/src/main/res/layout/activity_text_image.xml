@@ -8,29 +8,4 @@
         android:id="@+id/text"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"/>
-
-    <FrameLayout
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="100dp">
-        <TextView
-            android:id="@+id/icon"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="图标"
-            android:paddingLeft="4dp"
-            android:paddingTop="2dp"
-            android:paddingBottom="2dp"
-            android:paddingRight="4dp"
-            android:textSize="@dimen/text_small"
-            android:textColor="@color/white"
-            android:background="@drawable/circle_green_shape"/>
-        <TextView
-            android:id="@+id/content"
-            android:layout_width="wrap_content"
-            android:layout_height="match_parent"
-            android:lineSpacingExtra="6dp"
-            android:layout_gravity="center_vertical"/>
-    </FrameLayout>
-
 </LinearLayout>

@@ -34,7 +34,7 @@ android {
 
     sourceSets {
         main {
-            java.srcDirs = ['src/main/java', 'src/main/java-gen']
+            java.srcDirs = ['src/main/java', 'src/main/java']
         }
     }
 
@@ -68,7 +68,6 @@ dependencies {
     compile 'com.squareup.retrofit2:converter-gson:2.0.0-beta4'
     compile 'com.trello:rxlifecycle:0.4.0'
     compile 'com.trello:rxlifecycle-components:0.4.0'
-    compile 'com.jcodecraeer:xrecyclerview:1.2.7'
     compile 'com.google.code.gson:gson:2.7'
     compile 'in.srain.cube:ultra-ptr:1.0.11'
     compile 'in.srain.cube:clog:1.0.2'
@@ -80,9 +79,8 @@ dependencies {
     compile project(':baidumaplibrary')
     compile project(':titlebarlibrary')
     compile project(':tablayoutlibrary')
-    compile project(':swipelistviewlibrary')
     compile project(':amaploclibrary')
-    compile project(path: ':heartbubblelibrary')
-    compile project(path: ':photodialoglibrary')
+    compile project(':heartbubblelibrary')
+    compile project(':photodialoglibrary')
     compile project(':downloadlibrary')
 }

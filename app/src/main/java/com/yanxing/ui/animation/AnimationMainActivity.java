@@ -4,7 +4,6 @@ import android.animation.Animator;
 import android.animation.ObjectAnimator;
 import android.content.Intent;
 import android.graphics.drawable.AnimationDrawable;
-import android.os.Bundle;
 import android.os.Handler;
 import android.view.View;
 import android.view.animation.AlphaAnimation;
@@ -12,11 +11,13 @@ import android.widget.Button;
 import android.widget.ImageView;
 
 import com.yanxing.base.BaseActivity;
+import com.yanxing.ui.CircleProgressBarActivity;
+import com.yanxing.ui.ProgressBarActivity;
 import com.yanxing.ui.R;
+import com.yanxing.ui.RippleLayoutActivity;
 import com.yanxing.util.CommonUtil;
 
 import butterknife.BindView;
-import butterknife.ButterKnife;
 import butterknife.OnClick;
 
 /**
@@ -82,9 +83,9 @@ public class AnimationMainActivity extends BaseActivity {
 
     @OnClick(R.id.object_animation)
     public void onClick() {
-        ViewWrapper viewWrapper=new ViewWrapper(mObjectAnimation);
-        ObjectAnimator objectAnimator=ObjectAnimator.ofInt(viewWrapper,"width"
-                ,CommonUtil.getScreenDisplay(this).getWidth()-20).setDuration(3000);
+        ViewWrapper viewWrapper = new ViewWrapper(mObjectAnimation);
+        ObjectAnimator objectAnimator = ObjectAnimator.ofInt(viewWrapper, "width"
+                , CommonUtil.getScreenDisplay(this).getWidth() - 20).setDuration(3000);
         objectAnimator.start();
         objectAnimator.addListener(new Animator.AnimatorListener() {
             @Override
@@ -111,39 +112,55 @@ public class AnimationMainActivity extends BaseActivity {
     }
 
     @OnClick(R.id.heartBubbleView)
-    public void onClickHeartBubbleView(){
-        Intent intent=new Intent(getApplicationContext(),HeartBubbleViewActivity.class);
+    public void onClickHeartBubbleView() {
+        Intent intent = new Intent(getApplicationContext(), HeartBubbleViewActivity.class);
         startActivity(intent);
     }
 
 
     @OnClick(R.id.health_animation)
     public void onClickHealth() {
-        Intent intent=new Intent(getApplicationContext(),QQHealthActivity.class);
+        Intent intent = new Intent(getApplicationContext(), QQHealthActivity.class);
         startActivity(intent);
     }
 
     @OnClick(R.id.path_animation)
-    public void onClickPath(){
-        Intent intent=new Intent(getApplicationContext(),PathExampleActivity.class);
+    public void onClickPath() {
+        Intent intent = new Intent(getApplicationContext(), PathExampleActivity.class);
         startActivity(intent);
     }
 
+    @OnClick(R.id.progressBar)
+    public void onProgressBar() {
+        Intent intent = new Intent(getApplicationContext(), ProgressBarActivity.class);
+        startActivity(intent);
+    }
 
+    @OnClick(R.id.circleProgressBar)
+    public void onCircleProgressBar() {
+        Intent intent = new Intent(getApplicationContext(), CircleProgressBarActivity.class);
+        startActivity(intent);
+    }
 
-    public static class ViewWrapper{
+    @OnClick(R.id.ripple_sesame)
+    public void onRippleSesame() {
+        Intent intent = new Intent(getApplicationContext(), RippleLayoutActivity.class);
+        startActivity(intent);
+    }
+
+    private static class ViewWrapper {
         private View mView;
 
-        ViewWrapper(View view){
-            this.mView=view;
+        ViewWrapper(View view) {
+            this.mView = view;
         }
 
-        public int getWidth(){
+        public int getWidth() {
             return mView.getLayoutParams().width;
         }
 
-        public void setWidth(int width){
-            mView.getLayoutParams().width=width;
+        public void setWidth(int width) {
+            mView.getLayoutParams().width = width;
             mView.requestLayout();
         }
     }

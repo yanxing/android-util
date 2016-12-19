@@ -1,6 +1,7 @@
 package com.yanxing.ui;
 
 import com.yanxing.base.BaseActivity;
+import com.yanxing.util.CommonUtil;
 
 /**
  * titlebarlibrary使用
@@ -15,6 +16,7 @@ public class TitleBarExampleActivity extends BaseActivity {
 
     @Override
     protected void afterInstanceView() {
+        CommonUtil.setStatusBarDarkMode(false,this);
 
     }
 }

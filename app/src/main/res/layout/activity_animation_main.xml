@@ -1,14 +1,9 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-              xmlns:app="http://schemas.android.com/apk/res-auto"
               android:layout_width="match_parent"
               android:layout_height="match_parent"
+              android:fitsSystemWindows="true"
               android:orientation="vertical">
-
-    <com.yanxing.titlebarlibrary.TitleBar
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        app:title_main="@string/animation"/>
 
     <Button
         android:id="@+id/alpha"
@@ -52,4 +47,18 @@
         android:id="@+id/heartBubbleView"
         style="@style/Animation_Button"
         android:text="heartBubbleView"/>
+
+    <Button
+        android:id="@+id/progressBar"
+        style="@style/Animation_Button"
+        android:text="圆环进度1"/>
+
+    <Button
+        android:id="@+id/circleProgressBar"
+        style="@style/Animation_Button"
+        android:text="圆环进度2"/>
+    <Button
+        android:id="@+id/ripple_sesame"
+        style="@style/Animation_Button"
+        android:text="ripple_sesame"/>
 </LinearLayout>

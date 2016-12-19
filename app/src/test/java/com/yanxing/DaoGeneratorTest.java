@@ -25,7 +25,7 @@ public class DaoGeneratorTest {
         schema.setDefaultJavaPackageDao("com.yanxing.dao");
         // keep custom code block
         schema.enableKeepSectionsByDefault();
-        new DaoGenerator().generateAll(schema, "src/main/java-gen");
+        new DaoGenerator().generateAll(schema, "src/main/java");
     }
 
     private static void addStudent(Schema schema) {

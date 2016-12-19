@@ -84,7 +84,7 @@ public class ExtendRecyclerViewActivity extends BaseActivity {
     /**
      * 滑动监听，当指定位置位于最后可见项的后面时，移动最后的距离
      */
-    class RecyclerViewListener extends RecyclerView.OnScrollListener {
+    private class RecyclerViewListener extends RecyclerView.OnScrollListener {
         @Override
         public void onScrolled(RecyclerView recyclerView, int dx, int dy) {
             super.onScrolled(recyclerView, dx, dy);

@@ -12,7 +12,6 @@ import com.facebook.imagepipeline.request.ImageRequestBuilder;
 import com.yanxing.adapterlibrary.CommonAdapter;
 import com.yanxing.adapterlibrary.ViewHolder;
 import com.yanxing.base.BaseActivity;
-import com.yanxing.util.FileUtil;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -27,9 +26,6 @@ public class FrescoExampleActivity extends BaseActivity {
 
     @BindView(R.id.gridView)
     GridView mGridView;
-
-//    @BindView(R.id.simple_drawee_view)
-//    SimpleDraweeView mSimpleDraweeView;
 
     private CommonAdapter<String> mCommonAdapter;
     private List<String> mList=new ArrayList<String>();

@@ -3,11 +3,8 @@ package com.yanxing.ui;
 import android.Manifest;
 import android.content.Intent;
 import android.content.pm.PackageManager;
-import android.graphics.Color;
 import android.os.Build;
 import android.os.Bundle;
-import android.support.design.widget.CollapsingToolbarLayout;
-import android.text.format.Time;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.Toast;
@@ -19,12 +16,10 @@ import com.photo.ui.PhotoUtilsActivity;
 import com.yanxing.dialog.PhotoParam;
 import com.yanxing.dialog.SelectPhotoActivity;
 import com.yanxing.base.BaseActivity;
-import com.yanxing.model.FirstEventBus;
 import com.yanxing.sortlistviewlibrary.CityListActivity;
 import com.yanxing.ui.animation.AnimationMainActivity;
-import com.yanxing.ui.fragmentnest.NestExampleActivity;
 import com.yanxing.ui.swipebacklayout.SwipeBackLayoutActivity;
-import com.yanxing.util.CommonUtil;
+import com.yanxing.ui.tablayout.TabLayoutPagerExampleActivity;
 import com.yanxing.util.ConstantValue;
 import com.yanxing.util.FileUtil;
 import com.yanxing.util.PermissionUtil;
@@ -35,9 +30,7 @@ import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
 
-import butterknife.BindView;
 import butterknife.OnClick;
-import de.greenrobot.event.EventBus;
 
 public class MainActivity extends BaseActivity implements AMapLocListener {
 
@@ -56,7 +49,6 @@ public class MainActivity extends BaseActivity implements AMapLocListener {
 
     @Override
     protected void afterInstanceView() {
-        EventBus.getDefault().register(this);
         checkPermission();
         mAMapLoc = new AMapLoc(getApplicationContext());
         mAMapLoc.setAMapLocListener(this);
@@ -79,13 +71,13 @@ public class MainActivity extends BaseActivity implements AMapLocListener {
 
     @OnClick(value = {R.id.adapter_button, R.id.list_dialog_button, R.id.confirm_dialog_button
             , R.id.loading_dialog_button, R.id.select_image, R.id.browse_image, R.id.map
-            , R.id.fresco, R.id.eventbus, R.id.titleBar, R.id.tabLayoutPager, R.id.recyclerView
-            , R.id.sortListView, R.id.greenDao, R.id.selectCity, R.id.xRecyclerView, R.id.ultra_ptr
-            , R.id.amap, R.id.threadTest, R.id.animation, R.id.dialog, R.id.ButterKnife
+            , R.id.fresco, R.id.titleBar, R.id.tabLayoutPager
+            , R.id.sortListView, R.id.greenDao, R.id.selectCity, R.id.ultra_ptr
+            , R.id.amap, R.id.animation, R.id.dialog
             , R.id.expandableListViewCheck, R.id.RxJava, R.id.inputEditButton, R.id.textImage
-            , R.id.select_image_dialog, R.id.downloadlibrary, R.id.nestFragment, R.id.surfaceView
-            , R.id.progressBar, R.id.circleProgressBar, R.id.textChangeImage, R.id.extendRecyclerView
-            , R.id.hideTitleBottom, R.id.swipeBackLayout, R.id.design, R.id.ripple_layout, R.id.time})
+            , R.id.select_image_dialog, R.id.downloadlibrary, R.id.surfaceView
+            , R.id.textChangeImage, R.id.extendRecyclerView
+            , R.id.hideTitleBottom, R.id.swipeBackLayout, R.id.design, R.id.time})
     public void onClick(View v) {
         Intent intent = new Intent();
         Bundle bundle = new Bundle();
@@ -137,7 +129,6 @@ public class MainActivity extends BaseActivity implements AMapLocListener {
             case R.id.browse_image:
                 intent.setClass(getApplicationContext(), BrowseImageExampleActivity.class);
                 List<String> list = new ArrayList<String>();
-                list.add("http://www.loveq.cn/store/photo/144/546/1445460/2140998/1402789580862162351.png");
                 list.add("http://a0.att.hudong.com/15/08/300218769736132194086202411_950.jpg");
                 list.add("http://pic15.nipic.com/20110731/8022110_162804602317_2.jpg");
                 bundle.putSerializable("images", (Serializable) list);
@@ -157,11 +148,6 @@ public class MainActivity extends BaseActivity implements AMapLocListener {
                 intent.setClass(getApplicationContext(), FrescoExampleActivity.class);
                 startActivity(intent);
                 break;
-            //eventBus测试
-            case R.id.eventbus:
-                intent.setClass(getApplicationContext(), EventBusExampleActivity.class);
-                startActivity(intent);
-                break;
             //标题栏测试
             case R.id.titleBar:
                 intent.setClass(getApplicationContext(), TitleBarExampleActivity.class);
@@ -169,11 +155,6 @@ public class MainActivity extends BaseActivity implements AMapLocListener {
                 break;
             case R.id.tabLayoutPager:
                 intent.setClass(getApplicationContext(), TabLayoutPagerExampleActivity.class);
-                startActivity(intent);
-                break;
-            //RecyclerViewAdapter test
-            case R.id.recyclerView:
-                intent.setClass(getApplicationContext(), RecyclerViewExampleActivity.class);
                 startActivity(intent);
                 break;
             case R.id.extendRecyclerView:
@@ -199,24 +180,12 @@ public class MainActivity extends BaseActivity implements AMapLocListener {
                 intent.setClass(getApplicationContext(), UltraPtrExampleActivity.class);
                 startActivity(intent);
                 break;
-            case R.id.xRecyclerView:
-                intent.setClass(getApplicationContext(), XRecyclerViewActivity.class);
-                startActivity(intent);
-                break;
-            case R.id.threadTest:
-                intent.setClass(getApplicationContext(), ThreadTestActivity2.class);
-                startActivity(intent);
-                break;
             case R.id.animation:
                 intent.setClass(getApplicationContext(), AnimationMainActivity.class);
                 startActivity(intent);
                 break;
             case R.id.dialog:
                 intent.setClass(getApplicationContext(), DialogActivity.class);
-                startActivity(intent);
-                break;
-            case R.id.ButterKnife:
-                intent.setClass(getApplicationContext(), ButterKnifeExampleActivity.class);
                 startActivity(intent);
                 break;
             case R.id.expandableListViewCheck:
@@ -239,20 +208,8 @@ public class MainActivity extends BaseActivity implements AMapLocListener {
                 intent.setClass(getApplicationContext(), DownloadLibraryActivity.class);
                 startActivity(intent);
                 break;
-            case R.id.nestFragment:
-                intent.setClass(getApplicationContext(), NestExampleActivity.class);
-                startActivity(intent);
-                break;
             case R.id.surfaceView:
                 intent.setClass(getApplicationContext(), SurfaceViewMediaPlayerActivity.class);
-                startActivity(intent);
-                break;
-            case R.id.progressBar:
-                intent.setClass(getApplicationContext(), ProgressBarActivity.class);
-                startActivity(intent);
-                break;
-            case R.id.circleProgressBar:
-                intent.setClass(getApplicationContext(), CircleProgressBarActivity.class);
                 startActivity(intent);
                 break;
             case R.id.textChangeImage:
@@ -269,10 +226,6 @@ public class MainActivity extends BaseActivity implements AMapLocListener {
                 break;
             case R.id.design:
                 intent.setClass(getApplicationContext(), DesignActivity.class);
-                startActivity(intent);
-                break;
-            case R.id.ripple_layout:
-                intent.setClass(getApplicationContext(), RippleLayoutActivity.class);
                 startActivity(intent);
                 break;
             case R.id.time:
@@ -313,14 +266,7 @@ public class MainActivity extends BaseActivity implements AMapLocListener {
     }
 
     @Override
-    protected void onStop() {
-        super.onStop();
-        EventBus.getDefault().post(new FirstEventBus(getString(R.string.eventbus_tip)));
-    }
-
-    @Override
     protected void onDestroy() {
-        EventBus.getDefault().unregister(this);
         mAMapLoc.onDestroy();
         super.onDestroy();
     }
@@ -336,13 +282,7 @@ public class MainActivity extends BaseActivity implements AMapLocListener {
             } else if (requestCode == QUESTION_SORT_LISTVIEW_CODE) {
                 showToast(data.getExtras().getString("city"));
             }
-        }else {
-            showToast(getString(R.string.operater_error));
         }
-    }
-
-    public void onEvent(String msg) {
-        showToast(msg);
     }
 
     @Override
