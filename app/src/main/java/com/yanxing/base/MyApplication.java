@@ -31,8 +31,9 @@ public class  MyApplication extends Application {
 
     public  BaiduLoc baiduLoc;
 
-    private DaoSession daoSession;
     private SQLiteDatabase db;
+
+    private DaoSession mDaoSession;
 
     @Override
     public void onCreate() {
@@ -53,11 +54,11 @@ public class  MyApplication extends Application {
     public void initGreen(){
         DaoMaster.DevOpenHelper helper = new DaoMaster.DevOpenHelper(this, "yanxing-db", null);
         DaoMaster daoMaster = new DaoMaster(helper.getWritableDatabase());
-        daoSession = daoMaster.newSession();
+        mDaoSession = daoMaster.newSession();
     }
 
     public DaoSession getDaoSession() {
-        return daoSession;
+        return mDaoSession;
     }
 
     public SQLiteDatabase getDb() {

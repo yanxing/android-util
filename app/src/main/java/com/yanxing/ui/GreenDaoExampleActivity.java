@@ -16,7 +16,6 @@ import java.util.List;
 import butterknife.BindView;
 import butterknife.OnClick;
 import butterknife.OnItemClick;
-import de.greenrobot.dao.query.Query;
 
 /**
  * GreenDao例子
@@ -41,10 +40,7 @@ public class GreenDaoExampleActivity extends BaseActivity {
     @Override
     protected void afterInstanceView() {
         mStudentDao=((MyApplication)getApplicationContext()).getDaoSession().getStudentDao();
-        Query query = mStudentDao.queryBuilder()
-                .orderDesc(StudentDao.Properties.Id)
-                .build();
-        mStudentList=query.list();
+        mStudentList=mStudentDao.queryBuilder().orderDesc(StudentDao.Properties.Id).list();
         mStudentCommonAdapter = new CommonAdapter<Student>(mStudentList,R.layout.list_dialog_textview)
         {
             @Override
@@ -59,9 +55,7 @@ public class GreenDaoExampleActivity extends BaseActivity {
     public void onClick(View view){
         switch (view.getId()){
             case R.id.button:
-                Student student=new Student();
-                student.setName("yanxing"+i);
-                student.setSex(getString(R.string.male));
+                Student student=new Student("yanxing"+i,"0","13");
                 mStudentDao.insert(student);
                 mStudentList.add(student);
                 mStudentCommonAdapter.update(mStudentList);

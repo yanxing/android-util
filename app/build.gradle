@@ -1,6 +1,7 @@
 apply plugin: 'com.android.application'
 apply plugin: 'android-apt'
 apply plugin: 'me.tatarka.retrolambda'
+apply plugin: 'org.greenrobot.greendao'
 
 android {
     signingConfigs {
@@ -32,15 +33,15 @@ android {
         unitTests.returnDefaultValues = true
     }
 
-    sourceSets {
-        main {
-            java.srcDirs = ['src/main/java', 'src/main/java']
-        }
-    }
-
     compileOptions {
         targetCompatibility 1.8
         sourceCompatibility 1.8
+    }
+
+    greendao {
+        schemaVersion 1
+        daoPackage 'com.yanxing.dao'
+        targetGenDir 'src/main/java'
     }
 }
 
@@ -51,8 +52,6 @@ dependencies {
     compile 'com.android.support:design:24.0.0'
     compile 'com.facebook.fresco:fresco:0.9.0'
     compile 'de.greenrobot:eventbus:2.4.0'
-    compile 'de.greenrobot:greendao:2.0.0'
-    compile 'de.greenrobot:greendao-generator:2.1.0'
     compile 'com.nostra13.universalimageloader:universal-image-loader:1.9.5'
     compile 'com.jakewharton:butterknife:8.2.1'
     apt 'com.jakewharton:butterknife-compiler:8.2.1'
@@ -72,6 +71,7 @@ dependencies {
     compile 'in.srain.cube:ultra-ptr:1.0.11'
     compile 'in.srain.cube:clog:1.0.2'
     compile 'com.jakewharton:disklrucache:2.0.2'
+    compile 'org.greenrobot:greendao:3.0.1'
     compile project(':sortlistviewlibrary')
     compile project(':adapterlibrary')
     compile project(':photolibrary')
