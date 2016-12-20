@@ -15,24 +15,39 @@ import java.util.List;
  * 解析json
  * Created by lishuangxiang on 2016/4/8.
  */
-public class ParseJson {
+public class ParseJsonFile {
 
+
+    /**
+     * 读取Json文件
+     * @param context
+     * @param jsonFileName
+     * @return String
+     */
+    public static String getJsonFileString(Context context,String jsonFileName) {
+        StringBuilder stringBuffer = new StringBuilder();
+        try {
+            InputStream inputStream = context.getAssets().open(jsonFileName);
+            int len;
+            byte[] buffer = new byte[1024];
+            while ((len = inputStream.read(buffer)) != -1) {
+                stringBuffer.append(new String(buffer, 0, len, "UTF-8"));
+            }
+            inputStream.close();
+            return stringBuffer.toString();
+        } catch (Exception e) {
+
+        }
+        return null;
+    }
 
     /**
      * 解析省市区数据
      * @param context
      */
     public static List<Area> getArea(Context context) {
-        StringBuffer stringBuffer = new StringBuffer();
-        try {
-            InputStream inputStream = context.getAssets().open("city.json");
-            int len = -1;
-            byte[] buffer = new byte[1024];
-            while ((len = inputStream.read(buffer)) != -1) {
-                stringBuffer.append(new String(buffer, 0, len, "UTF-8"));
-            }
-            inputStream.close();
-            String content = stringBuffer.toString();
+        try{
+            String content =getJsonFileString(context,"city.json");
             Gson gson=new Gson();
             JSONArray jsonArray=new JSONArray(content);
             List<Area> areaList=new ArrayList<Area>();
