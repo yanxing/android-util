@@ -61,29 +61,12 @@
             android:name=".BrowseImageActivity"
             android:theme="@style/noTitle"/>
         <activity
-            android:name=".TitleBarFragment"/>
-        <activity
-            android:name=".tablayout.TabLayoutPagerFragment"/>
-        <activity
-            android:name=".GreenDaoFragment"/>
-        <activity
-            android:name=".SelectCityFragment"/>
-        <activity
             android:name=".ShowImageActivity"/>
-        <activity
-            android:name=".RxJavaFragment"/>
-        <activity
-            android:name=".UltraPtrFragment"/>
-        <activity
-            android:name=".animation.AnimationMainFragment"/>
         <activity
             android:name=".animation.LayoutAnimationExampleActivity"/>
         <activity
             android:name=".DialogActivity"
             android:theme="@style/MyDialogStyleSelect"/>
-        <activity
-            android:name=".ExpandableListViewCheckBoxFragment"
-            android:theme="@style/AppTheme"/>
         <activity
             android:name=".animation.ObjectAnimationActivity"/>
         <activity
@@ -94,11 +77,7 @@
             android:name=".InputEditButtonActivity"
             android:windowSoftInputMode="adjustResize|stateAlwaysHidden"/>
         <activity
-            android:name=".TextAddImageBeforeLastFragment"/>
-        <activity
             android:name=".animation.HeartBubbleViewActivity"/>
-        <activity
-            android:name=".DownloadLibraryFragment"/>
         <activity
             android:name=".SurfaceViewMediaPlayerActivity"
             android:theme="@style/AppTheme"/>
@@ -106,12 +85,6 @@
             android:name=".ProgressBarActivity"/>
         <activity
             android:name=".CircleProgressBarActivity"/>
-        <activity
-            android:name=".TextConversionBitmapFragment"/>
-        <activity
-            android:name=".ExtendRecyclerViewFragment"/>
-        <activity
-            android:name=".HideTitleBottomFragment"/>
         <activity
             android:name=".swipebacklayout.SwipeBackLayoutActivity"/>
         <activity
@@ -124,12 +97,8 @@
             android:name=".swipebacklayout.AbsListViewActivity"
             android:theme="@android:style/Theme.Translucent"/>
         <activity
-            android:name=".DesignFragment"/>
-        <activity
             android:name=".RippleLayoutActivity"
             android:hardwareAccelerated="false"/>
-        <activity
-            android:name=".TimingFragment"/>
     </application>
 
 </manifest>
