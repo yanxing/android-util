@@ -10,6 +10,7 @@ import android.widget.TextView;
 
 import com.yanxing.adapterlibrary.RecyclerViewAdapter;
 import com.yanxing.base.BaseFragment;
+import com.yanxing.ui.animation.ProgressBarActivity;
 
 import java.lang.ref.WeakReference;
 import java.util.ArrayList;

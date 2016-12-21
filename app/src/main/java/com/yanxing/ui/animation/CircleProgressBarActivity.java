@@ -1,6 +1,7 @@
-package com.yanxing.ui;
+package com.yanxing.ui.animation;
 
 import com.yanxing.base.BaseActivity;
+import com.yanxing.ui.R;
 import com.yanxing.util.CommonUtil;
 import com.yanxing.view.CircleDotProgressBar;
 

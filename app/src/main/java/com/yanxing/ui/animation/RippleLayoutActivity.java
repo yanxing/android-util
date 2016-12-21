@@ -1,8 +1,9 @@
-package com.yanxing.ui;
+package com.yanxing.ui.animation;
 
 import android.widget.EditText;
 
 import com.yanxing.base.BaseActivity;
+import com.yanxing.ui.R;
 import com.yanxing.view.CircleProgressView;
 import com.yanxing.view.SesameView;
 

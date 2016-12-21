@@ -11,10 +11,7 @@ import android.widget.Button;
 import android.widget.ImageView;
 
 import com.yanxing.base.BaseFragment;
-import com.yanxing.ui.CircleProgressBarActivity;
-import com.yanxing.ui.ProgressBarActivity;
 import com.yanxing.ui.R;
-import com.yanxing.ui.RippleLayoutActivity;
 import com.yanxing.util.CommonUtil;
 
 import butterknife.BindView;

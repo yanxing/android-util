@@ -82,9 +82,9 @@
             android:name=".SurfaceViewMediaPlayerActivity"
             android:theme="@style/AppTheme"/>
         <activity
-            android:name=".ProgressBarActivity"/>
+            android:name=".animation.ProgressBarActivity"/>
         <activity
-            android:name=".CircleProgressBarActivity"/>
+            android:name=".animation.CircleProgressBarActivity"/>
         <activity
             android:name=".swipebacklayout.SwipeBackLayoutActivity"/>
         <activity
@@ -97,7 +97,7 @@
             android:name=".swipebacklayout.AbsListViewActivity"
             android:theme="@android:style/Theme.Translucent"/>
         <activity
-            android:name=".RippleLayoutActivity"
+            android:name=".animation.RippleLayoutActivity"
             android:hardwareAccelerated="false"/>
     </application>
 
