@@ -58,36 +58,31 @@
             </intent-filter>
         </activity>
         <activity
-            android:name=".AdapterExampleActivity"/>
-        <activity
-            android:name=".BrowseImageExampleActivity"
+            android:name=".BrowseImageActivity"
             android:theme="@style/noTitle"/>
-        <activity android:name=".BaiduMapExampleActivity"/>
         <activity
-            android:name=".FrescoExampleActivity"/>
+            android:name=".TitleBarFragment"/>
         <activity
-            android:name=".TitleBarExampleActivity"/>
+            android:name=".tablayout.TabLayoutPagerFragment"/>
         <activity
-            android:name=".tablayout.TabLayoutPagerExampleActivity"/>
+            android:name=".GreenDaoFragment"/>
         <activity
-            android:name=".GreenDaoExampleActivity"/>
-        <activity
-            android:name=".SelectCityActivity"/>
+            android:name=".SelectCityFragment"/>
         <activity
             android:name=".ShowImageActivity"/>
         <activity
-            android:name=".RxJavaExampleActivity"/>
+            android:name=".RxJavaFragment"/>
         <activity
-            android:name=".UltraPtrExampleActivity"/>
+            android:name=".UltraPtrFragment"/>
         <activity
-            android:name=".animation.AnimationMainActivity"/>
+            android:name=".animation.AnimationMainFragment"/>
         <activity
             android:name=".animation.LayoutAnimationExampleActivity"/>
         <activity
             android:name=".DialogActivity"
             android:theme="@style/MyDialogStyleSelect"/>
         <activity
-            android:name=".ExpandableListViewCheckActivity"
+            android:name=".ExpandableListViewCheckBoxFragment"
             android:theme="@style/AppTheme"/>
         <activity
             android:name=".animation.ObjectAnimationActivity"/>
@@ -99,11 +94,11 @@
             android:name=".InputEditButtonActivity"
             android:windowSoftInputMode="adjustResize|stateAlwaysHidden"/>
         <activity
-            android:name=".TextImageActivity"/>
+            android:name=".TextAddImageBeforeLastFragment"/>
         <activity
             android:name=".animation.HeartBubbleViewActivity"/>
         <activity
-            android:name=".DownloadLibraryActivity"/>
+            android:name=".DownloadLibraryFragment"/>
         <activity
             android:name=".SurfaceViewMediaPlayerActivity"
             android:theme="@style/AppTheme"/>
@@ -112,11 +107,11 @@
         <activity
             android:name=".CircleProgressBarActivity"/>
         <activity
-            android:name=".TextChangeImageActivity"/>
+            android:name=".TextConversionBitmapFragment"/>
         <activity
-            android:name=".ExtendRecyclerViewActivity"/>
+            android:name=".ExtendRecyclerViewFragment"/>
         <activity
-            android:name=".HideTitleBottomActivity"/>
+            android:name=".HideTitleBottomFragment"/>
         <activity
             android:name=".swipebacklayout.SwipeBackLayoutActivity"/>
         <activity
@@ -129,12 +124,12 @@
             android:name=".swipebacklayout.AbsListViewActivity"
             android:theme="@android:style/Theme.Translucent"/>
         <activity
-            android:name=".DesignActivity"/>
+            android:name=".DesignFragment"/>
         <activity
             android:name=".RippleLayoutActivity"
             android:hardwareAccelerated="false"/>
         <activity
-            android:name=".TimingActivity"/>
+            android:name=".TimingFragment"/>
     </application>
 
 </manifest>

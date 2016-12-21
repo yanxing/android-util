@@ -5,8 +5,7 @@ import android.support.v7.widget.RecyclerView;
 import android.widget.LinearLayout;
 
 import com.yanxing.adapterlibrary.RecyclerViewAdapter;
-import com.yanxing.base.BaseActivity;
-import com.yanxing.util.CommonUtil;
+import com.yanxing.base.BaseFragment;
 import com.yanxing.util.RecycleViewUtil;
 
 import java.util.ArrayList;
@@ -19,7 +18,7 @@ import butterknife.BindView;
  * Created by lishuangxiang on 2016/11/16.
  */
 
-public class HideTitleBottomActivity extends BaseActivity {
+public class HideTitleBottomFragment extends BaseFragment {
 
     @BindView(R.id.recyclerView)
     RecyclerView mRecyclerView;
@@ -37,12 +36,11 @@ public class HideTitleBottomActivity extends BaseActivity {
 
     @Override
     protected void afterInstanceView() {
-        CommonUtil.setStatusBarDarkMode(true,this);
         List<String> strings = new ArrayList<>();
         for (int i = 0; i < 80; i++) {
             strings.add(String.valueOf(i));
         }
-        mRecyclerView.setLayoutManager(new LinearLayoutManager(this));
+        mRecyclerView.setLayoutManager(new LinearLayoutManager(getActivity()));
         RecyclerViewAdapter recyclerViewAdapter = new RecyclerViewAdapter<String>(strings, R.layout.adapter_hide_title_bottom) {
 
             @Override

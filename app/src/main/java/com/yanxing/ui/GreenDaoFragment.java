@@ -5,7 +5,7 @@ import android.widget.ListView;
 
 import com.yanxing.adapterlibrary.CommonAdapter;
 import com.yanxing.adapterlibrary.ViewHolder;
-import com.yanxing.base.BaseActivity;
+import com.yanxing.base.BaseFragment;
 import com.yanxing.base.MyApplication;
 import com.yanxing.dao.StudentDao;
 import com.yanxing.model.Student;
@@ -21,7 +21,7 @@ import butterknife.OnItemClick;
  * GreenDao例子
  * Created by lishuangxiang on 2016/5/5.
  */
-public class GreenDaoExampleActivity extends BaseActivity {
+public class GreenDaoFragment extends BaseFragment {
 
     @BindView(R.id.listview)
     ListView mListView;
@@ -34,12 +34,12 @@ public class GreenDaoExampleActivity extends BaseActivity {
 
     @Override
     protected int getLayoutResID() {
-        return R.layout.activity_greendao_example;
+        return R.layout.fragment_greendao;
     }
 
     @Override
     protected void afterInstanceView() {
-        mStudentDao=((MyApplication)getApplicationContext()).getDaoSession().getStudentDao();
+        mStudentDao=((MyApplication)getActivity().getApplicationContext()).getDaoSession().getStudentDao();
         mStudentList=mStudentDao.queryBuilder().orderDesc(StudentDao.Properties.Id).list();
         mStudentCommonAdapter = new CommonAdapter<Student>(mStudentList,R.layout.list_dialog_textview)
         {

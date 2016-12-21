@@ -4,8 +4,7 @@ import android.widget.ListView;
 
 import com.yanxing.adapterlibrary.CommonAdapter;
 import com.yanxing.adapterlibrary.ViewHolder;
-import com.yanxing.base.BaseActivity;
-import com.yanxing.util.CommonUtil;
+import com.yanxing.base.BaseFragment;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -19,7 +18,7 @@ import in.srain.cube.views.ptr.PtrFrameLayout;
  * UltraPtr
  * Created by lishuangxiang on 2016/5/30.
  */
-public class UltraPtrExampleActivity extends BaseActivity {
+public class UltraPtrFragment extends BaseFragment {
 
     @BindView(R.id.listview)
     ListView mListView;
@@ -32,12 +31,11 @@ public class UltraPtrExampleActivity extends BaseActivity {
 
     @Override
     protected int getLayoutResID() {
-        return R.layout.activity_ultra_ptr;
+        return R.layout.fragment_ultra_ptr;
     }
 
     @Override
     protected void afterInstanceView() {
-        CommonUtil.setStatusBarDarkMode(true,this);
         mPtrClassicFrameLayout.setPtrHandler(new PtrDefaultHandler() {
             @Override
             public void onRefreshBegin(PtrFrameLayout frame) {

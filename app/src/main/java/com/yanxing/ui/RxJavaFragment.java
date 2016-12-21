@@ -3,8 +3,7 @@ package com.yanxing.ui;
 import android.widget.Button;
 import android.widget.TextView;
 
-import com.photo.util.AppUtil;
-import com.yanxing.base.BaseActivity;
+import com.yanxing.base.BaseFragment;
 import com.yanxing.dao.DouBanDao;
 import com.yanxing.model.DouBan;
 
@@ -21,7 +20,7 @@ import rx.schedulers.Schedulers;
  * RxJava使用
  * Created by lishuangxiang on 2016/5/9.
  */
-public class RxJavaExampleActivity extends BaseActivity {
+public class RxJavaFragment extends BaseFragment {
 
     @BindView(R.id.get_data)
     Button mGetData;
@@ -31,13 +30,11 @@ public class RxJavaExampleActivity extends BaseActivity {
 
     @Override
     protected int getLayoutResID() {
-        return R.layout.activity_rxjava_example;
+        return R.layout.fragment_rxjava;
     }
 
     @Override
     protected void afterInstanceView() {
-        AppUtil.setStatusBarDarkMode(true, this);
-
     }
 
     @OnClick(R.id.get_data)
@@ -58,6 +55,7 @@ public class RxJavaExampleActivity extends BaseActivity {
                 .build();
         DouBanDao douBanDao = retrofit.create(DouBanDao.class);
         douBanDao.getTopMovie(0, 10)
+                .compose(this.bindToLifecycle())
                 .subscribeOn(Schedulers.io())
                 .observeOn(AndroidSchedulers.mainThread())
                 .subscribe(new Subscriber<DouBan>() {

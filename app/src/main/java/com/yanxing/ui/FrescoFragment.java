@@ -11,7 +11,7 @@ import com.facebook.imagepipeline.request.ImageRequest;
 import com.facebook.imagepipeline.request.ImageRequestBuilder;
 import com.yanxing.adapterlibrary.CommonAdapter;
 import com.yanxing.adapterlibrary.ViewHolder;
-import com.yanxing.base.BaseActivity;
+import com.yanxing.base.BaseFragment;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -22,7 +22,7 @@ import butterknife.BindView;
  * fresco使用
  * Created by lishuangxiang on 2016/1/28.
  */
-public class FrescoExampleActivity extends BaseActivity {
+public class FrescoFragment extends BaseFragment {
 
     @BindView(R.id.gridView)
     GridView mGridView;

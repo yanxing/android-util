@@ -6,6 +6,7 @@ import android.widget.TextView;
 
 import com.yanxing.adapterlibrary.RecyclerViewAdapter;
 import com.yanxing.base.BaseActivity;
+import com.yanxing.base.BaseFragment;
 import com.yanxing.view.CustomLinearLayoutManager;
 
 import java.util.ArrayList;
@@ -18,12 +19,12 @@ import butterknife.OnClick;
  * 扩展RecyclerView,增加禁止上下滑动和滑动到指定位置(参考http://blog.csdn.net/tyzlmjj/article/details/49227601)
  * Created by lishuangxiang on 2016/11/11.
  */
-public class ExtendRecyclerViewActivity extends BaseActivity {
+public class ExtendRecyclerViewFragment extends BaseFragment {
 
     @BindView(R.id.recyclerView)
     RecyclerView mRecyclerView;
 
-    private RecyclerViewAdapter mRecyclerViewAdapter;
+    private RecyclerViewAdapter<String> mRecyclerViewAdapter;
     private CustomLinearLayoutManager mLayoutManager;
     private boolean mNeedScroll;
     private List<String> mStrings = new ArrayList<>();
@@ -39,7 +40,7 @@ public class ExtendRecyclerViewActivity extends BaseActivity {
         for (int i = 0; i < 80; i++) {
             mStrings.add(String.valueOf(i));
         }
-        mLayoutManager = new CustomLinearLayoutManager(this);
+        mLayoutManager = new CustomLinearLayoutManager(getActivity());
         mRecyclerView.setLayoutManager(mLayoutManager);
         mRecyclerViewAdapter = new RecyclerViewAdapter<String>(mStrings, R.layout.adapter_recycler_view) {
 

@@ -3,7 +3,7 @@ package com.yanxing.ui.tablayout;
 import android.support.design.widget.TabLayout;
 import android.support.v4.app.Fragment;
 
-import com.yanxing.base.BaseActivity;
+import com.yanxing.base.BaseFragment;
 import com.yanxing.tablayoutlibrary.TabLayoutPager;
 import com.yanxing.ui.R;
 
@@ -16,7 +16,7 @@ import butterknife.BindView;
  * tablayoutpagerlibrary例子
  * Created by lishuangxiang on 2016/3/14.
  */
-public class TabLayoutPagerExampleActivity extends BaseActivity {
+public class TabLayoutPagerFragment extends BaseFragment {
 
     @BindView(R.id.tabLayoutPager)
     TabLayoutPager mTabLayoutPager;
@@ -26,7 +26,7 @@ public class TabLayoutPagerExampleActivity extends BaseActivity {
 
     @Override
     protected int getLayoutResID() {
-        return R.layout.activity_tablayoutpager_example;
+        return R.layout.fragment_tablayoutpager;
     }
 
     @Override

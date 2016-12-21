@@ -1,13 +1,12 @@
 package com.yanxing.ui;
 
-import com.yanxing.base.BaseActivity;
-import com.yanxing.util.CommonUtil;
+import com.yanxing.base.BaseFragment;
 
 /**
  * titlebarlibrary使用
  * Created by lishuangxiang on 2016/2/3.
  */
-public class TitleBarExampleActivity extends BaseActivity {
+public class TitleBarFragment extends BaseFragment {
 
     @Override
     protected int getLayoutResID() {
@@ -16,7 +15,5 @@ public class TitleBarExampleActivity extends BaseActivity {
 
     @Override
     protected void afterInstanceView() {
-        CommonUtil.setStatusBarDarkMode(false,this);
-
     }
 }

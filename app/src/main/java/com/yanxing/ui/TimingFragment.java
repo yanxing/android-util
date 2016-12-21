@@ -9,7 +9,7 @@ import android.view.View;
 import android.widget.TextView;
 
 import com.yanxing.adapterlibrary.RecyclerViewAdapter;
-import com.yanxing.base.BaseActivity;
+import com.yanxing.base.BaseFragment;
 
 import java.lang.ref.WeakReference;
 import java.util.ArrayList;
@@ -26,7 +26,7 @@ import butterknife.BindView;
  * 列表定时器一种实现方式
  * Created by lishuangxiang on 2016/12/7.
  */
-public class TimingActivity extends BaseActivity {
+public class TimingFragment extends BaseFragment {
 
     @BindView(R.id.recyclerView)
     RecyclerView mRecyclerView;
@@ -41,34 +41,34 @@ public class TimingActivity extends BaseActivity {
     private MyHandler mHandler = new MyHandler(this);
 
     private static class MyHandler extends Handler {
-        WeakReference<TimingActivity> mReference;
+        WeakReference<TimingFragment> mReference;
 
-        MyHandler(TimingActivity activity) {
+        MyHandler(TimingFragment activity) {
             mReference = new WeakReference<>(activity);
         }
 
         @Override
         public void handleMessage(Message msg) {
             super.handleMessage(msg);
-            TimingActivity timingActivity = mReference.get();
+            TimingFragment timingFragment = mReference.get();
             if (msg.what == UPDATE) {
-                timingActivity.mRecyclerViewAdapter.update(timingActivity.mList);
+                timingFragment.mRecyclerViewAdapter.update(timingFragment.mList);
             } else if (msg.what == FINISH) {
-                timingActivity.mScheduledExecutorService.shutdown();
-                timingActivity.showToast(timingActivity.getString(R.string.ji_shi_quan_finish));
+                timingFragment.mScheduledExecutorService.shutdown();
+                timingFragment.showToast(timingFragment.getString(R.string.ji_shi_quan_finish));
             }
         }
     }
 
     @Override
     protected int getLayoutResID() {
-        return R.layout.activity_timing;
+        return R.layout.fragment_timing;
     }
 
     @Override
     protected void afterInstanceView() {
         addTestData();
-        mRecyclerView.setLayoutManager(new LinearLayoutManager(this));
+        mRecyclerView.setLayoutManager(new LinearLayoutManager(getActivity()));
         mRecyclerViewAdapter = new RecyclerViewAdapter<Integer>(mList, R.layout.adapter_recycler_view) {
             @Override
             public void onBindViewHolder(RecyclerViewAdapter.MyViewHolder holder, final int position) {
@@ -77,7 +77,7 @@ public class TimingActivity extends BaseActivity {
                 holder.itemView.setOnClickListener(new View.OnClickListener() {
                     @Override
                     public void onClick(View v) {
-                        startActivity(new Intent(getApplicationContext(),ProgressBarActivity.class));
+                        startActivity(new Intent(getActivity(),ProgressBarActivity.class));
                     }
                 });
             }
@@ -125,7 +125,7 @@ public class TimingActivity extends BaseActivity {
     }
 
     @Override
-    protected void onDestroy() {
+    public void onDestroy() {
         super.onDestroy();
         mScheduledExecutorService.shutdown();
     }

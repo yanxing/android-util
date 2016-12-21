@@ -3,10 +3,9 @@ package com.yanxing.ui;
 import android.widget.ExpandableListView;
 
 import com.yanxing.adapter.ExpandableListCheckAdapter;
-import com.yanxing.base.BaseActivity;
+import com.yanxing.base.BaseFragment;
 import com.yanxing.model.Child;
 import com.yanxing.model.Parent;
-import com.yanxing.util.CommonUtil;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -17,19 +16,18 @@ import butterknife.BindView;
  * ExpandableListView点击一组，全选这个组
  * Created by lishuangxiang on 2016/7/26.
  */
-public class ExpandableListViewCheckActivity extends BaseActivity {
+public class ExpandableListViewCheckBoxFragment extends BaseFragment {
 
     @BindView(R.id.expandableListView)
     ExpandableListView mExpandableListView;
 
     @Override
     protected int getLayoutResID() {
-        return R.layout.activity_expandable_listview_check;
+        return R.layout.fragment_expandable_listview_checkbox;
     }
 
     @Override
     protected void afterInstanceView() {
-        CommonUtil.setStatusBarDarkMode(true,this);
         mExpandableListView.setGroupIndicator(null);
         Child child1=new Child(false,"西瓜1");
         Child child2=new Child(false,"西瓜2");
@@ -66,7 +64,7 @@ public class ExpandableListViewCheckActivity extends BaseActivity {
         parentList.add(parent2);
         parentList.add(parent3);
         parentList.add(parent4);
-        ExpandableListCheckAdapter expandableListCheckAdapter = new ExpandableListCheckAdapter(this,parentList);
+        ExpandableListCheckAdapter expandableListCheckAdapter = new ExpandableListCheckAdapter(getActivity(),parentList);
         mExpandableListView.setAdapter(expandableListCheckAdapter);
     }
 }

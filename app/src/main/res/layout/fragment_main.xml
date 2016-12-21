@@ -108,7 +108,7 @@
             style="@style/style_btn"
             android:text="@string/activity"/>
         <Button
-            android:id="@+id/expandableListViewCheck"
+            android:id="@+id/expandableListViewCheckbox"
             style="@style/style_btn"
             android:text="@string/expandablelistview_checkbox"/>
         <Button
@@ -132,7 +132,7 @@
             style="@style/style_btn"
             android:text="@string/surfaceview_mediaplayer"/>
         <Button
-            android:id="@+id/textChangeImage"
+            android:id="@+id/textConversionBitmap"
             style="@style/style_btn"
             android:text="@string/text_change_picture"/>
         <Button

@@ -7,7 +7,7 @@ import android.widget.ListView;
 
 import com.yanxing.adapterlibrary.CommonAdapter;
 import com.yanxing.adapterlibrary.ViewHolder;
-import com.yanxing.base.BaseActivity;
+import com.yanxing.base.BaseFragment;
 import com.yanxing.model.Area;
 import com.yanxing.util.ParseJsonFile;
 
@@ -20,7 +20,7 @@ import butterknife.BindView;
  * 选择城市
  * Created by lishuangxiang on 2016/4/12.
  */
-public class SelectCityActivity extends BaseActivity
+public class SelectCityFragment extends BaseFragment
         implements AdapterView.OnItemClickListener{
 
     @BindView(R.id.province)
@@ -41,7 +41,7 @@ public class SelectCityActivity extends BaseActivity
 
     @Override
     protected int getLayoutResID() {
-        return R.layout.activity_select_city;
+        return R.layout.fragment_select_city;
     }
 
     @Override
@@ -51,12 +51,12 @@ public class SelectCityActivity extends BaseActivity
         currentArea.setName(getString(R.string.current_area));
         ArrayList<Area.CityBean> currentCity=new ArrayList<Area.CityBean>();
         Area.CityBean cityBean=new Area.CityBean();
-        String currentCityStr=getIntent().getStringExtra("currentCity");
+        String currentCityStr=getArguments().getString("currentCity");
         cityBean.setName(currentCityStr);
         currentCity.add(cityBean);
         currentArea.setCity(currentCity);
         mAreaList.add(currentArea);
-        mAreaList.addAll(ParseJsonFile.getArea(getApplicationContext()));
+        mAreaList.addAll(ParseJsonFile.getArea(getActivity()));
         mProvinceAdapter=new CommonAdapter<Area>(mAreaList,R.layout.adapter_province) {
             @Override
             public void onBindViewHolder(ViewHolder viewHolder, int position) {

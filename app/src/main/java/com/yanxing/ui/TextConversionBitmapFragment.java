@@ -10,8 +10,7 @@ import android.net.Uri;
 import android.widget.ImageView;
 
 import com.nostra13.universalimageloader.core.ImageLoader;
-import com.yanxing.base.BaseActivity;
-import com.yanxing.util.CommonUtil;
+import com.yanxing.base.BaseFragment;
 import com.yanxing.util.FileUtil;
 
 import java.io.File;
@@ -24,19 +23,18 @@ import butterknife.BindView;
  * Created by lishuangxiang on 2016/11/7.
  */
 
-public class TextChangeImageActivity extends BaseActivity {
+public class TextConversionBitmapFragment extends BaseFragment {
 
     @BindView(R.id.image)
     ImageView mImageView;
 
     @Override
     protected int getLayoutResID() {
-        return R.layout.activity_text_change_image;
+        return R.layout.fragment_text_conversion_bitmap;
     }
 
     @Override
     protected void afterInstanceView() {
-        CommonUtil.setStatusBarDarkMode(true, this);
         String content = "把秋衣扎进秋裤/n把秋裤扎进/n袜子/n是对冬天最起码的/n尊重";
         ImageLoader.getInstance().displayImage("file://" + createTextImage(content, "test.png"), mImageView);
     }
@@ -144,7 +142,7 @@ public class TextChangeImageActivity extends BaseActivity {
             }
             FileOutputStream out = new FileOutputStream(file);
             bitmap.compress(Bitmap.CompressFormat.JPEG, 100, out);
-            sendBroadcast(new Intent(Intent.ACTION_MEDIA_SCANNER_SCAN_FILE
+            getActivity().sendBroadcast(new Intent(Intent.ACTION_MEDIA_SCANNER_SCAN_FILE
                     , Uri.fromFile(file)));
             out.flush();
             out.close();

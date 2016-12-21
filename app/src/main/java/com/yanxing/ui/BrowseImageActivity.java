@@ -13,6 +13,7 @@ import com.nostra13.universalimageloader.core.ImageLoader;
 import com.photo.browse.widget.CustomPhotoViewPager;
 import com.photo.browse.widget.PhotoView;
 import com.yanxing.base.BaseActivity;
+import com.yanxing.base.BaseFragment;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -23,7 +24,7 @@ import butterknife.BindView;
  * 浏览图片
  * Created by lishuangxiang on 2016/1/26.
  */
-public class BrowseImageExampleActivity extends BaseActivity{
+public class BrowseImageActivity extends BaseActivity{
 
     @BindView(R.id.custom_photo_viewpage)
     CustomPhotoViewPager mCustomPhotoViewPager;
@@ -36,7 +37,7 @@ public class BrowseImageExampleActivity extends BaseActivity{
     private List<String> mPathList = new ArrayList<String>();
 
     @Override
-    protected void onCreate(@Nullable Bundle savedInstanceState) {
+    public void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
     }
 
@@ -58,7 +59,7 @@ public class BrowseImageExampleActivity extends BaseActivity{
             mNumber.setText((index + 1) + "/" + mPathList.size());
         }
         mCustomPhotoViewPager.setCurrentItem(index);
-        mCustomPhotoViewPager.setOnPageChangeListener(new ViewPager.OnPageChangeListener() {
+        mCustomPhotoViewPager.addOnPageChangeListener(new ViewPager.OnPageChangeListener() {
             @Override
             public void onPageScrolled(int position, float positionOffset, int positionOffsetPixels) {
 
@@ -102,7 +103,7 @@ public class BrowseImageExampleActivity extends BaseActivity{
             photoView.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
-                    BrowseImageExampleActivity.this.finish();
+                    BrowseImageActivity.this.finish();
                 }
             });
             return photoView;

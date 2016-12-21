@@ -5,11 +5,10 @@ import android.widget.Button;
 import android.widget.ProgressBar;
 import android.widget.TextView;
 
-import com.yanxing.base.BaseActivity;
+import com.yanxing.base.BaseFragment;
 import com.yanxing.downloadlibrary.DownloadConfiguration;
 import com.yanxing.downloadlibrary.DownloadUtils;
 import com.yanxing.downloadlibrary.SimpleDownloadListener;
-import com.yanxing.util.CommonUtil;
 import com.yanxing.util.ConstantValue;
 import com.yanxing.util.FileUtil;
 import com.yanxing.util.LogUtil;
@@ -24,7 +23,7 @@ import butterknife.OnClick;
  * Created by lishuangxiang on 2016/9/21.
  */
 
-public class DownloadLibraryActivity extends BaseActivity {
+public class DownloadLibraryFragment extends BaseFragment {
 
     @BindView(R.id.progressBar)
     ProgressBar mProgressBar;
@@ -43,21 +42,21 @@ public class DownloadLibraryActivity extends BaseActivity {
 
     @Override
     protected int getLayoutResID() {
-        return R.layout.activity_download_library;
+        return R.layout.fragment_download_library;
     }
 
     @Override
     protected void afterInstanceView() {
-        CommonUtil.setStatusBarDarkMode(true, this);
         File file = new File(FileUtil.getStoragePath() + ConstantValue.CACHE_IMAGE);
         DownloadConfiguration downloadConfiguration = new DownloadConfiguration.Builder()
                 .savePath(file)
                 .setLog(true)
                 .builder();
         DownloadUtils.getInstance().init(downloadConfiguration);
-        int progress = DownloadUtils.getInstance().getDownloadProgressByUrl(getApplicationContext(), mUrl.getText().toString());
+        int progress = DownloadUtils.getInstance().getDownloadProgressByUrl(getActivity()
+                .getApplicationContext(), mUrl.getText().toString());
         if (progress == -1) {
-            showToast("文件已被删除，点击下载将重新下载");
+            showToast(getString(R.string.file_delete_re_down));
         } else if (progress >= 0) {
             mProgress.setText(progress + "%");
             mProgressBar.setMax(100);
@@ -86,11 +85,11 @@ public class DownloadLibraryActivity extends BaseActivity {
      * 下载
      */
     public void download() {
-        DownloadUtils.getInstance().startDownload(getApplicationContext(), mUrl.getText().toString()
+        DownloadUtils.getInstance().startDownload(getActivity().getApplicationContext(), mUrl.getText().toString()
                 , new SimpleDownloadListener() {
             @Override
             public void onStart() {
-                LogUtil.d("DownloadUtils", "下载开始...");
+                LogUtil.d("DownloadUtils", getString(R.string.start_download1));
             }
 
             @Override
@@ -104,15 +103,15 @@ public class DownloadLibraryActivity extends BaseActivity {
             public void onError(int state, String message) {
                 super.onError(state, message);
                 if (state == 404) {
-                    showToast("文件不存在");
+                    showToast(getString(R.string.file_exist));
                 } else {
-                    showToast("错误代码" + state + "  " + message);
+                    showToast(getString(R.string.error_code) + state + "  " + message);
                 }
             }
 
             @Override
             public void onFinish() {
-                LogUtil.d("DownloadUtils", "下载完成...");
+                LogUtil.d("DownloadUtils", getString(R.string.download_finish));
             }
         });
     }

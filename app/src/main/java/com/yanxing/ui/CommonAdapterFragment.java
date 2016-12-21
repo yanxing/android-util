@@ -11,7 +11,7 @@ import android.widget.TextView;
 import com.yanxing.adapterlibrary.CommonAdapter;
 import com.yanxing.adapterlibrary.RecyclerViewAdapter;
 import com.yanxing.adapterlibrary.ViewHolder;
-import com.yanxing.base.BaseActivity;
+import com.yanxing.base.BaseFragment;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -22,7 +22,7 @@ import butterknife.BindView;
  * adapterlibrary测试
  * Created by lishuangxiang on 2016/1/20.
  */
-public class AdapterExampleActivity extends BaseActivity {
+public class CommonAdapterFragment extends BaseFragment {
 
     @BindView(R.id.listView)
     ListView mListView;
@@ -35,7 +35,7 @@ public class AdapterExampleActivity extends BaseActivity {
 
     @Override
     protected int getLayoutResID() {
-        return R.layout.activity_adapter_example;
+        return R.layout.fragment_common_adapter;
     }
 
     @Override
@@ -51,11 +51,11 @@ public class AdapterExampleActivity extends BaseActivity {
                 viewHolder.setText(R.id.text, String.valueOf(list.get(position)));
             }
         };
+        //ListView
         mListView.setAdapter(adapter);
-
+        //GridView
         mGridView.setAdapter(adapter);
-
-        //瀑布流
+        //RecycleView
         mRecyclerView.setLayoutManager(new StaggeredGridLayoutManager(4, StaggeredGridLayoutManager.VERTICAL));
         RecyclerViewAdapter recyclerViewAdapter = new RecyclerViewAdapter<Integer>(list, R.layout.adapter_recycler_view) {
 

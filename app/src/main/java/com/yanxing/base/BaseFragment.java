@@ -8,6 +8,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Toast;
 
+import com.trello.rxlifecycle.components.support.RxFragment;
 import com.yanxing.view.LoadingDialog;
 
 import butterknife.ButterKnife;
@@ -17,7 +18,7 @@ import butterknife.ButterKnife;
  * 基类fragment
  * Created by lishuangxiang on 2015/12/28.
  */
-public abstract class BaseFragment extends Fragment{
+public abstract class BaseFragment extends RxFragment{
 
     public LoadingDialog loadingDialog;
     protected String TAG = getClass().getName();

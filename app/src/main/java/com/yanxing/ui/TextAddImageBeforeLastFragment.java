@@ -6,7 +6,7 @@ import android.text.SpannableString;
 import android.text.style.ImageSpan;
 import android.widget.TextView;
 
-import com.yanxing.base.BaseActivity;
+import com.yanxing.base.BaseFragment;
 
 import butterknife.BindView;
 
@@ -15,16 +15,10 @@ import butterknife.BindView;
  * http://blog.csdn.net/yanzi1225627/article/details/24590029
  * Created by lishuangxiang on 2016/8/25.
  */
-public class TextImageActivity extends BaseActivity {
+public class TextAddImageBeforeLastFragment extends BaseFragment {
 
     @BindView(R.id.text)
     TextView mText;
-
-    @BindView(R.id.icon)
-    TextView mIcon;
-
-    @BindView(R.id.content)
-    TextView mContent;
 
     @Override
     protected int getLayoutResID() {

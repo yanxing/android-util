@@ -19,7 +19,7 @@ import com.baidu.mapapi.search.route.DrivingRouteResult;
 import com.baidu.mapapi.search.route.PlanNode;
 import com.baidu.mapapi.search.route.TransitRouteResult;
 import com.baidu.mapapi.search.route.WalkingRouteResult;
-import com.yanxing.base.BaseActivity;
+import com.yanxing.base.BaseFragment;
 import com.yanxing.base.MyApplication;
 
 import butterknife.BindView;
@@ -27,7 +27,7 @@ import butterknife.BindView;
 /**
  * 百度地图封装测试
  */
-public class BaiduMapExampleActivity extends BaseActivity
+public class BaiduMapFragment extends BaseFragment
         implements RoutePlanResultListener,BaiduLocListener {
 
     @BindView(R.id.map)
@@ -37,12 +37,12 @@ public class BaiduMapExampleActivity extends BaseActivity
 
     @Override
     protected int getLayoutResID() {
-        return R.layout.activity_baidu_map_example;
+        return R.layout.fragment_baidu_map;
     }
 
     @Override
     protected void afterInstanceView() {
-        mBaiduMapView=new BaiduMapView(this, mMap);
+        mBaiduMapView=new BaiduMapView(getActivity(), mMap);
         mBaiduMapView.setRoutePlanResultListener(this);
         //驾车路径
         LatLng fromLatLng = new LatLng(31.1145130000, 121.4112010000);
@@ -50,7 +50,7 @@ public class BaiduMapExampleActivity extends BaseActivity
         LatLng toLatLng = new LatLng(31.2166060000, 121.4471340000);
         PlanNode receiverNode = PlanNode.withLocation(toLatLng);
         //定位
-        BaiduLoc baiduLoc=((MyApplication)getApplication().getApplicationContext()).getBaiduLoc();
+        BaiduLoc baiduLoc=((MyApplication)getActivity().getApplication().getApplicationContext()).getBaiduLoc();
         baiduLoc.startLocation();
         baiduLoc.setBaiduLocListener(this);
         //最短距离路线
@@ -60,8 +60,6 @@ public class BaiduMapExampleActivity extends BaseActivity
                 .to(receiverNode));
         //设置视角中心
         mBaiduMapView.setCenterOnly(fromLatLng.latitude, fromLatLng.longitude);
-        //添加覆盖物
-        mBaiduMapView.setOverlay(31.1744546784,121.4980140000,R.mipmap.ic_launcher);
     }
 
     @Override

@@ -59,7 +59,6 @@ public class BaiduMapView implements OnGetPoiSearchResultListener, OnMapStatusCh
     private BaiduMap mBaiduMap;
 
     private LinearLayout mParentLayout;
-    private Activity mParentActivity;
 
     private BaiduMapListener mMapListener;
     //marker拖拽监听
@@ -83,7 +82,6 @@ public class BaiduMapView implements OnGetPoiSearchResultListener, OnMapStatusCh
     private float minZoomLevel;
 
     public BaiduMapView(Activity activity, LinearLayout parentLayout) {
-        mParentActivity = activity;
         mParentLayout = parentLayout;
         try {
             mMapView = new MapView(activity);

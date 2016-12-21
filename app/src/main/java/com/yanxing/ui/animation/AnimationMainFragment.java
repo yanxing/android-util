@@ -10,7 +10,7 @@ import android.view.animation.AlphaAnimation;
 import android.widget.Button;
 import android.widget.ImageView;
 
-import com.yanxing.base.BaseActivity;
+import com.yanxing.base.BaseFragment;
 import com.yanxing.ui.CircleProgressBarActivity;
 import com.yanxing.ui.ProgressBarActivity;
 import com.yanxing.ui.R;
@@ -24,7 +24,7 @@ import butterknife.OnClick;
  * 动画学习
  * Created by lishuangxiang on 2016/7/7.
  */
-public class AnimationMainActivity extends BaseActivity {
+public class AnimationMainFragment extends BaseFragment {
 
     @BindView(R.id.alpha)
     Button mAlpha;
@@ -40,7 +40,7 @@ public class AnimationMainActivity extends BaseActivity {
 
     @Override
     protected int getLayoutResID() {
-        return R.layout.activity_animation_main;
+        return R.layout.fragment_animation_main;
     }
 
     @Override
@@ -77,7 +77,7 @@ public class AnimationMainActivity extends BaseActivity {
 
     @OnClick(R.id.layout_animation)
     public void onClickLayoutAnimation() {
-        Intent intent = new Intent(getApplicationContext(), LayoutAnimationExampleActivity.class);
+        Intent intent = new Intent(getActivity(), LayoutAnimationExampleActivity.class);
         startActivity(intent);
     }
 
@@ -85,7 +85,7 @@ public class AnimationMainActivity extends BaseActivity {
     public void onClick() {
         ViewWrapper viewWrapper = new ViewWrapper(mObjectAnimation);
         ObjectAnimator objectAnimator = ObjectAnimator.ofInt(viewWrapper, "width"
-                , CommonUtil.getScreenDisplay(this).getWidth() - 20).setDuration(3000);
+                , CommonUtil.getScreenDisplay(getActivity()).getWidth() - 20).setDuration(3000);
         objectAnimator.start();
         objectAnimator.addListener(new Animator.AnimatorListener() {
             @Override
@@ -95,7 +95,7 @@ public class AnimationMainActivity extends BaseActivity {
 
             @Override
             public void onAnimationEnd(Animator animation) {
-                Intent intent = new Intent(getApplicationContext(), ObjectAnimationActivity.class);
+                Intent intent = new Intent(getActivity(), ObjectAnimationActivity.class);
                 startActivity(intent);
             }
 
@@ -113,38 +113,38 @@ public class AnimationMainActivity extends BaseActivity {
 
     @OnClick(R.id.heartBubbleView)
     public void onClickHeartBubbleView() {
-        Intent intent = new Intent(getApplicationContext(), HeartBubbleViewActivity.class);
+        Intent intent = new Intent(getActivity(), HeartBubbleViewActivity.class);
         startActivity(intent);
     }
 
 
     @OnClick(R.id.health_animation)
     public void onClickHealth() {
-        Intent intent = new Intent(getApplicationContext(), QQHealthActivity.class);
+        Intent intent = new Intent(getActivity(), QQHealthActivity.class);
         startActivity(intent);
     }
 
     @OnClick(R.id.path_animation)
     public void onClickPath() {
-        Intent intent = new Intent(getApplicationContext(), PathExampleActivity.class);
+        Intent intent = new Intent(getActivity(), PathExampleActivity.class);
         startActivity(intent);
     }
 
     @OnClick(R.id.progressBar)
     public void onProgressBar() {
-        Intent intent = new Intent(getApplicationContext(), ProgressBarActivity.class);
+        Intent intent = new Intent(getActivity(), ProgressBarActivity.class);
         startActivity(intent);
     }
 
     @OnClick(R.id.circleProgressBar)
     public void onCircleProgressBar() {
-        Intent intent = new Intent(getApplicationContext(), CircleProgressBarActivity.class);
+        Intent intent = new Intent(getActivity(), CircleProgressBarActivity.class);
         startActivity(intent);
     }
 
     @OnClick(R.id.ripple_sesame)
     public void onRippleSesame() {
-        Intent intent = new Intent(getApplicationContext(), RippleLayoutActivity.class);
+        Intent intent = new Intent(getActivity(), RippleLayoutActivity.class);
         startActivity(intent);
     }
 
