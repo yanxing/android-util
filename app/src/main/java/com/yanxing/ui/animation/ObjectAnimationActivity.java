@@ -46,8 +46,7 @@ public class ObjectAnimationActivity extends BaseActivity {
                 break;
             case R.id.image1:
                 ObjectAnimator objectAnimator=ObjectAnimator
-//                .ofFloat(mImage,"rotationX",0.0f,360f)
-                        .ofFloat(mImage1,"yanxing",1.0f,0.0f)
+                        .ofFloat(mImage1,"rotationX",1.0f,0.0f)
                         .setDuration(1000);
                 objectAnimator.start();
                 objectAnimator.addUpdateListener(new ValueAnimator.AnimatorUpdateListener() {

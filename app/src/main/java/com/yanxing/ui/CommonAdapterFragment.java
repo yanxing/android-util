@@ -67,12 +67,7 @@ public class CommonAdapterFragment extends BaseFragment {
                 lp.height = (int) (50 + Math.random() * 300);
                 textView.setLayoutParams(lp);
                 textView.setText(String.valueOf(list.get(position)));
-                holder.itemView.setOnClickListener(new View.OnClickListener() {
-                    @Override
-                    public void onClick(View v) {
-                        showToast(getString(R.string.you_click) + (position + 1) + getString(R.string.ge));
-                    }
-                });
+                holder.itemView.setOnClickListener(v -> showToast(getString(R.string.you_click) + (position + 1) + getString(R.string.ge)));
             }
         };
         mRecyclerView.setAdapter(recyclerViewAdapter);

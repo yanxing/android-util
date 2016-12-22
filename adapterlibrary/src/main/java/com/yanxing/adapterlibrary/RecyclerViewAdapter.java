@@ -9,7 +9,7 @@ import android.widget.TextView;
 import java.util.List;
 
 /**
- * RecyclerView适配器抽象类
+ * RecyclerView适配器抽象类 itemClick和ItemLongClick用ViewHolder.item设置
  * Created by lishuangxiang on 2016/3/23.
  */
 public abstract class RecyclerViewAdapter<T> extends RecyclerView.Adapter<RecyclerViewAdapter.MyViewHolder> {
@@ -29,8 +29,7 @@ public abstract class RecyclerViewAdapter<T> extends RecyclerView.Adapter<Recycl
     @Override
     public MyViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
         View view = LayoutInflater.from(parent.getContext()).inflate(mLayoutID, parent, false);
-        MyViewHolder viewHolder = new MyViewHolder(view);
-        return viewHolder;
+        return new MyViewHolder(view);
     }
 
     @Override
@@ -71,11 +70,9 @@ public abstract class RecyclerViewAdapter<T> extends RecyclerView.Adapter<Recycl
      * ViewHolder
      */
     public class MyViewHolder extends RecyclerView.ViewHolder {
-        View mView;
 
         public MyViewHolder(View view) {
             super(view);
-            mView = view;
         }
 
         /**
@@ -86,7 +83,7 @@ public abstract class RecyclerViewAdapter<T> extends RecyclerView.Adapter<Recycl
          * @return
          */
         public <T extends View> T findViewById(int viewID) {
-            View view = mView.findViewById(viewID);
+            View view = itemView.findViewById(viewID);
             return (T) view;
         }
 
