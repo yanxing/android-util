@@ -9,7 +9,7 @@ import com.yanxing.adapterlibrary.CommonAdapter;
 import com.yanxing.adapterlibrary.ViewHolder;
 import com.yanxing.base.BaseFragment;
 import com.yanxing.model.Area;
-import com.yanxing.util.ParseJsonFile;
+import com.yanxing.util.ParseJsonUtil;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -56,7 +56,7 @@ public class SelectCityFragment extends BaseFragment
         currentCity.add(cityBean);
         currentArea.setCity(currentCity);
         mAreaList.add(currentArea);
-        mAreaList.addAll(ParseJsonFile.getArea(getActivity()));
+        mAreaList.addAll(ParseJsonUtil.getArea(getActivity()));
         mProvinceAdapter=new CommonAdapter<Area>(mAreaList,R.layout.adapter_province) {
             @Override
             public void onBindViewHolder(ViewHolder viewHolder, int position) {

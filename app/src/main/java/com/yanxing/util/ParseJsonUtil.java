@@ -15,7 +15,7 @@ import java.util.List;
  * 解析json
  * Created by lishuangxiang on 2016/4/8.
  */
-public class ParseJsonFile {
+public class ParseJsonUtil {
 
 
     /**
@@ -39,6 +39,19 @@ public class ParseJsonFile {
 
         }
         return null;
+    }
+
+    /**
+     * 转化json为bean
+     * @param json
+     * @param clazz
+     * @param <T>
+     * @return
+     */
+    public static <T> T convertJson(String json,Class<T> clazz){
+        Gson gson = new Gson();
+        T t = gson.fromJson(json,clazz);
+        return t;
     }
 
     /**
