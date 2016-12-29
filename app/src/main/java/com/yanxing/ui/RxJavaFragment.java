@@ -17,7 +17,8 @@ import rx.android.schedulers.AndroidSchedulers;
 import rx.schedulers.Schedulers;
 
 /**
- * RxJava使用
+ * RxJava使用 更多例子 https://github.com/cn-ljb/rxjava_for_android
+ * http://gank.io/post/560e15be2dca930e00da1083
  * Created by lishuangxiang on 2016/5/9.
  */
 public class RxJavaFragment extends BaseFragment {
