@@ -8,9 +8,6 @@ import com.baidu.mapapi.SDKInitializer;
 import com.facebook.cache.disk.DiskCacheConfig;
 import com.facebook.drawee.backends.pipeline.Fresco;
 import com.facebook.imagepipeline.core.ImagePipelineConfig;
-import com.facebook.imagepipeline.decoder.ProgressiveJpegConfig;
-import com.facebook.imagepipeline.image.ImmutableQualityInfo;
-import com.facebook.imagepipeline.image.QualityInfo;
 import com.nostra13.universalimageloader.cache.disc.impl.UnlimitedDiskCache;
 import com.nostra13.universalimageloader.core.ImageLoader;
 import com.nostra13.universalimageloader.core.ImageLoaderConfiguration;
@@ -69,17 +66,6 @@ public class  MyApplication extends Application {
      * 初始化fresco
      */
     private  void initFresco(){
-        ProgressiveJpegConfig pjpegConfig = new ProgressiveJpegConfig() {
-            @Override
-            public int getNextScanNumberToDecode(int scanNumber) {
-                return scanNumber + 2;
-            }
-
-            public QualityInfo getQualityInfo(int scanNumber) {
-                boolean isGoodEnough = (scanNumber >= 5);
-                return ImmutableQualityInfo.of(scanNumber, isGoodEnough, false);
-            }
-        };
         File file=new File(FileUtil.getStoragePath());
         //自定义图片的磁盘配置,fresco缓存文件后缀cnt
         DiskCacheConfig diskCacheConfig =  DiskCacheConfig.newBuilder(this)
@@ -90,7 +76,6 @@ public class  MyApplication extends Application {
                 .setMaxCacheSizeOnVeryLowDiskSpace(ConstantValue.MAX_DISK_CACHE_VERYLOW_SIZE)//缓存的最大大小,当设备极低磁盘空间
                 .build();
         ImagePipelineConfig imagePipelineConfig = ImagePipelineConfig.newBuilder(this)
-                .setProgressiveJpegConfig(pjpegConfig)
                 .setMainDiskCacheConfig(diskCacheConfig)//磁盘缓存配置
                 .build();
         Fresco.initialize(getApplicationContext(),imagePipelineConfig);
