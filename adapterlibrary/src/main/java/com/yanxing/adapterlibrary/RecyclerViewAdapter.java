@@ -67,6 +67,13 @@ public abstract class RecyclerViewAdapter<T> extends RecyclerView.Adapter<Recycl
     }
 
     /**
+     * 更新数据
+     */
+    public void update(int position) {
+        notifyItemChanged(position);
+    }
+
+    /**
      * ViewHolder
      */
     public class MyViewHolder extends RecyclerView.ViewHolder {
