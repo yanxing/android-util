@@ -77,7 +77,6 @@ dependencies {
     compile project(':sortlistviewlibrary')
     compile project(':adapterlibrary')
     compile project(':photolibrary')
-    compile project(':photobrowselibrary')
     compile project(':baidumaplibrary')
     compile project(':titlebarlibrary')
     compile project(':tablayoutlibrary')

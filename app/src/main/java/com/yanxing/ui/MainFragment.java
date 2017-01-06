@@ -174,9 +174,10 @@ public class MainFragment extends BaseFragment implements AMapLocListener {
     public void onClickBrowseImage() {
         List<String> list = new ArrayList<String>();
         Bundle bundle = new Bundle();
-        list.add("http://a0.att.hudong.com/15/08/300218769736132194086202411_950.jpg");
-        list.add("http://pic15.nipic.com/20110731/8022110_162804602317_2.jpg");
-        bundle.putSerializable("images", (Serializable) list);
+        list.add("http://wx4.sinaimg.cn/thumbnail/61e7f4aaly1fbgnxq7bh7j20c8138gpn.jpg");
+        list.add("http://wx4.sinaimg.cn/thumbnail/61e7f4aaly1fbgo4v08ftj20pg0wa468.jpg");
+        list.add("http://wx4.sinaimg.cn/thumbnail/61e7f4aaly1fbgo5cc9pbj20c80eeta5.jpg");
+        bundle.putSerializable("imageUrl", (Serializable) list);
         Intent intent = new Intent(getActivity(), BrowseImageActivity.class);
         intent.putExtras(bundle);
         startActivity(intent);

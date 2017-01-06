@@ -32,4 +32,19 @@ public class ConstantValue {
      */
     public static final int MAX_DISK_CACHE_SIZE = 50 * ByteConstants.MB;
 
+    /**
+     * 缩略图图片 http://ww1.sinaimg.cn/thumbnail/8c9ef2e9gw1fbcz48b05gj20u00u0dk2.jpg
+     */
+    public static final String THUMBNAIL_PIC="thumbnail";
+    /**
+     * 中等图片 http://ww1.sinaimg.cn/thumbnail/8c9ef2e9gw1fbcz48b05gj20u00u0dk2.jpg
+     * 替换thumbnail获取的则为中等图片
+     */
+    public static final String BMIDDLE_PIC="bmiddle";
+    /**
+     * 原图 http://ww1.sinaimg.cn/thumbnail/8c9ef2e9gw1fbcz48b05gj20u00u0dk2.jpg
+     * 替换thumbnail获取的则为原图
+     */
+    public static final String ORIGINAL_PIC="large";
+
 }

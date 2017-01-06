@@ -58,9 +58,6 @@
             </intent-filter>
         </activity>
         <activity
-            android:name=".BrowseImageActivity"
-            android:theme="@style/noTitle"/>
-        <activity
             android:name=".ShowImageActivity"/>
         <activity
             android:name=".animation.LayoutAnimationExampleActivity"/>
@@ -99,6 +96,9 @@
         <activity
             android:name=".animation.RippleLayoutActivity"
             android:hardwareAccelerated="false"/>
+        <activity
+            android:name=".BrowseImageActivity"
+            android:screenOrientation="portrait"/>
     </application>
 
 </manifest>

@@ -10,7 +10,7 @@
     <string name="title_activity_loading_dialog_example">进度框测试</string>
     <string name="loading_dialog">进度框</string>
     <string name="select_image">图片选择(类似微信图片选择)</string>
-    <string name="browse_image">图片浏览放大缩小</string>
+    <string name="browse_image">图片浏览(类似微博图片浏览)</string>
     <string name="map">百度地图封装</string>
     <string name="map_lable">百度地图封装测试</string>
     <string name="fresco">Fresco+PhotoDraweeView使用</string>
@@ -92,4 +92,5 @@
     <string name="download_finish">下载完成...</string>
     <string name="file_exist">文件不存在</string>
     <string name="error_code">错误代码</string>
+    <string name="this_is_menu">这是菜单</string>
 </resources>
