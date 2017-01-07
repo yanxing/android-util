@@ -1,112 +1,99 @@
 package com.yanxing.ui;
 
+import android.graphics.drawable.Animatable;
 import android.os.Bundle;
-import android.support.annotation.Nullable;
 import android.support.v4.view.PagerAdapter;
 import android.support.v4.view.ViewPager;
 import android.view.View;
 import android.view.ViewGroup;
+import android.view.WindowManager;
 import android.widget.TextView;
 
-import com.nostra13.universalimageloader.core.DisplayImageOptions;
-import com.nostra13.universalimageloader.core.ImageLoader;
-import com.photo.browse.widget.CustomPhotoViewPager;
-import com.photo.browse.widget.PhotoView;
+import com.facebook.drawee.backends.pipeline.Fresco;
+import com.facebook.drawee.backends.pipeline.PipelineDraweeControllerBuilder;
+import com.facebook.drawee.controller.BaseControllerListener;
+import com.facebook.imagepipeline.image.ImageInfo;
+import com.facebook.imagepipeline.request.ImageRequest;
 import com.yanxing.base.BaseActivity;
-import com.yanxing.base.BaseFragment;
+import com.yanxing.util.ConstantValue;
 
 import java.util.ArrayList;
 import java.util.List;
 
 import butterknife.BindView;
+import butterknife.OnClick;
+import me.relex.photodraweeview.OnPhotoTapListener;
+import me.relex.photodraweeview.PhotoDraweeView;
 
 /**
- * 浏览图片
- * Created by lishuangxiang on 2016/1/26.
+ * 类似微博图片浏览（Fresco+photodraweeview）
+ * Created by lishuangxiang on 2017/1/5.
  */
-public class BrowseImageActivity extends BaseActivity{
+public class BrowseImageActivity extends BaseActivity {
 
-    @BindView(R.id.custom_photo_viewpage)
-    CustomPhotoViewPager mCustomPhotoViewPager;
+    @BindView(R.id.viewPager)
+    ViewPager mViewPager;
 
-    @BindView(R.id.number)
-    TextView mNumber;//记录当前张数
+    @BindView(R.id.currentPage)
+    TextView mCurrentPage;//当前第几个
 
-    private SamplePagerAdapter mPhotoAdapter;
-
-    private List<String> mPathList = new ArrayList<String>();
-
-    @Override
-    public void onCreate(@Nullable Bundle savedInstanceState) {
-        super.onCreate(savedInstanceState);
-    }
+    private List<String> mImageUrls = new ArrayList<>();
 
     @Override
     protected int getLayoutResID() {
-        return R.layout.activity_browse_image_example;
+        return R.layout.activity_browse_image;
     }
 
+    @Override
     protected void afterInstanceView() {
-        mNumber.getPaint().setFakeBoldText(true);
+        getWindow().setFlags(WindowManager.LayoutParams.FLAG_FULLSCREEN, WindowManager.LayoutParams.FLAG_FULLSCREEN);
         Bundle bundle = getIntent().getExtras();
-        mPathList = (List<String>) bundle.getSerializable("images");
-        int index = bundle.getInt("index", 0);//点击的图片索引
-        mPhotoAdapter = new SamplePagerAdapter();
-        mCustomPhotoViewPager.setAdapter(mPhotoAdapter);
-        if (mPathList.size() == 1) {
-            mNumber.setVisibility(View.GONE);
-        } else {
-            mNumber.setText((index + 1) + "/" + mPathList.size());
+        if (bundle != null) {
+            mImageUrls = bundle.getStringArrayList("imageUrl");
+            int index = bundle.getInt("currentIndex");
+            if (index >= mImageUrls.size()) {
+                throw new IndexOutOfBoundsException("currentIndex must to <imageUrl.size");
+            } else {
+                if (mImageUrls.size() == 1) {
+                    mCurrentPage.setVisibility(View.INVISIBLE);
+                } else {
+                    mCurrentPage.setText((index + 1) + "/" + mImageUrls.size());
+                }
+                mViewPager.setAdapter(new DraweePagerAdapter());
+                mViewPager.setCurrentItem(index);
+                mViewPager.addOnPageChangeListener(new ViewPager.OnPageChangeListener() {
+                    @Override
+                    public void onPageScrolled(int position, float positionOffset, int positionOffsetPixels) {
+                    }
+
+                    @Override
+                    public void onPageSelected(int position) {
+                        mCurrentPage.setText((position + 1) + "/" + mImageUrls.size());
+                    }
+
+                    @Override
+                    public void onPageScrollStateChanged(int state) {
+                    }
+                });
+            }
         }
-        mCustomPhotoViewPager.setCurrentItem(index);
-        mCustomPhotoViewPager.addOnPageChangeListener(new ViewPager.OnPageChangeListener() {
-            @Override
-            public void onPageScrolled(int position, float positionOffset, int positionOffsetPixels) {
-
-            }
-
-            @Override
-            public void onPageSelected(int position) {//设置当前图片第几个
-                mNumber.setText((position + 1) + "/" + mPathList.size());
-            }
-
-            @Override
-            public void onPageScrollStateChanged(int state) {
-
-            }
-        });
     }
 
-    //适配器
-    private class SamplePagerAdapter extends PagerAdapter {
+    @OnClick(R.id.menu)
+    public void onClick() {
+        showToast(getString(R.string.this_is_menu));
+    }
 
-        DisplayImageOptions options;
-        public SamplePagerAdapter(){
-            options=new DisplayImageOptions.Builder()
-                    .cacheOnDisk(true)
-                    .showImageOnLoading(R.drawable.loading_fresco)
-                    .showImageForEmptyUri(R.mipmap.ic_launcher)
-                    .showImageOnFail(R.mipmap.ic_launcher)
-                    .cacheInMemory(true)
-                    .build();
-        }
+    public class DraweePagerAdapter extends PagerAdapter {
+
         @Override
         public int getCount() {
-            return mPathList.size();
+            return mImageUrls.size();
         }
 
         @Override
-        public View instantiateItem(ViewGroup container, int position) {
-            PhotoView photoView = new PhotoView(container.getContext());
-            ImageLoader.getInstance().displayImage(mPathList.get(position),photoView,options);
-            container.addView(photoView, ViewGroup.LayoutParams.MATCH_PARENT, ViewGroup.LayoutParams.MATCH_PARENT);
-            photoView.setOnClickListener(new View.OnClickListener() {
-                @Override
-                public void onClick(View v) {
-                    BrowseImageActivity.this.finish();
-                }
-            });
-            return photoView;
+        public boolean isViewFromObject(View view, Object object) {
+            return view == object;
         }
 
         @Override
@@ -115,8 +102,42 @@ public class BrowseImageActivity extends BaseActivity{
         }
 
         @Override
-        public boolean isViewFromObject(View view, Object object) {
-            return view == object;
+        public Object instantiateItem(ViewGroup viewGroup, int position) {
+            final PhotoDraweeView photoDraweeView = new PhotoDraweeView(viewGroup.getContext());
+            PipelineDraweeControllerBuilder controller = Fresco.newDraweeControllerBuilder()
+                    //先加载中等图，再加载原图
+                    .setLowResImageRequest(ImageRequest.fromUri(mImageUrls.get(position)
+                            .replaceAll(ConstantValue.THUMBNAIL_PIC, ConstantValue.BMIDDLE_PIC)))
+                    .setImageRequest(ImageRequest.fromUri(mImageUrls.get(position)
+                            .replaceAll(ConstantValue.THUMBNAIL_PIC, ConstantValue.ORIGINAL_PIC)))
+                    .setAutoPlayAnimations(true)
+                    .setOldController(photoDraweeView.getController());
+            controller.setControllerListener(new BaseControllerListener<ImageInfo>() {
+                @Override
+                public void onFinalImageSet(String id, ImageInfo imageInfo, Animatable animatable) {
+                    super.onFinalImageSet(id, imageInfo, animatable);
+                    if (imageInfo == null) {
+                        return;
+                    }
+                    photoDraweeView.update(imageInfo.getWidth(), imageInfo.getHeight());
+                }
+            });
+            photoDraweeView.setController(controller.build());
+            photoDraweeView.setOnPhotoTapListener(new OnPhotoTapListener() {
+                @Override
+                public void onPhotoTap(View view, float x, float y) {
+                    finish();
+                }
+            });
+
+            try {
+                viewGroup.addView(photoDraweeView, ViewGroup.LayoutParams.MATCH_PARENT,
+                        ViewGroup.LayoutParams.MATCH_PARENT);
+            } catch (Exception e) {
+                e.printStackTrace();
+            }
+
+            return photoDraweeView;
         }
     }
 }
