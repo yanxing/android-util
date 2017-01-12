@@ -151,5 +151,9 @@
             android:id="@+id/time"
             style="@style/style_btn"
             android:text="@string/countdown_time"/>
+        <Button
+            android:id="@+id/luban"
+            style="@style/style_btn"
+            android:text="Luban压缩"/>
     </LinearLayout>
 </android.support.v4.widget.NestedScrollView>

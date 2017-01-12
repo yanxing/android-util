@@ -74,6 +74,7 @@ dependencies {
     compile 'in.srain.cube:clog:1.0.2'
     compile 'com.jakewharton:disklrucache:2.0.2'
     compile 'org.greenrobot:greendao:3.0.1'
+    compile 'top.zibin:Luban:1.0.9'
     compile project(':sortlistviewlibrary')
     compile project(':adapterlibrary')
     compile project(':photolibrary')
