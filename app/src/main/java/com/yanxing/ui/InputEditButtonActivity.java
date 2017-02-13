@@ -18,7 +18,7 @@ import butterknife.BindView;
  * 加不加都会影响通知栏着色（通知栏颜色不能和标题栏颜色一致）。
  *
  * 更新：在一个项目中看到，只需要把Button放到ScrollView外下面（层级并列），就可以实现Button不被输入法遮挡，
- * 不需要写代码移动布局。
+ * 不需要写代码移动布局，根节点需要添加android:fitsSystemWindows="true"属性。
  * Created by lishuangxiang on 2016/8/23.
  */
 public class InputEditButtonActivity extends BaseActivity{
