@@ -141,6 +141,11 @@ public class MainFragment extends BaseFragment implements AMapLocListener {
         replace(new AnimationMainFragment());
     }
 
+    @OnClick(R.id.luban)
+    public void onClick(){
+        replace(new LubanFragment());
+    }
+
     @OnClick(R.id.tabLayoutPager)
     public void onClickTabLayoutPager() {
         replace(new TabLayoutPagerFragment());

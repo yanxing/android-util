@@ -14,6 +14,11 @@ public class ConstantValue {
     public static final String CACHE_IMAGE="yanxing/image/";
 
     /**
+     * 缓存图片文件夹
+     */
+    public static final String DCIM_IMAGE="DCIM/Camera/";
+
+    /**
      * imageloader、fresco加载本地图片
      */
     public static final String FILE_CACHE_IMAGE="file://"+FileUtil.getStoragePath()+CACHE_IMAGE;
