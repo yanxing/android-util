@@ -188,6 +188,11 @@ public class MainFragment extends BaseFragment implements AMapLocListener {
         startActivity(intent);
     }
 
+    @OnClick(R.id.MPAndroidChart)
+    public void onMPAndroidChart(){
+        replace(new MPAndroidChartFragment());
+    }
+
     @OnClick(value = {R.id.list_dialog_button, R.id.confirm_dialog_button
             , R.id.loading_dialog_button, R.id.select_image, R.id.titleBar
             , R.id.sortListView, R.id.amap, R.id.dialog, R.id.inputEditButton

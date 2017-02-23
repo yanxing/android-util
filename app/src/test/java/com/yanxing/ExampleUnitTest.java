@@ -27,6 +27,7 @@ public class ExampleUnitTest {
 //        assertEquals(4, 2 + 2);
         Pattern pattern=Pattern.compile("http://(m\\.weibo\\.cn){1}(/\\w*)*");
         Matcher matcher=pattern.matcher("日邮报》）...全文： http://m.weibo.cn/1806503894/4057624951927777");
-        System.out.print(matcher.find());
+        System.out.println(matcher.find());
     }
+
 }

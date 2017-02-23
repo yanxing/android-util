@@ -155,5 +155,9 @@
             android:id="@+id/luban"
             style="@style/style_btn"
             android:text="Luban压缩"/>
+        <Button
+            android:id="@+id/MPAndroidChart"
+            style="@style/style_btn"
+            android:text="MPAndroidChart图表"/>
     </LinearLayout>
 </android.support.v4.widget.NestedScrollView>
