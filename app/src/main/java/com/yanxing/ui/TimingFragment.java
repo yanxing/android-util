@@ -74,7 +74,7 @@ public class TimingFragment extends BaseFragment {
             @Override
             public void onBindViewHolder(RecyclerViewAdapter.MyViewHolder holder, final int position) {
                 TextView textView = (TextView) holder.findViewById(R.id.text);
-                textView.setText(String.valueOf(mList.get(position)));
+                textView.setText(String.valueOf(mDataList.get(position)));
                 holder.itemView.setOnClickListener(new View.OnClickListener() {
                     @Override
                     public void onClick(View v) {

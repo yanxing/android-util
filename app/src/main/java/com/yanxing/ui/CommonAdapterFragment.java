@@ -48,7 +48,7 @@ public class CommonAdapterFragment extends BaseFragment {
         CommonAdapter<Integer> adapter = new CommonAdapter<Integer>(list, R.layout.list_dialog_textview) {
             @Override
             public void onBindViewHolder(ViewHolder viewHolder, int position) {
-                viewHolder.setText(R.id.text, String.valueOf(list.get(position)));
+                viewHolder.setText(R.id.text, String.valueOf(mDataList.get(position)));
             }
         };
         //ListView

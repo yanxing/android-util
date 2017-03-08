@@ -45,7 +45,7 @@ public class GreenDaoFragment extends BaseFragment {
         {
             @Override
             public void onBindViewHolder(ViewHolder viewHolder, int position) {
-                viewHolder.setText(R.id.text, mStudentList.get(position).getName()+"   "+mStudentList.get(position).getSex());
+                viewHolder.setText(R.id.text, mDataList.get(position).getName()+"   "+mDataList.get(position).getSex());
             }
         };
         mListView.setAdapter(mStudentCommonAdapter);

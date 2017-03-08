@@ -60,12 +60,12 @@ public class SelectCityFragment extends BaseFragment
         mProvinceAdapter=new CommonAdapter<Area>(mAreaList,R.layout.adapter_province) {
             @Override
             public void onBindViewHolder(ViewHolder viewHolder, int position) {
-                if (mAreaList.get(position).isCheck()){
+                if (mDataList.get(position).isCheck()){
                     viewHolder.findViewById(R.id.current).setVisibility(View.VISIBLE);
                 }else {
                     viewHolder.findViewById(R.id.current).setVisibility(View.GONE);
                 }
-                viewHolder.setText(R.id.province,mAreaList.get(position).getName());
+                viewHolder.setText(R.id.province,mDataList.get(position).getName());
             }
         };
         mProvince.setAdapter(mProvinceAdapter);
@@ -91,7 +91,7 @@ public class SelectCityFragment extends BaseFragment
                     }else {
                         holder.findViewById(R.id.current).setVisibility(View.GONE);
                     }
-                    holder.setText(R.id.city,mAreaList.get(mIndex).getCity().get(index).getName());
+                    holder.setText(R.id.city,mDataList.get(index).getName());
                 }
             };
             mCity.setAdapter(mCityAdapter);

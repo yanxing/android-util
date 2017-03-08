@@ -46,7 +46,7 @@ public class FrescoFragment extends BaseFragment {
         mCommonAdapter=new RecyclerViewAdapter<String>(mList,R.layout.gridview_adapter) {
             @Override
             public void onBindViewHolder(RecyclerViewAdapter.MyViewHolder holder, int position) {
-                String url=mList.get(position);
+                String url=mDataList.get(position);
                 Uri uri = Uri.parse(url);
                 PhotoDraweeView photoDraweeView= (PhotoDraweeView) holder.findViewById(R.id.simple_drawee_view);
                 PipelineDraweeControllerBuilder controller = Fresco.newDraweeControllerBuilder()

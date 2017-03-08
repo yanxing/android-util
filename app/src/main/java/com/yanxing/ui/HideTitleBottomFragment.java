@@ -45,7 +45,7 @@ public class HideTitleBottomFragment extends BaseFragment {
 
             @Override
             public void onBindViewHolder(RecyclerViewAdapter.MyViewHolder holder, final int position) {
-                holder.setText(R.id.text,strings.get(position));
+                holder.setText(R.id.text,mDataList.get(position));
             }
         };
         mRecyclerView.setAdapter(recyclerViewAdapter);

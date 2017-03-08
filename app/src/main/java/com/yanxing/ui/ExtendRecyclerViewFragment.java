@@ -47,7 +47,7 @@ public class ExtendRecyclerViewFragment extends BaseFragment {
             @Override
             public void onBindViewHolder(RecyclerViewAdapter.MyViewHolder holder, final int position) {
                 TextView textView = (TextView) holder.findViewById(R.id.text);
-                textView.setText(mStrings.get(position));
+                textView.setText(mDataList.get(position));
                 holder.itemView.setOnClickListener(new View.OnClickListener() {
                     @Override
                     public void onClick(View v) {

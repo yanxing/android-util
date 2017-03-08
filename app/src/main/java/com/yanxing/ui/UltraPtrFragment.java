@@ -59,7 +59,7 @@ public class UltraPtrFragment extends BaseFragment {
         mCommonAdapter = new CommonAdapter<String>(mList,R.layout.adapter_content) {
             @Override
             public void onBindViewHolder(ViewHolder viewHolder, int position) {
-                viewHolder.setText(R.id.name,mList.get(position));
+                viewHolder.setText(R.id.name,mDataList.get(position));
             }
         };
         mListView.setAdapter(mCommonAdapter);
