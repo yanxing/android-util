@@ -14,8 +14,8 @@ import java.util.List;
  */
 public abstract class RecyclerViewAdapter<T> extends RecyclerView.Adapter<RecyclerViewAdapter.MyViewHolder> {
 
-    private List<T> mDataList;
-    private int mLayoutID;
+    protected List<T> mDataList;
+    protected int mLayoutID;
 
     /**
      * @param dataList
