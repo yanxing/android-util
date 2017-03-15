@@ -171,7 +171,7 @@ intent.putExtra("city","上海");
 startActivityForResult(intent,QUESTION_SORT_LISTVIEW_CODE);
 ```
 ![image](https://github.com/yanxing/android-util/raw/master/sortlistviewlibrary/1.png)
-##photodialoglibrary
+## photodialoglibrary
 图片选择（拍照和从图库选择）。
 ```Java
 Intent intent=new Intent(getApplicationContext(), SelectPhotoActivity.class);
@@ -187,7 +187,7 @@ bundle.putParcelable("photoParam",photoParam);
 intent.putExtras(bundle);
 startActivityForResult(intent, QUESTION_IMAGE_CODE);
 ```
-##downloadlibrary
+## downloadlibrary
 多线程下载，支持断点续传。
 ```Java
 DownloadUtils.getInstance().startDownload(getApplicationContext(),url
