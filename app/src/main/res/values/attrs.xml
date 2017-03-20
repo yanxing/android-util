@@ -57,6 +57,21 @@
         <!--进度最大值-->
         <attr name="circleMaxProgress" format="reference|dimension|integer" />
     </declare-styleable>
+    
+    <declare-styleable name="WheelView">
+        <!-- 未选中文本颜色-->
+        <attr name="outTextColor" format="color"/>
+        <!-- 未选中文本大小-->
+        <attr name="outTextSize" format="dimension"/>
+        <!-- 选中文本颜色-->
+        <attr name="centerTextColor" format="color"/>
+        <!-- 未选中文本大小-->
+        <attr name="CenterTextSize" format="dimension"/>
+        <!-- 分割线文本颜色-->
+        <attr name="IndicatorTextColor" format="color"/>
+
+
+    </declare-styleable>
 
 
 </resources>
