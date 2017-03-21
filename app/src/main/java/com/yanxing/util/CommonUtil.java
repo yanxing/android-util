@@ -16,6 +16,7 @@ import android.net.Uri;
 import android.os.IBinder;
 import android.provider.MediaStore;
 import android.telephony.TelephonyManager;
+import android.util.DisplayMetrics;
 import android.view.Display;
 import android.view.View;
 import android.view.Window;
@@ -424,6 +425,25 @@ public class CommonUtil {
         try {
             wm = (WindowManager) context.getSystemService(Context.WINDOW_SERVICE);
             return wm.getDefaultDisplay();
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        return null;
+    }
+
+    /**
+     * 获取屏幕参数
+     *
+     * @param context
+     * @return
+     */
+    public static DisplayMetrics getDisplayMetrics(Context context) {
+        try {
+
+            WindowManager wm = (WindowManager) context.getSystemService(Context.WINDOW_SERVICE);
+            DisplayMetrics dm = new DisplayMetrics();
+            wm.getDefaultDisplay().getMetrics(dm);
+            return dm;
         } catch (Exception e) {
             e.printStackTrace();
         }
