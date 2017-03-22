@@ -118,6 +118,9 @@ public class SelectPhotoActivity extends FragmentActivity implements View.OnClic
                     return;
                 }
                 File file = new File(mPhotoParam.getPath(), mPhotoParam.getName());
+                if (Build.VERSION.SDK_INT == Build.VERSION_CODES.LOLLIPOP_MR1){//android22 bug
+                    selectedImage=Uri.fromFile(new File(ContentUriUtil.getPath(getApplicationContext(), selectedImage)));
+                }
                 cutPhoto(selectedImage, Uri.fromFile(file));
             }
         }
