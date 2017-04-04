@@ -76,7 +76,7 @@ public abstract class RecyclerViewAdapter<T> extends RecyclerView.Adapter<Recycl
     /**
      * ViewHolder
      */
-    public class MyViewHolder extends RecyclerView.ViewHolder {
+    public static class MyViewHolder extends RecyclerView.ViewHolder {
 
         public MyViewHolder(View view) {
             super(view);

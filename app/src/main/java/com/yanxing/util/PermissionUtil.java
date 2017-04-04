@@ -1,4 +1,4 @@
-package com.yanxing.util;
+package com.dianmei.util;
 
 import android.app.Activity;
 import android.content.pm.PackageManager;
@@ -10,7 +10,7 @@ import java.util.List;
 
 /**
  * android6.0以上权限请求
- * Created by lishuangxiang on 2016/12/12.
+ * Created by 李双祥 on 2017/4/1.
  */
 public class PermissionUtil {
 
@@ -47,17 +47,16 @@ public class PermissionUtil {
     }
 
     /**
-     * 检查权限并申请
+     * 申请权限
      *
      * @param activity
      * @param permissions
      * @param requestCode
      */
     public static void checkSelfPermission(Activity activity, String permissions[], int requestCode) {
-        List<String> permissionList = findNeedRequestPermissions(activity, permissions);
-        if (permissionList.size() > 0) {
+        if (permissions.length > 0) {
             if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
-                activity.requestPermissions(permissionList.toArray(new String[permissionList.size()]), requestCode);
+                activity.requestPermissions(permissions, requestCode);
             }
         }
     }
@@ -68,7 +67,7 @@ public class PermissionUtil {
      * @param activity
      * @param permissions
      */
-    private static List<String> findNeedRequestPermissions(Activity activity, String permissions[]) {
+    public static String[] findNeedRequestPermissions(Activity activity, String permissions[]) {
         List<String> permissionList = new ArrayList<>();
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
             for (int i = 0; i < permissions.length; i++) {
@@ -77,7 +76,7 @@ public class PermissionUtil {
                 }
             }
         }
-        return permissionList;
+        return permissionList.toArray(new String[permissionList.size()]);
     }
 
     /**
