@@ -159,5 +159,9 @@
             android:id="@+id/MPAndroidChart"
             style="@style/style_btn"
             android:text="MPAndroidChart图表"/>
+        <Button
+            android:id="@+id/swipe_to_load_layout"
+            style="@style/style_btn"
+            android:text="SwipeToLoadLayout"/>
     </LinearLayout>
 </android.support.v4.widget.NestedScrollView>

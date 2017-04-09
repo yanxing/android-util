@@ -22,6 +22,7 @@ import com.yanxing.dialog.SelectPhotoActivity;
 import com.yanxing.sortlistviewlibrary.CityListActivity;
 import com.yanxing.ui.animation.AnimationMainFragment;
 import com.yanxing.ui.swipebacklayout.SwipeBackLayoutActivity;
+import com.yanxing.ui.swipetoloadlayout.SwipeToLoadLayoutFragment;
 import com.yanxing.ui.tablayout.TabLayoutPagerFragment;
 import com.yanxing.util.ConstantValue;
 import com.yanxing.util.FileUtil;
@@ -196,7 +197,7 @@ public class MainFragment extends BaseFragment implements AMapLocListener {
     @OnClick(value = {R.id.list_dialog_button, R.id.confirm_dialog_button
             , R.id.loading_dialog_button, R.id.select_image, R.id.titleBar
             , R.id.sortListView, R.id.amap, R.id.dialog, R.id.inputEditButton
-            , R.id.select_image_dialog, R.id.surfaceView, R.id.swipeBackLayout})
+            , R.id.select_image_dialog, R.id.surfaceView, R.id.swipeBackLayout,R.id.swipe_to_load_layout})
     public void onClick(View v) {
         Intent intent = new Intent();
         Bundle bundle = new Bundle();
@@ -260,6 +261,9 @@ public class MainFragment extends BaseFragment implements AMapLocListener {
                 intent.setClass(getActivity(), SwipeBackLayoutActivity.class);
                 startActivity(intent);
                 break;
+            case R.id.swipe_to_load_layout:
+                replace(new SwipeToLoadLayoutFragment());
+
         }
     }
 

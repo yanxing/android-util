@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="utf-8"?>
+<com.yanxing.ui.swipetoloadlayout.LoadMoreFooterView xmlns:android="http://schemas.android.com/apk/res/android"
+                                                     xmlns:app="http://schemas.android.com/apk/res-auto"
+                                                     android:layout_width="match_parent"
+                                                     android:layout_height="@dimen/load_more_footer_height">
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+        <com.yanxing.view.ProgressWheel
+            android:id="@+id/refresh"
+            android:layout_width="20dp"
+            android:layout_height="20dp"
+            android:layout_centerVertical="true"
+            android:layout_marginRight="20dp"
+            android:layout_toLeftOf="@id/text"
+            app:matProg_barColor="#a0a0a0"
+            app:matProg_barWidth="2dp"
+            app:matProg_progressIndeterminate="true"/>
+
+        <TextView
+            android:id="@+id/tvLoadMore"
+            android:layout_width="150dp"
+            android:layout_height="wrap_content"
+            android:layout_centerInParent="true"
+            android:layout_centerVertical="true"
+            android:gravity="center"
+            android:text="LoadMore"
+            android:textColor="#666666"/>
+    </RelativeLayout>
+</com.yanxing.ui.swipetoloadlayout.LoadMoreFooterView>

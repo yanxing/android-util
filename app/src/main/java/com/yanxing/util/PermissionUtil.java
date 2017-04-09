@@ -1,4 +1,4 @@
-package com.dianmei.util;
+package com.yanxing.util;
 
 import android.app.Activity;
 import android.content.pm.PackageManager;

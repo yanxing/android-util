@@ -12,7 +12,7 @@ android {
             storePassword 'yanxing'
         }
     }
-    compileSdkVersion 24
+    compileSdkVersion 25
     buildToolsVersion "25.0.1"
     defaultConfig {
         applicationId "com.yanxing.ui"
@@ -48,8 +48,8 @@ android {
 dependencies {
     compile fileTree(include: ['*.jar'], dir: 'libs')
     testCompile 'junit:junit:4.12'
-    compile 'com.android.support:appcompat-v7:24.0.0'
-    compile 'com.android.support:design:24.0.0'
+    compile 'com.android.support:appcompat-v7:25.1.0'
+    compile 'com.android.support:design:25.1.0'
     compile 'com.facebook.fresco:fresco:1.0.0'
     compile 'com.facebook.fresco:animated-gif:1.0.0'
     compile 'me.relex:photodraweeview:1.1.2'
@@ -76,6 +76,7 @@ dependencies {
     compile 'com.jakewharton:disklrucache:2.0.2'
     compile 'org.greenrobot:greendao:3.0.1'
     compile 'top.zibin:Luban:1.0.9'
+    compile 'com.github.Aspsine:SwipeToLoadLayout:1.0.4'
     compile project(':sortlistviewlibrary')
     compile project(':adapterlibrary')
     compile project(':photolibrary')
