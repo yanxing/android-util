@@ -93,4 +93,7 @@
     <string name="file_exist">文件不存在</string>
     <string name="error_code">错误代码</string>
     <string name="this_is_menu">这是菜单</string>
+    <string name="COMPLETE">刷新完成</string>
+    <string name="swipe_to_refresh">松开</string>
+    <string name="he_ji">合计</string>
 </resources>

@@ -1,11 +1,23 @@
 <resources>
     <!-- Default screen margins, per the Android Design guidelines. -->
+
+    <!--按照720 px:dp/sp   2:1 -->
+    <dimen name="text_size_9">9sp</dimen>
+    <dimen name="text_size_12">12sp</dimen>
+    <dimen name="text_size_13">13sp</dimen>
+    <dimen name="text_normal_14">14sp</dimen>
+    <dimen name="text_size_15">15sp</dimen>
+    <dimen name="text_size_16">16sp</dimen>
+    <dimen name="text_size_17">17sp</dimen>
+
+
     <dimen name="activity_horizontal_margin">16dp</dimen>
     <dimen name="activity_vertical_margin">16dp</dimen>
     <dimen name="fab_margin">16dp</dimen>
-    <dimen name="text_normal_xx">17dp</dimen>
     <dimen name="margin8">8dp</dimen>
     <dimen name="margin4">4dp</dimen>
     <dimen name="refresh_header_height">80dp</dimen>
     <dimen name="load_more_footer_height">80dp</dimen>
+    <dimen name="margin10">10dp</dimen>
+    <dimen name="margin15">15dp</dimen>
 </resources>

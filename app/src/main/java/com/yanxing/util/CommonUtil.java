@@ -112,6 +112,25 @@ public class CommonUtil {
     }
 
     /**
+     * 格式化时间，04-05 13:19
+     *
+     * @param time 2017-04-05 13:19:51
+     * @return
+     */
+    public static String formatTime(double money) {
+        String regex = "^(\\d)+\\.0$";
+        Pattern pattern = Pattern.compile(regex);
+        Matcher matcher = pattern.matcher(String.valueOf(money));
+        if (matcher.matches()){
+            return String.valueOf((int)money);
+        }else {
+            return String.valueOf(money);
+        }
+
+
+    }
+
+    /**
      * 判断字符串是否都是数字，true都是数字
      * @param digit
      * @return

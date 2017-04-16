@@ -1,38 +1,42 @@
 <?xml version="1.0" encoding="utf-8"?>
 <com.yanxing.ui.swipetoloadlayout.RefreshHeaderView xmlns:android="http://schemas.android.com/apk/res/android"
-              android:orientation="vertical"
-              android:layout_width="match_parent"
-              android:layout_height="match_parent">
+                                                    xmlns:app="http://schemas.android.com/apk/res-auto"
+                                                    android:layout_width="match_parent"
+                                                    android:layout_height="wrap_content"
+                                                    android:orientation="vertical">
+
     <RelativeLayout
         android:layout_width="match_parent"
         android:layout_height="@dimen/refresh_header_height"
         android:layout_gravity="center">
 
-    <ImageView
-        android:id="@+id/ivArrow"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_centerVertical="true"
-        android:layout_marginRight="48dp"
-        android:layout_toLeftOf="@+id/tvRefresh"
-        android:background="@mipmap/down" />
+        <ImageView
+            android:id="@+id/ivArrow"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerVertical="true"
+            android:layout_marginRight="10dp"
+            android:layout_toLeftOf="@+id/tvRefresh"
+            android:background="@mipmap/down"/>
 
-    <ProgressBar
-        android:id="@+id/progressbar"
-        style="?android:attr/progressBarStyleSmallInverse"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_centerVertical="true"
-        android:layout_marginRight="48dp"
-        android:layout_toLeftOf="@+id/tvRefresh" />
+        <TextView
+            android:id="@+id/tvRefresh"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerInParent="true"
+            android:layout_marginLeft="@dimen/margin15"
+            android:gravity="center"
+            android:text="ajdfaj"
+            android:textColor="#666666"/>
 
-    <TextView
-        android:id="@+id/tvRefresh"
-        android:layout_width="150dp"
-        android:layout_height="wrap_content"
-        android:layout_centerInParent="true"
-        android:gravity="center"
-        android:text="ajdfaj"
-        android:textColor="#666666" />
+        <com.yanxing.view.ProgressWheel
+            android:id="@+id/progressbar"
+            android:layout_width="20dp"
+            android:layout_height="20dp"
+            android:layout_centerVertical="true"
+            android:layout_toLeftOf="@id/tvRefresh"
+            app:matProg_barColor="#a0a0a0"
+            app:matProg_barWidth="2dp"
+            app:matProg_progressIndeterminate="true"/>
     </RelativeLayout>
 </com.yanxing.ui.swipetoloadlayout.RefreshHeaderView>

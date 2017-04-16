@@ -1,6 +1,8 @@
 package com.yanxing.ui.swipetoloadlayout;
 
+import android.os.Bundle;
 import android.support.v4.view.ViewCompat;
+import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 
 import com.aspsine.swipetoloadlayout.OnLoadMoreListener;
@@ -24,7 +26,7 @@ public class SwipeToLoadLayoutFragment extends BaseFragment implements OnRefresh
     @BindView(R.id.swipe_to_load_layout)
     SwipeToLoadLayout mSwipeToLoadLayout;
 
-    @BindView(R.id.recyclerView)
+    @BindView(R.id.swipe_target)
     RecyclerView mRecyclerView;
 
     private List<Integer> mList=new ArrayList<>();
@@ -40,11 +42,13 @@ public class SwipeToLoadLayoutFragment extends BaseFragment implements OnRefresh
     protected void afterInstanceView() {
         mSwipeToLoadLayout.setOnRefreshListener(this);
         mSwipeToLoadLayout.setOnLoadMoreListener(this);
-
         mRecyclerView.addOnScrollListener(new RecyclerView.OnScrollListener() {
             @Override
             public void onScrollStateChanged(RecyclerView recyclerView, int newState) {
                 if (newState == RecyclerView.SCROLL_STATE_IDLE ){
+                    if (recyclerView==null){
+                        showToast("为空");
+                    }
                     if (!ViewCompat.canScrollVertically(recyclerView, 1)){
                         mSwipeToLoadLayout.setLoadingMore(true);
                     }
@@ -52,6 +56,17 @@ public class SwipeToLoadLayoutFragment extends BaseFragment implements OnRefresh
             }
         });
 
+    }
+
+    @Override
+    public void onActivityCreated(Bundle savedInstanceState) {
+        super.onActivityCreated(savedInstanceState);
+        mSwipeToLoadLayout.post(new Runnable() {
+            @Override
+            public void run() {
+                mSwipeToLoadLayout.setRefreshing(true);
+            }
+        });
     }
 
     @Override
@@ -75,6 +90,8 @@ public class SwipeToLoadLayoutFragment extends BaseFragment implements OnRefresh
                 holder.setText(R.id.text,String.valueOf(mList.get(position)));
             }
         };
+        mRecyclerView.setLayoutManager(new LinearLayoutManager(getActivity()));
         mRecyclerView.setAdapter(mIntegerRecyclerViewAdapter);
+        mSwipeToLoadLayout.setRefreshing(false);
     }
 }

@@ -15,4 +15,8 @@
     <color name="colorOrange">#F7692B</color>
     <color name="colorYellow">#eda40c</color>
     <color name="colorBlue">#1FB6FF</color>
+
+    <color name="color_dde0df">#dde0df</color>
+    <color name="black">#000000</color>
+    <color name="color_f7f7f7">#f7f7f7</color>
 </resources>

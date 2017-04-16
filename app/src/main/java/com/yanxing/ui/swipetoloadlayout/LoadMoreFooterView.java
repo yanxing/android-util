@@ -47,16 +47,16 @@ public class LoadMoreFooterView extends SwipeLoadMoreFooterLayout {
         if (!isComplete) {
             progressBar.setVisibility(GONE);
             if (-y >= mFooterHeight) {
-                tvLoadMore.setText("RELEASE TO LOAD MORE");
+                tvLoadMore.setText("释放加载更多");
             } else {
-                tvLoadMore.setText("SWIPE TO LOAD MORE");
+                tvLoadMore.setText("上拉加载");
             }
         }
     }
 
     @Override
     public void onLoadMore() {
-        tvLoadMore.setText("LOADING MORE");
+        tvLoadMore.setText("加载中...");
         progressBar.setVisibility(VISIBLE);
     }
 

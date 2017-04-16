@@ -69,8 +69,6 @@
         <attr name="CenterTextSize" format="dimension"/>
         <!-- 分割线文本颜色-->
         <attr name="IndicatorTextColor" format="color"/>
-
-
     </declare-styleable>
 
 

@@ -1,8 +1,10 @@
 package com.yanxing.ui.swipetoloadlayout;
 
 import android.content.Context;
+import android.os.Handler;
 import android.util.AttributeSet;
 import android.util.Log;
+import android.view.View;
 import android.view.animation.Animation;
 import android.view.animation.AnimationUtils;
 import android.widget.ImageView;
@@ -22,7 +24,7 @@ public class RefreshHeaderView extends SwipeRefreshHeaderLayout {
 
     private TextView tvRefresh;
 
-    private ProgressBar progressBar;
+    private View progressBar;
 
     private int mHeaderHeight;
 
@@ -52,7 +54,7 @@ public class RefreshHeaderView extends SwipeRefreshHeaderLayout {
         super.onFinishInflate();
         tvRefresh = (TextView) findViewById(R.id.tvRefresh);
         ivArrow = (ImageView) findViewById(R.id.ivArrow);
-        progressBar = (ProgressBar) findViewById(R.id.progressbar);
+        progressBar =findViewById(R.id.progressbar);
     }
 
     @Override
@@ -60,12 +62,11 @@ public class RefreshHeaderView extends SwipeRefreshHeaderLayout {
         ivArrow.clearAnimation();
         ivArrow.setVisibility(GONE);
         progressBar.setVisibility(VISIBLE);
-        tvRefresh.setText("REFRESHING");
+        tvRefresh.setText("刷新中...");
     }
 
     @Override
     public void onPrepare() {
-        Log.d("TwitterRefreshHeader", "onPrepare()");
     }
 
     @Override
@@ -74,7 +75,7 @@ public class RefreshHeaderView extends SwipeRefreshHeaderLayout {
             ivArrow.setVisibility(VISIBLE);
             progressBar.setVisibility(GONE);
             if (y > mHeaderHeight) {
-                tvRefresh.setText("RELEASE TO REFRESH");
+                tvRefresh.setText("释放刷新");
                 if (!rotated) {
                     ivArrow.clearAnimation();
                     ivArrow.startAnimation(rotateUp);
@@ -87,14 +88,13 @@ public class RefreshHeaderView extends SwipeRefreshHeaderLayout {
                     rotated = false;
                 }
 
-                tvRefresh.setText("SWIPE TO REFRESH");
+                tvRefresh.setText("下拉刷新");
             }
         }
     }
 
     @Override
     public void onRelease() {
-        Log.d("TwitterRefreshHeader", "onRelease()");
     }
 
     @Override
@@ -103,7 +103,7 @@ public class RefreshHeaderView extends SwipeRefreshHeaderLayout {
         ivArrow.clearAnimation();
         ivArrow.setVisibility(GONE);
         progressBar.setVisibility(GONE);
-        tvRefresh.setText("COMPLETE");
+        tvRefresh.setText(R.string.COMPLETE);
     }
 
     @Override

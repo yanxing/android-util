@@ -163,5 +163,9 @@
             android:id="@+id/swipe_to_load_layout"
             style="@style/style_btn"
             android:text="SwipeToLoadLayout"/>
+        <Button
+            android:id="@+id/tableView"
+            style="@style/style_btn"
+            android:text="tableView"/>
     </LinearLayout>
 </android.support.v4.widget.NestedScrollView>
