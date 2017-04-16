@@ -216,3 +216,6 @@ resumeDownload();//恢复下载
 delete(Context context, String url);//删除下载记录
 getDownloadProgressByUrl(Context context, String url);//获取已下载的进度，用作刚进入界面显示用
 ```
+## TableView
+表格，上滑标题不动，右滑，第一列不动，[example](https://github.com/yanxing/android-util/blob/master/app/src/main/java/com/yanxing/ui/TableViewFragment.java)<br>
+![image](https://github.com/yanxing/android-util/raw/master/image/1.gif)
