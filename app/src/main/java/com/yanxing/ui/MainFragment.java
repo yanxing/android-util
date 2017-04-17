@@ -65,16 +65,14 @@ public class MainFragment extends BaseFragment implements AMapLocListener {
     }
 
     /**
-     * 检查并申请定位权限
+     * 申请定位权限
      */
     public void checkPermission() {
-        if (Build.VERSION.SDK_INT >= 23) {
-            PermissionUtil.checkSelfPermission(this, new String[]{
-                    Manifest.permission.CAMERA, Manifest.permission.ACCESS_FINE_LOCATION
-                    , Manifest.permission.ACCESS_COARSE_LOCATION, Manifest.permission.WRITE_EXTERNAL_STORAGE
-                    , Manifest.permission.READ_EXTERNAL_STORAGE
-                    , Manifest.permission.READ_PHONE_STATE, Manifest.permission.WRITE_SETTINGS}, QUESTION_LOCATION);
-        }
+        PermissionUtil.requestPermission(this, new String[]{
+                Manifest.permission.CAMERA, Manifest.permission.ACCESS_FINE_LOCATION
+                , Manifest.permission.ACCESS_COARSE_LOCATION, Manifest.permission.WRITE_EXTERNAL_STORAGE
+                , Manifest.permission.READ_EXTERNAL_STORAGE
+                , Manifest.permission.READ_PHONE_STATE, Manifest.permission.WRITE_SETTINGS}, QUESTION_LOCATION);
     }
 
     @OnClick(R.id.adapter_button)

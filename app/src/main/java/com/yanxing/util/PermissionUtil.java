@@ -10,7 +10,7 @@ import java.util.List;
 
 /**
  * android6.0以上权限请求
- * Created by 李双祥 on 2017/4/1.
+ * Created by lishuangxiang on 2016/10/11
  */
 public class PermissionUtil {
 
@@ -36,24 +36,28 @@ public class PermissionUtil {
     private static final String STORAGE1 = "android.permission.READ_EXTERNAL_STORAGE";
 
     /**
-     * 检查权限并申请
+     * Fragment中检查权限并申请
      *
      * @param fragment
      * @param permissions
      * @param requestCode
      */
-    public static void checkSelfPermission(Fragment fragment, String permissions[], int requestCode) {
-        checkSelfPermission(fragment.getActivity(), permissions, requestCode);
+    public static void requestPermission(Fragment fragment, String permissions[], int requestCode) {
+        if (permissions.length > 0) {
+            if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
+                fragment.requestPermissions(permissions, requestCode);
+            }
+        }
     }
 
     /**
-     * 申请权限
+     * Activity中申请权限
      *
      * @param activity
      * @param permissions
      * @param requestCode
      */
-    public static void checkSelfPermission(Activity activity, String permissions[], int requestCode) {
+    public static void requestPermission(Activity activity, String permissions[], int requestCode) {
         if (permissions.length > 0) {
             if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
                 activity.requestPermissions(permissions, requestCode);
