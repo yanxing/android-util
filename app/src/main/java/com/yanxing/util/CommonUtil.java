@@ -131,12 +131,12 @@ public class CommonUtil {
     }
 
     /**
-     * 判断字符串是否都是数字，true都是数字
+     * 判断字符串是否都是数字，包括负数、小数点，true都是数字
      * @param digit
      * @return
      */
     public static boolean isDigit(String digit){
-        String regex="^[0-9]*$";
+        String regex="^-?[0-9]*(\\.)?[0-9]*$";
         Pattern pattern=Pattern.compile(regex);
         return pattern.matcher(digit).matches();
     }

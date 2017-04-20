@@ -17,6 +17,7 @@ import com.yanxing.adapterlibrary.RecyclerViewAdapter;
 import com.yanxing.model.Table;
 import com.yanxing.ui.R;
 import com.yanxing.util.CommonUtil;
+import com.yanxing.util.DoubleUtil;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -203,13 +204,27 @@ public class TableView extends LinearLayout {
             List<String> strings=new ArrayList<>();
             for (Table table11:mColumnData){
                 for (int i=0;i<table11.getOtherColumn().size();i++){
-                    if (strings.size()<=i){
-                        strings.add(table11.getOtherColumn().get(i));
+                    String temp=table11.getOtherColumn().get(i);
+                    if (!CommonUtil.isDigit(temp)){//非数字不计算
+                        strings.add("");
+                        continue;//可能某一行还是数字
+                    }
+                    if (strings.size()<=i){//第一次合计时
+                        strings.add(temp);
                     }else {
-                        double before=Double.parseDouble(strings.get(i));
-                        double current=Double.parseDouble(table11.getOtherColumn().get(i));
-                        strings.remove(i);
-                        strings.add(i,String.valueOf((before+current)));
+                        String b=strings.get(i);
+                        String c=temp;
+                        if ((!b.contains("."))&&(!c.contains("."))){//都是整数计算，结果也是整数
+                            int before=Integer.parseInt(strings.get(i));
+                            int current=Integer.parseInt(temp);
+                            strings.remove(i);
+                            strings.add(i,String.valueOf(before+current));
+                        }else {
+                            double before=Double.parseDouble(strings.get(i));
+                            double current=Double.parseDouble(temp);
+                            strings.remove(i);
+                            strings.add(i,String.valueOf((DoubleUtil.add(before,current))));
+                        }
                     }
                 }
             }

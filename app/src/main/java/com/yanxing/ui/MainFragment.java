@@ -343,12 +343,13 @@ public class MainFragment extends BaseFragment implements AMapLocListener {
     public void onRequestPermissionsResult(int requestCode, @NonNull String[] permissions
             , @NonNull int[] grantResults) {
         if (requestCode == QUESTION_LOCATION) {
-            if (grantResults[0] != PackageManager.PERMISSION_GRANTED) {
-                for (String permission : permissions) {
-                    PermissionUtil.getPermissionTip(permission);
+            for (int i=0;i<grantResults.length;i++){
+                if (grantResults[i]!=PackageManager.PERMISSION_GRANTED){
+                    for (String permission : permissions) {
+                        PermissionUtil.getPermissionTip(permission);
+                    }
                 }
             }
-            return;
         }
         super.onRequestPermissionsResult(requestCode, permissions, grantResults);
     }
