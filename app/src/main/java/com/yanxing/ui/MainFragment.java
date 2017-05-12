@@ -196,7 +196,7 @@ public class MainFragment extends BaseFragment implements AMapLocListener {
             , R.id.loading_dialog_button, R.id.select_image, R.id.titleBar
             , R.id.sortListView, R.id.amap, R.id.dialog, R.id.inputEditButton
             , R.id.select_image_dialog, R.id.surfaceView, R.id.swipeBackLayout
-            ,R.id.swipe_to_load_layout,R.id.tableView})
+            ,R.id.swipe_to_load_layout,R.id.tableView,R.id.navigationTop})
     public void onClick(View v) {
         Intent intent = new Intent();
         Bundle bundle = new Bundle();
@@ -265,6 +265,9 @@ public class MainFragment extends BaseFragment implements AMapLocListener {
                 break;
             case R.id.tableView:
                 replace(new TableViewFragment());
+                break;
+            case R.id.navigationTop:
+                replace(new NavigationTopFragment());
                 break;
 
         }

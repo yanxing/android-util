@@ -167,5 +167,9 @@
             android:id="@+id/tableView"
             style="@style/style_btn"
             android:text="tableView"/>
+        <Button
+            android:id="@+id/navigationTop"
+            style="@style/style_btn"
+            android:text="navigationTop"/>
     </LinearLayout>
 </android.support.v4.widget.NestedScrollView>

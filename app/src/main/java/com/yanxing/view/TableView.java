@@ -133,8 +133,19 @@ public class TableView extends LinearLayout {
                 });
             }
         };
-        mFirstColumn.setLayoutManager(new LinearLayoutManager(mContext));
-        mOtherColumn.setLayoutManager(new LinearLayoutManager(mContext));
+        LinearLayoutManager firstLinearLayoutManager=new LinearLayoutManager(mContext);
+        firstLinearLayoutManager.setSmoothScrollbarEnabled(true);
+        firstLinearLayoutManager.setAutoMeasureEnabled(true);
+        mFirstColumn.setLayoutManager(firstLinearLayoutManager);
+        mFirstColumn.setHasFixedSize(true);
+        mFirstColumn.setNestedScrollingEnabled(false);
+
+        LinearLayoutManager OtherLinearLayoutManager=new LinearLayoutManager(mContext);
+        OtherLinearLayoutManager.setSmoothScrollbarEnabled(true);
+        OtherLinearLayoutManager.setAutoMeasureEnabled(true);
+        mOtherColumn.setLayoutManager(OtherLinearLayoutManager);
+        mOtherColumn.setHasFixedSize(true);
+        mOtherColumn.setNestedScrollingEnabled(false);
         mFirstColumn.setAdapter(mFirstColumnAdapter);
         mOtherColumn.setAdapter(mOtherColumnAdapter);
         syncScroll(mFirstColumn,mOtherColumn);
