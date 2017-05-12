@@ -2,6 +2,7 @@ package com.yanxing.ui;
 
 import android.Manifest;
 import android.content.Intent;
+import android.content.pm.ActivityInfo;
 import android.content.pm.PackageManager;
 import android.os.Build;
 import android.os.Bundle;
@@ -29,6 +30,10 @@ import com.yanxing.util.FileUtil;
 import com.yanxing.util.PermissionUtil;
 import com.yanxing.view.ConfirmDialog;
 import com.yanxing.view.ListDialog;
+import com.zhihu.matisse.Matisse;
+import com.zhihu.matisse.MimeType;
+import com.zhihu.matisse.engine.impl.GlideEngine;
+import com.zhihu.matisse.filter.Filter;
 
 import java.io.Serializable;
 import java.util.ArrayList;
@@ -46,6 +51,7 @@ public class MainFragment extends BaseFragment implements AMapLocListener {
     private static final int QUESTION_IMAGE_CODE = 1;
     private static final int QUESTION_SORT_LISTVIEW_CODE = 2;
     private static final int QUESTION_LOCATION = 3;
+    private static final int REQUEST_CODE_CHOOSE = 4;
     //选择的图片名称
     private String mImageName;
     private String mCity;
@@ -196,7 +202,7 @@ public class MainFragment extends BaseFragment implements AMapLocListener {
             , R.id.loading_dialog_button, R.id.select_image, R.id.titleBar
             , R.id.sortListView, R.id.amap, R.id.dialog, R.id.inputEditButton
             , R.id.select_image_dialog, R.id.surfaceView, R.id.swipeBackLayout
-            ,R.id.swipe_to_load_layout,R.id.tableView,R.id.navigationTop})
+            ,R.id.swipe_to_load_layout,R.id.tableView,R.id.navigationTop,R.id.matisse})
     public void onClick(View v) {
         Intent intent = new Intent();
         Bundle bundle = new Bundle();
@@ -268,6 +274,18 @@ public class MainFragment extends BaseFragment implements AMapLocListener {
                 break;
             case R.id.navigationTop:
                 replace(new NavigationTopFragment());
+                break;
+            case R.id.matisse:
+                Matisse.from(getActivity())
+                        .choose(MimeType.allOf())
+                        .countable(true)
+                        .maxSelectable(9)
+//                        .addFilter(new GifSizeFilter(320, 320, 5 * Filter.K * Filter.K))
+                        .gridExpectedSize(getResources().getDimensionPixelSize(R.dimen.grid_expected_size))
+                        .restrictOrientation(ActivityInfo.SCREEN_ORIENTATION_UNSPECIFIED)
+                        .thumbnailScale(0.85f)
+                        .imageEngine(new GlideEngine())
+                        .forResult(REQUEST_CODE_CHOOSE);
                 break;
 
         }

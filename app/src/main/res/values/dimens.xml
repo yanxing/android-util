@@ -20,4 +20,5 @@
     <dimen name="load_more_footer_height">80dp</dimen>
     <dimen name="margin10">10dp</dimen>
     <dimen name="margin15">15dp</dimen>
+    <dimen name="grid_expected_size">180dp</dimen>
 </resources>

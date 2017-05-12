@@ -48,7 +48,7 @@ android {
 dependencies {
     compile fileTree(include: ['*.jar'], dir: 'libs')
     testCompile 'junit:junit:4.12'
-    compile 'com.android.support:appcompat-v7:25.1.0'
+    compile 'com.android.support:appcompat-v7:25.3.1'
     compile 'com.android.support:design:25.1.0'
     compile 'com.facebook.fresco:fresco:1.0.0'
     compile 'com.facebook.fresco:animated-gif:1.0.0'
@@ -77,6 +77,8 @@ dependencies {
     compile 'org.greenrobot:greendao:3.0.1'
     compile 'top.zibin:Luban:1.0.9'
     compile 'com.github.Aspsine:SwipeToLoadLayout:1.0.4'
+    compile 'com.zhihu.android:matisse:0.4.3'
+    compile 'com.github.bumptech.glide:glide:3.7.0'
     compile project(':sortlistviewlibrary')
     compile project(':adapterlibrary')
     compile project(':photolibrary')

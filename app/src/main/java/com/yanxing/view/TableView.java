@@ -217,7 +217,9 @@ public class TableView extends LinearLayout {
                 for (int i=0;i<table11.getOtherColumn().size();i++){
                     String temp=table11.getOtherColumn().get(i);
                     if (!CommonUtil.isDigit(temp)){//非数字不计算
-                        strings.add("");
+                        if (strings.size()<=i){//第一次合计则添加，合计集合长度大小已确定不添加
+                            strings.add("");
+                        }
                         continue;//可能某一行还是数字
                     }
                     if (strings.size()<=i){//第一次合计时
