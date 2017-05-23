@@ -31,6 +31,7 @@ public class  MyApplication extends Application {
     private SQLiteDatabase db;
 
     private DaoSession mDaoSession;
+    private static MyApplication mMyApplication;
 
     @Override
     public void onCreate() {
@@ -39,10 +40,15 @@ public class  MyApplication extends Application {
         initBaiduMap();
         initFresco();
         initGreen();
+        mMyApplication=this;
         if (LeakCanary.isInAnalyzerProcess(this)) {
             return;
         }
         LeakCanary.install(this);
+    }
+
+    public static MyApplication getInstance() {
+        return mMyApplication;
     }
 
     /**
