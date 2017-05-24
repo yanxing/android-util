@@ -42,7 +42,9 @@ public class LoadDialogUtil {
      */
     public void showLoadingDialog(Context context, String msg) {
         WeakReference<Context> reference = new WeakReference<Context>(context);
-        mLoadingDialog = new LoadingDialog(reference.get(), msg);
+        if (mLoadingDialog==null){
+            mLoadingDialog = new LoadingDialog(reference.get(), msg);
+        }
         mLoadingDialog.setCanceledOnTouchOutside(false);
         if (!mLoadingDialog.isShowing()) {
             mLoadingDialog.show();
