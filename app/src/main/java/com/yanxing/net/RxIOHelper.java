@@ -56,7 +56,6 @@ public class RxIOHelper<T> {
         };
     }
 
-
     /**
      * 封装Rx线程切换部分，有进度条
      *
@@ -89,7 +88,7 @@ public class RxIOHelper<T> {
                         .doOnSubscribe(new Action0() {
                             @Override
                             public void call() {
-                                LoadDialogUtil.showLoadingDialog(context, toast);
+                                LoadDialogUtil.getInstance().showLoadingDialog(context, toast);
                             }
                         })
                         .subscribeOn(AndroidSchedulers.mainThread())

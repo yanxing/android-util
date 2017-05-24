@@ -16,12 +16,12 @@ public abstract class RxSubscriberHelper<T extends BaseModel> extends Subscriber
 
     @Override
     public void onCompleted() {
-        LoadDialogUtil.dismiss();
+        LoadDialogUtil.getInstance().dismiss();
     }
 
     @Override
     public void onError(Throwable e) {
-        LoadDialogUtil.dismiss();
+        LoadDialogUtil.getInstance().dismiss();
         if (MyApplication.getInstance()!=null){
             ToastUtil.showToast(MyApplication.getInstance(),ErrorCodeUtil.getException(e));
         }

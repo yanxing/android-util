@@ -12,21 +12,37 @@ import java.lang.ref.WeakReference;
  */
 public class LoadDialogUtil {
 
-    private static LoadingDialog mLoadingDialog;
+    private static WeakReference<LoadDialogUtil> WeakReferenceInstance;
+    private LoadingDialog mLoadingDialog;
+
+    /**
+     * dialog需要activity、fragment的content，这里使用弱引用
+     * @return
+     */
+    public static LoadDialogUtil getInstance() {
+        if (WeakReferenceInstance == null || WeakReferenceInstance.get() == null) {
+            WeakReferenceInstance = new WeakReference<>(new LoadDialogUtil());
+        }
+        return WeakReferenceInstance.get();
+    }
+
+    private LoadDialogUtil() {
+    }
+
 
     /**
      * 显示加载框
      */
     protected void showLoadingDialog(Context context) {
-        showLoadingDialog(context,null);
+        showLoadingDialog(context, null);
     }
 
     /**
      * 显示加载框,带文字提示
      */
-    public static void showLoadingDialog(Context context,String msg) {
-        WeakReference<Context> reference=new WeakReference<Context>(context);
-        mLoadingDialog=new LoadingDialog(reference.get(),msg);
+    public void showLoadingDialog(Context context, String msg) {
+        WeakReference<Context> reference = new WeakReference<Context>(context);
+        mLoadingDialog = new LoadingDialog(reference.get(), msg);
         mLoadingDialog.setCanceledOnTouchOutside(false);
         if (!mLoadingDialog.isShowing()) {
             mLoadingDialog.show();
@@ -36,7 +52,7 @@ public class LoadDialogUtil {
     /**
      * 隐藏加载框
      */
-    public static void dismiss() {
+    public void dismiss() {
         try {
             if (mLoadingDialog != null && mLoadingDialog.isShowing()) {
                 mLoadingDialog.dismiss();
