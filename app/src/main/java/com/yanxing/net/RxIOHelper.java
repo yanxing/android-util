@@ -1,10 +1,12 @@
 package com.yanxing.net;
 
-import android.content.Context;
+import android.support.v4.app.Fragment;
+import android.support.v4.app.FragmentManager;
+import android.support.v4.app.FragmentTransaction;
 
 import com.trello.rxlifecycle.components.support.RxAppCompatActivity;
 import com.trello.rxlifecycle.components.support.RxFragment;
-import com.yanxing.util.LoadDialogUtil;
+import com.yanxing.view.LoadDialog;
 
 import rx.Observable;
 import rx.android.schedulers.AndroidSchedulers;
@@ -12,13 +14,13 @@ import rx.functions.Action0;
 import rx.schedulers.Schedulers;
 
 /**
- * 封装RxJava线程和进度条部分
+ * 封装RxJava线程切换和进度条部分
  * Created by 李双祥 on 2017/5/23.
  */
 public class RxIOHelper<T> {
 
     /**
-     * 封装Rx线程切换部分，没有进度条
+     * 封装RxJava线程切换部分，没有进度条
      *
      * @param context RxAppCompatActivity
      * @return Observable
@@ -28,7 +30,7 @@ public class RxIOHelper<T> {
     }
 
     /**
-     * 封装Rx线程切换部分，没有进度条
+     * 封装RxJava线程切换部分，没有进度条
      *
      * @param context RxAppCompatActivity
      * @return Observable
@@ -56,29 +58,30 @@ public class RxIOHelper<T> {
         };
     }
 
+
     /**
-     * 封装Rx线程切换部分，有进度条
+     * 封装RxJava线程切换部分，有进度条
      *
-     * @param context RxFragment
+     * @param rxFragment RxFragment
      * @param toast   提示文字，null使用默认提示文字
      * @return Observable
      */
-    public Observable.Transformer<T, T> iOMainHasProgress(final RxFragment context, final String toast) {
-        return iOMainHasProgressExecute(context, context.getActivity(), toast);
+    public Observable.Transformer<T, T> iOMainHasProgress(final RxFragment rxFragment, final String toast) {
+        return iOMainHasProgressExecute(rxFragment, rxFragment.getFragmentManager(), toast);
     }
 
     /**
-     * 封装Rx线程切换部分，有进度条
+     * 封装RxJava线程切换部分，有进度条
      *
-     * @param context RxAppCompatActivity
+     * @param rxAppCompatActivity RxAppCompatActivity
      * @param toast   提示文字，null使用默认提示文字
      * @return Observable
      */
-    public Observable.Transformer<T, T> iOMainHasProgress(final RxAppCompatActivity context, final String toast) {
-        return iOMainHasProgressExecute(context, context.getApplicationContext(), toast);
+    public Observable.Transformer<T, T> iOMainHasProgress(final RxAppCompatActivity rxAppCompatActivity, final String toast) {
+        return iOMainHasProgressExecute(rxAppCompatActivity, rxAppCompatActivity.getSupportFragmentManager(), toast);
     }
 
-    private Observable.Transformer<T, T> iOMainHasProgressExecute(final Object object, final Context context, final String toast) {
+    private Observable.Transformer<T, T> iOMainHasProgressExecute(final Object object, final FragmentManager fragmentManager, final String toast) {
         return new Observable.Transformer<T, T>() {
             @Override
             public Observable<T> call(Observable<T> observable) {
@@ -88,7 +91,17 @@ public class RxIOHelper<T> {
                         .doOnSubscribe(new Action0() {
                             @Override
                             public void call() {
-                                LoadDialogUtil.getInstance().showLoadingDialog(context, toast);
+                                FragmentTransaction fragmentTransaction = fragmentManager.beginTransaction();
+                                Fragment fragment = fragmentManager.findFragmentByTag(LoadDialog.TAG);
+                                if (fragment != null) {
+                                    fragmentTransaction.remove(fragment).commit();
+                                } else {
+                                    LoadDialog loadDialog = new LoadDialog();
+                                    loadDialog.show(fragmentTransaction, LoadDialog.TAG);
+                                    if (toast != null) {
+                                        loadDialog.setTip(toast);
+                                    }
+                                }
                             }
                         })
                         .subscribeOn(AndroidSchedulers.mainThread())

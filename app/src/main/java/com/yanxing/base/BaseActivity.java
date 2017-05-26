@@ -3,11 +3,13 @@ package com.yanxing.base;
 import android.os.Build;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
+import android.support.v4.app.Fragment;
+import android.support.v4.app.FragmentTransaction;
 import android.view.WindowManager;
 import android.widget.Toast;
 
 import com.yanxing.util.CommonUtil;
-import com.yanxing.view.LoadingDialog;
+import com.yanxing.view.LoadDialog;
 
 import butterknife.ButterKnife;
 import me.imid.swipebacklayout.lib.app.SwipeBackActivity;
@@ -18,7 +20,6 @@ import me.imid.swipebacklayout.lib.app.SwipeBackActivity;
  */
 public abstract class BaseActivity extends SwipeBackActivity {
 
-    private LoadingDialog mLoadingDialog;
     protected String TAG = getClass().getName();
 
 
@@ -60,12 +61,16 @@ public abstract class BaseActivity extends SwipeBackActivity {
      * 显示加载框,带文字提示
      */
     public void showLoadingDialog(String tip) {
-        if (mLoadingDialog == null) {
-            mLoadingDialog = new LoadingDialog(this,tip);
-            mLoadingDialog.setCanceledOnTouchOutside(false);
-        }
-        if (!mLoadingDialog.isShowing()) {
-            mLoadingDialog.show();
+        FragmentTransaction fragmentTransaction = getSupportFragmentManager().beginTransaction();
+        Fragment fragment = getSupportFragmentManager().findFragmentByTag(LoadDialog.TAG);
+        if (fragment != null) {
+            fragmentTransaction.remove(fragment).commit();
+        } else {
+            LoadDialog loadDialog = new LoadDialog();
+            loadDialog.show(fragmentTransaction, LoadDialog.TAG);
+            if (tip != null) {
+                loadDialog.setTip(tip);
+            }
         }
     }
 
@@ -73,11 +78,10 @@ public abstract class BaseActivity extends SwipeBackActivity {
      * 隐藏加载框
      */
     public void dismissLoadingDialog() {
-        try {
-            if (mLoadingDialog != null && mLoadingDialog.isShowing()) {
-                mLoadingDialog.dismiss();
-            }
-        } catch (Exception ignored) {
+        FragmentTransaction fragmentTransaction = getSupportFragmentManager().beginTransaction();
+        Fragment fragment = getSupportFragmentManager().findFragmentByTag(LoadDialog.TAG);
+        if (fragment != null) {
+            fragmentTransaction.remove(fragment).commitNow();
         }
     }
 

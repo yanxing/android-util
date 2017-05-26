@@ -6,13 +6,9 @@ import android.support.annotation.Nullable;
 import android.support.v4.app.FragmentActivity;
 import android.view.Window;
 import android.view.WindowManager;
-import android.widget.Toast;
 
-import com.readystatesoftware.systembartint.SystemBarTintManager;
-import com.yanxing.view.LoadingDialog;
 
 import butterknife.ButterKnife;
-import me.imid.swipebacklayout.lib.app.SwipeBackActivity;
 
 /**
  * Created by lishuangxiang on 2016/1/21.

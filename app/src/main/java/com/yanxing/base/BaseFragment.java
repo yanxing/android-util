@@ -3,13 +3,14 @@ package com.yanxing.base;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
+import android.support.v4.app.FragmentTransaction;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Toast;
 
 import com.trello.rxlifecycle.components.support.RxFragment;
-import com.yanxing.view.LoadingDialog;
+import com.yanxing.view.LoadDialog;
 
 import butterknife.ButterKnife;
 
@@ -20,7 +21,6 @@ import butterknife.ButterKnife;
  */
 public abstract class BaseFragment extends RxFragment{
 
-    public LoadingDialog loadingDialog;
     protected String TAG = getClass().getName();
 
     @Nullable
@@ -64,12 +64,16 @@ public abstract class BaseFragment extends RxFragment{
      * 显示加载框,带文字提示
      */
     public void showLoadingDialog(String msg) {
-        if (loadingDialog == null) {
-            loadingDialog = new LoadingDialog(getActivity(), msg);
-            loadingDialog.setCanceledOnTouchOutside(false);
-        }
-        if (!loadingDialog.isShowing()) {
-            loadingDialog.show();
+        FragmentTransaction fragmentTransaction = getFragmentManager().beginTransaction();
+        Fragment fragment = getFragmentManager().findFragmentByTag(LoadDialog.TAG);
+        if (fragment != null) {
+            fragmentTransaction.remove(fragment).commit();
+        } else {
+            LoadDialog loadDialog = new LoadDialog();
+            loadDialog.show(fragmentTransaction, LoadDialog.TAG);
+            if (msg != null) {
+                loadDialog.setTip(msg);
+            }
         }
     }
 
@@ -77,11 +81,10 @@ public abstract class BaseFragment extends RxFragment{
      * 隐藏加载框
      */
     public void dismissLoadingDialog() {
-        try {
-            if (loadingDialog != null && loadingDialog.isShowing()) {
-                loadingDialog.dismiss();
-            }
-        } catch (Exception e) {
+        FragmentTransaction fragmentTransaction = getFragmentManager().beginTransaction();
+        Fragment fragment = getFragmentManager().findFragmentByTag(LoadDialog.TAG);
+        if (fragment != null) {
+            fragmentTransaction.remove(fragment).commitNow();
         }
     }
 }
