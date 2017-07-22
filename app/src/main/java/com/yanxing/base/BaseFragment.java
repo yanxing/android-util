@@ -70,10 +70,12 @@ public abstract class BaseFragment extends RxFragment{
             fragmentTransaction.remove(fragment).commit();
         } else {
             LoadDialog loadDialog = new LoadDialog();
-            loadDialog.show(fragmentTransaction, LoadDialog.TAG);
             if (msg != null) {
-                loadDialog.setTip(msg);
+                Bundle bundle=new Bundle();
+                bundle.putString("tip",msg);
+                loadDialog.setArguments(bundle);
             }
+            loadDialog.show(fragmentTransaction, LoadDialog.TAG);
         }
     }
 

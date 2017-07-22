@@ -67,10 +67,12 @@ public abstract class BaseActivity extends SwipeBackActivity {
             fragmentTransaction.remove(fragment).commit();
         } else {
             LoadDialog loadDialog = new LoadDialog();
-            loadDialog.show(fragmentTransaction, LoadDialog.TAG);
             if (tip != null) {
-                loadDialog.setTip(tip);
+                Bundle bundle=new Bundle();
+                bundle.putString("tip",tip);
+                loadDialog.setArguments(bundle);
             }
+            loadDialog.show(fragmentTransaction, LoadDialog.TAG);
         }
     }
 

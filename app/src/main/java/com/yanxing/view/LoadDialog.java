@@ -31,15 +31,14 @@ public class LoadDialog extends DialogFragment {
     {
         View view = inflater.inflate(R.layout.loading_dialog, container);
         mTip= (TextView) view.findViewById(R.id.tip);
+        Bundle bundle=getArguments();
+        if (bundle!=null){
+            String tip=bundle.getString("tip");
+            if (tip!=null){
+                mTip.setText(tip);
+            }
+        }
         getDialog().setCanceledOnTouchOutside(false);
         return view;
-    }
-
-    /**
-     * 设置提示
-     * @param tip
-     */
-    public void setTip(String tip){
-        mTip.setText(tip);
     }
 }

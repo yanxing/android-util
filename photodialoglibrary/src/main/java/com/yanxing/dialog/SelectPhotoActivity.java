@@ -20,6 +20,7 @@ import android.widget.TextView;
 
 
 import java.io.File;
+import java.io.IOException;
 
 /**
  * 选择拍照或者选择图片
@@ -68,8 +69,20 @@ public class SelectPhotoActivity extends FragmentActivity implements View.OnClic
     private void takePhoto() {
         Intent intent = new Intent(MediaStore.ACTION_IMAGE_CAPTURE);
         mTempPhoto = System.currentTimeMillis() + ".png";
+        //针对一些手机需要自己先创建文件夹
         //file文件夹，和filepaths.xml中目录符合，或者是其子文件夹
+        File f=new File(mPhotoParam.getPath());
+        if (!f.exists()){
+            f.mkdirs();
+        }
         File file = new File(mPhotoParam.getPath(), mTempPhoto);
+        if (!file.exists()){
+            try {
+                file.createNewFile();
+            } catch (IOException e) {
+                e.printStackTrace();
+            }
+        }
         if (Build.VERSION.SDK_INT >= 24) { //判读版本是否在7.0以上
             sendBroadcast(new Intent(Intent.ACTION_MEDIA_SCANNER_SCAN_FILE,
                     FileProvider.getUriForFile(this, AUTHORITY, file)));

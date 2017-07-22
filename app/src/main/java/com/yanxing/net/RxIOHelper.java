@@ -1,5 +1,6 @@
 package com.yanxing.net;
 
+import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentTransaction;
@@ -97,10 +98,12 @@ public class RxIOHelper<T> {
                                     fragmentTransaction.remove(fragment).commit();
                                 } else {
                                     LoadDialog loadDialog = new LoadDialog();
-                                    loadDialog.show(fragmentTransaction, LoadDialog.TAG);
                                     if (toast != null) {
-                                        loadDialog.setTip(toast);
+                                        Bundle bundle=new Bundle();
+                                        bundle.putString("tip",toast);
+                                        loadDialog.setArguments(bundle);
                                     }
+                                    loadDialog.show(fragmentTransaction, LoadDialog.TAG);
                                 }
                             }
                         })
