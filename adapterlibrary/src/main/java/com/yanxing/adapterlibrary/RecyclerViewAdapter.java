@@ -14,8 +14,10 @@ import java.util.List;
  */
 public abstract class RecyclerViewAdapter<T> extends RecyclerView.Adapter<RecyclerViewAdapter.MyViewHolder> {
 
+    private static final int ITEM_TYPE_HEADER = 100;//头部
     protected List<T> mDataList;
     protected int mLayoutID;
+    protected View mHeaderView;//头部
 
     /**
      * @param dataList
@@ -28,13 +30,40 @@ public abstract class RecyclerViewAdapter<T> extends RecyclerView.Adapter<Recycl
 
     @Override
     public MyViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
-        View view = LayoutInflater.from(parent.getContext()).inflate(mLayoutID, parent, false);
+        View view;
+        if (viewType==ITEM_TYPE_HEADER){//头部
+            view = mHeaderView;
+        }else {
+            view = LayoutInflater.from(parent.getContext()).inflate(mLayoutID, parent, false);
+        }
         return new MyViewHolder(view);
+    }
+
+    /**
+     * 添加头部
+     * @param view
+     */
+    public void addHeaderView(View view){
+        mHeaderView=view;
     }
 
     @Override
     public int getItemCount() {
-        return mDataList.size();
+        return mDataList.size()+getHeadersCount();
+    }
+
+    @Override
+    public int getItemViewType(int position)
+    {
+        if (mHeaderView!=null)
+        {
+            return ITEM_TYPE_HEADER;
+        }
+        return super.getItemViewType(position - getHeadersCount());
+    }
+
+    private int getHeadersCount(){
+        return mHeaderView!=null?1:0;
     }
 
     /**
@@ -107,4 +136,3 @@ public abstract class RecyclerViewAdapter<T> extends RecyclerView.Adapter<Recycl
         }
     }
 }
-
