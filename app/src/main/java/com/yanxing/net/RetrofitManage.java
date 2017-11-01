@@ -14,23 +14,19 @@ public class RetrofitManage {
 
     private Retrofit mRetrofit;
 
-    private RetrofitManage(Retrofit retrofit) {
-        if (retrofit==null){
-            OkHttpClient client = new OkHttpClient.Builder()
-                    .connectTimeout(30000L, TimeUnit.MILLISECONDS)
-                    .readTimeout(30000L, TimeUnit.MILLISECONDS)
-                    .addInterceptor(new ParameterInterceptor())
-                    .build();
+    private RetrofitManage() {
+        OkHttpClient client = new OkHttpClient.Builder()
+                .connectTimeout(30000L, TimeUnit.MILLISECONDS)
+                .readTimeout(30000L, TimeUnit.MILLISECONDS)
+                .addInterceptor(new ParameterInterceptor())
+                .build();
 
-            mRetrofit=new Retrofit.Builder()
-                    .baseUrl(ConstantAPI.SERVICE)
-                    .client(client)
-                    .addConverterFactory(GsonConverterFactory.create())
-                    .addCallAdapterFactory(RxJavaCallAdapterFactory.create())
-                    .build();
-        }else {
-            mRetrofit=retrofit;
-        }
+        mRetrofit=new Retrofit.Builder()
+                .baseUrl(ConstantAPI.SERVICE)
+                .client(client)
+                .addConverterFactory(GsonConverterFactory.create())
+                .addCallAdapterFactory(RxJavaCallAdapterFactory.create())
+                .build();
     }
 
     public static RetrofitManage getInstance() {
@@ -38,7 +34,7 @@ public class RetrofitManage {
     }
 
     private static class SingletonHolder {
-        private static final RetrofitManage retrofitManage = new RetrofitManage(null);
+        private static final RetrofitManage retrofitManage = new RetrofitManage();
     }
 
     public Retrofit initRetrofit(Retrofit retrofit) {
