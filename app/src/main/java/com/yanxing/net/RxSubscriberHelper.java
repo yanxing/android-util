@@ -46,6 +46,7 @@ public abstract class RxSubscriberHelper<T extends BaseModel> extends Subscriber
 
     @Override
     public void onError(Throwable e) {
+        e.printStackTrace();//打印具体的错误
         if (MyApplication.getInstance()!=null){
             ToastUtil.showToast(MyApplication.getInstance(),ErrorCodeUtil.getException(e));
         }
