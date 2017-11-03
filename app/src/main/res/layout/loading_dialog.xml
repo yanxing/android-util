@@ -5,7 +5,7 @@
               xmlns:wheel="http://schemas.android.com/apk/res-auto"
               android:alpha="0.9"
               android:orientation="horizontal"
-              android:background="@drawable/loading_bg"
+              android:background="@drawable/black_shape"
               android:padding="10dp">
     <com.yanxing.view.ProgressWheel
         android:id="@+id/view_load"

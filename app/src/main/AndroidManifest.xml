@@ -23,6 +23,7 @@
     <uses-permission android:name="android.permission.CAMERA"/>
     <uses-permission android:name="android.permission.MANAGE_DOCUMENTS"/>
     <uses-permission android:name="android.permission.WRITE_SETTINGS"/>
+    <uses-permission android:name="android.permission.READ_LOGS" />
 
     <application
         android:name="com.yanxing.base.MyApplication"
@@ -30,6 +31,10 @@
         android:icon="@mipmap/ic_launcher"
         android:supportsRtl="true"
         android:theme="@style/SwipeBack">
+
+     <!--   <meta-data
+            android:name="APP_CHANNEL"
+            android:value="${APP_CHANNEL_VALUE}" />-->
 
         <!-- 高德地图key -->
         <meta-data

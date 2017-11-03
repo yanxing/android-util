@@ -43,7 +43,6 @@ import butterknife.OnClick;
  * 菜单列表
  * Created by lishuangxiang on 2016/12/21.
  */
-
 public class MainFragment extends BaseFragment implements AMapLocListener {
 
     private static final int QUESTION_IMAGE_CODE = 1;
@@ -62,6 +61,7 @@ public class MainFragment extends BaseFragment implements AMapLocListener {
 
     @Override
     protected void afterInstanceView() {
+//        showToast("测试Tinker热更新");
         checkPermission();
         mAMapLoc = new AMapLoc(getActivity().getApplicationContext());
         mAMapLoc.setAMapLocListener(this);
@@ -284,6 +284,7 @@ public class MainFragment extends BaseFragment implements AMapLocListener {
                         .imageEngine(new GlideEngine())
                         .forResult(REQUEST_CODE_CHOOSE);
                 break;
+                default:
 
         }
     }

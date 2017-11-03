@@ -24,6 +24,7 @@
 -dontusemixedcaseclassnames
 -dontskipnonpubliclibraryclasses
 -verbose
+-ignorewarning
 
 # ADDED
 -dontshrink
@@ -78,3 +79,10 @@ void onEvent*(**);
 -keepclasseswithmembernames class * {
       @butterknife.* <methods>;
  }
+
+#tencent
+-dontwarn com.tencent.bugly.**
+-keep public class com.tencent.bugly.**{*;}
+
+-keep class android.support.**{*;}
+
