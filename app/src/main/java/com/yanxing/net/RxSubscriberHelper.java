@@ -6,6 +6,7 @@ import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentTransaction;
 
 import com.yanxing.base.MyApplication;
+import com.yanxing.base.SampleApplicationLike;
 import com.yanxing.model.BaseModel;
 import com.yanxing.util.ToastUtil;
 import com.yanxing.view.LoadDialog;
@@ -47,8 +48,8 @@ public abstract class RxSubscriberHelper<T extends BaseModel> extends Subscriber
     @Override
     public void onError(Throwable e) {
         e.printStackTrace();//打印具体的错误
-        if (MyApplication.getInstance()!=null){
-            ToastUtil.showToast(MyApplication.getInstance(),ErrorCodeUtil.getException(e));
+        if (SampleApplicationLike.getInstance()!=null){
+            ToastUtil.showToast(SampleApplicationLike.getInstance().getContext(),ErrorCodeUtil.getException(e));
         }
         if (mFragmentManager!=null){
             FragmentTransaction fragmentTransaction = mFragmentManager.beginTransaction();
@@ -64,8 +65,8 @@ public abstract class RxSubscriberHelper<T extends BaseModel> extends Subscriber
         if (t.getStatus().equals("0")){
             onCall(t);
         }else {
-            if (MyApplication.getInstance()!=null){
-                ToastUtil.showToast(MyApplication.getInstance(),t.getMessage());
+            if (SampleApplicationLike.getInstance()!=null){
+                ToastUtil.showToast(SampleApplicationLike.getInstance().getContext(),t.getMessage());
             }
         }
     }
