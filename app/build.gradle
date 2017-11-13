@@ -15,17 +15,17 @@ android {
             storePassword 'yanxing'
         }
     }
-    compileSdkVersion 25
-    buildToolsVersion "25.0.1"
+    compileSdkVersion COMPILE_SDK_VERSION as int
+    buildToolsVersion BUILD_TOOLS_VERSION
 
     aaptOptions.cruncherEnabled = false
     aaptOptions.useNewCruncher = false
 
     defaultConfig {
         applicationId "com.yanxing.ui"
-        minSdkVersion 15
-        versionCode 1
-        versionName "1.0.0"
+        minSdkVersion COMMON_MIN_SDK_VERSION as int
+        versionCode CURRENT_RELEASE_VERSION_CODE as int
+        versionName CURRENT_RELEASE_VERSION_NAME as String
 
         ndk {
             //设置支持的SO库架构
@@ -43,37 +43,10 @@ android {
         debug {
             signingConfig signingConfigs.debug
         }
-    }
+}
 
-/*
-    productFlavors {
-        guanwang {} //官网
-        xiaomi {}   //小米
-        qh360 {}   //360
-        baidu {}   //百度
-    }
 
-    productFlavors.all {
-        flavor -> flavor.manifestPlaceholders = [APP_CHANNEL_VALUE: name]
-    }
-
-   android.applicationVariants.all {
-        variant ->
-            variant.outputs.each { output ->
-                def outputFile = output.outputFile
-                if (outputFile != null && outputFile.name.endsWith('.apk')) {
-                    def fileName;
-                    if (variant.flavorName == 'guanwang'){
-                        fileName = "android-util.apk"
-                    }else {
-                        fileName = "android-util_${defaultConfig.versionName}_${variant.productFlavors[0].name}.apk"
-                    }
-                    output.outputFile = new File(outputFile.parent, fileName)
-                }
-            }
-    }*/
-
-    lintOptions{
+lintOptions{
         checkReleaseBuilds false
         abortOnError false
     }

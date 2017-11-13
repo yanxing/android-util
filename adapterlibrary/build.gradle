@@ -1,13 +1,13 @@
 apply plugin: 'com.android.library'
 
 android {
-    compileSdkVersion 25
-    buildToolsVersion "25.0.1"
+    compileSdkVersion COMPILE_SDK_VERSION as int
+    buildToolsVersion BUILD_TOOLS_VERSION
 
     defaultConfig {
-        minSdkVersion 15
-        versionCode 1
-        versionName "1.0"
+        minSdkVersion COMMON_MIN_SDK_VERSION as int
+        versionCode CURRENT_RELEASE_VERSION_CODE as int
+        versionName CURRENT_RELEASE_VERSION_NAME as String
     }
     buildTypes {
         release {
@@ -20,6 +20,6 @@ android {
 dependencies {
     compile fileTree(include: ['*.jar'], dir: 'libs')
     testCompile 'junit:junit:4.12'
-    compile 'com.android.support:appcompat-v7:25.1.0'
-    compile 'com.android.support:recyclerview-v7:25.1.0'
+    compile "com.android.support:appcompat-v7:${SUPPORT_V7_VERSION}"
+    compile "com.android.support:recyclerview-v7:${SUPPORT_V7_VERSION}"
 }
