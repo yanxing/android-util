@@ -3,6 +3,22 @@
 [CommonUtil](https://github.com/yanxing/android-util/blob/master/app/src/main/java/com/yanxing/util/CommonUtil.java)(包含关闭显示输入法、
 截图、获取通知栏高度、应用是否在前台、检验应用签名、打电话、校验邮箱和手机号等)、[NetworkStateUtil](https://github.com/yanxing/android-util/blob/master/app/src/main/java/com/yanxing/util/NetworkStateUtil.java)、[DESUtil](https://github.com/yanxing/android-util/blob/master/app/src/main/java/com/yanxing/util/DESUtil.java)、[ParseJsonUtil](https://github.com/yanxing/android-util/blob/master/app/src/main/java/com/yanxing/util/ParseJsonUtil.java)、[OpenFileUtil](https://github.com/yanxing/android-util/blob/master/app/src/main/java/com/yanxing/util/OpenFileUtil.java)（打开word、PPT、excel文件）、[FileUtil](https://github.com/yanxing/android-util/blob/master/app/src/main/java/com/yanxing/util/FileUtil.java)、[BitmapUtil](https://github.com/yanxing/android-util/blob/master/app/src/main/java/com/yanxing/util/BitmapUtil.java)、[VideoFrameLoader](https://github.com/yanxing/android-util/blob/master/app/src/main/java/com/yanxing/util/VideoFrameLoader.java)（加载视频某一帧）、[PermissionUtil](https://github.com/yanxing/android-util/blob/master/app/src/main/java/com/yanxing/util/PermissionUtil.java)、
 [DownloadImageUtil](https://github.com/yanxing/android-util/blob/master/app/src/main/java/com/yanxing/util/DownloadImageUtil.java)
+##networklibrary
+对retrofit2+rxjava2网络请求的封装（包括网络请求时显示等待对话框和请求完成后上下拉刷新控件置为完成状态）。[example](https://github.com/yanxing/android-util/blob/master/app/src/main/java/com/yanxing/ui/NetworkLibraryFragment.java)
+```java
+ RetrofitManage.init(baseUrl,true);
+ RetrofitManage.getInstance().getRetrofit().create(ServiceAPI.class)
+     .getTopMovie(0,10)
+     .compose(new RxIOHelper<DouBan>().iOMainHasProgress(this,getFragmentManager()))
+     .subscribe(new RxSubscriberHelper<DouBan>(getActivity(),pullToRefreshImpl) {
+          @Override
+          public void onCall(DouBan douBan) {
+
+          }
+       });
+```
+
+
 ## adapterlibrary
 ListView、GridView适配器，对BaseAdapter、ViewHolder的封装。[example](https://github.com/yanxing/android-util/blob/master/app/src/main/java/com/yanxing/ui/AdapterExampleActivity.java)
 ```Java
