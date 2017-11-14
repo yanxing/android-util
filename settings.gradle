@@ -1,1 +1,1 @@
-include ':app', ':adapterlibrary', ':photolibrary', ':baidumaplibrary', ':titlebarlibrary', ':tablayoutlibrary', ':sortlistviewlibrary', ':amaploclibrary', ':heartbubblelibrary', ':photodialoglibrary', ':downloadlibrary'
+include ':app', ':adapterlibrary', ':photolibrary', ':baidumaplibrary', ':titlebarlibrary', ':tablayoutlibrary', ':sortlistviewlibrary', ':amaploclibrary', ':heartbubblelibrary', ':photodialoglibrary', ':downloadlibrary',':networklibrary'
