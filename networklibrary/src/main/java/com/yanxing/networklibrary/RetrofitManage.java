@@ -5,7 +5,7 @@ import java.util.concurrent.TimeUnit;
 
 import okhttp3.OkHttpClient;
 import retrofit2.Retrofit;
-import retrofit2.adapter.rxjava.RxJavaCallAdapterFactory;
+import retrofit2.adapter.rxjava2.RxJava2CallAdapterFactory;
 import retrofit2.converter.gson.GsonConverterFactory;
 
 /**
@@ -15,6 +15,7 @@ public class RetrofitManage {
 
     private static Retrofit mRetrofit;
     private static String url;
+    private static boolean mLog;
 
     private RetrofitManage() {
         if (mRetrofit != null) {
@@ -23,13 +24,13 @@ public class RetrofitManage {
         OkHttpClient okHttpClient = new OkHttpClient.Builder()
                 .connectTimeout(30000L, TimeUnit.MILLISECONDS)
                 .readTimeout(30000L, TimeUnit.MILLISECONDS)
-                .addInterceptor(new ParameterInterceptor())
+                .addInterceptor(new ParameterInterceptor(mLog))
                 .build();
         mRetrofit = new Retrofit.Builder()
                 .baseUrl(url)
                 .client(okHttpClient)
                 .addConverterFactory(GsonConverterFactory.create())
-                .addCallAdapterFactory(RxJavaCallAdapterFactory.create())
+                .addCallAdapterFactory(RxJava2CallAdapterFactory.create())
                 .build();
     }
 
@@ -37,8 +38,10 @@ public class RetrofitManage {
      * Retrofit baseUrl
      *
      * @param baseUrl
+     * @param log true打印请求参数和返回数据
      */
-    public static void init(String baseUrl) {
+    public static void init(String baseUrl,boolean log) {
+        mLog=log;
         url = baseUrl;
     }
 

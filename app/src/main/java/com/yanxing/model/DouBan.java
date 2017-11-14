@@ -1,11 +1,13 @@
 package com.yanxing.model;
 
+import com.yanxing.networklibrary.model.BaseModel;
+
 import java.util.List;
 
 /**
  * Created by lishuangxiang on 2016/8/15.
  */
-public class DouBan {
+public class DouBan extends BaseModel{
 
     /**
      * count : 10

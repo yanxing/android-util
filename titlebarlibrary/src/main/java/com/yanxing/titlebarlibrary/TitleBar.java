@@ -5,12 +5,11 @@ import android.content.Context;
 import android.content.res.TypedArray;
 import android.graphics.Color;
 import android.graphics.drawable.Drawable;
+import android.support.v7.widget.Toolbar;
 import android.util.AttributeSet;
-import android.view.Gravity;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.FrameLayout;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.TextView;
@@ -29,7 +28,7 @@ public class TitleBar extends LinearLayout {
     //右文字菜单
     private TextView mRightTitle;
     //标题栏背景色
-    private LinearLayout mBackground;
+    private Toolbar mBackground;
     //右菜单图标
     private ImageView mRightIcon;
 
@@ -48,7 +47,7 @@ public class TitleBar extends LinearLayout {
         mBack = (LinearLayout) findViewById(R.id.back_layout);
         mTitle = (TextView) findViewById(R.id.title);
         mRightTitle = (TextView) findViewById(R.id.right_title);
-        mBackground = (LinearLayout) findViewById(R.id.background);
+        mBackground = (Toolbar) findViewById(R.id.background);
         mBackImg= (ImageView) findViewById(R.id.back_img);
         mRightIcon= (ImageView) findViewById(R.id.right_icon);
         TypedArray a = context.obtainStyledAttributes(attrs, R.styleable.MyTitleBar);
@@ -56,16 +55,15 @@ public class TitleBar extends LinearLayout {
         if (a.hasValue(R.styleable.MyTitleBar_title_main)){
             mTitle.setText(a.getText(R.styleable.MyTitleBar_title_main));
         }
-        //标题居中true
-        if (a.getBoolean(R.styleable.MyTitleBar_title_main_center,false)){
-            setTitleCenter();
-        }
         //标题颜色
         mTitle.setTextColor(a.getColor(R.styleable.MyTitleBar_title_main_color,Color.WHITE));
         //右菜单
         if (a.hasValue(R.styleable.MyTitleBar_title_right)){
             mRightTitle.setText(a.getText(R.styleable.MyTitleBar_title_right));
             mRightTitle.setVisibility(VISIBLE);
+            if (!a.hasValue(R.styleable.MyTitleBar_right_icon)){
+                mRightTitle.setPadding(0,0,60,0);
+            }
         }
         //右菜单文字颜色
         mRightTitle.setTextColor(a.getColor(R.styleable.MyTitleBar_titleRightColor,Color.WHITE));
@@ -82,14 +80,14 @@ public class TitleBar extends LinearLayout {
         //返回图片资源
         if (a.hasValue(R.styleable.MyTitleBar_back_img_resource)){
             Drawable background = a.getDrawable(R.styleable.MyTitleBar_back_img_resource);
-            mBackImg.setBackgroundDrawable(background);
+            mBackImg.setImageDrawable(background);
         }
 
         //右菜单图片
         if (a.hasValue(R.styleable.MyTitleBar_right_icon)){
             Drawable background = a.getDrawable(R.styleable.MyTitleBar_right_icon);
             mRightIcon.setVisibility(VISIBLE);
-            mRightIcon.setBackgroundDrawable(background);
+            mRightIcon.setImageDrawable(background);
         }
 
         //返回图片可见，才有点击事件
@@ -102,6 +100,14 @@ public class TitleBar extends LinearLayout {
             });
         }
         a.recycle();
+    }
+
+    /**
+     * Toolbar颜色
+     * @param color
+     */
+    public void setToolbarBackground(int color){
+        mBackground.setBackgroundColor(getResources().getColor(color));
     }
 
     /**
@@ -135,16 +141,6 @@ public class TitleBar extends LinearLayout {
     }
 
     /**
-     * 设置标题居中，默认左边
-     */
-    public void setTitleCenter() {
-        FrameLayout.LayoutParams lp = new FrameLayout.LayoutParams(ViewGroup.LayoutParams.MATCH_PARENT, ViewGroup.LayoutParams.MATCH_PARENT);
-        lp.setMargins(0, 0, 0, 0);
-        mTitle.setLayoutParams(lp);
-        mTitle.setGravity(Gravity.CENTER);
-    }
-
-    /**
      * 设置右菜单文字
      *
      * @param text
@@ -159,7 +155,16 @@ public class TitleBar extends LinearLayout {
      * @param visibility
      */
     public void setRightTitleVisibility(int visibility) {
+        if (mRightIcon.getVisibility()==GONE){
+            mRightTitle.setPadding(0,0,60,0);
+        }
         mRightTitle.setVisibility(visibility);
+    }
+
+    public void setMargin(int left,int top,int right,int bottom){
+        LinearLayout.LayoutParams params=new LayoutParams(LinearLayout.LayoutParams.WRAP_CONTENT, 130);
+        params.setMargins(left,top,right,bottom);
+        mBackground.setLayoutParams(params);
     }
 
     /**
@@ -178,5 +183,10 @@ public class TitleBar extends LinearLayout {
      */
     public void setRightIconClick(OnClickListener onClickListener) {
         mRightIcon.setOnClickListener(onClickListener);
+    }
+
+    public void setRightIconVisibility(int visibility){
+        mRightIcon.setVisibility(visibility);
+        mRightTitle.setPadding(0,0,60,0);
     }
 }

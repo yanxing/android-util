@@ -10,13 +10,15 @@ import com.yanxing.networklibrary.dialog.LoadDialog;
 import com.yanxing.networklibrary.model.BaseModel;
 import com.yanxing.networklibrary.refresh.PullToRefresh;
 
-import rx.Subscriber;
+import io.reactivex.Observer;
+import io.reactivex.annotations.NonNull;
+import io.reactivex.disposables.Disposable;
 
 /**
  * 统一处理处理onCompleted onError,onNext处理一部分
  * Created by 李双祥 on 2017/5/23.
  */
-public abstract class RxSubscriberHelper<T extends BaseModel> extends Subscriber<T> {
+public abstract class RxSubscriberHelper<T extends BaseModel> implements Observer<T> {
 
     private PullToRefresh mPullToRefresh;
     private FragmentManager mFragmentManager;
@@ -35,7 +37,7 @@ public abstract class RxSubscriberHelper<T extends BaseModel> extends Subscriber
     /**
      * @param fragmentManager 用来请求结束，移除对话框
      */
-    protected RxSubscriberHelper(FragmentManager fragmentManager, Context context) {
+    protected RxSubscriberHelper(Context context,FragmentManager fragmentManager) {
         this.mFragmentManager = fragmentManager;
         this.mContext = context;
     }
@@ -45,7 +47,7 @@ public abstract class RxSubscriberHelper<T extends BaseModel> extends Subscriber
     }
 
     @Override
-    public void onCompleted() {
+    public void onComplete() {
         if (mPullToRefresh != null) {
             mPullToRefresh.refreshComplete();
         }
@@ -95,4 +97,10 @@ public abstract class RxSubscriberHelper<T extends BaseModel> extends Subscriber
      * @param t
      */
     public abstract void onCall(T t);
+
+    @Override
+    public void onSubscribe(@NonNull Disposable var1){
+
+    }
+
 }

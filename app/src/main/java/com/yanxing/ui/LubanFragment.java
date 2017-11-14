@@ -19,13 +19,8 @@ import java.io.File;
 
 import butterknife.BindView;
 import butterknife.OnClick;
-import rx.Observable;
-import rx.android.schedulers.AndroidSchedulers;
-import rx.functions.Action0;
-import rx.functions.Action1;
-import rx.functions.Func1;
-import rx.schedulers.Schedulers;
 import top.zibin.luban.Luban;
+import top.zibin.luban.OnCompressListener;
 
 import static android.app.Activity.RESULT_OK;
 
@@ -88,35 +83,19 @@ public class LubanFragment extends BaseFragment {
 
     public void yaSuo() {
         File file = new File(FileUtil.getStoragePath()+ConstantValue.DCIM_IMAGE + mPhotoName);
-        String tip="压缩前文件大小为："+file.length()/1024+"KB\n路径为："+file.getAbsolutePath();
-        Luban.get(getActivity())
-                .load(file)
-                .putGear(Luban.THIRD_GEAR)
-                .asObservable()
-                .subscribeOn(Schedulers.io())
-                .doOnSubscribe(new Action0() {
+        final String tip="压缩前文件大小为："+file.length()/1024+"KB\n路径为："+file.getAbsolutePath();
+        Luban.with(getActivity())
+                .load(file)                                   // 传人要压缩的图片列表
+                .ignoreBy(100)                                  // 忽略不压缩图片的大小
+                .setTargetDir(file.getAbsolutePath())                        // 设置压缩后文件存储位置
+                .setCompressListener(new OnCompressListener() { //设置回调
                     @Override
-                    public void call() {
+                    public void onStart() {
                         showLoadingDialog("压缩中...");
                     }
-                })
-                .subscribeOn(AndroidSchedulers.mainThread())
-                .observeOn(AndroidSchedulers.mainThread())
-                .doOnError(new Action1<Throwable>() {
+
                     @Override
-                    public void call(Throwable throwable) {
-                        throwable.printStackTrace();
-                    }
-                })
-                .onErrorResumeNext(new Func1<Throwable, Observable<? extends File>>() {
-                    @Override
-                    public Observable<? extends File> call(Throwable throwable) {
-                        return Observable.empty();
-                    }
-                })
-                .subscribe(new Action1<File>() {
-                    @Override
-                    public void call(File file) {
+                    public void onSuccess(File file) {
                         String tag=tip+"\n"+
                                 "压缩后文件大小： "+file.length() / 1024 + "KB"
                                 +"\n路径为："+file.getAbsolutePath();
@@ -126,7 +105,11 @@ public class LubanFragment extends BaseFragment {
                         mText.setText(tag);
                         dismissLoadingDialog();
                     }
-                });
+
+                    @Override
+                    public void onError(Throwable e) {
+                    }
+                }).launch();    //启动压缩
     }
 
     @OnClick(R.id.button)

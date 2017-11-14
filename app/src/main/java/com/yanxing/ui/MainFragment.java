@@ -115,7 +115,7 @@ public class MainFragment extends BaseFragment implements AMapLocListener {
 
     @OnClick(R.id.RxJava)
     public void onClickRxJava() {
-        replace(new RxJavaFragment());
+        replace(new NetworkLibraryFragment());
     }
 
     @OnClick(R.id.expandableListViewCheckbox)
@@ -306,9 +306,12 @@ public class MainFragment extends BaseFragment implements AMapLocListener {
      */
     public void showConfirmDialog() {
         final ConfirmDialog confirmDialog = new ConfirmDialog(getActivity(), getString(R.string.exit));
-        confirmDialog.setConfirmButton(v -> {
-            Toast.makeText(getActivity(), R.string.click_confirm, Toast.LENGTH_LONG).show();
-            confirmDialog.dismiss();
+        confirmDialog.setConfirmButton(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Toast.makeText(getActivity(), R.string.click_confirm, Toast.LENGTH_LONG).show();
+                confirmDialog.dismiss();
+            }
         });
     }
 

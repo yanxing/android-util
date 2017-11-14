@@ -1,8 +1,7 @@
 package com.yanxing.networklibrary;
 
 
-import com.orhanobut.logger.AndroidLogAdapter;
-import com.orhanobut.logger.Logger;
+import android.util.Log;
 
 import java.io.IOException;
 import java.net.SocketTimeoutException;
@@ -17,7 +16,6 @@ import okhttp3.RequestBody;
 import okhttp3.Response;
 import okhttp3.ResponseBody;
 import okio.Buffer;
-import retrofit2.http.PUT;
 
 /**
  * 拦截器 ，http错误信息封装
@@ -26,8 +24,10 @@ import retrofit2.http.PUT;
 public class ParameterInterceptor implements Interceptor {
 
     public static final String TAG = "networklibrary";
+    private boolean mLog;
 
-    public ParameterInterceptor() {
+    public ParameterInterceptor(boolean log) {
+        mLog=log;
     }
 
     @Override
@@ -80,23 +80,24 @@ public class ParameterInterceptor implements Interceptor {
         if (response == null) {
             return null;
         }
-        long a = System.currentTimeMillis();
-        String message = null;
-        if (!response.isSuccessful()) {
-            message = ErrorCodeUtil.getMessage(response.code());
-        }
+        //打印日志
+        if (mLog){
+            long a = System.currentTimeMillis();
+            String message = null;
+            if (!response.isSuccessful()) {
+                message = ErrorCodeUtil.getMessage(response.code());
+            }
 
-        String content = response.body().string();
-        Logger.addLogAdapter(new AndroidLogAdapter());
-        Logger.d(TAG, newRequest.url().url().toString() + "请求耗时：" + (a - b) + "ms" + "  请求参数:" + params.toString() + sb.toString() + "请求结果");
-        Logger.json(content);
+            String content = response.body().string();
+            Log.d(TAG,newRequest.url().url().toString()+"请求耗时："+(a-b)+"ms"+"  请求参数:"+params.toString()+sb.toString()
+                    +"请求结果\n"+content);
 
-        ResponseBody body = ResponseBody.create(newRequest.body() == null ? null : newRequest.body().contentType(), content);
-        //重新构造body
-        Response server = response.newBuilder().body(body).build();
-        if (message != null) {
+            ResponseBody body = ResponseBody.create(newRequest.body() == null ? null : newRequest.body().contentType(), content);
+            //重新构造body
+            Response server = response.newBuilder().body(body).build();
             return server.newBuilder().message(message).build();
+        }else {
+            return response;
         }
-        return server;
     }
 }

@@ -1,30 +1,31 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-              android:id="@+id/background"
-              android:layout_width="match_parent"
-              android:layout_height="wrap_content"
-              android:clipToPadding="true"
-              android:background="@color/titleBarColorGreen"
-              android:fitsSystemWindows="true"
-              android:orientation="vertical">
+<android.support.v7.widget.Toolbar xmlns:android="http://schemas.android.com/apk/res/android"
+                                   xmlns:app="http://schemas.android.com/apk/res-auto"
+                                   android:id="@+id/background"
+                                   android:layout_width="match_parent"
+                                   android:layout_height="45dp"
+                                   app:contentInsetLeft="0dp"
+                                   app:contentInsetStart="0dp"
+                                   android:background="?attr/colorPrimary">
+    <!--?attr/actionBarSize-->
 
     <RelativeLayout
         android:id="@+id/back"
         android:layout_width="wrap_content"
-        android:layout_height="46dp">
+        android:layout_height="match_parent">
 
         <LinearLayout
             android:id="@+id/back_layout"
-            android:layout_width="50dp"
+            android:layout_width="wrap_content"
             android:layout_height="match_parent"
             android:gravity="center_vertical">
 
             <ImageView
                 android:id="@+id/back_img"
-                android:layout_width="20dp"
-                android:layout_height="20dp"
-                android:layout_marginLeft="12dp"
-                android:background="@mipmap/goback_normal"/>
+                android:layout_width="28dp"
+                android:layout_height="28dp"
+                android:layout_marginLeft="15dp"
+                android:background="@mipmap/back"/>
 
         </LinearLayout>
 
@@ -37,32 +38,36 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_gravity="center_vertical"
-                android:layout_marginLeft="40dp"
-                android:gravity="left"
+                android:gravity="center"
                 android:maxLines="1"
                 android:text="@string/title"
+                android:textColor="@android:color/white"
                 android:textSize="17sp"/>
         </FrameLayout>
+
+        <ImageView
+            android:id="@+id/right_icon"
+            android:layout_width="14dp"
+            android:layout_height="18dp"
+            android:layout_alignParentRight="true"
+            android:layout_marginRight="15dp"
+            android:layout_centerVertical="true"
+            android:gravity="center"
+            android:paddingTop="2dp"
+            android:visibility="gone"
+            android:src="@mipmap/down"/>
 
         <TextView
             android:id="@+id/right_title"
             android:layout_width="wrap_content"
             android:layout_height="match_parent"
-            android:layout_alignParentRight="true"
-            android:layout_marginRight="8dp"
+            android:paddingRight="34dp"
+            android:layout_toLeftOf="@id/right_icon"
             android:gravity="center"
+            android:visibility="invisible"
             android:text="@string/menu"
-            android:textSize="17sp"
-            android:visibility="invisible"/>
-
-        <ImageView
-            android:id="@+id/right_icon"
-            android:layout_width="20dp"
-            android:layout_height="20dp"
             android:layout_alignParentRight="true"
-            android:layout_marginRight="12dp"
-            android:layout_marginTop="16dp"
-            android:gravity="center"
-            android:visibility="invisible"/>
+            android:textColor="@android:color/white"
+            android:textSize="12sp"/>
     </RelativeLayout>
-</LinearLayout>
+</android.support.v7.widget.Toolbar>

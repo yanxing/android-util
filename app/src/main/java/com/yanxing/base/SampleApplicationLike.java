@@ -16,7 +16,6 @@ import com.facebook.drawee.backends.pipeline.Fresco;
 import com.facebook.imagepipeline.core.ImagePipelineConfig;
 import com.facebook.imagepipeline.listener.RequestListener;
 import com.facebook.imagepipeline.listener.RequestLoggingListener;
-import com.facebook.stetho.Stetho;
 import com.nostra13.universalimageloader.cache.disc.impl.UnlimitedDiskCache;
 import com.nostra13.universalimageloader.core.ImageLoader;
 import com.nostra13.universalimageloader.core.ImageLoaderConfiguration;
@@ -62,8 +61,6 @@ public class SampleApplicationLike extends DefaultApplicationLike {
         initGreen();
         //内存泄漏检测
 //        LeakCanary.install(this);
-        Stetho.initializeWithDefaults(getApplication().getApplicationContext());;
-
     }
 
     public static SampleApplicationLike getInstance() {

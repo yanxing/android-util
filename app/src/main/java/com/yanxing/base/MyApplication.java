@@ -13,7 +13,6 @@ import com.facebook.drawee.backends.pipeline.Fresco;
 import com.facebook.imagepipeline.core.ImagePipelineConfig;
 import com.facebook.imagepipeline.listener.RequestListener;
 import com.facebook.imagepipeline.listener.RequestLoggingListener;
-import com.facebook.stetho.Stetho;
 import com.nostra13.universalimageloader.cache.disc.impl.UnlimitedDiskCache;
 import com.nostra13.universalimageloader.core.ImageLoader;
 import com.nostra13.universalimageloader.core.ImageLoaderConfiguration;
@@ -50,8 +49,7 @@ public class  MyApplication extends Application {
         initGreen();
         mMyApplication=this;
         //内存泄漏检测
-//        LeakCanary.install(this);
-        Stetho.initializeWithDefaults(getApplicationContext());
+        LeakCanary.install(this);
         Bugly.init(getApplicationContext(), "cb96408e0e", true);
     }
 

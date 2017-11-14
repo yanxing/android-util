@@ -5,14 +5,18 @@ import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentTransaction;
 
-import com.trello.rxlifecycle.LifecycleProvider;
+import com.trello.rxlifecycle2.LifecycleProvider;
 import com.yanxing.networklibrary.dialog.BaseDialog;
 import com.yanxing.networklibrary.dialog.LoadDialog;
 
-import rx.Observable;
-import rx.android.schedulers.AndroidSchedulers;
-import rx.functions.Action0;
-import rx.schedulers.Schedulers;
+import io.reactivex.ObservableSource;
+import io.reactivex.ObservableTransformer;
+import io.reactivex.android.schedulers.AndroidSchedulers;
+import io.reactivex.disposables.Disposable;
+import io.reactivex.functions.Consumer;
+import io.reactivex.schedulers.Schedulers;
+import io.reactivex.Observable;
+
 
 /**
  * 封装RxJava线程切换和进度条部分
@@ -27,15 +31,15 @@ public class RxIOHelper<T> {
      * @param lifecycleProvider RxLifecycle解决RxJava可能导致的内存泄漏
      * @return
      */
-    private Observable.Transformer<T, T> iOMainNoProgress(final LifecycleProvider lifecycleProvider) {
-        return new Observable.Transformer<T, T>() {
+    private ObservableTransformer<T, T> iOMainNoProgress(final LifecycleProvider lifecycleProvider) {
+        return new ObservableTransformer<T, T>() {
             @Override
-            public Observable<T> call(Observable<T> observable) {
+            public ObservableSource<T> apply(Observable<T> observable) {
                 Observable<T> observable1
                         = observable
                         .subscribeOn(Schedulers.io())
                         .observeOn(AndroidSchedulers.mainThread());
-                return observable1.compose(lifecycleProvider.<T>bindToLifecycle());
+                return observable1.compose(lifecycleProvider.bindToLifecycle());
             }
         };
     }
@@ -47,7 +51,7 @@ public class RxIOHelper<T> {
      * @param fragmentManager   用于销毁默认进度条Fragment
      * @return
      */
-    public Observable.Transformer<T, T> iOMainHasProgress(final LifecycleProvider lifecycleProvider, FragmentManager fragmentManager) {
+    public ObservableTransformer<T, T> iOMainHasProgress(final LifecycleProvider lifecycleProvider, FragmentManager fragmentManager) {
         return iOMainHasProgressExecute(lifecycleProvider, fragmentManager, null, null);
     }
 
@@ -60,7 +64,7 @@ public class RxIOHelper<T> {
      * @param toast             提示文字
      * @return
      */
-    public Observable.Transformer<T, T> iOMainHasProgress(final LifecycleProvider lifecycleProvider, FragmentManager fragmentManager, String toast) {
+    public ObservableTransformer<T, T> iOMainHasProgress(final LifecycleProvider lifecycleProvider, FragmentManager fragmentManager, String toast) {
         return iOMainHasProgressExecute(lifecycleProvider, fragmentManager, null, toast);
     }
 
@@ -72,20 +76,20 @@ public class RxIOHelper<T> {
      * @param baseDialog        自定义的进度对话框
      * @return
      */
-    public Observable.Transformer<T, T> iOMainHasProgress(final LifecycleProvider lifecycleProvider, FragmentManager fragmentManager, BaseDialog baseDialog) {
+    public ObservableTransformer<T, T> iOMainHasProgress(final LifecycleProvider lifecycleProvider, FragmentManager fragmentManager, BaseDialog baseDialog) {
         return iOMainHasProgressExecute(lifecycleProvider, fragmentManager, baseDialog, null);
     }
 
-    private Observable.Transformer<T, T> iOMainHasProgressExecute(final LifecycleProvider lifecycleProvider, final FragmentManager fragmentManager, final BaseDialog baseDialog, final String toast) {
-        return new Observable.Transformer<T, T>() {
+    private ObservableTransformer iOMainHasProgressExecute(final LifecycleProvider lifecycleProvider, final FragmentManager fragmentManager, final BaseDialog baseDialog, final String toast) {
+        return new ObservableTransformer<T, T>() {
             @Override
-            public Observable<T> call(Observable<T> observable) {
+            public ObservableSource<T> apply(Observable<T> observable) {
                 Observable<T> observable1
                         = observable
                         .subscribeOn(Schedulers.io())
-                        .doOnSubscribe(new Action0() {
+                        .doOnSubscribe(new Consumer<Disposable>() {
                             @Override
-                            public void call() {
+                            public void accept(Disposable disposable) throws Exception {
                                 FragmentTransaction fragmentTransaction = fragmentManager.beginTransaction();
                                 Fragment fragment = fragmentManager.findFragmentByTag(LoadDialog.TAG);
                                 if (fragment != null) {
