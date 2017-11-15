@@ -45,6 +45,10 @@
             android:id="@+id/select_image_dialog"
             style="@style/style_btn"
             android:text="@string/select_image_dialog"/>
+        <Button
+            android:id="@+id/matisse"
+            style="@style/style_btn"
+            android:text="matisse(知乎开源的图片选择)"/>
 
         <Button
             android:id="@+id/browse_image"
@@ -171,9 +175,5 @@
             android:id="@+id/navigationTop"
             style="@style/style_btn"
             android:text="navigationTop"/>
-        <Button
-            android:id="@+id/matisse"
-            style="@style/style_btn"
-            android:text="matisse"/>
     </LinearLayout>
 </android.support.v4.widget.NestedScrollView>

@@ -73,7 +73,7 @@ public class TimingFragment extends BaseFragment {
         mRecyclerViewAdapter = new RecyclerViewAdapter<Integer>(mList, R.layout.adapter_recycler_view) {
             @Override
             public void onBindViewHolder(RecyclerViewAdapter.MyViewHolder holder, final int position) {
-                TextView textView = (TextView) holder.findViewById(R.id.text);
+                TextView textView = holder.findViewById(R.id.text);
                 textView.setText(String.valueOf(mDataList.get(position)));
                 holder.itemView.setOnClickListener(new View.OnClickListener() {
                     @Override
