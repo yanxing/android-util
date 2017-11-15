@@ -47,7 +47,7 @@ public class NetworkLibraryFragment extends BaseFragment {
         RetrofitManage.getInstance().init(baseUrl,true);
         RetrofitManage.getInstance().getRetrofit().create(DouBanAPI.class)
                 .getTopMovie(0,10)
-                .compose(new RxIOHelper<DouBan>().iOMainHasProgress(this,getFragmentManager()))
+                .compose(new RxIOHelper<DouBan>().iOMainHasProgress(this,getFragmentManager(),"请稍等..."))
                 .subscribe(new RxSubscriberHelper<DouBan>(getActivity(),getFragmentManager()) {
                     @Override
                     public void onCall(DouBan douBan) {
