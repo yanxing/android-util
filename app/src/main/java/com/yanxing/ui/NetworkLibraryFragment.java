@@ -44,7 +44,7 @@ public class NetworkLibraryFragment extends BaseFragment {
      */
     public void getData() {
         String baseUrl = "https://api.douban.com/v2/movie/";
-        RetrofitManage.init(baseUrl,true);
+        RetrofitManage.getInstance().init(baseUrl,true);
         RetrofitManage.getInstance().getRetrofit().create(DouBanAPI.class)
                 .getTopMovie(0,10)
                 .compose(new RxIOHelper<DouBan>().iOMainHasProgress(this,getFragmentManager()))

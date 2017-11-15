@@ -1,9 +1,10 @@
-package com.yanxing.networklibrary;
+package com.yanxing.networklibrary.util;
 
 import android.accounts.NetworkErrorException;
 import android.util.Log;
 
 import com.google.gson.JsonSyntaxException;
+import com.yanxing.networklibrary.intercepter.ParameterInterceptor;
 
 import org.json.JSONException;
 

@@ -9,6 +9,7 @@ import android.widget.Toast;
 import com.yanxing.networklibrary.dialog.LoadDialog;
 import com.yanxing.networklibrary.model.BaseModel;
 import com.yanxing.networklibrary.refresh.PullToRefresh;
+import com.yanxing.networklibrary.util.ErrorCodeUtil;
 
 import io.reactivex.Observer;
 import io.reactivex.annotations.NonNull;

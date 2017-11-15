@@ -1,6 +1,11 @@
 package com.yanxing.networklibrary;
 
 
+import android.content.Context;
+
+import com.yanxing.networklibrary.intercepter.CacheInterceptor;
+import com.yanxing.networklibrary.intercepter.ParameterInterceptor;
+
 import java.util.concurrent.TimeUnit;
 
 import okhttp3.OkHttpClient;
@@ -13,43 +18,16 @@ import retrofit2.converter.gson.GsonConverterFactory;
  */
 public class RetrofitManage {
 
-    private static Retrofit mRetrofit;
-    private static String url;
-    private static boolean mLog;
+    private Retrofit.Builder mRetrofitBuilder;
+    private OkHttpClient.Builder mOkHttpClientBuilder;
 
     private RetrofitManage() {
-        if (mRetrofit != null) {
-            return;
-        }
-        OkHttpClient okHttpClient = new OkHttpClient.Builder()
+        mOkHttpClientBuilder = new OkHttpClient.Builder()
                 .connectTimeout(30000L, TimeUnit.MILLISECONDS)
-                .readTimeout(30000L, TimeUnit.MILLISECONDS)
-                .addInterceptor(new ParameterInterceptor(mLog))
-                .build();
-        mRetrofit = new Retrofit.Builder()
-                .baseUrl(url)
-                .client(okHttpClient)
+                .readTimeout(30000L, TimeUnit.MILLISECONDS);
+        mRetrofitBuilder = new Retrofit.Builder()
                 .addConverterFactory(GsonConverterFactory.create())
-                .addCallAdapterFactory(RxJava2CallAdapterFactory.create())
-                .build();
-    }
-
-    /**
-     * Retrofit baseUrl
-     *
-     * @param baseUrl
-     * @param log true打印请求参数和返回数据
-     */
-    public static void init(String baseUrl,boolean log) {
-        mLog=log;
-        url = baseUrl;
-    }
-
-    /**
-     * @param retrofit
-     */
-    public static void init(Retrofit retrofit) {
-        mRetrofit = retrofit;
+                .addCallAdapterFactory(RxJava2CallAdapterFactory.create());
     }
 
     public static RetrofitManage getInstance() {
@@ -61,8 +39,42 @@ public class RetrofitManage {
         private static final RetrofitManage retrofitManage = new RetrofitManage();
     }
 
+    /**
+     * 初始化Retrofit
+     *
+     * @param baseUrl
+     * @param log     true打印请求参数和返回数据
+     */
+    public synchronized void init(String baseUrl, boolean log) {
+        mRetrofitBuilder
+                .baseUrl(baseUrl)
+                .client(mOkHttpClientBuilder.addInterceptor(new ParameterInterceptor(log)).build());
+    }
+
+    /**
+     * 自定义okHttpClient
+     *
+     * @param okHttpClient
+     */
+    public void setHttpClient(OkHttpClient okHttpClient) {
+        mRetrofitBuilder.client(okHttpClient);
+    }
+
+    /**
+     * 设置无网络时是否缓存
+     *
+     * @param context
+     * @param cache   无网络时true使用缓存的数据
+     */
+    public void setNoNetworkCache(Context context, boolean cache) {
+        if (cache) {
+            mOkHttpClientBuilder.addInterceptor(new CacheInterceptor(context));
+            mRetrofitBuilder.client(mOkHttpClientBuilder.build()).build();
+        }
+    }
+
     public Retrofit getRetrofit() {
-        return mRetrofit;
+        return mRetrofitBuilder.build();
     }
 
 }
