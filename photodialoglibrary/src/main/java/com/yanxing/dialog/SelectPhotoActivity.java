@@ -71,12 +71,18 @@ public class SelectPhotoActivity extends FragmentActivity implements View.OnClic
         mTempPhoto = System.currentTimeMillis() + ".png";
         //针对一些手机需要自己先创建文件夹
         //file文件夹，和filepaths.xml中目录符合，或者是其子文件夹
-        File f=new File(mPhotoParam.getPath());
-        if (!f.exists()){
+        File f = new File(mPhotoParam.getPath());
+        if (!f.exists()) {
             f.mkdirs();
         }
-        File file = new File(mPhotoParam.getPath(), mTempPhoto);
-        if (!file.exists()){
+        File file;
+        //经过裁剪
+        if (mPhotoParam.isCut()){
+            file = new File(mPhotoParam.getPath(), mTempPhoto);
+        }else {
+            file = new File(mPhotoParam.getPath(), mPhotoParam.getName());
+        }
+        if (!file.exists()) {
             try {
                 file.createNewFile();
             } catch (IOException e) {
@@ -110,31 +116,50 @@ public class SelectPhotoActivity extends FragmentActivity implements View.OnClic
         if (resultCode == RESULT_OK) {
             //拍照返回
             if (requestCode == TAKE_PHOTO) {
-                //判读版本是否在7.0以上
-                if (Build.VERSION.SDK_INT >= 24) {
-                    cutPhoto(getImageContentUri(new File(mPhotoParam.getPath(), mTempPhoto))
-                            , Uri.fromFile(new File(mPhotoParam.getPath() + mPhotoParam.getName())));
+                //经过裁剪
+                if (mPhotoParam.isCut()) {
+                    //判读版本是否在7.0以上
+                    if (Build.VERSION.SDK_INT >= 24) {
+                        cutPhoto(getImageContentUri(new File(mPhotoParam.getPath(), mTempPhoto))
+                                , Uri.fromFile(new File(mPhotoParam.getPath() + mPhotoParam.getName())));
+                    } else {
+                        cutPhoto(Uri.fromFile(new File(mPhotoParam.getPath(), mTempPhoto))
+                                , Uri.fromFile(new File(mPhotoParam.getPath(), mPhotoParam.getName())));
+                    }
                 } else {
-                    cutPhoto(Uri.fromFile(new File(mPhotoParam.getPath(), mTempPhoto))
-                            , Uri.fromFile(new File(mPhotoParam.getPath(), mPhotoParam.getName())));
+                    //不裁减
+                    Intent intent=new Intent();
+                    intent.putExtra("image", mPhotoParam.getPath() + mPhotoParam.getName());
+                    setResult(RESULT_OK,intent);
+                    finish();
                 }
             } else if (requestCode == CUT_PHOTO) {//裁剪返回
                 if (mTempPhoto != null) {
                     File file = new File(mPhotoParam.getPath(), mTempPhoto);
                     file.delete();
                 }
-                setResult(RESULT_OK);
+                data.putExtra("image", mPhotoParam.getPath() + mPhotoParam.getName());
+                setResult(RESULT_OK,data);
                 finish();
             } else if (requestCode == FROM_PICTURE) {//图库选择
                 Uri selectedImage = data.getData();
                 if (selectedImage == null) {
                     return;
                 }
-                File file = new File(mPhotoParam.getPath(), mPhotoParam.getName());
-                if (Build.VERSION.SDK_INT == Build.VERSION_CODES.LOLLIPOP_MR1){//android22 bug
-                    selectedImage=Uri.fromFile(new File(ContentUriUtil.getPath(getApplicationContext(), selectedImage)));
+                //经过裁剪
+                if (mPhotoParam.isCut()) {
+                    File file = new File(mPhotoParam.getPath(), mPhotoParam.getName());
+                    //android22 bug
+                    if (Build.VERSION.SDK_INT == Build.VERSION_CODES.LOLLIPOP_MR1) {
+                        selectedImage = Uri.fromFile(new File(ContentUriUtil.getPath(getApplicationContext(), selectedImage)));
+                    }
+                    cutPhoto(selectedImage, Uri.fromFile(file));
+                } else {
+                    data.putExtra("image", ContentUriUtil.getPath(getApplicationContext(), selectedImage));
+                    setResult(RESULT_OK, data);
+                    finish();
                 }
-                cutPhoto(selectedImage, Uri.fromFile(file));
+
             }
         }
     }
@@ -148,15 +173,12 @@ public class SelectPhotoActivity extends FragmentActivity implements View.OnClic
     public void cutPhoto(Uri uri, Uri newUri) {
         Intent intent = new Intent("com.android.camera.action.CROP");
         intent.setDataAndType(uri, "image/*");
-        //进行裁剪
-        if (mPhotoParam.isCut()) {
-            intent.putExtra("crop", "true");
-            intent.putExtra("aspectX", 1);
-            intent.putExtra("aspectY", 1);
-            intent.putExtra("outputX", mPhotoParam.getOutputX());
-            intent.putExtra("outputY", mPhotoParam.getOutputY());
-            intent.putExtra("scale", true);
-        }
+        intent.putExtra("crop", "true");
+        intent.putExtra("aspectX", 1);
+        intent.putExtra("aspectY", 1);
+        intent.putExtra("outputX", mPhotoParam.getOutputX());
+        intent.putExtra("outputY", mPhotoParam.getOutputY());
+        intent.putExtra("scale", true);
         if (Build.VERSION.SDK_INT >= 24) {
             intent.setFlags(Intent.FLAG_GRANT_READ_URI_PERMISSION);
         }
@@ -218,6 +240,7 @@ public class SelectPhotoActivity extends FragmentActivity implements View.OnClic
     /**
      * 点击屏幕其他地方，对话框消失
      */
+    @Override
     public boolean onTouchEvent(MotionEvent event) {
         finish();
         return true;

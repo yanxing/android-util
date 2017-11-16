@@ -23,7 +23,7 @@ public class PhotoParam implements Parcelable {
     private int outputX;
     private int outputY;
     /**
-     * 默认裁剪
+     * 默认不裁剪
      */
     private boolean cut;
 

@@ -345,7 +345,7 @@ public class MainFragment extends BaseFragment implements AMapLocListener {
         if (resultCode == FragmentActivity.RESULT_OK) {
             if (requestCode == QUESTION_IMAGE_CODE) {
                 Intent intent = new Intent(getActivity(), ShowImageActivity.class);
-                intent.putExtra("name", mImageName);
+                intent.putExtra("name", data.getStringExtra("image"));
                 startActivity(intent);
             } else if (requestCode == QUESTION_SORT_LISTVIEW_CODE) {
                 showToast(data.getExtras().getString("city"));

@@ -24,13 +24,10 @@ public class ContentUriUtil {
      * @param uri     The Uri to query.
      * @author paulburke
      */
-    @RequiresApi(api = Build.VERSION_CODES.KITKAT)
     public static String getPath(final Context context, final Uri uri) {
 
-        final boolean isKitKat = Build.VERSION.SDK_INT >= Build.VERSION_CODES.KITKAT;
-
         // DocumentProvider
-        if (isKitKat && DocumentsContract.isDocumentUri(context, uri)) {
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.KITKAT && DocumentsContract.isDocumentUri(context, uri)) {
             // ExternalStorageProvider
             if (isExternalStorageDocument(uri)) {
                 final String docId = DocumentsContract.getDocumentId(uri);
@@ -45,7 +42,7 @@ public class ContentUriUtil {
             // DownloadsProvider
             else if (isDownloadsDocument(uri)) {
 
-                String id=null;
+                String id = null;
                 if (android.os.Build.VERSION.SDK_INT >= android.os.Build.VERSION_CODES.KITKAT) {
                     id = DocumentsContract.getDocumentId(uri);
                 }
@@ -84,9 +81,9 @@ public class ContentUriUtil {
         else if ("content".equalsIgnoreCase(uri.getScheme())) {
 
             // Return the remote address
-            if (isGooglePhotosUri(uri))
+            if (isGooglePhotosUri(uri)){
                 return uri.getLastPathSegment();
-
+            }
             return getDataColumn(context, uri, null, null);
         }
         // File
