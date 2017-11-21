@@ -199,7 +199,7 @@ public class MainFragment extends BaseFragment implements AMapLocListener {
             , R.id.loading_dialog_button, R.id.select_image, R.id.titleBar
             , R.id.sortListView, R.id.amap, R.id.dialog, R.id.inputEditButton
             , R.id.select_image_dialog, R.id.surfaceView, R.id.swipeBackLayout
-            ,R.id.swipe_to_load_layout,R.id.tableView,R.id.navigationTop,R.id.matisse})
+            ,R.id.swipe_to_load_layout,R.id.tableView,R.id.navigationTop,R.id.matisse,R.id.webOpenPhoto})
     public void onClick(View v) {
         Intent intent = new Intent();
         Bundle bundle = new Bundle();
@@ -277,13 +277,15 @@ public class MainFragment extends BaseFragment implements AMapLocListener {
                         .choose(MimeType.allOf())
                         .countable(true)
                         .maxSelectable(9)
-//                        .addFilter(new GifSizeFilter(320, 320, 5 * Filter.K * Filter.K))
                         .gridExpectedSize(getResources().getDimensionPixelSize(R.dimen.grid_expected_size))
                         .restrictOrientation(ActivityInfo.SCREEN_ORIENTATION_UNSPECIFIED)
                         .thumbnailScale(0.85f)
                         .imageEngine(new GlideEngine())
                         .forResult(REQUEST_CODE_CHOOSE);
                 break;
+            case R.id.webOpenPhoto:
+                intent.setClass(getActivity(),WebOpenPhotoActivity.class);
+                startActivity(intent);
                 default:
 
         }

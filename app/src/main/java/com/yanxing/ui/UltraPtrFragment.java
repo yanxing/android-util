@@ -51,7 +51,7 @@ public class UltraPtrFragment extends BaseFragment {
         mPtrClassicFrameLayout.autoRefresh(true);
     }
 
-    //test
+    //javaScript
     public void load() {
         for (int i=0;i<10;i++){
             mList.add(String.valueOf(i));

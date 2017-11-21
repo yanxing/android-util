@@ -36,7 +36,7 @@ public class TextConversionBitmapFragment extends BaseFragment {
     @Override
     protected void afterInstanceView() {
         String content = "把秋衣扎进秋裤/n把秋裤扎进/n袜子/n是对冬天最起码的/n尊重";
-        ImageLoader.getInstance().displayImage("file://" + createTextImage(content, "test.png"), mImageView);
+        ImageLoader.getInstance().displayImage("file://" + createTextImage(content, "javaScript.png"), mImageView);
     }
 
     /**

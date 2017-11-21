@@ -45,7 +45,7 @@ public class NavigationTopFragment extends BaseFragment {
                 , LinearLayoutManager.HORIZONTAL, false);
         mNavList.setLayoutManager(mLinearManager);
 
-        //test
+        //javaScript
         List<Integer> list = new ArrayList<>();
         for (int i = 0; i < 10; i++) {
             list.add(i);

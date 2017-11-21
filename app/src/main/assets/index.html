@@ -1,0 +1,24 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <script>
+        function selectPhoto(){
+            // 调用Android中选择图库方法
+            photo.selectPhoto();
+        }
+
+         //选择图片的string64 base64
+        function onPhotoListener(photo) {
+           alert("图片选择成功");
+           //document.getElementById("txt").value=photo.substring(0,20);
+           //alert(photo)
+        }
+    </script>
+</head>
+<body>
+<button type="button" id="button1" onclick="selectPhoto()">选择图片</button>
+<input  type="text" id="txt" value="">
+</body>
+</html>

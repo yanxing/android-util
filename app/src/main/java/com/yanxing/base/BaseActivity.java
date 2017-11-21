@@ -23,10 +23,11 @@ public abstract class BaseActivity extends RxFragmentActivity {
 
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
-        CommonUtil.setStatusBarDarkMode(true,this);
         super.onCreate(savedInstanceState);
         setContentView(getLayoutResID());
         ButterKnife.bind(this);
+        CommonUtil.setStatusBarDarkMode(true, this);
+        CommonUtil.setStatusBarDarkIcon(getWindow(),true);
         afterInstanceView();
     }
 

@@ -85,7 +85,7 @@ public class ParameterInterceptor implements Interceptor {
         //打印日志
         if (mLog){
             long a = System.currentTimeMillis();
-            String message = null;
+            String message = "";
             if (!response.isSuccessful()) {
                 message = ErrorCodeUtil.getMessage(response.code());
             }

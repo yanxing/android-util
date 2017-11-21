@@ -175,5 +175,9 @@
             android:id="@+id/navigationTop"
             style="@style/style_btn"
             android:text="navigationTop"/>
+        <Button
+            android:id="@+id/webOpenPhoto"
+            style="@style/style_btn"
+            android:text="webview选择图片"/>
     </LinearLayout>
 </android.support.v4.widget.NestedScrollView>
