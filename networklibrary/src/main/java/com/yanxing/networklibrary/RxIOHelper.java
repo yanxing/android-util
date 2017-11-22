@@ -93,7 +93,10 @@ public class RxIOHelper<T> {
                                 FragmentTransaction fragmentTransaction = fragmentManager.beginTransaction();
                                 Fragment fragment = fragmentManager.findFragmentByTag(LoadDialog.TAG);
                                 if (fragment != null) {
-                                    fragmentTransaction.remove(fragment).commitAllowingStateLoss();
+                                    if (baseDialog!=null){
+                                        fragmentTransaction.remove(fragment).commitAllowingStateLoss();
+                                        baseDialog.show(fragmentTransaction, LoadDialog.TAG);
+                                    }
                                 } else {
                                     if (baseDialog == null) {
                                         LoadDialog loadDialog = new LoadDialog();
