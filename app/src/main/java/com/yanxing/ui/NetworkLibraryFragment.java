@@ -5,8 +5,8 @@ import android.widget.TextView;
 
 import com.yanxing.base.BaseFragment;
 import com.yanxing.networklibrary.RetrofitManage;
-import com.yanxing.networklibrary.RxIOHelper;
-import com.yanxing.networklibrary.RxSubscriberHelper;
+import com.yanxing.networklibrary.Transformer;
+import com.yanxing.networklibrary.AbstractObserver;
 import com.yanxing.ui.retrofit.DouBanAPI;
 import com.yanxing.model.DouBan;
 
@@ -47,8 +47,8 @@ public class NetworkLibraryFragment extends BaseFragment {
         RetrofitManage.getInstance().init(baseUrl,true);
         RetrofitManage.getInstance().getRetrofit().create(DouBanAPI.class)
                 .getTopMovie(0,10)
-                .compose(new RxIOHelper<DouBan>().iOMainHasProgress(this,getFragmentManager(),"请稍等..."))
-                .subscribe(new RxSubscriberHelper<DouBan>(getActivity(),getFragmentManager()) {
+                .compose(new Transformer<DouBan>().iOMainHasProgress(this,getFragmentManager(),"请稍等..."))
+                .subscribe(new AbstractObserver<DouBan>(getActivity(),getFragmentManager()) {
                     @Override
                     public void onCall(DouBan douBan) {
 

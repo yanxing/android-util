@@ -8,5 +8,5 @@ public interface PullToRefresh {
     /**
      * RXJava完成任务请求，停止刷新控件刷新状态
      */
-    public void refreshComplete();
+    void refreshComplete();
 }

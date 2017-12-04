@@ -9,11 +9,9 @@
             photo.selectPhoto();
         }
 
-         //选择图片的string64 base64
-        function onPhotoListener(photo) {
-           alert("图片选择成功");
-           //document.getElementById("txt").value=photo.substring(0,20);
-           //alert(photo)
+         //图片上传成功后回调，url图片地址http://
+        function onPhotoListener(url) {
+           alert("图片上传成功");
         }
     </script>
 </head>

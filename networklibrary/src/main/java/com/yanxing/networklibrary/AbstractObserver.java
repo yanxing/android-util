@@ -19,7 +19,7 @@ import io.reactivex.disposables.Disposable;
  * 统一处理处理onCompleted onError,onNext处理一部分
  * Created by 李双祥 on 2017/5/23.
  */
-public abstract class RxSubscriberHelper<T extends BaseModel> implements Observer<T> {
+public abstract class AbstractObserver<T extends BaseModel> implements Observer<T> {
 
     private PullToRefresh mPullToRefresh;
     private FragmentManager mFragmentManager;
@@ -30,7 +30,7 @@ public abstract class RxSubscriberHelper<T extends BaseModel> implements Observe
      *
      * @param pullToRefresh
      */
-    protected RxSubscriberHelper(Context context, PullToRefresh pullToRefresh) {
+    protected AbstractObserver(Context context, PullToRefresh pullToRefresh) {
         this.mPullToRefresh = pullToRefresh;
         this.mContext = context;
     }
@@ -38,12 +38,12 @@ public abstract class RxSubscriberHelper<T extends BaseModel> implements Observe
     /**
      * @param fragmentManager 用来请求结束，移除对话框
      */
-    protected RxSubscriberHelper(Context context,FragmentManager fragmentManager) {
+    protected AbstractObserver(Context context, FragmentManager fragmentManager) {
         this.mFragmentManager = fragmentManager;
         this.mContext = context;
     }
 
-    protected RxSubscriberHelper(Context context) {
+    protected AbstractObserver(Context context) {
         this.mContext = context;
     }
 

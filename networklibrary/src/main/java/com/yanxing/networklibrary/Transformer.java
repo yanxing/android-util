@@ -19,14 +19,14 @@ import io.reactivex.Observable;
 
 
 /**
- * 封装RxJava线程切换和进度条部分
+ * 封装RxJava线程切换（任务在子线程，回调在主线程）和进度条部分
  * Created by 李双祥 on 2017/5/23.
  */
-public class RxIOHelper<T> {
+public class Transformer<T> {
 
 
     /**
-     * 封装RxJava线程切换部分，没有进度对话框
+     * 没有进度对话框
      *
      * @param lifecycleProvider RxLifecycle解决RxJava可能导致的内存泄漏
      * @return
@@ -45,7 +45,7 @@ public class RxIOHelper<T> {
     }
 
     /**
-     * 封装RxJava线程切换部分，默认进度对话框
+     * 默认进度对话框
      *
      * @param lifecycleProvider RxLifecycle解决RxJava可能导致的内存泄漏
      * @param fragmentManager   用于销毁默认进度条Fragment
@@ -57,7 +57,7 @@ public class RxIOHelper<T> {
 
 
     /**
-     * 封装RxJava线程切换部分，默认进度对话框
+     * 默认进度对话框
      *
      * @param lifecycleProvider RxLifecycle解决RxJava可能导致的内存泄漏
      * @param fragmentManager   用于销毁默认进度条Fragment
@@ -69,7 +69,7 @@ public class RxIOHelper<T> {
     }
 
     /**
-     * 封装RxJava线程切换部分，有进度对话框
+     * 有进度对话框
      *
      * @param lifecycleProvider RxLifecycle解决RxJava可能导致的内存泄漏
      * @param fragmentManager   用于销毁默认进度条Fragment
