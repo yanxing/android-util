@@ -22,12 +22,6 @@ public class RetrofitManage {
     private OkHttpClient.Builder mOkHttpClientBuilder;
 
     private RetrofitManage() {
-        mOkHttpClientBuilder = new OkHttpClient.Builder()
-                .connectTimeout(30000L, TimeUnit.MILLISECONDS)
-                .readTimeout(30000L, TimeUnit.MILLISECONDS);
-        mRetrofitBuilder = new Retrofit.Builder()
-                .addConverterFactory(GsonConverterFactory.create())
-                .addCallAdapterFactory(RxJava2CallAdapterFactory.create());
     }
 
     public static RetrofitManage getInstance() {
@@ -46,8 +40,13 @@ public class RetrofitManage {
      * @param log     true打印请求参数和返回数据
      */
     public synchronized void init(String baseUrl, boolean log) {
-        mRetrofitBuilder
+        mOkHttpClientBuilder = new OkHttpClient.Builder()
+                .connectTimeout(30000L, TimeUnit.MILLISECONDS)
+                .readTimeout(30000L, TimeUnit.MILLISECONDS);
+        mRetrofitBuilder = new Retrofit.Builder()
                 .baseUrl(baseUrl)
+                .addConverterFactory(GsonConverterFactory.create())
+                .addCallAdapterFactory(RxJava2CallAdapterFactory.create())
                 .client(mOkHttpClientBuilder.addInterceptor(new ParameterInterceptor(log)).build());
     }
 
