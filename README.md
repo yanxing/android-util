@@ -9,8 +9,8 @@
  RetrofitManage.getInstance().init(baseUrl,true);
  RetrofitManage.getInstance().getRetrofit().create(ServiceAPI.class)
      .getTopMovie(0,10)
-     .compose(new RxIOHelper<DouBan>().iOMainHasProgress(this,getFragmentManager(),"请稍等..."))
-     .subscribe(new RxSubscriberHelper<DouBan>(getActivity(),pullToRefreshImpl) {
+     .compose(new Transformer<DouBan>().iOMainHasProgress(this,getFragmentManager(),"请稍等..."))
+     .subscribe(new AbstractObserver<DouBan>(getActivity(),pullToRefreshImpl) {
           @Override
           public void onCall(DouBan douBan) {
 
