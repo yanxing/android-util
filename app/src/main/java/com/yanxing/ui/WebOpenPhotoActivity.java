@@ -3,10 +3,10 @@ package com.yanxing.ui;
 import android.Manifest;
 import android.content.Intent;
 import android.content.pm.PackageManager;
+import android.net.Uri;
 import android.os.Build;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
-import android.util.Base64;
 import android.webkit.JavascriptInterface;
 import android.webkit.ValueCallback;
 import android.webkit.WebChromeClient;
@@ -20,6 +20,8 @@ import com.yanxing.util.ConstantValue;
 import com.yanxing.util.FileUtil;
 import com.yanxing.util.LogUtil;
 import com.yanxing.util.PermissionUtil;
+
+import java.io.File;
 
 import butterknife.BindView;
 
@@ -36,6 +38,8 @@ public class WebOpenPhotoActivity extends BaseActivity {
     public static final int QUESTION = 1;
     private static final int QUESTION_IMAGE_CODE = 2;
 
+    private ValueCallback<Uri[]> mValueCallback;
+
     @Override
     protected int getLayoutResID() {
         return R.layout.activity_web_open_photo;
@@ -48,7 +52,23 @@ public class WebOpenPhotoActivity extends BaseActivity {
         webSettings.setJavaScriptEnabled(true);
         webSettings.setCacheMode(WebSettings.LOAD_DEFAULT);
         webSettings.setDomStorageEnabled(true);
-        mWebView.setWebChromeClient(new WebChromeClient());
+        mWebView.setWebChromeClient(new WebChromeClient(){
+
+            @Override
+            public boolean onShowFileChooser(WebView webView, ValueCallback<Uri[]> filePathCallback, FileChooserParams fileChooserParams) {
+                mValueCallback =filePathCallback;
+                long currentTimeDialog = System.currentTimeMillis();
+                Intent intent=new Intent(getApplicationContext(), SelectPhotoActivity.class);
+                PhotoParam photoParam = new PhotoParam();
+                photoParam.setName(currentTimeDialog+".png");
+                photoParam.setPath(FileUtil.getStoragePath() + ConstantValue.CACHE_IMAGE);
+                Bundle bundle=new Bundle();
+                bundle.putParcelable("photoParam", photoParam);
+                intent.putExtras(bundle);
+                startActivityForResult(intent, QUESTION_IMAGE_CODE);
+                return true;
+            }
+        });
         mWebView.loadUrl("file:///android_asset/index.html");
         // 添加一个对象, 让JS可以访问该对象的方法, 该对象中可以调用JS中的方法
         mWebView.addJavascriptInterface(new Photo(), "photo");
@@ -103,9 +123,12 @@ public class WebOpenPhotoActivity extends BaseActivity {
         super.onActivityResult(requestCode, resultCode, data);
         if (resultCode == RESULT_OK) {
             if (requestCode == QUESTION_IMAGE_CODE) {
-                byte file[]=FileUtil.getBytes(data.getStringExtra("image"));
-                String image=Base64.encodeToString(file,Base64.DEFAULT);
-                javaScript(image);
+                String path=data.getStringExtra("image");
+                Uri uri=Uri.fromFile(new File(path));
+                mValueCallback.onReceiveValue(new Uri[]{uri});
+//                byte file[]=FileUtil.getBytes(path);
+//                String image=Base64.encodeToString(file,Base64.DEFAULT);
+//                javaScript(image);
             }
         }
     }

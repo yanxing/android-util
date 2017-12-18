@@ -5,6 +5,7 @@ import android.content.Context;
 
 import com.yanxing.networklibrary.intercepter.CacheInterceptor;
 import com.yanxing.networklibrary.intercepter.ParameterInterceptor;
+import com.yanxing.networklibrary.intercepter.Paramterceptor;
 
 import java.util.concurrent.TimeUnit;
 
@@ -42,12 +43,20 @@ public class RetrofitManage {
     public synchronized void init(String baseUrl, boolean log) {
         mOkHttpClientBuilder = new OkHttpClient.Builder()
                 .connectTimeout(30000L, TimeUnit.MILLISECONDS)
-                .readTimeout(30000L, TimeUnit.MILLISECONDS);
+                .readTimeout(30000L, TimeUnit.MILLISECONDS)
+                .addInterceptor(new ParameterInterceptor(log));
         mRetrofitBuilder = new Retrofit.Builder()
                 .baseUrl(baseUrl)
                 .addConverterFactory(GsonConverterFactory.create())
                 .addCallAdapterFactory(RxJava2CallAdapterFactory.create())
-                .client(mOkHttpClientBuilder.addInterceptor(new ParameterInterceptor(log)).build());
+                .client(mOkHttpClientBuilder.build());
+    }
+
+    /**
+     * 设置拦截器
+     */
+    public void setInterceptor(Paramterceptor paramterceptor) {
+        mRetrofitBuilder.client(mOkHttpClientBuilder.addInterceptor(paramterceptor).build());
     }
 
     /**

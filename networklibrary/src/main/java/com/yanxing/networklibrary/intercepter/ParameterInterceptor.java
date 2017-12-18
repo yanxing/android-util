@@ -11,7 +11,6 @@ import java.util.Set;
 
 import okhttp3.FormBody;
 import okhttp3.HttpUrl;
-import okhttp3.Interceptor;
 import okhttp3.MultipartBody;
 import okhttp3.Request;
 import okhttp3.RequestBody;
@@ -23,7 +22,7 @@ import okio.Buffer;
  * 拦截器 ，http错误信息封装
  * Created by 李双祥 on 2017/04/01.
  */
-public class ParameterInterceptor implements Interceptor {
+public class ParameterInterceptor implements Paramterceptor {
 
     public static final String TAG = "networklibrary";
     private boolean mLog;
