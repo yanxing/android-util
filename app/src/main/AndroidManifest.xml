@@ -41,8 +41,9 @@
             android:name="com.amap.api.v2.apikey"
             android:value="578ee5fcd1cb8302bbd2af7fb63ca1d5"/>
         <!-- 定位需要的服务 -->
-        <service android:name="com.amap.api.location.APSService">
-        </service>
+        <service android:name="com.amap.api.location.APSService"/>
+
+        <service android:name="com.dianmei.analyzelibrary.AnalyzeService"/>
 
         <meta-data
             android:name="com.baidu.lbsapi.API_KEY"

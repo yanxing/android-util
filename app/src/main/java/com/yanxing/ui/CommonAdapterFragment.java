@@ -60,14 +60,19 @@ public class CommonAdapterFragment extends BaseFragment {
         RecyclerViewAdapter recyclerViewAdapter = new RecyclerViewAdapter<Integer>(list, R.layout.adapter_recycler_view) {
 
             @Override
-            public void onBindViewHolder(RecyclerViewAdapter.MyViewHolder holder, int position) {
+            public void onBindViewHolder(RecyclerViewAdapter.MyViewHolder holder, final int position) {
                 TextView textView = (TextView) holder.findViewById(R.id.text);
                 //瀑布流，动态设置item大小
                 ViewGroup.LayoutParams lp = textView.getLayoutParams();
                 lp.height = (int) (50 + Math.random() * 300);
                 textView.setLayoutParams(lp);
                 textView.setText(String.valueOf(list.get(position)));
-                holder.itemView.setOnClickListener(v -> showToast(getString(R.string.you_click) + (position + 1) + getString(R.string.ge)));
+                holder.itemView.setOnClickListener(new View.OnClickListener() {
+                    @Override
+                    public void onClick(View v) {
+                        showToast(getString(R.string.you_click) + (position + 1) + getString(R.string.ge));
+                    }
+                });
             }
         };
         mRecyclerView.setAdapter(recyclerViewAdapter);

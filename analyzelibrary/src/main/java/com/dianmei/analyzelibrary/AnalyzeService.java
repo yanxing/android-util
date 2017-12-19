@@ -6,7 +6,9 @@ import android.util.Log;
 
 import com.dianmei.analyzelibrary.util.DeviceUtil;
 import com.dianmei.analyzelibrary.util.TimeUtil;
-import com.dianmei.analyzelibrary.util.UploadConfig;
+
+import java.util.ArrayList;
+import java.util.List;
 
 /**
  * 统计服务
@@ -19,15 +21,23 @@ import com.dianmei.analyzelibrary.util.UploadConfig;
 public class AnalyzeService extends IntentService {
 
     private static final String TAG = "AnalyzeService";
-    private static final String ANDROID="android";
+    private static final String ANDROID = "android";
     private boolean mLog = false;
-    private long mLastTime;
+    /**
+     * app上次位于后台的时间
+     */
+    private long mLastBackgroundTime;
+    /**
+     * 上次上报页面时间
+     */
+    private long mLastUploadPageTime;
     private boolean mBackground = false;
     /**
      * 渠道名称
      */
     private String mChannel;
     private String mUserId;
+    private String mTactic;
 
     public AnalyzeService() {
         super(TAG);
@@ -35,6 +45,7 @@ public class AnalyzeService extends IntentService {
 
     @Override
     protected void onHandleIntent(Intent intent) {
+        mTactic = intent.getStringExtra("tactic");
         mChannel = intent.getStringExtra("channel");
         mUserId = intent.getStringExtra("userId");
         mLog = intent.getBooleanExtra("log", false);
@@ -44,11 +55,12 @@ public class AnalyzeService extends IntentService {
         uploadData.setDeviceBrand(DeviceUtil.getDeviceBrand());
         uploadData.setDeviceID(DeviceUtil.getDeviceId(getApplicationContext()));
         uploadData.setDeviceMode(DeviceUtil.getSystemModel());
-        uploadData.setSystemVersion(ANDROID+" "+DeviceUtil.getSystemVersion());
+        uploadData.setSystemVersion(ANDROID + " " + DeviceUtil.getSystemVersion());
         uploadData.setTime(TimeUtil.getTime());
         uploadData.setVersionName(DeviceUtil.getVersionName(getApplicationContext()));
         uploadDayActive(uploadData);
         uploadStartCount(uploadData);
+        mLastUploadPageTime = System.currentTimeMillis();
         while (true) {
             uploadData.setTime(TimeUtil.getTime());
             //处在后台
@@ -56,11 +68,44 @@ public class AnalyzeService extends IntentService {
                 mBackground = true;
             } else {
                 //后台停留超过30s
-                if (System.currentTimeMillis() - mLastTime > 30 * 1000 && mBackground) {
+                if (System.currentTimeMillis() - mLastBackgroundTime > 30 * 1000 && mBackground) {
                     uploadStartCount(uploadData);
                 }
-                mLastTime = System.currentTimeMillis();
+                mLastBackgroundTime = System.currentTimeMillis();
             }
+
+            List<PageMap.Page> pageList = new ArrayList<>();
+            PageMap pageMap = AnalyzeAgent.getPageMap();
+            for (int i = 0; i < pageMap.getMap().size(); i++) {
+                PageMap.Page page = (PageMap.Page) pageMap.getMap().valueAt(i);
+                if (page.getEndTime() != 0) {
+                    pageList.add(page);
+                }
+            }
+            uploadData.setPageList(pageList);
+            //半小时策略
+            if (Tactic.HALF_HOUR.name().equals(mTactic)) {
+                if (System.currentTimeMillis() - mLastUploadPageTime >= 1000 * 60 * 30) {
+                    mLastUploadPageTime = System.currentTimeMillis();
+                    uploadPageTime(uploadData);
+                } else if (Tactic.HOUR.name().equals(mTactic)) {
+                    if (System.currentTimeMillis() - mLastUploadPageTime >= 1000 * 60 * 60) {
+                        mLastUploadPageTime = System.currentTimeMillis();
+                        uploadPageTime(uploadData);
+                    }
+                }
+            }
+        }
+    }
+
+    /**
+     * 上报页面停留时间
+     *
+     * @param uploadData
+     */
+    private void uploadPageTime(UploadData uploadData) {
+        if (mLog) {
+            Log.d(TAG, "上报页面停留时间" + uploadData.toString());
         }
     }
 
@@ -71,7 +116,7 @@ public class AnalyzeService extends IntentService {
      */
     private void uploadStartCount(UploadData uploadData) {
         if (mLog) {
-            Log.d(TAG, "上报启动次数一次"+uploadData.toString());
+            Log.d(TAG, "上报启动次数一次" + uploadData.toString());
         }
 
 
@@ -90,7 +135,7 @@ public class AnalyzeService extends IntentService {
         }
         UploadConfig.saveTodayActive(getApplicationContext(), mUserId, TimeUtil.getToday());
         if (mLog) {
-            Log.d(TAG, "上报用户使用一次（日活）"+uploadData.toString());
+            Log.d(TAG, "上报用户使用一次（日活）" + uploadData.toString());
         }
     }
 }

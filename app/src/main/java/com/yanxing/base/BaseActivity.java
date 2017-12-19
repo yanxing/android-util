@@ -6,6 +6,8 @@ import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentTransaction;
 import android.widget.Toast;
 
+import com.dianmei.analyzelibrary.AnalyzeAgent;
+import com.dianmei.analyzelibrary.Tactic;
 import com.trello.rxlifecycle2.components.support.RxFragmentActivity;
 import com.yanxing.util.CommonUtil;
 import com.yanxing.view.LoadDialog;
@@ -29,6 +31,20 @@ public abstract class BaseActivity extends RxFragmentActivity {
         CommonUtil.setStatusBarDarkMode(true, this);
         CommonUtil.setStatusBarDarkIcon(getWindow(),true);
         afterInstanceView();
+    }
+
+    @Override
+    protected void onResume() {
+        super.onResume();
+        AnalyzeAgent.AnalyzeConfig analyzeConfig=new AnalyzeAgent.AnalyzeConfig(Tactic.HOUR.name(),"guanwang","yanxing",true);
+        AnalyzeAgent.init(analyzeConfig);
+        AnalyzeAgent.onResume(this,TAG);
+    }
+
+    @Override
+    protected void onPause() {
+        super.onPause();
+        AnalyzeAgent.onPause(TAG);
     }
 
     /**

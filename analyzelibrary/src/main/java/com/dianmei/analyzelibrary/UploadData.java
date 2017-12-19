@@ -4,6 +4,7 @@ import java.util.List;
 
 /**
  * 上报的数据
+ *
  * @author 李双祥 on 2017/12/6.
  */
 public class UploadData {
@@ -37,10 +38,8 @@ public class UploadData {
      */
     private String time;
     private String versionName;
-    /**
-     * 页面操作轨迹
-     */
-    private List<String> paths;
+
+    private List<PageMap.Page> mPageList;
 
     public String getVersionName() {
         return versionName;
@@ -106,12 +105,12 @@ public class UploadData {
         this.time = time;
     }
 
-    public List<String> getPaths() {
-        return paths;
+    public List<PageMap.Page> getPageList() {
+        return mPageList;
     }
 
-    public void setPaths(List<String> paths) {
-        this.paths = paths;
+    public void setPageList(List<PageMap.Page> pageList) {
+        mPageList = pageList;
     }
 
     @Override
@@ -125,6 +124,7 @@ public class UploadData {
                 ", systemVersion='" + systemVersion + '\'' +
                 ", time='" + time + '\'' +
                 ", versionName='" + versionName + '\'' +
+                ", mPageList=" + mPageList +
                 '}';
     }
 }

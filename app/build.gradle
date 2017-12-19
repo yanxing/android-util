@@ -113,4 +113,5 @@ dependencies {
     compile project(':photodialoglibrary')
     compile project(':downloadlibrary')
     compile project(':networklibrary')
+    compile project(':analyzelibrary')
 }

@@ -50,7 +50,7 @@ public class  MyApplication extends Application {
         mMyApplication=this;
         //内存泄漏检测
         LeakCanary.install(this);
-        Bugly.init(getApplicationContext(), "cb96408e0e", true);
+        Bugly.init(getApplicationContext(), "cb96408e0e", false);
     }
 
     @Override
