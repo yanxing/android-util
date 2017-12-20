@@ -24,7 +24,6 @@ import io.reactivex.Observable;
  */
 public class Transformer<T> {
 
-
     /**
      * 没有进度对话框
      *

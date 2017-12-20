@@ -5,8 +5,10 @@ import android.content.Context;
 
 import com.yanxing.networklibrary.intercepter.CacheInterceptor;
 import com.yanxing.networklibrary.intercepter.ParameterInterceptor;
-import com.yanxing.networklibrary.intercepter.Paramterceptor;
+import com.yanxing.networklibrary.intercepter.Interceptor;
+import com.yanxing.networklibrary.util.LogUtil;
 
+import java.util.Map;
 import java.util.concurrent.TimeUnit;
 
 import okhttp3.OkHttpClient;
@@ -41,10 +43,11 @@ public class RetrofitManage {
      * @param log     true打印请求参数和返回数据
      */
     public synchronized void init(String baseUrl, boolean log) {
+        LogUtil.mAllow=log;
         mOkHttpClientBuilder = new OkHttpClient.Builder()
-                .connectTimeout(30000L, TimeUnit.MILLISECONDS)
-                .readTimeout(30000L, TimeUnit.MILLISECONDS)
-                .addInterceptor(new ParameterInterceptor(log));
+                .connectTimeout(30L, TimeUnit.SECONDS)
+                .readTimeout(30L, TimeUnit.SECONDS)
+                .addInterceptor(new ParameterInterceptor());
         mRetrofitBuilder = new Retrofit.Builder()
                 .baseUrl(baseUrl)
                 .addConverterFactory(GsonConverterFactory.create())
@@ -55,8 +58,17 @@ public class RetrofitManage {
     /**
      * 设置拦截器
      */
-    public void setInterceptor(Paramterceptor paramterceptor) {
-        mRetrofitBuilder.client(mOkHttpClientBuilder.addInterceptor(paramterceptor).build());
+    public void setInterceptor(Interceptor interceptor) {
+        mRetrofitBuilder.client(mOkHttpClientBuilder.addInterceptor(interceptor).build());
+    }
+
+    /**
+     * 为每个请求设置头部信息，比如token信息
+     * @param headers
+     */
+    public void setHeader(Map<String,String> headers){
+       mOkHttpClientBuilder.addInterceptor(new ParameterInterceptor(headers));
+       mRetrofitBuilder.client(mOkHttpClientBuilder.build());
     }
 
     /**

@@ -1,12 +1,12 @@
 package com.yanxing.networklibrary.intercepter;
 
 
-import android.util.Log;
-
 import com.yanxing.networklibrary.util.ErrorCodeUtil;
+import com.yanxing.networklibrary.util.LogUtil;
 
 import java.io.IOException;
 import java.net.SocketTimeoutException;
+import java.util.Map;
 import java.util.Set;
 
 import okhttp3.FormBody;
@@ -22,13 +22,16 @@ import okio.Buffer;
  * 拦截器 ，http错误信息封装
  * Created by 李双祥 on 2017/04/01.
  */
-public class ParameterInterceptor implements Paramterceptor {
+public class ParameterInterceptor implements Interceptor {
 
-    public static final String TAG = "networklibrary";
-    private boolean mLog;
+    private static final String TAG = "networklibrary";
+    private Map<String,String> mHeadMap;
 
-    public ParameterInterceptor(boolean log) {
-        mLog=log;
+    public ParameterInterceptor() {
+    }
+
+    public ParameterInterceptor(Map<String,String> head){
+        mHeadMap=head;
     }
 
     @Override
@@ -68,37 +71,39 @@ public class ParameterInterceptor implements Paramterceptor {
             }
         }
 
-        Request newRequest = oldRequest.newBuilder()
+        Request.Builder builder=oldRequest.newBuilder()
                 .method(oldRequest.method(), oldRequest.body())
-                .url(urlBuilder.build())
-                .build();
+                .url(urlBuilder.build());
+        //添加header
+        if (mHeadMap!=null){
+            for(Map.Entry<String,String> entry:mHeadMap.entrySet()){
+                builder.addHeader(entry.getKey(),entry.getValue());
+            }
+        }
+        Request newRequest = builder.build();
         long b = System.currentTimeMillis();
         Response response = null;
         try {
             response = chain.proceed(newRequest);
         } catch (SocketTimeoutException e) {
+            e.printStackTrace();
         }
+        long a = System.currentTimeMillis();
+        LogUtil.d(TAG,newRequest.url().url().toString()+"请求耗时："+(a-b)+"ms"+"  请求参数:"+params.toString()+sb.toString());
         if (response == null) {
             return null;
         }
-        //打印日志
-        if (mLog){
-            long a = System.currentTimeMillis();
-            String message = "";
-            if (!response.isSuccessful()) {
-                message = ErrorCodeUtil.getMessage(response.code());
-            }
 
-            String content = response.body().string();
-            Log.d(TAG,newRequest.url().url().toString()+"请求耗时："+(a-b)+"ms"+"  请求参数:"+params.toString()+sb.toString()
-                    +"请求结果\n"+content);
-
-            ResponseBody body = ResponseBody.create(newRequest.body() == null ? null : newRequest.body().contentType(), content);
-            //重新构造body
-            Response server = response.newBuilder().body(body).build();
-            return server.newBuilder().message(message).build();
-        }else {
-            return response;
+        String message = "";
+        if (!response.isSuccessful()) {
+            message = ErrorCodeUtil.getMessage(response.code());
         }
+        String content = response.body().string();
+        LogUtil.d(TAG,"请求结果\n"+content);
+
+        ResponseBody body = ResponseBody.create(newRequest.body() == null ? null : newRequest.body().contentType(), content);
+        //重新构造body
+        Response server = response.newBuilder().body(body).build();
+        return server.newBuilder().message(message).build();
     }
 }

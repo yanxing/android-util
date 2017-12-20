@@ -6,6 +6,8 @@ import android.support.v4.app.FragmentTransaction;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.view.Window;
+import android.view.WindowManager;
 import android.widget.TextView;
 
 import com.yanxing.networklibrary.R;
@@ -27,7 +29,7 @@ public class LoadDialog extends BaseDialog {
                              Bundle savedInstanceState)
     {
         View view = inflater.inflate(R.layout.load_dialog, container);
-        TextView tipTxt= (TextView) view.findViewById(R.id.progress_text);
+        TextView tipTxt=view.findViewById(R.id.progress_text);
         Bundle bundle=getArguments();
         if (bundle!=null){
             String tip=bundle.getString("tip");
@@ -37,6 +39,15 @@ public class LoadDialog extends BaseDialog {
         }
         getDialog().setCanceledOnTouchOutside(false);
         return view;
+    }
+
+    @Override
+    public void onResume() {
+        super.onResume();
+        Window window = getDialog().getWindow();
+        WindowManager.LayoutParams layoutParams = window.getAttributes();
+        layoutParams.dimAmount=0.47f;
+        window.setAttributes(layoutParams);
     }
 
     @Override

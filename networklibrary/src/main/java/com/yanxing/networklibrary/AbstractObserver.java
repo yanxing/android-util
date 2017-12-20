@@ -4,6 +4,7 @@ import android.content.Context;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentTransaction;
+import android.text.TextUtils;
 import android.widget.Toast;
 
 import com.yanxing.networklibrary.dialog.LoadDialog;
@@ -87,7 +88,7 @@ public abstract class AbstractObserver<T extends BaseModel> implements Observer<
             onCall(t);
         } else {
             if (mContext != null) {
-                Toast.makeText(mContext, t.getMessage(), Toast.LENGTH_LONG).show();
+                Toast.makeText(mContext, TextUtils.isEmpty(t.getMessage())?"":t.getMessage(), Toast.LENGTH_LONG).show();
             }
         }
     }

@@ -1,4 +1,4 @@
-package com.yanxing.util;
+package com.yanxing.networklibrary.util;
 
 import android.util.Log;
 
@@ -8,7 +8,7 @@ import android.util.Log;
  */
 public class LogUtil {
 
-    private static boolean mAllow = true;
+    public static boolean mAllow = false;
 
     public static void v(String tag, String msg) {
         if (mAllow) {

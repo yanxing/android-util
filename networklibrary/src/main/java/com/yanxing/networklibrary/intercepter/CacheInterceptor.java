@@ -14,7 +14,7 @@ import okhttp3.Response;
  * 缓存策略，无网络时使用缓存
  * Created by lishuangxiang on 2016/11/25.
  */
-public class CacheInterceptor implements Paramterceptor {
+public class CacheInterceptor implements Interceptor {
 
     private Context mContext;
     private boolean mUseCache;
