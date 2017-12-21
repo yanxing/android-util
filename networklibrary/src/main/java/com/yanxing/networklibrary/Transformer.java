@@ -30,7 +30,7 @@ public class Transformer<T> {
      * @param lifecycleProvider RxLifecycle解决RxJava可能导致的内存泄漏
      * @return
      */
-    private ObservableTransformer<T, T> iOMainNoProgress(final LifecycleProvider lifecycleProvider) {
+    public ObservableTransformer<T, T> iOMainNoProgress(final LifecycleProvider lifecycleProvider) {
         return new ObservableTransformer<T, T>() {
             @Override
             public ObservableSource<T> apply(Observable<T> observable) {

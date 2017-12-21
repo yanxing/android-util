@@ -22,9 +22,22 @@ import io.reactivex.disposables.Disposable;
  */
 public abstract class AbstractObserver<T extends BaseModel> implements Observer<T> {
 
-    private PullToRefresh mPullToRefresh;
-    private FragmentManager mFragmentManager;
-    private Context mContext;
+    protected PullToRefresh mPullToRefresh;
+    protected FragmentManager mFragmentManager;
+    protected Context mContext;
+    /**
+     * 是否显示错误信息提示
+     */
+    protected boolean mIsShowToast = true;
+
+    protected AbstractObserver(Context context) {
+        this(context, true);
+    }
+
+    protected AbstractObserver(Context context, boolean isShowToast) {
+        this.mContext = context;
+        this.mIsShowToast = isShowToast;
+    }
 
     /**
      * 含有刷新组件，请求结束完成刷新状态
@@ -32,20 +45,34 @@ public abstract class AbstractObserver<T extends BaseModel> implements Observer<
      * @param pullToRefresh
      */
     protected AbstractObserver(Context context, PullToRefresh pullToRefresh) {
+        this(context, pullToRefresh, true);
+    }
+
+    /**
+     * 含有刷新组件，请求结束完成刷新状态
+     *
+     * @param pullToRefresh
+     */
+    protected AbstractObserver(Context context, PullToRefresh pullToRefresh, boolean isShowToast) {
         this.mPullToRefresh = pullToRefresh;
         this.mContext = context;
+        this.mIsShowToast = isShowToast;
     }
 
     /**
      * @param fragmentManager 用来请求结束，移除对话框
      */
     protected AbstractObserver(Context context, FragmentManager fragmentManager) {
-        this.mFragmentManager = fragmentManager;
-        this.mContext = context;
+        this(context, fragmentManager, true);
     }
 
-    protected AbstractObserver(Context context) {
+    /**
+     * @param fragmentManager 用来请求结束，移除对话框
+     */
+    protected AbstractObserver(Context context, FragmentManager fragmentManager, boolean isShowToast) {
+        this.mFragmentManager = fragmentManager;
         this.mContext = context;
+        this.mIsShowToast = isShowToast;
     }
 
     @Override
@@ -67,7 +94,7 @@ public abstract class AbstractObserver<T extends BaseModel> implements Observer<
     public void onError(Throwable e) {
         //打印具体的错误信息
         e.printStackTrace();
-        if (mContext != null) {
+        if (mContext != null && mIsShowToast) {
             Toast.makeText(mContext, ErrorCodeUtil.getException(e), Toast.LENGTH_LONG).show();
         }
         if (mPullToRefresh != null) {
@@ -87,8 +114,8 @@ public abstract class AbstractObserver<T extends BaseModel> implements Observer<
         if (ErrorCodeUtil.isSuccess(t.getStatus())) {
             onCall(t);
         } else {
-            if (mContext != null) {
-                Toast.makeText(mContext, TextUtils.isEmpty(t.getMessage())?"":t.getMessage(), Toast.LENGTH_LONG).show();
+            if (mContext != null && mIsShowToast) {
+                Toast.makeText(mContext, TextUtils.isEmpty(t.getMessage()) ? "" : t.getMessage(), Toast.LENGTH_LONG).show();
             }
         }
     }
@@ -101,7 +128,7 @@ public abstract class AbstractObserver<T extends BaseModel> implements Observer<
     public abstract void onCall(T t);
 
     @Override
-    public void onSubscribe(@NonNull Disposable var1){
+    public void onSubscribe(@NonNull Disposable var1) {
 
     }
 
