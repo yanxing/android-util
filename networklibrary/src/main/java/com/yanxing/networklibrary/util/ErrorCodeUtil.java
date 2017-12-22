@@ -8,6 +8,7 @@ import com.yanxing.networklibrary.intercepter.ParameterInterceptor;
 
 import org.json.JSONException;
 
+import java.io.IOException;
 import java.net.ConnectException;
 import java.net.SocketTimeoutException;
 import java.net.UnknownHostException;
@@ -34,7 +35,12 @@ public class ErrorCodeUtil {
     private static final String SERVICE_INTERNAL_ERROR = "服务器内部错误";
     private static final String SERVICE_NOT_AVAILABLE = "服务器不可用";
     private static final String REQUEST_METHOD_ERROR = "请求方法出错";
+    private static final String CONNECT_EXCEPTION ="连接异常";
 
+    /**
+     * 获取异常信息
+     * @param e
+     */
     public static String getException(Throwable e) {
         Log.e(TAG, e.getMessage());
         if (e instanceof JSONException || e instanceof JsonSyntaxException) {
@@ -44,14 +50,18 @@ public class ErrorCodeUtil {
                 || e instanceof UnknownHostException) {
             return NETWORK_ERROR;
         } else if (e instanceof SocketTimeoutException || e.getMessage().contains(ParameterInterceptor.class.getName())) {
+            //response 为null
             return CONNET_SERVICE_TIME_OUT;
-        } else {
+        } else if (e instanceof IOException){
+            //unexpected end of stream on Connection 情况
+            return CONNECT_EXCEPTION;
+        }else {
             return e.getMessage();
         }
     }
 
     /**
-     * 获取错误代码代表的错误信息
+     * 获取服务器错误代码代表的错误信息
      *
      * @param code
      * @return
@@ -91,4 +101,13 @@ public class ErrorCodeUtil {
         return code == SUCCESS_CODE;
     }
 
+    /**
+     * status为1或者success时，代表成功，所有服务器接口没有统一
+     *
+     * @param status
+     * @return
+     */
+    public static boolean isSuccess(String status) {
+        return "1".equals(status)||"success".equals(status);
+    }
 }

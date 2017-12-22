@@ -25,13 +25,13 @@ import okio.Buffer;
 public class ParameterInterceptor implements Interceptor {
 
     private static final String TAG = "networklibrary";
-    private Map<String,String> mHeadMap;
+    private Map<String, String> mHeadMap;
 
     public ParameterInterceptor() {
     }
 
-    public ParameterInterceptor(Map<String,String> head){
-        mHeadMap=head;
+    public ParameterInterceptor(Map<String, String> head) {
+        mHeadMap = head;
     }
 
     @Override
@@ -45,13 +45,17 @@ public class ParameterInterceptor implements Interceptor {
 
         //get参数
         Set<String> parameters = oldRequest.url().queryParameterNames();
-        StringBuilder params = new StringBuilder();
+        StringBuilder getParams = new StringBuilder();
         for (String param : parameters) {
-            params.append(param).append("=").append(oldRequest.url().queryParameter(param)).append("  ");
+            getParams
+                    .append(param)
+                    .append("=")
+                    .append(oldRequest.url().queryParameter(param))
+                    .append("  ");
         }
 
         //post参数
-        StringBuilder sb = new StringBuilder();
+        StringBuilder postParams = new StringBuilder();
         RequestBody requestBody = oldRequest.body();
         if (requestBody != null) {
             //键值参数
@@ -59,7 +63,11 @@ public class ParameterInterceptor implements Interceptor {
                 FormBody formBody = ((FormBody) oldRequest.body());
                 if (formBody != null) {
                     for (int i = 0; i < formBody.size(); i++) {
-                        sb.append(formBody.encodedName(i)).append("=").append(formBody.encodedValue(i)).append("  ");
+                        postParams
+                                .append(formBody.encodedName(i))
+                                .append("=")
+                                .append(formBody.encodedValue(i))
+                                .append("  ");
                     }
                 }
             } else if (requestBody instanceof MultipartBody) {
@@ -67,29 +75,37 @@ public class ParameterInterceptor implements Interceptor {
             } else {//json参数
                 final Buffer buffer = new Buffer();
                 requestBody.writeTo(buffer);
-                sb.append(buffer.readUtf8());
+                postParams.append(buffer.readUtf8());
             }
         }
 
-        Request.Builder builder=oldRequest.newBuilder()
+        Request.Builder builder = oldRequest.newBuilder()
                 .method(oldRequest.method(), oldRequest.body())
                 .url(urlBuilder.build());
+        StringBuilder headerParams = new StringBuilder();
         //添加header
-        if (mHeadMap!=null){
-            for(Map.Entry<String,String> entry:mHeadMap.entrySet()){
-                builder.addHeader(entry.getKey(),entry.getValue());
+        if (mHeadMap != null) {
+            for (Map.Entry<String, String> entry : mHeadMap.entrySet()) {
+                builder.addHeader(entry.getKey(), entry.getValue());
+                headerParams
+                        .append(entry.getKey())
+                        .append("=")
+                        .append(entry.getValue())
+                        .append("  ");
             }
         }
+
         Request newRequest = builder.build();
         long b = System.currentTimeMillis();
-        Response response = null;
+        Response response;
         try {
             response = chain.proceed(newRequest);
         } catch (SocketTimeoutException e) {
             e.printStackTrace();
+            return null;
         }
         long a = System.currentTimeMillis();
-        LogUtil.d(TAG,newRequest.url().url().toString()+"请求耗时："+(a-b)+"ms"+"  请求参数:"+params.toString()+sb.toString());
+        LogUtil.d(TAG, newRequest.url().url().toString() + "请求耗时：" + (a - b) + "ms" + "  请求参数:" + getParams.toString() + postParams.toString() + "  头部参数" + headerParams.toString());
         if (response == null) {
             return null;
         }
@@ -99,7 +115,7 @@ public class ParameterInterceptor implements Interceptor {
             message = ErrorCodeUtil.getMessage(response.code());
         }
         String content = response.body().string();
-        LogUtil.d(TAG,"请求结果\n"+content);
+        LogUtil.d(TAG, "请求结果\n" + content);
 
         ResponseBody body = ResponseBody.create(newRequest.body() == null ? null : newRequest.body().contentType(), content);
         //重新构造body

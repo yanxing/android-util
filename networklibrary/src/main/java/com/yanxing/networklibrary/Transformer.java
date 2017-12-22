@@ -89,6 +89,9 @@ public class Transformer<T> {
                         .doOnSubscribe(new Consumer<Disposable>() {
                             @Override
                             public void accept(Disposable disposable) throws Exception {
+                                if (fragmentManager==null){
+                                    return;
+                                }
                                 FragmentTransaction fragmentTransaction = fragmentManager.beginTransaction();
                                 Fragment fragment = fragmentManager.findFragmentByTag(LoadDialog.TAG);
                                 if (fragment != null) {

@@ -114,4 +114,5 @@ dependencies {
     compile project(':downloadlibrary')
     compile project(':networklibrary')
     compile project(':analyzelibrary')
+    compile project(':baselibrary')
 }
