@@ -54,9 +54,11 @@ public class ExtendRecyclerViewFragment extends BaseFragment {
                         showToast(getString(R.string.you_click) + (position + 1) + getString(R.string.ge));
                     }
                 });
-                holder.itemView.setOnLongClickListener(v -> {
-                    showToast(getString(R.string.long_an) + (position + 1) + getString(R.string.ge));
-                    return true;
+                holder.itemView.setOnClickListener(new View.OnClickListener() {
+                    @Override
+                    public void onClick(View v) {
+                        showToast(getString(R.string.long_an) + (position + 1) + getString(R.string.ge));
+                    }
                 });
             }
         };

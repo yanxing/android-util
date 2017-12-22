@@ -44,7 +44,7 @@ public abstract class BaseLibraryFragment extends RxFragment {
      * @param tip
      */
     public void showToast(String tip) {
-        if (getActivity()!=null){
+        if (isAdded()&&getActivity()!=null){
             Toast toast = Toast.makeText(getActivity(), tip, Toast.LENGTH_LONG);
             toast.setGravity(Gravity.CENTER, 0, 0);
             toast.show();

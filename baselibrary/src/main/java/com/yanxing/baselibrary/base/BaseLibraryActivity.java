@@ -8,7 +8,7 @@ import android.support.v4.app.FragmentTransaction;
 import android.view.Gravity;
 import android.widget.Toast;
 
-import com.trello.rxlifecycle2.components.support.RxFragmentActivity;
+import com.trello.rxlifecycle2.components.support.RxAppCompatActivity;
 import com.yanxing.baselibrary.view.LoadDialog;
 
 import butterknife.ButterKnife;
@@ -16,7 +16,7 @@ import butterknife.ButterKnife;
 /**
  * Created by 李双祥 on 2017/10/19.
  */
-public abstract class BaseLibraryActivity extends RxFragmentActivity {
+public abstract class BaseLibraryActivity extends RxAppCompatActivity {
 
     protected FragmentManager mFragmentManager;
     protected String TAG = getClass().getName();
