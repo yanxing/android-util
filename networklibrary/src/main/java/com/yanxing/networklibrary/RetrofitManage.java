@@ -43,11 +43,8 @@ public class RetrofitManage {
      * @param log     true打印请求参数和返回数据
      */
     public synchronized void init(String baseUrl, boolean log) {
-        LogUtil.mAllow=log;
-        mOkHttpClientBuilder = new OkHttpClient.Builder()
-                .connectTimeout(30L, TimeUnit.SECONDS)
-                .readTimeout(30L, TimeUnit.SECONDS)
-                .writeTimeout(30L,TimeUnit.SECONDS)
+        LogUtil.mAllow = log;
+        mOkHttpClientBuilder = getOkHttpClientBuilderTimeout()
                 .addInterceptor(new ParameterInterceptor());
         mRetrofitBuilder = new Retrofit.Builder()
                 .baseUrl(baseUrl)
@@ -64,12 +61,14 @@ public class RetrofitManage {
     }
 
     /**
-     * 为每个请求设置头部信息，比如token信息
+     * 为每个请求设置头部信息，比如token信息，这里重新创建OkHttpClient.Builder()，防止之前添加的拦截器（更新header）再次执行
+     *
      * @param headers
      */
-    public void setHeader(Map<String,String> headers){
-       mOkHttpClientBuilder.addInterceptor(new ParameterInterceptor(headers));
-       mRetrofitBuilder.client(mOkHttpClientBuilder.build());
+    public void setHeader(Map<String, String> headers) {
+        mOkHttpClientBuilder = getOkHttpClientBuilderTimeout()
+                .addInterceptor(new ParameterInterceptor(headers));
+        mRetrofitBuilder.client(mOkHttpClientBuilder.build());
     }
 
     /**
@@ -95,7 +94,17 @@ public class RetrofitManage {
     }
 
     public Retrofit getRetrofit() {
+        if (mRetrofitBuilder==null){
+            return null;
+        }
         return mRetrofitBuilder.build();
+    }
+
+    private OkHttpClient.Builder getOkHttpClientBuilderTimeout() {
+        return new OkHttpClient.Builder()
+                .connectTimeout(60L, TimeUnit.SECONDS)
+                .readTimeout(60L, TimeUnit.SECONDS)
+                .writeTimeout(60L, TimeUnit.SECONDS);
     }
 
 }
