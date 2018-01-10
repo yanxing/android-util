@@ -115,7 +115,7 @@ public class ParameterInterceptor implements Interceptor {
             message = ErrorCodeUtil.getMessage(response.code());
         }
         String content = response.body().string();
-        LogUtil.d(TAG, "请求结果\n" + content);
+        LogUtil.d(TAG, "请求结果\n" + content+"\n");
 
         ResponseBody body = ResponseBody.create(newRequest.body() == null ? null : newRequest.body().contentType(), content);
         //重新构造body

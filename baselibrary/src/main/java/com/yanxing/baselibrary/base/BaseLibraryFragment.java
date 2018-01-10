@@ -85,7 +85,7 @@ public abstract class BaseLibraryFragment extends RxFragment {
         Fragment fragment = mFragmentManager.findFragmentByTag(LoadDialog.TAG);
         if (fragment != null) {
             //移除正在显示的对话框
-            fragmentTransaction.remove(fragment).commitNow();
+            fragmentTransaction.remove(fragment).commitAllowingStateLoss();
         }
     }
 

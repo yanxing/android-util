@@ -1,6 +1,7 @@
 package com.yanxing.networklibrary.util;
 
 import android.accounts.NetworkErrorException;
+import android.text.TextUtils;
 import android.util.Log;
 
 import com.google.gson.JsonSyntaxException;
@@ -42,14 +43,17 @@ public class ErrorCodeUtil {
      * @param e
      */
     public static String getException(Throwable e) {
-        Log.e(TAG, e.getMessage());
+        if (!TextUtils.isEmpty(e.getMessage())){
+            LogUtil.e(TAG, e.getMessage());
+        }
         if (e instanceof JSONException || e instanceof JsonSyntaxException) {
             return PARSE_JSON_FAIL;
         } else if (e instanceof ConnectException
                 || e instanceof NetworkErrorException
                 || e instanceof UnknownHostException) {
             return NETWORK_ERROR;
-        } else if (e instanceof SocketTimeoutException || e.getMessage().contains(ParameterInterceptor.class.getName())) {
+        } else if (e instanceof SocketTimeoutException
+                || (!TextUtils.isEmpty(e.getMessage())&&e.getMessage().contains(ParameterInterceptor.class.getName()))) {
             //response 为null
             return CONNET_SERVICE_TIME_OUT;
         } else if (e instanceof IOException){
