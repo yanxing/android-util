@@ -5,12 +5,14 @@ import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentTransaction;
 import android.text.TextUtils;
+import android.util.Log;
 import android.widget.Toast;
 
 import com.yanxing.networklibrary.dialog.LoadDialog;
 import com.yanxing.networklibrary.model.BaseModel;
 import com.yanxing.networklibrary.refresh.PullToRefresh;
 import com.yanxing.networklibrary.util.ErrorCodeUtil;
+import com.yanxing.networklibrary.util.LogUtil;
 
 import io.reactivex.Observer;
 import io.reactivex.annotations.NonNull;
@@ -93,7 +95,7 @@ public abstract class AbstractObserver<T extends BaseModel> implements Observer<
     @Override
     public void onError(Throwable e) {
         //打印具体的错误信息
-        e.printStackTrace();
+        LogUtil.e(getClass().getName(), Log.getStackTraceString(e));
         if (mContext != null && mIsShowToast) {
             Toast.makeText(mContext, ErrorCodeUtil.getException(e), Toast.LENGTH_LONG).show();
         }

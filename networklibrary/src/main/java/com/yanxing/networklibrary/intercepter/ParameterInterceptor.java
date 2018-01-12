@@ -1,6 +1,8 @@
 package com.yanxing.networklibrary.intercepter;
 
 
+import android.util.Log;
+
 import com.yanxing.networklibrary.util.ErrorCodeUtil;
 import com.yanxing.networklibrary.util.LogUtil;
 
@@ -101,7 +103,7 @@ public class ParameterInterceptor implements Interceptor {
         try {
             response = chain.proceed(newRequest);
         } catch (SocketTimeoutException e) {
-            e.printStackTrace();
+            LogUtil.d(TAG, Log.getStackTraceString(e));
             return null;
         }
         long a = System.currentTimeMillis();
