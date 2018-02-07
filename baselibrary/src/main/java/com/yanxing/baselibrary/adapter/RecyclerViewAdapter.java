@@ -55,7 +55,7 @@ public abstract class RecyclerViewAdapter<T> extends RecyclerView.Adapter<Recycl
     @Override
     public int getItemViewType(int position)
     {
-        if (mHeaderView!=null)
+        if (mHeaderView!=null&&position==0)
         {
             return ITEM_TYPE_HEADER;
         }
