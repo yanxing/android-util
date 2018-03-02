@@ -1,6 +1,5 @@
 package com.yanxing.ui;
 
-import android.widget.Button;
 import android.widget.TextView;
 
 import com.yanxing.base.BaseFragment;
@@ -11,7 +10,6 @@ import com.yanxing.ui.retrofit.DouBanAPI;
 import com.yanxing.model.DouBan;
 
 import butterknife.BindView;
-import butterknife.OnClick;
 
 /**
  * Networklibrary 例子
@@ -19,11 +17,10 @@ import butterknife.OnClick;
  */
 public class NetworkLibraryFragment extends BaseFragment {
 
-    @BindView(R.id.get_data)
-    Button mGetData;
-
     @BindView(R.id.data)
     TextView mData;
+
+    private String mBaseUrl = "https://api.douban.com/v2/movie/";
 
     @Override
     protected int getLayoutResID() {
@@ -32,23 +29,18 @@ public class NetworkLibraryFragment extends BaseFragment {
 
     @Override
     protected void afterInstanceView() {
-    }
-
-    @OnClick(R.id.get_data)
-    public void onClick() {
+        RetrofitManage.getInstance().init(mBaseUrl,true);
         getData();
     }
 
     /**
-     * 获取数据
+     * 获取电影排行
      */
     public void getData() {
-        String baseUrl = "https://api.douban.com/v2/movie/";
-        RetrofitManage.getInstance().init(baseUrl,true);
         RetrofitManage.getInstance().getRetrofit().create(DouBanAPI.class)
                 .getTopMovie(0,10)
                 .compose(new Transformer<DouBan>().iOMainHasProgress(this,getFragmentManager(),"请稍等..."))
-                .subscribe(new AbstractObserver<DouBan>(getActivity(),getFragmentManager()) {
+                .subscribe(new AbstractObserver<DouBan>(getActivity(),getFragmentManager(),false) {
                     @Override
                     public void onCall(DouBan douBan) {
 

@@ -118,6 +118,11 @@ public class MainFragment extends BaseFragment implements AMapLocListener {
         replace(new NetworkLibraryFragment());
     }
 
+    @OnClick(R.id.RxJava2)
+    public void onClickRxJava2() {
+        replace(new NetWorkLibraryKtFragment());
+    }
+
     @OnClick(R.id.expandableListViewCheckbox)
     public void onClickExpandableLVCH() {
         replace(new ExpandableListViewCheckBoxFragment());
