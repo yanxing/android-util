@@ -19,7 +19,6 @@ public class NetworkLibraryFragment extends BaseFragment {
 
     @BindView(R.id.data)
     TextView mData;
-
     private String mBaseUrl = "https://api.douban.com/v2/movie/";
 
     @Override
