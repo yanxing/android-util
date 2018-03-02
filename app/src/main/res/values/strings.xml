@@ -84,7 +84,7 @@
     <string name="text_change_picture">文字转化为图片，宽度一致</string>
     <string name="downloadlibrary">downloadlibrary</string>
     <string name="surfaceview_mediaplayer">SurfaceView+MediaPlayer</string>
-    <string name="rxjava">networklibrary</string>
+    <string name="rxjava">networklibrary(Java版)</string>
     <string name="expandablelistview_checkbox">ExpandableListView+CheckBox</string>
     <string name="activity">Activity对话框</string>
     <string name="file_delete_re_down">文件已被删除，点击下载将重新下载</string>

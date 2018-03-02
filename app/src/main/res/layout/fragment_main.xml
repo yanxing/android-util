@@ -120,6 +120,10 @@
             style="@style/style_btn"
             android:text="@string/rxjava"/>
         <Button
+            android:id="@+id/RxJava2"
+            style="@style/style_btn"
+            android:text="networklibrary(Kotlin版)"/>
+        <Button
             android:id="@+id/inputEditButton"
             style="@style/style_btn"
             android:text="@string/edittext_edittext_botton"/>
