@@ -44,7 +44,7 @@ public abstract class BaseLibraryActivity extends RxAppCompatActivity {
     }
 
     /**
-     * 子类布局ID
+     * 子类布局，例如R.layout.activity_main
      */
     protected abstract int getLayoutResID();
 

@@ -1,4 +1,5 @@
 apply plugin: 'com.android.library'
+apply plugin: 'kotlin-android'
 
 android {
     compileSdkVersion COMPILE_SDK_VERSION as int
@@ -26,5 +27,6 @@ dependencies {
     compile 'com.jakewharton:butterknife:8.8.1'
     compile 'com.trello.rxlifecycle2:rxlifecycle:2.2.0'
     compile 'com.trello.rxlifecycle2:rxlifecycle-components:2.2.0'
+    compile "org.jetbrains.kotlin:kotlin-stdlib-jdk7:${kotlin_version}"
 
 }

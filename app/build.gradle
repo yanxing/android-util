@@ -5,6 +5,8 @@ apply plugin: 'org.greenrobot.greendao'
 apply plugin: 'hugo'
 // 依赖插件脚本
 apply from: 'tinker-support.gradle'
+apply plugin: 'kotlin-android'
+apply plugin: 'kotlin-android-extensions'
 
 android {
     signingConfigs {
