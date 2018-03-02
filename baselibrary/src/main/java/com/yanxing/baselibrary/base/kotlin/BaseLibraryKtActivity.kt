@@ -8,7 +8,7 @@ import com.trello.rxlifecycle2.components.support.RxAppCompatActivity
 import com.yanxing.baselibrary.view.LoadDialog
 
 /**
- * kotlin基础Activity
+ * kotlin基类Activity
  * @author 李双祥 on 2018/3/2.
  */
 abstract class BaseLibraryKtActivity : RxAppCompatActivity() {

@@ -11,7 +11,7 @@ import com.trello.rxlifecycle2.components.support.RxFragment
 import com.yanxing.baselibrary.view.LoadDialog
 
 /**
- *  kotlin基础Fragment
+ *  kotlin基类Fragment
  * @author 李双祥 on 2018/3/2.
  */
 abstract class BaseLibraryKtFragment : RxFragment() {

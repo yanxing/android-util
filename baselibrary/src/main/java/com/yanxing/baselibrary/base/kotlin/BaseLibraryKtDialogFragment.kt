@@ -10,7 +10,7 @@ import com.trello.rxlifecycle2.components.support.RxDialogFragment
 import com.yanxing.baselibrary.R
 
 /**
- *  kotlin基础DialogFragment
+ *  kotlin基类DialogFragment
  * @author 李双祥 on 2018/3/2.
  */
 abstract class BaseLibraryKtDialogFragment : RxDialogFragment() {
