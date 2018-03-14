@@ -1,6 +1,7 @@
 package com.yanxing.networklibrary.intercepter;
 
 
+import android.text.TextUtils;
 import android.util.Log;
 
 import com.yanxing.networklibrary.util.ErrorCodeUtil;
@@ -88,7 +89,9 @@ public class ParameterInterceptor implements Interceptor {
         //添加header
         if (mHeadMap != null) {
             for (Map.Entry<String, String> entry : mHeadMap.entrySet()) {
-                builder.addHeader(entry.getKey(), entry.getValue());
+                if (!TextUtils.isEmpty(entry.getValue())){
+                    builder.addHeader(entry.getKey(), entry.getValue());
+                }
                 headerParams
                         .append(entry.getKey())
                         .append("=")

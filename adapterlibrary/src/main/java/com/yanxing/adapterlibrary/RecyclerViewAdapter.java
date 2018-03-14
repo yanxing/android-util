@@ -49,7 +49,7 @@ public abstract class RecyclerViewAdapter<T> extends RecyclerView.Adapter<Recycl
 
     @Override
     public int getItemCount() {
-        return mDataList.size()+getHeadersCount();
+        return mDataList==null?0:mDataList.size()+getHeadersCount();
     }
 
     @Override
