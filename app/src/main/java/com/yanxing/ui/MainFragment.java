@@ -138,6 +138,11 @@ public class MainFragment extends BaseFragment implements AMapLocListener {
         replace(new GreenDaoFragment());
     }
 
+    @OnClick(R.id.room)
+    public void onClickRoom(){
+        replace(new RoomFragment());
+    }
+
     @OnClick(R.id.fresco)
     public void onClickFresco() {
         replace(new FrescoFragment());

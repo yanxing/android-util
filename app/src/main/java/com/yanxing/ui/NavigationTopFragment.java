@@ -46,13 +46,13 @@ public class NavigationTopFragment extends BaseFragment {
         mNavList.setLayoutManager(mLinearManager);
 
         //javaScript
-        List<Integer> list = new ArrayList<>();
+        final List<Integer> list = new ArrayList<>();
         for (int i = 0; i < 10; i++) {
             list.add(i);
         }
         mNavList.setAdapter(new RecyclerViewAdapter<Integer>(list, R.layout.adapter_nav) {
             @Override
-            public void onBindViewHolder(MyViewHolder holder, int position) {
+            public void onBindViewHolder(final MyViewHolder holder, final int position) {
                 holder.setText(R.id.menu, "菜单" + list.get(position));
                 holder.itemView.setOnClickListener(new View.OnClickListener() {
                     @Override

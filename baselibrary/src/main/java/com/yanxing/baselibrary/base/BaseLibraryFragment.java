@@ -24,6 +24,7 @@ public abstract class BaseLibraryFragment extends RxFragment {
 
     private Unbinder mUnbinder;
     protected FragmentManager mFragmentManager;
+    protected View mView;
     protected String TAG = getClass().getName();
 
     @Nullable
@@ -31,11 +32,11 @@ public abstract class BaseLibraryFragment extends RxFragment {
     public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container
             , @Nullable Bundle savedInstanceState) {
         super.onCreateView(inflater, container, savedInstanceState);
-        View view = inflater.inflate(getLayoutResID(), container, false);
+        mView = inflater.inflate(getLayoutResID(), container, false);
         mFragmentManager = getFragmentManager();
-        mUnbinder = ButterKnife.bind(this, view);
+        mUnbinder = ButterKnife.bind(this, mView);
         afterInstanceView();
-        return view;
+        return mView;
     }
 
     /**

@@ -70,9 +70,11 @@ public class SelectCityFragment extends BaseFragment
         };
         mProvince.setAdapter(mProvinceAdapter);
         mProvince.setOnItemClickListener(this);
-        new Handler().postDelayed(() -> {
-            //选中第一项
-            mProvince.performItemClick(mProvince.getChildAt(0),0,mProvince.getItemIdAtPosition(0));
+        new Handler().postDelayed(new Runnable() {
+            @Override
+            public void run() {
+                mProvince.performItemClick(mProvince.getChildAt(0),0,mProvince.getItemIdAtPosition(0));
+            }
         },700);
     }
 

@@ -98,6 +98,10 @@
             android:id="@+id/greenDao"
             style="@style/style_btn"
             android:text="@string/greendao"/>
+        <Button
+            android:id="@+id/room"
+            style="@style/style_btn"
+            android:text="room"/>
 
         <Button
             android:id="@+id/ultra_ptr"
