@@ -5,7 +5,6 @@ import android.content.Context;
 import android.database.sqlite.SQLiteDatabase;
 import android.support.multidex.MultiDex;
 
-import com.baidu.map.BaiduLoc;
 import com.baidu.mapapi.SDKInitializer;
 import com.facebook.cache.disk.DiskCacheConfig;
 import com.facebook.common.logging.FLog;
@@ -35,7 +34,6 @@ import java.util.Set;
  */
 public class  MyApplication extends Application {
 
-    public  BaiduLoc baiduLoc;
     private SQLiteDatabase db;
     private DaoSession mDaoSession;
     private static MyApplication mMyApplication;
@@ -109,7 +107,6 @@ public class  MyApplication extends Application {
      */
     private void initBaiduMap(){
         SDKInitializer.initialize(getApplicationContext());
-        baiduLoc = new BaiduLoc(getApplicationContext());
     }
 
     /**
@@ -126,13 +123,5 @@ public class  MyApplication extends Application {
                 .writeDebugLogs()
                 .build();
         ImageLoader.getInstance().init(config);
-    }
-
-    public BaiduLoc getBaiduLoc() {
-        return baiduLoc;
-    }
-
-    public void setBaiduLoc(BaiduLoc baiduLoc) {
-        this.baiduLoc = baiduLoc;
     }
 }

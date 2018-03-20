@@ -50,7 +50,7 @@ public class BaiduMapFragment extends BaseFragment
         LatLng toLatLng = new LatLng(31.2166060000, 121.4471340000);
         PlanNode receiverNode = PlanNode.withLocation(toLatLng);
         //定位
-        BaiduLoc baiduLoc=((MyApplication)getActivity().getApplication().getApplicationContext()).getBaiduLoc();
+        BaiduLoc baiduLoc=new BaiduLoc(getActivity());
         baiduLoc.startLocation();
         baiduLoc.setBaiduLocListener(this);
         //最短距离路线
