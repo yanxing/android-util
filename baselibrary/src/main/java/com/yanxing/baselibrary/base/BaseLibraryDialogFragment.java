@@ -1,6 +1,7 @@
 package com.yanxing.baselibrary.base;
 
 import android.os.Bundle;
+import android.support.annotation.Nullable;
 import android.view.Gravity;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -32,9 +33,15 @@ public abstract class BaseLibraryDialogFragment extends RxDialogFragment {
         View view = inflater.inflate(getLayoutResID(), container);
         mUnbinder = ButterKnife.bind(this, view);
         getDialog().setCanceledOnTouchOutside(false);
-        afterInstanceView();
         return view;
     }
+
+    @Override
+    public void onViewCreated(View view, @Nullable Bundle savedInstanceState) {
+        super.onViewCreated(view, savedInstanceState);
+        afterInstanceView();
+    }
+
     /**
      * 子类布局ID
      */

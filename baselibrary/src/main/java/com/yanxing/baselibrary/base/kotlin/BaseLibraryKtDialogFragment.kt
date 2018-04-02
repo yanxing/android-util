@@ -26,8 +26,12 @@ abstract class BaseLibraryKtDialogFragment : RxDialogFragment() {
                               , savedInstanceState: Bundle?): View? {
         val view = inflater.inflate(getLayoutResID(), container)
         dialog.setCanceledOnTouchOutside(false)
-        afterInstanceView()
         return view
+    }
+
+    override fun onViewCreated(view: View?, savedInstanceState: Bundle?) {
+        super.onViewCreated(view, savedInstanceState)
+        afterInstanceView()
     }
 
     /**

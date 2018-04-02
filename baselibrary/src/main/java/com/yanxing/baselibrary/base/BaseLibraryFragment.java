@@ -35,8 +35,13 @@ public abstract class BaseLibraryFragment extends RxFragment {
         mView = inflater.inflate(getLayoutResID(), container, false);
         mFragmentManager = getFragmentManager();
         mUnbinder = ButterKnife.bind(this, mView);
-        afterInstanceView();
         return mView;
+    }
+
+    @Override
+    public void onViewCreated(View view, @Nullable Bundle savedInstanceState) {
+        super.onViewCreated(view, savedInstanceState);
+        afterInstanceView();
     }
 
     /**
