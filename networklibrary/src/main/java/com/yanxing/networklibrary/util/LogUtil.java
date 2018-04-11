@@ -41,29 +41,33 @@ public class LogUtil {
     }
 
     private static void print(int key, String tag, String msg) {
-        int maxLogSize = 4000;
-        for (int i = 0; i <= msg.length() / maxLogSize; i++) {
-            int start = i * maxLogSize;
-            int end = (i + 1) * maxLogSize;
-            end = end > msg.length()?msg.length() : end;
-            switch (key) {
-                case 1:
-                    Log.v(tag, msg.substring(start, end));
-                    break;
-                case 2:
-                    Log.d(tag, msg.substring(start, end));
-                    break;
-                case 3:
-                    Log.i(tag, msg.substring(start, end));
-                    break;
-                case 4:
-                    Log.w(tag, msg.substring(start, end));
-                    break;
-                case 5:
-                    Log.e(tag, msg.substring(start, end));
-                    break;
-                    default:
-            }
+        //添加换行
+        if (!msg.contains(",\n")){
+            msg=msg.replaceAll(",",",\n   ");
+        }
+        if (!msg.contains("{\n")){
+            msg=msg.replaceAll("\\{","{\n   ");
+        }
+        if (msg.contains("},")){
+            msg=msg.replaceAll("\\},","\n},");
+        }
+        switch (key) {
+            case 1:
+                Log.v(tag, msg);
+                break;
+            case 2:
+                Log.d(tag, msg);
+                break;
+            case 3:
+                Log.i(tag, msg);
+                break;
+            case 4:
+                Log.w(tag, msg);
+                break;
+            case 5:
+                Log.e(tag, msg);
+                break;
+            default:
         }
     }
 }
