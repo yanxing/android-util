@@ -17,7 +17,7 @@
           }
       });
 ```
-其中使用了Retrofit2来防止RXJava的内存泄露，所以基类需要继承Retrofit2相关类，或者实现LifecycleProvider接口
+其中使用了Retrofit2来防止RxJava的内存泄露，所以基类需要继承Retrofit2相关类，或者实现LifecycleProvider接口
 
 ## adapterlibrary
 ListView、GridView适配器，对BaseAdapter、ViewHolder的封装。[example](https://github.com/yanxing/android-util/blob/master/app/src/main/java/com/yanxing/ui/AdapterExampleActivity.java)
