@@ -1,5 +1,30 @@
 apply plugin: 'com.android.library'
 
+ext {
+    bintrayRepo = 'android-util'
+    bintrayName = 'networklibrary'
+
+    publishedGroupId = 'com.yanxing'
+    libraryName = 'networklibrary'
+    artifact = 'networklibrary'
+
+    libraryDescription = 'a simple retrofit2 and rxjava2 network package for android'
+
+    siteUrl = 'https://github.com/yanxing/android-util'
+    gitUrl = 'https://github.com/yanxing/android-util.git'
+
+    libraryVersion = '1.0.0'
+
+    developerId = 'yanxing'
+    developerName = 'yanxing'
+    developerEmail = 'lyxtime@163.com'
+
+    licenseName = 'The Apache Software License, Version 2.0'
+    licenseUrl = 'http://www.apache.org/licenses/LICENSE-2.0.txt'
+    allLicenses = ["Apache-2.0"]
+}
+
+
 android {
     compileSdkVersion COMPILE_SDK_VERSION as int
     buildToolsVersion BUILD_TOOLS_VERSION
@@ -46,3 +71,6 @@ dependencies {
     compile 'com.google.code.gson:gson:2.8.2'
     compile "com.android.support:support-v4:${SUPPORT_V4_VERSION}"
 }
+
+apply from: 'https://raw.githubusercontent.com/nuuneoi/JCenter/master/installv1.gradle'
+apply from: 'https://raw.githubusercontent.com/nuuneoi/JCenter/master/bintrayv1.gradle'
