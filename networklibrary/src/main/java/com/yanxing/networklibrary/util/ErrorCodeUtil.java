@@ -2,7 +2,6 @@ package com.yanxing.networklibrary.util;
 
 import android.accounts.NetworkErrorException;
 import android.text.TextUtils;
-import android.util.Log;
 
 import com.google.gson.JsonSyntaxException;
 import com.yanxing.networklibrary.intercepter.ParameterInterceptor;
@@ -23,7 +22,7 @@ public class ErrorCodeUtil {
     private static final int SUCCESS_CODE = 1;
     private static final String TAG = "networklibrary";
     private static final String PARSE_JSON_FAIL = "数据解析失败";
-    private static final String NETWORK_ERROR = "网络异常，请检查网络";
+    private static final String NETWORK_ERROR = "连接服务器异常，请检查网络或稍后再试";
     private static final String CONNET_SERVICE_TIME_OUT = "连接服务器超时，请稍后再试";
 
     private static final int NOT_FOUND = 404;
