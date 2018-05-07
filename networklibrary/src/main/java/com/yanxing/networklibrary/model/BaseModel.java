@@ -14,6 +14,10 @@ public class BaseModel {
      * 返回说明
      */
     protected String message;
+    /**
+     * 存放错误信息字段
+     */
+    protected String operation;
 
     public String getStatus() {
         return status;
@@ -29,5 +33,13 @@ public class BaseModel {
 
     public void setMessage(String message) {
         this.message = message;
+    }
+
+    public String getOperation() {
+        return operation;
+    }
+
+    public void setOperation(String operation) {
+        this.operation = operation;
     }
 }
