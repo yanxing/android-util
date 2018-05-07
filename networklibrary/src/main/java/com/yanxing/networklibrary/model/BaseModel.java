@@ -9,17 +9,17 @@ public class BaseModel {
     /**
      * 返回状态
      */
-    private int status;
+    protected String status;
     /**
      * 返回说明
      */
-    private String message;
+    protected String message;
 
-    public int getStatus() {
+    public String getStatus() {
         return status;
     }
 
-    public void setStatus(int status) {
+    public void setStatus(String status) {
         this.status = status;
     }
 

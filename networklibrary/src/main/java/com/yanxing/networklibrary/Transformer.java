@@ -89,13 +89,13 @@ public class Transformer<T> {
                         .doOnSubscribe(new Consumer<Disposable>() {
                             @Override
                             public void accept(Disposable disposable) throws Exception {
-                                if (fragmentManager==null){
+                                if (fragmentManager == null) {
                                     return;
                                 }
                                 FragmentTransaction fragmentTransaction = fragmentManager.beginTransaction();
                                 Fragment fragment = fragmentManager.findFragmentByTag(LoadDialog.TAG);
                                 if (fragment != null) {
-                                    if (baseDialog!=null){
+                                    if (baseDialog != null) {
                                         fragmentTransaction.remove(fragment).commitAllowingStateLoss();
                                         baseDialog.show(fragmentTransaction, LoadDialog.TAG);
                                     }
@@ -104,7 +104,7 @@ public class Transformer<T> {
                                         LoadDialog loadDialog = new LoadDialog();
                                         if (toast != null) {
                                             Bundle bundle = new Bundle();
-                                            bundle.putString("tip", toast);
+                                            bundle.putString(LoadDialog.ARGUMENT_KEY, toast);
                                             loadDialog.setArguments(bundle);
                                         }
                                         loadDialog.show(fragmentTransaction, LoadDialog.TAG);

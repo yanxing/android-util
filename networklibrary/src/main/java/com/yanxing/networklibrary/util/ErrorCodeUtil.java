@@ -35,14 +35,15 @@ public class ErrorCodeUtil {
     private static final String SERVICE_INTERNAL_ERROR = "服务器内部错误";
     private static final String SERVICE_NOT_AVAILABLE = "服务器不可用";
     private static final String REQUEST_METHOD_ERROR = "请求方法出错";
-    private static final String CONNECT_EXCEPTION ="连接异常";
+    private static final String CONNECT_EXCEPTION = "连接异常";
 
     /**
      * 获取异常信息
+     *
      * @param e
      */
     public static String getException(Throwable e) {
-        if (!TextUtils.isEmpty(e.getMessage())){
+        if (!TextUtils.isEmpty(e.getMessage())) {
             LogUtil.e(TAG, e.getMessage());
         }
         if (e instanceof JSONException || e instanceof JsonSyntaxException) {
@@ -52,13 +53,13 @@ public class ErrorCodeUtil {
                 || e instanceof UnknownHostException) {
             return NETWORK_ERROR;
         } else if (e instanceof SocketTimeoutException
-                || (!TextUtils.isEmpty(e.getMessage())&&e.getMessage().contains(ParameterInterceptor.class.getName()))) {
+                || (!TextUtils.isEmpty(e.getMessage()) && e.getMessage().contains(ParameterInterceptor.class.getName()))) {
             //response 为null
             return CONNET_SERVICE_TIME_OUT;
-        } else if (e instanceof IOException){
+        } else if (e instanceof IOException) {
             //unexpected end of stream on Connection 情况
             return CONNECT_EXCEPTION;
-        }else {
+        } else {
             return e.getMessage();
         }
     }
@@ -95,22 +96,12 @@ public class ErrorCodeUtil {
     }
 
     /**
-     * 错误代码是否为1,1代表响应成功
-     *
-     * @param code
-     * @return
-     */
-    public static boolean isSuccess(int code) {
-        return code == SUCCESS_CODE;
-    }
-
-    /**
-     * status为1或者success时，代表成功，所有服务器接口没有统一
+     * 这里status为1或者success时，代表成功。如果成功状态码不一样，则重写{@link com.yanxing.networklibrary.AbstractObserver} onNext方法
      *
      * @param status
      * @return
      */
     public static boolean isSuccess(String status) {
-        return "1".equals(status)||"success".equals(status);
+        return String.valueOf(SUCCESS_CODE).equals(status) || "success".equals(status);
     }
 }

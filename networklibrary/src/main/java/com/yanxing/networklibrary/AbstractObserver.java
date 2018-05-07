@@ -19,7 +19,7 @@ import io.reactivex.annotations.NonNull;
 import io.reactivex.disposables.Disposable;
 
 /**
- * 统一处理处理onCompleted onError,onNext处理一部分
+ * 统一处理onCompleted onError方法,onNext处理一部分，如果onNext方法中接口请求返回状态逻辑处理不一样，可重写此方法
  * Created by 李双祥 on 2017/5/23.
  */
 public abstract class AbstractObserver<T extends BaseModel> implements Observer<T> {
@@ -123,7 +123,7 @@ public abstract class AbstractObserver<T extends BaseModel> implements Observer<
     }
 
     /**
-     * 响应成功调用（status为1）
+     * 请求成功返回调用
      *
      * @param t
      */
