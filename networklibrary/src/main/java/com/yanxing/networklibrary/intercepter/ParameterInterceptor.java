@@ -46,7 +46,7 @@ public class ParameterInterceptor implements Interceptor {
                 .scheme(oldRequest.url().scheme())
                 .host(oldRequest.url().host());
 
-        //get参数
+        //get请求的参数
         Set<String> parameters = oldRequest.url().queryParameterNames();
         StringBuilder getParams = new StringBuilder();
         for (String param : parameters) {
@@ -57,7 +57,7 @@ public class ParameterInterceptor implements Interceptor {
                     .append("  ");
         }
 
-        //post参数
+        //post请求的参数
         StringBuilder postParams = new StringBuilder();
         RequestBody requestBody = oldRequest.body();
         if (requestBody != null) {
@@ -102,18 +102,9 @@ public class ParameterInterceptor implements Interceptor {
 
         Request newRequest = builder.build();
         long b = System.currentTimeMillis();
-        Response response;
-        try {
-            response = chain.proceed(newRequest);
-        } catch (SocketTimeoutException e) {
-            LogUtil.d(TAG, Log.getStackTraceString(e));
-            return null;
-        }
+        Response response = chain.proceed(newRequest);
         long a = System.currentTimeMillis();
         LogUtil.d(TAG, newRequest.url().url().toString() + "请求耗时：" + (a - b) + "ms" + "  请求参数:" + getParams.toString() + postParams.toString() + "  头部参数" + headerParams.toString());
-        if (response == null) {
-            return null;
-        }
 
         String message = "";
         if (!response.isSuccessful()) {
