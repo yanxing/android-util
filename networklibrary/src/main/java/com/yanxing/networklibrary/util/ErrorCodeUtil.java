@@ -52,9 +52,7 @@ public class ErrorCodeUtil {
                 || e instanceof NetworkErrorException
                 || e instanceof UnknownHostException) {
             return NETWORK_ERROR;
-        } else if (e instanceof SocketTimeoutException
-                || (!TextUtils.isEmpty(e.getMessage()) && e.getMessage().contains(ParameterInterceptor.class.getName()))) {
-            //response 为null
+        } else if (e instanceof SocketTimeoutException) {
             return CONNET_SERVICE_TIME_OUT;
         } else if (e instanceof IOException) {
             //unexpected end of stream on Connection 情况
