@@ -43,7 +43,7 @@ public class RetrofitManage {
      * @param log     true打印请求参数和返回数据
      */
     public synchronized void init(String baseUrl, boolean log) {
-        LogUtil.mAllow = log;
+        LogUtil.isDebug = log;
         mOkHttpClientBuilder = getOkHttpClientBuilderTimeout()
                 .addInterceptor(new ParameterInterceptor());
         mRetrofitBuilder = new Retrofit.Builder()

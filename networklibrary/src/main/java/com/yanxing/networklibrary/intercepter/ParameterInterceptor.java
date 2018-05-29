@@ -101,17 +101,19 @@ public class ParameterInterceptor implements Interceptor {
         }
 
         Request newRequest = builder.build();
+        String headParamsStr=TextUtils.isEmpty(headerParams.toString())?"":"  头部参数"+headerParams.toString();
+        LogUtil.d(TAG, newRequest.url().url().toString() +"  请求参数:" + getParams.toString() + postParams.toString() +headParamsStr);
+
         long b = System.currentTimeMillis();
+        //此句异常，将不执行后续打印耗时代码
         Response response = chain.proceed(newRequest);
         long a = System.currentTimeMillis();
-        LogUtil.d(TAG, newRequest.url().url().toString() + "请求耗时：" + (a - b) + "ms" + "  请求参数:" + getParams.toString() + postParams.toString() + "  头部参数" + headerParams.toString());
-
         String message = "";
         if (!response.isSuccessful()) {
             message = ErrorCodeUtil.getMessage(response.code());
         }
         String content = response.body().string();
-        LogUtil.d(TAG, "请求结果\n" + content+"\n");
+        LogUtil.d(TAG, "请求耗时：" + (a - b) + "ms，"+"请求结果\n" + content+"\n");
 
         ResponseBody body = ResponseBody.create(newRequest.body() == null ? null : newRequest.body().contentType(), content);
         //重新构造body

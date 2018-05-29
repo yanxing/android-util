@@ -8,34 +8,34 @@ import android.util.Log;
  */
 public class LogUtil {
 
-    public static boolean mAllow = false;
+    public static boolean isDebug = false;
 
     public static void v(String tag, String msg) {
-        if (mAllow) {
+        if (isDebug) {
             print(1,tag,msg);
         }
     }
 
     public static void d(String tag, String msg) {
-        if (mAllow) {
+        if (isDebug) {
             print(2,tag,msg);
         }
     }
 
     public static void i(String tag, String msg) {
-        if (mAllow) {
+        if (isDebug) {
             print(3,tag,msg);
         }
     }
 
     public static void w(String tag, String msg) {
-        if (mAllow) {
+        if (isDebug) {
             print(4,tag,msg);
         }
     }
 
     public static void e(String tag, String msg) {
-        if (mAllow) {
+        if (isDebug) {
             print(5,tag,msg);
         }
     }

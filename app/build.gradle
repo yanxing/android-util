@@ -114,8 +114,8 @@ dependencies {
     compile project(':heartbubblelibrary')
     compile project(':photodialoglibrary')
     compile project(':downloadlibrary')
-//    compile project(':networklibrary')
-    compile 'com.yanxing:networklibrary:1.0.6'
+    compile project(':networklibrary')
+//    compile 'com.yanxing:networklibrary:1.0.6'
     compile project(':analyzelibrary')
     compile project(':baselibrary')
 }
