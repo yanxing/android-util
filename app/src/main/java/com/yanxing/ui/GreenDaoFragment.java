@@ -7,6 +7,7 @@ import com.yanxing.adapterlibrary.CommonAdapter;
 import com.yanxing.adapterlibrary.ViewHolder;
 import com.yanxing.base.BaseFragment;
 import com.yanxing.base.MyApplication;
+import com.yanxing.base.SampleApplicationLike;
 import com.yanxing.dao.StudentDao;
 import com.yanxing.model.Student;
 
@@ -39,7 +40,7 @@ public class GreenDaoFragment extends BaseFragment {
 
     @Override
     protected void afterInstanceView() {
-        mStudentDao=((MyApplication)getActivity().getApplicationContext()).getDaoSession().getStudentDao();
+        mStudentDao= SampleApplicationLike.getInstance().getDaoSession().getStudentDao();
         mStudentList=mStudentDao.queryBuilder().orderDesc(StudentDao.Properties.Id).list();
         mStudentCommonAdapter = new CommonAdapter<Student>(mStudentList,R.layout.list_dialog_textview)
         {

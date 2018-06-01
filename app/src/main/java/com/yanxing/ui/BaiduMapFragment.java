@@ -20,7 +20,6 @@ import com.baidu.mapapi.search.route.PlanNode;
 import com.baidu.mapapi.search.route.TransitRouteResult;
 import com.baidu.mapapi.search.route.WalkingRouteResult;
 import com.yanxing.base.BaseFragment;
-import com.yanxing.base.MyApplication;
 
 import butterknife.BindView;
 
