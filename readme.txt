@@ -1,0 +1,4 @@
+使用instant run关闭tinker
+1.使用反射Application方式接入：可以直接在build.gradle中将apply from: 'tinker-support.gradle'注释掉。
+2.改造Application方式接入：先将tinkerSupport中overrideTinkerPatchConfiguration设置为false 修改成将tinkerSupport中enable设置为false。
+本项目使用的第二种。
