@@ -13,7 +13,7 @@ def baseApkDir = "app-0320-10-32-19"
 tinkerSupport {
 
     // 开启tinker-support插件，默认值true
-    enable = false
+    enable = true
 
     // 指定归档目录，默认值当前module的子目录tinker
     autoBackupApkDir = "${bakPath}"
@@ -21,7 +21,7 @@ tinkerSupport {
     // 是否启用覆盖tinkerPatch配置功能，默认值false
     // 开启后tinkerPatch配置不生效，即无需添加tinkerPatch
     // 补丁包位于app/build/outputs/patch目录下
-    overrideTinkerPatchConfiguration = false
+    overrideTinkerPatchConfiguration = true
 
     // 编译补丁包时，必需指定基线版本的apk，默认值为空
     // 如果为空，则表示不是进行补丁包的编译
