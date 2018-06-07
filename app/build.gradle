@@ -64,6 +64,8 @@ android {
 
     dexOptions {
         javaMaxHeapSize "4g"
+        //是否支持大工程模式
+        jumboMode = true
     }
 
 
@@ -120,8 +122,8 @@ dependencies {
     compile project(':heartbubblelibrary')
     compile project(':photodialoglibrary')
     compile project(':downloadlibrary')
-    compile project(':networklibrary')
-//    compile 'com.yanxing:networklibrary:1.0.6'
+//    compile project(':networklibrary')
+    compile 'com.yanxing:networklibrary:1.0.7'
     compile project(':analyzelibrary')
     compile project(':baselibrary')
 }
