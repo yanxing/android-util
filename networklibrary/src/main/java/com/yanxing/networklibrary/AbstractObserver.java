@@ -19,7 +19,7 @@ import io.reactivex.annotations.NonNull;
 import io.reactivex.disposables.Disposable;
 
 /**
- * 统一处理onCompleted onError方法,onNext处理一部分，如果onNext方法中接口请求返回状态逻辑处理不一样，可重写此方法
+ * 统一处理onCompleted onError方法,onNext处理一部分，如果onNext方法中接口请求返回成功状态逻辑处理不一样，可重写此方法
  * Created by 李双祥 on 2017/5/23.
  */
 public abstract class AbstractObserver<T extends BaseModel> implements Observer<T> {
@@ -28,12 +28,26 @@ public abstract class AbstractObserver<T extends BaseModel> implements Observer<
     protected FragmentManager mFragmentManager;
     protected Context mContext;
     /**
-     * 是否显示错误信息提示
+     * 自定义的错误提示，替代接口返回的错误信息，不替换onError方法里面的报错信息显示
+     */
+    protected String mMessage;
+    /**
+     * 是否显示错误信息提示，默认提示
      */
     protected boolean mIsShowToast = true;
 
     protected AbstractObserver(Context context) {
         this(context, true);
+    }
+
+    /**
+     * @param context
+     * @param message 自定义错误信息，接口报错生效
+     */
+    protected AbstractObserver(Context context, String message) {
+        this.mContext = context;
+        this.mIsShowToast = true;
+        this.mMessage = message;
     }
 
     protected AbstractObserver(Context context, boolean isShowToast) {
@@ -51,9 +65,19 @@ public abstract class AbstractObserver<T extends BaseModel> implements Observer<
     }
 
     /**
-     * 含有刷新组件，请求结束完成刷新状态
-     *
-     * @param pullToRefresh
+     * @param pullToRefresh 用来结束掉刷新状态
+     * @param message       自定义错误信息，接口报错生效
+     */
+    protected AbstractObserver(Context context, PullToRefresh pullToRefresh, String message) {
+        this.mPullToRefresh = pullToRefresh;
+        this.mContext = context;
+        this.mIsShowToast = true;
+        this.mMessage = message;
+    }
+
+    /**
+     * @param pullToRefresh 用来结束掉刷新状态
+     * @param isShowToast   true显示错误信息
      */
     protected AbstractObserver(Context context, PullToRefresh pullToRefresh, boolean isShowToast) {
         this.mPullToRefresh = pullToRefresh;
@@ -66,6 +90,17 @@ public abstract class AbstractObserver<T extends BaseModel> implements Observer<
      */
     protected AbstractObserver(Context context, FragmentManager fragmentManager) {
         this(context, fragmentManager, true);
+    }
+
+    /**
+     * @param fragmentManager 用来请求结束，移除对话框
+     * @param message         自定义错误信息，接口报错生效
+     */
+    protected AbstractObserver(Context context, FragmentManager fragmentManager, String message) {
+        this.mFragmentManager = fragmentManager;
+        this.mContext = context;
+        this.mIsShowToast = true;
+        this.mMessage = message;
     }
 
     /**
@@ -117,7 +152,11 @@ public abstract class AbstractObserver<T extends BaseModel> implements Observer<
             onCall(t);
         } else {
             if (mContext != null && mIsShowToast) {
-                Toast.makeText(mContext, TextUtils.isEmpty(t.getMessage()) ? "" : t.getMessage(), Toast.LENGTH_LONG).show();
+                if (TextUtils.isEmpty(mMessage)) {
+                    Toast.makeText(mContext, TextUtils.isEmpty(t.getMessage()) ? "" : t.getMessage(), Toast.LENGTH_LONG).show();
+                } else {
+                    Toast.makeText(mContext, mMessage, Toast.LENGTH_LONG).show();
+                }
             }
         }
     }
