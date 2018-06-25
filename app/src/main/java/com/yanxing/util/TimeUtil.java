@@ -467,6 +467,52 @@ public class TimeUtil {
         }
     }
 
+    /**
+     * 格式化时间，今天、昨天、 月-日 时：分、 年-月-日 时：分
+     *
+     * @param time 2017-04-05 13:19:51
+     * @return
+     */
+    public static String formatTime7(String time) {
+        if (TextUtils.isEmpty(time)){
+            return "";
+        }
+        String regex = "^(\\d){4}(-(\\d){2}){2} (\\d){2}(:(\\d){2}){2}$";
+        Pattern pattern = Pattern.compile(regex);
+        Matcher matcher = pattern.matcher(time);
+        if (!matcher.matches()){
+            return  "";
+        }
+        Calendar calendar=Calendar.getInstance();
+        int year=calendar.get(Calendar.YEAR);
+        int month=calendar.get(Calendar.MONTH)+1;
+        int day=calendar.get(Calendar.DAY_OF_MONTH);
+
+        String tem[]=time.split(" ");
+        String left[]=tem[0].split("-");
+        String right[]=tem[1].split(":");
+        //今年
+        if (year==Integer.parseInt(left[0])){
+            //本月
+            if (month==Integer.parseInt(left[1])){
+                //今天
+                if (day==Integer.parseInt(left[2])){
+                    return "今天 "+right[0]+":"+right[1];
+                }else if (day==Integer.parseInt(left[2])+1){
+                    //昨天
+                    return "昨天 "+right[0]+":"+right[1];
+                }else {
+                    //对于上个月最后一天，显示月-日 时：分
+                    return left[1]+"-"+left[2]+" "+right[0]+":"+right[1];
+                }
+            }else {
+                return left[1]+"-"+left[2]+" "+right[0]+":"+right[1];
+            }
+        }else {
+            return left[0]+"-"+left[1]+"-"+left[2]+" "+right[0]+":"+right[1];
+        }
+    }
+
 
     /**
      * 格式化时间，04-05
