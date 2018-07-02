@@ -89,20 +89,22 @@ public class ParameterInterceptor implements Interceptor {
         //添加header
         if (mHeadMap != null) {
             for (Map.Entry<String, String> entry : mHeadMap.entrySet()) {
-                if (!TextUtils.isEmpty(entry.getValue())){
+                if (!TextUtils.isEmpty(entry.getValue())) {
                     builder.addHeader(entry.getKey(), entry.getValue());
                 }
-                headerParams
-                        .append(entry.getKey())
-                        .append("=")
-                        .append(entry.getValue())
-                        .append("  ");
             }
         }
-
         Request newRequest = builder.build();
-        String headParamsStr=TextUtils.isEmpty(headerParams.toString())?"":"  头部参数"+headerParams.toString();
-        LogUtil.d(TAG, newRequest.url().url().toString() +"  请求参数:" + getParams.toString() + postParams.toString() +headParamsStr);
+        //获取所有header参数
+        for (String name : newRequest.headers().names()) {
+            headerParams
+                    .append(name)
+                    .append("=")
+                    .append(newRequest.headers().get(name))
+                    .append("  ");
+        }
+        String headParamsStr = TextUtils.isEmpty(headerParams.toString()) ? "" : "  头部参数" + headerParams.toString();
+        LogUtil.d(TAG, newRequest.url().url().toString() + "  请求参数:" + getParams.toString() + postParams.toString() + headParamsStr);
 
         long b = System.currentTimeMillis();
         //此句异常，将不执行后续打印耗时代码
@@ -113,7 +115,7 @@ public class ParameterInterceptor implements Interceptor {
             message = ErrorCodeUtil.getMessage(response.code());
         }
         String content = response.body().string();
-        LogUtil.d(TAG, "请求耗时：" + (a - b) + "ms，"+"请求结果\n" + content+"\n");
+        LogUtil.d(TAG, "请求耗时：" + (a - b) + "ms，" + "请求结果\n" + content + "\n");
 
         ResponseBody body = ResponseBody.create(newRequest.body() == null ? null : newRequest.body().contentType(), content);
         //重新构造body
