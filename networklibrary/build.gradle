@@ -49,7 +49,7 @@ android {
             def requested = details.requested
             if (requested.group == 'com.android.support') {
                 if (!requested.name.startsWith("multidex")) {
-                    details.useVersion "${SUPPORT_V4_VERSION}"
+                    details.useVersion "${SUPPORT_VERSION}"
                 }
             }
         }
@@ -69,7 +69,7 @@ dependencies {
     compile 'com.trello.rxlifecycle2:rxlifecycle:2.2.0'
     compile 'com.trello.rxlifecycle2:rxlifecycle-components:2.2.0'
     compile 'com.google.code.gson:gson:2.8.2'
-    compile "com.android.support:support-v4:${SUPPORT_V4_VERSION}"
+    compile "com.android.support:support-v4:${SUPPORT_VERSION}"
 }
 
 apply from: 'https://raw.githubusercontent.com/nuuneoi/JCenter/master/installv1.gradle'
