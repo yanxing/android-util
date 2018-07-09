@@ -7,7 +7,6 @@ import android.support.v7.widget.RecyclerView;
 
 import com.aspsine.swipetoloadlayout.OnLoadMoreListener;
 import com.aspsine.swipetoloadlayout.OnRefreshListener;
-import com.aspsine.swipetoloadlayout.SwipeToLoadLayout;
 import com.yanxing.adapterlibrary.RecyclerViewAdapter;
 import com.yanxing.base.BaseFragment;
 import com.yanxing.ui.R;

@@ -113,11 +113,6 @@ public class MainFragment extends BaseFragment implements AMapLocListener {
         replace(new DownloadLibraryFragment());
     }
 
-    @OnClick(R.id.RxJava)
-    public void onClickRxJava() {
-        replace(new NetworkLibraryFragment());
-    }
-
     @OnClick(R.id.RxJava2)
     public void onClickRxJava2() {
         replace(new NetWorkLibraryKtFragment());

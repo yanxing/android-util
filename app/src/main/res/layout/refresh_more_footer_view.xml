@@ -2,7 +2,7 @@
 <com.yanxing.ui.swipetoloadlayout.LoadMoreFooterView xmlns:android="http://schemas.android.com/apk/res/android"
                                                      xmlns:app="http://schemas.android.com/apk/res-auto"
                                                      android:layout_width="match_parent"
-                                                     android:layout_height="@dimen/load_more_footer_height">
+                                                     android:layout_height="80dp">
 
     <RelativeLayout
         android:layout_width="match_parent"
@@ -14,7 +14,7 @@
             android:layout_height="wrap_content"
             android:layout_centerInParent="true"
             android:layout_centerVertical="true"
-            android:layout_marginLeft="@dimen/margin15"
+            android:layout_marginLeft="15dp"
             android:gravity="center"
             android:text="加载更多"
             android:textColor="#666666"/>

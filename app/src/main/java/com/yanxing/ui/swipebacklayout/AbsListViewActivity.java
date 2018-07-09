@@ -5,7 +5,6 @@ import android.widget.ListView;
 import com.yanxing.adapterlibrary.CommonAdapter;
 import com.yanxing.adapterlibrary.ViewHolder;
 import com.yanxing.ui.R;
-import com.yanxing.util.CommonUtil;
 import com.yanxing.view.SwipeBackLayout;
 
 import java.util.ArrayList;
@@ -32,7 +31,6 @@ public class AbsListViewActivity extends BaseActivity {
 
     @Override
     protected void afterInstanceView() {
-        CommonUtil.setStatusBarDarkMode(true,this);
         final List<Integer> list=new ArrayList<Integer>();
         for (int i=0;i<20;i++){
             list.add(i);

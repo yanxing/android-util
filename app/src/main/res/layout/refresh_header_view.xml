@@ -7,7 +7,7 @@
 
     <RelativeLayout
         android:layout_width="match_parent"
-        android:layout_height="@dimen/refresh_header_height"
+        android:layout_height="80dp"
         android:layout_gravity="center">
 
         <ImageView
@@ -17,14 +17,14 @@
             android:layout_centerVertical="true"
             android:layout_marginRight="10dp"
             android:layout_toLeftOf="@+id/tvRefresh"
-            android:background="@mipmap/down"/>
+            android:src="@mipmap/refresh_down"/>
 
         <TextView
             android:id="@+id/tvRefresh"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_centerInParent="true"
-            android:layout_marginLeft="@dimen/margin15"
+            android:layout_marginLeft="15dp"
             android:gravity="center"
             android:text="ajdfaj"
             android:textColor="#666666"/>

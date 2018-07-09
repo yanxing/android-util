@@ -16,7 +16,7 @@ buildscript {
     //versionName
     ext.CURRENT_RELEASE_VERSION_NAME = '1.0.0'
     //kotlin
-    ext.kotlin_version = '1.2.30'
+    ext.kotlin_version = '1.2.41'
     repositories {
         jcenter()
         mavenCentral()

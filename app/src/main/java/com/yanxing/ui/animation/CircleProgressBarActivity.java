@@ -2,7 +2,6 @@ package com.yanxing.ui.animation;
 
 import com.yanxing.base.BaseActivity;
 import com.yanxing.ui.R;
-import com.yanxing.util.CommonUtil;
 import com.yanxing.view.CircleDotProgressBar;
 
 import java.lang.ref.WeakReference;
@@ -28,7 +27,6 @@ public class CircleProgressBarActivity extends BaseActivity {
 
     @Override
     protected void afterInstanceView() {
-        CommonUtil.setStatusBarDarkMode(true, this);
         mCircleDotProgressBar.setProgressMax(100);
         MyThread myThread = new MyThread(this);
         myThread.start();

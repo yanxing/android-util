@@ -28,7 +28,7 @@ public class LoadMoreFooterView extends SwipeLoadMoreFooterLayout {
 
     public LoadMoreFooterView(Context context, AttributeSet attrs, int defStyleAttr) {
         super(context, attrs, defStyleAttr);
-        mFooterHeight = getResources().getDimensionPixelOffset(R.dimen.load_more_footer_height);
+        mFooterHeight = getResources().getDimensionPixelOffset(R.dimen.refresh_header_foot_height);
     }
 
     @Override

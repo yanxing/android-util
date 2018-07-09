@@ -25,7 +25,7 @@
                 android:layout_width="28dp"
                 android:layout_height="28dp"
                 android:layout_marginLeft="15dp"
-                android:background="@mipmap/back"/>
+                android:src="@mipmap/back"/>
 
         </LinearLayout>
 

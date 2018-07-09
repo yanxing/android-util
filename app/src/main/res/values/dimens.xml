@@ -21,4 +21,5 @@
     <dimen name="margin10">10dp</dimen>
     <dimen name="margin15">15dp</dimen>
     <dimen name="grid_expected_size">180dp</dimen>
+    <dimen name="refresh_header_foot_height">80dp</dimen>
 </resources>

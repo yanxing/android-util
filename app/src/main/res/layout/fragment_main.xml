@@ -120,13 +120,9 @@
             style="@style/style_btn"
             android:text="@string/expandablelistview_checkbox"/>
         <Button
-            android:id="@+id/RxJava"
-            style="@style/style_btn"
-            android:text="@string/rxjava"/>
-        <Button
             android:id="@+id/RxJava2"
             style="@style/style_btn"
-            android:text="networklibrary(Kotlin版)"/>
+            android:text="networklibrary"/>
         <Button
             android:id="@+id/inputEditButton"
             style="@style/style_btn"

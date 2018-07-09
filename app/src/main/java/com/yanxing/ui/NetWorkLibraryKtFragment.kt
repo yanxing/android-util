@@ -1,7 +1,7 @@
 package com.yanxing.ui
 
 import com.tencent.bugly.Bugly.applicationContext
-import com.yanxing.baselibrary.base.kotlin.BaseLibraryKtFragment
+import com.yanxing.base.BaseFragment
 import com.yanxing.model.DouBan
 import com.yanxing.networklibrary.AbstractObserver
 import com.yanxing.networklibrary.RetrofitManage
@@ -13,7 +13,7 @@ import kotlinx.android.synthetic.main.fragment_networklibrary_kt.*
  * Networklibrary kotlin版例子
  * @author 李双祥 on 2018/3/2.
  */
-class NetWorkLibraryKtFragment : BaseLibraryKtFragment() {
+class NetWorkLibraryKtFragment : BaseFragment() {
 
     val mBaseUrl = "https://api.douban.com/v2/movie/"
 

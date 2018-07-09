@@ -44,7 +44,7 @@ public class RefreshHeaderView extends SwipeRefreshHeaderLayout {
 
     public RefreshHeaderView(Context context, AttributeSet attrs, int defStyleAttr) {
         super(context, attrs, defStyleAttr);
-        mHeaderHeight = getResources().getDimensionPixelOffset(R.dimen.refresh_header_height);
+        mHeaderHeight = getResources().getDimensionPixelOffset(R.dimen.refresh_header_foot_height);
         rotateUp = AnimationUtils.loadAnimation(context, R.anim.rotate_up);
         rotateDown = AnimationUtils.loadAnimation(context, R.anim.rotate_down);
     }
@@ -103,7 +103,7 @@ public class RefreshHeaderView extends SwipeRefreshHeaderLayout {
         ivArrow.clearAnimation();
         ivArrow.setVisibility(GONE);
         progressBar.setVisibility(GONE);
-        tvRefresh.setText(R.string.COMPLETE);
+        tvRefresh.setText("刷新完成");
     }
 
     @Override

@@ -22,7 +22,6 @@ public class SwipeBackLayoutActivity extends BaseActivity {
 
     @Override
     protected void afterInstanceView() {
-        CommonUtil.setStatusBarDarkMode(true,this);
     }
 
     @OnClick({R.id.normal, R.id.absListview, R.id.scrollView})
