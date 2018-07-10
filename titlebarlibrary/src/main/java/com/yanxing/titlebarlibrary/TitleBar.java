@@ -56,17 +56,17 @@ public class TitleBar extends LinearLayout {
             mTitle.setText(a.getText(R.styleable.MyTitleBar_title_main));
         }
         //标题颜色
-        mTitle.setTextColor(a.getColor(R.styleable.MyTitleBar_title_main_color,Color.WHITE));
+        mTitle.setTextColor(a.getColor(R.styleable.MyTitleBar_title_main_color,Color.BLACK));
         //右菜单
         if (a.hasValue(R.styleable.MyTitleBar_title_right)){
             mRightTitle.setText(a.getText(R.styleable.MyTitleBar_title_right));
             mRightTitle.setVisibility(VISIBLE);
             if (!a.hasValue(R.styleable.MyTitleBar_right_icon)){
-                mRightTitle.setPadding(0,0,60,0);
+                mRightTitle.setPadding(0,0,40,0);
             }
         }
         //右菜单文字颜色
-        mRightTitle.setTextColor(a.getColor(R.styleable.MyTitleBar_titleRightColor,Color.WHITE));
+        mRightTitle.setTextColor(a.getColor(R.styleable.MyTitleBar_titleRightColor,Color.BLACK));
         //背景颜色
         if (a.hasValue(R.styleable.MyTitleBar_backgroundColor)){
             Drawable background = a.getDrawable(R.styleable.MyTitleBar_backgroundColor);

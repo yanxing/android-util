@@ -4,9 +4,9 @@
                                    android:id="@+id/background"
                                    android:layout_width="match_parent"
                                    android:layout_height="45dp"
+                                   android:background="?attr/colorPrimary"
                                    app:contentInsetLeft="0dp"
-                                   app:contentInsetStart="0dp"
-                                   android:background="?attr/colorPrimary">
+                                   app:contentInsetStart="0dp">
     <!--?attr/actionBarSize-->
 
     <RelativeLayout
@@ -22,10 +22,10 @@
 
             <ImageView
                 android:id="@+id/back_img"
-                android:layout_width="28dp"
-                android:layout_height="28dp"
-                android:layout_marginLeft="15dp"
-                android:src="@mipmap/back"/>
+                android:layout_width="24dp"
+                android:layout_height="24dp"
+                android:layout_marginLeft="12dp"
+                android:src="@mipmap/back_black"/>
 
         </LinearLayout>
 
@@ -41,33 +41,33 @@
                 android:gravity="center"
                 android:maxLines="1"
                 android:text="@string/title"
-                android:textColor="@android:color/white"
-                android:textSize="17sp"/>
+                android:textColor="@android:color/black"
+                android:textSize="16sp"/>
         </FrameLayout>
 
         <ImageView
             android:id="@+id/right_icon"
-            android:layout_width="14dp"
+            android:layout_width="18dp"
             android:layout_height="18dp"
             android:layout_alignParentRight="true"
-            android:layout_marginRight="15dp"
             android:layout_centerVertical="true"
+            android:layout_marginRight="15dp"
             android:gravity="center"
             android:paddingTop="2dp"
-            android:visibility="gone"
-            android:src="@mipmap/down"/>
+            android:src="@mipmap/down"
+            android:visibility="gone"/>
 
         <TextView
             android:id="@+id/right_title"
             android:layout_width="wrap_content"
             android:layout_height="match_parent"
-            android:paddingRight="34dp"
+            android:layout_alignParentRight="true"
             android:layout_toLeftOf="@id/right_icon"
             android:gravity="center"
-            android:visibility="invisible"
+            android:paddingRight="34dp"
             android:text="@string/menu"
-            android:layout_alignParentRight="true"
-            android:textColor="@android:color/white"
-            android:textSize="12sp"/>
+            android:textColor="@android:color/black"
+            android:textSize="12sp"
+            android:visibility="gone"/>
     </RelativeLayout>
 </android.support.v7.widget.Toolbar>
