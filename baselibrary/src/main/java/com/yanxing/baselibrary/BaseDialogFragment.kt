@@ -1,32 +1,34 @@
-package com.yanxing.baselibrary.base
+package com.yanxing.baselibrary
 
 import android.os.Bundle
 import android.support.annotation.CallSuper
 import android.support.annotation.CheckResult
-import android.support.v4.app.FragmentManager
-import android.support.v7.app.AppCompatActivity
+import android.support.v4.app.DialogFragment
 import android.view.Gravity
+import android.view.LayoutInflater
+import android.view.View
+import android.view.ViewGroup
 import android.widget.Toast
 import com.trello.rxlifecycle2.LifecycleProvider
 import com.trello.rxlifecycle2.LifecycleTransformer
 import com.trello.rxlifecycle2.RxLifecycle
 import com.trello.rxlifecycle2.android.ActivityEvent
 import com.trello.rxlifecycle2.android.RxLifecycleAndroid
+import com.trello.rxlifecycle2.components.support.RxDialogFragment
 import io.reactivex.Observable
 import io.reactivex.subjects.BehaviorSubject
 
 /**
- * 基础Activity
- * @author 李双祥 on 2018/7/5.
+ * 基础DialogFragment
+ * @author 李双祥 on 2018/7/10.
  */
-abstract class BaseActivity : AppCompatActivity(), LifecycleProvider<ActivityEvent> {
+abstract class BaseDialogFragment : DialogFragment(), LifecycleProvider<ActivityEvent> {
 
+    protected val TAG: String = javaClass.name
     /**
      * rxlifecycle2用于取消Rxjava订阅，防止内存泄露
      */
     private val lifecycleSubject = BehaviorSubject.create<ActivityEvent>()
-    protected lateinit var mFragmentManager: FragmentManager
-    protected val TAG:String=javaClass.name
 
     @CheckResult
     override fun lifecycle(): Observable<ActivityEvent> {
@@ -43,32 +45,42 @@ abstract class BaseActivity : AppCompatActivity(), LifecycleProvider<ActivityEve
         return RxLifecycleAndroid.bindActivity(lifecycleSubject)
     }
 
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        lifecycleSubject.onNext(ActivityEvent.CREATE)
-        setContentView(getLayoutResID())
-        mFragmentManager = supportFragmentManager
-        afterInstanceView()
+        setStyle(RxDialogFragment.STYLE_NO_TITLE, R.style.dialog_fragment_style)
     }
 
-    /**
-     * 显示toast消息
-     */
-    fun showToast(tip: String) {
-        val toast = Toast.makeText(applicationContext, tip, Toast.LENGTH_LONG)
-        toast.setGravity(Gravity.CENTER, 0, 0)
-        toast.show()
+    override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?
+                              , savedInstanceState: Bundle?): View? {
+        val view = inflater.inflate(getLayoutResID(), container)
+        dialog.setCanceledOnTouchOutside(false)
+        return view
+    }
+
+    override fun onViewCreated(view: View?, savedInstanceState: Bundle?) {
+        super.onViewCreated(view, savedInstanceState)
+        afterInstanceView()
     }
 
     /**
      * 子类布局，例如R.layout.activity_main
      */
-    abstract fun getLayoutResID(): Int
+    protected abstract fun getLayoutResID(): Int
 
     /**
      * 实例化控件之后的操作
      */
-    abstract fun afterInstanceView()
+    protected abstract fun afterInstanceView()
+
+    /**
+     * 显示toast消息
+     */
+    fun showToast(tip: String) {
+        val toast = Toast.makeText(activity, tip, Toast.LENGTH_LONG)
+        toast.setGravity(Gravity.CENTER, 0, 0)
+        toast.show()
+    }
 
     @CallSuper
     override fun onStart() {
@@ -99,4 +111,5 @@ abstract class BaseActivity : AppCompatActivity(), LifecycleProvider<ActivityEve
         lifecycleSubject.onNext(ActivityEvent.DESTROY)
         super.onDestroy()
     }
+
 }

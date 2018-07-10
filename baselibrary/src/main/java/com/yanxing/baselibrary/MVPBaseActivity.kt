@@ -1,12 +1,13 @@
-package com.yanxing.baselibrary.base
+package com.yanxing.baselibrary
 
 import android.os.Bundle
 
+
 /**
- * MVP基础Fragment
- * @author 李双祥 on 2018/7/9.
+ * MVP基础Activity
+ * @author 李双祥 on 2018/7/5.
  */
-abstract class MVPBaseFragment<V : BaseView, P : BasePresenter<V>> : BaseFragment() {
+abstract class MVPBaseActivity<V : BaseView, P : BasePresenter<V>> : BaseActivity() {
 
     protected var mPresenter: P? = null
 

@@ -1,7 +1,7 @@
 package com.yanxing.ui
 
 import com.tencent.bugly.Bugly.applicationContext
-import com.yanxing.base.BaseFragment
+import com.yanxing.baselibrary.BaseFragment
 import com.yanxing.model.DouBan
 import com.yanxing.networklibrary.AbstractObserver
 import com.yanxing.networklibrary.RetrofitManage

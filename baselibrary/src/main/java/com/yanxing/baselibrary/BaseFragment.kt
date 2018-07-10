@@ -1,4 +1,4 @@
-package com.yanxing.baselibrary.base
+package com.yanxing.baselibrary
 
 import android.os.Bundle
 import android.support.annotation.CallSuper
