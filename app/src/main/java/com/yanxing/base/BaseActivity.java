@@ -3,10 +3,7 @@ package com.yanxing.base;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 
-import com.dianmei.analyzelibrary.AnalyzeAgent;
-import com.dianmei.analyzelibrary.Tactic;
-import com.yanxing.baselibrary.base.BaseLibraryActivity;
-import com.yanxing.util.CommonUtil;
+import com.yanxing.baseextendlibrary.BaseLibraryActivity;
 import com.yanxing.util.StatusBarUtil;
 
 /**

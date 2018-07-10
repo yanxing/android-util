@@ -1,8 +1,7 @@
 package com.yanxing.base;
 
 
-import com.yanxing.baselibrary.base.BaseLibraryFragment;
-
+import com.yanxing.baseextendlibrary.BaseLibraryFragment;
 
 /**
  * 基类fragment

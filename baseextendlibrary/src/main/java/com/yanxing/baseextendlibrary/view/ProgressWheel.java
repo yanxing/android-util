@@ -1,4 +1,4 @@
-package com.yanxing.baselibrary.view;
+package com.yanxing.baseextendlibrary.view;
 
 import android.content.Context;
 import android.content.res.TypedArray;
@@ -15,7 +15,7 @@ import android.util.DisplayMetrics;
 import android.util.TypedValue;
 import android.view.View;
 
-import com.yanxing.baselibrary.R;
+import com.yanxing.baseextendlibrary.R;
 
 
 /**

@@ -125,5 +125,6 @@ dependencies {
 //    compile project(':networklibrary')
     compile 'com.yanxing:networklibrary:1.0.9'
     compile project(':analyzelibrary')
-    compile project(':baselibrary')
+//    compile project(':baselibrary')
+    compile project(':baseextendlibrary')
 }

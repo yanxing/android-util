@@ -1,14 +1,11 @@
-package com.yanxing.baselibrary.base.mvp
+package com.yanxing.baselibrary.base
 
 import android.os.Bundle
 import android.support.annotation.CallSuper
 import android.support.annotation.CheckResult
-import android.support.v4.app.Fragment
 import android.support.v4.app.FragmentManager
+import android.support.v7.app.AppCompatActivity
 import android.view.Gravity
-import android.view.LayoutInflater
-import android.view.View
-import android.view.ViewGroup
 import android.widget.Toast
 import com.trello.rxlifecycle2.LifecycleProvider
 import com.trello.rxlifecycle2.LifecycleTransformer
@@ -20,16 +17,16 @@ import io.reactivex.subjects.BehaviorSubject
 
 /**
  * 基础Activity
- * @author 李双祥 on 2018/7/9.
+ * @author 李双祥 on 2018/7/5.
  */
-abstract class BaseFragment : Fragment(), LifecycleProvider<ActivityEvent> {
+abstract class BaseActivity : AppCompatActivity(), LifecycleProvider<ActivityEvent> {
 
     /**
      * rxlifecycle2用于取消Rxjava订阅，防止内存泄露
      */
     private val lifecycleSubject = BehaviorSubject.create<ActivityEvent>()
     protected lateinit var mFragmentManager: FragmentManager
-    protected val TAG: String = javaClass.name
+    protected val TAG:String=javaClass.name
 
     @CheckResult
     override fun lifecycle(): Observable<ActivityEvent> {
@@ -46,28 +43,21 @@ abstract class BaseFragment : Fragment(), LifecycleProvider<ActivityEvent> {
         return RxLifecycleAndroid.bindActivity(lifecycleSubject)
     }
 
-    override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?
-                              , savedInstanceState: Bundle?): View? {
-        super.onCreateView(inflater, container, savedInstanceState)
-        val view = inflater.inflate(getLayoutResID(), container, false)
-        mFragmentManager = fragmentManager
-        return view
-    }
-
-    override fun onViewCreated(view: View?, savedInstanceState: Bundle?) {
+    override fun onCreate(savedInstanceState: Bundle?) {
+        super.onCreate(savedInstanceState)
+        lifecycleSubject.onNext(ActivityEvent.CREATE)
+        setContentView(getLayoutResID())
+        mFragmentManager = supportFragmentManager
         afterInstanceView()
-        super.onViewCreated(view, savedInstanceState)
     }
 
     /**
      * 显示toast消息
      */
     fun showToast(tip: String) {
-        if (isAdded && activity != null) {
-            val toast = Toast.makeText(activity, tip, Toast.LENGTH_LONG)
-            toast.setGravity(Gravity.CENTER, 0, 0)
-            toast.show()
-        }
+        val toast = Toast.makeText(applicationContext, tip, Toast.LENGTH_LONG)
+        toast.setGravity(Gravity.CENTER, 0, 0)
+        toast.show()
     }
 
     /**
@@ -109,6 +99,4 @@ abstract class BaseFragment : Fragment(), LifecycleProvider<ActivityEvent> {
         lifecycleSubject.onNext(ActivityEvent.DESTROY)
         super.onDestroy()
     }
-
-
 }

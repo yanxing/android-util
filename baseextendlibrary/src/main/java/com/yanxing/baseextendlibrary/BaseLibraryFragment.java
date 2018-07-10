@@ -1,4 +1,4 @@
-package com.yanxing.baselibrary.base;
+package com.yanxing.baseextendlibrary;
 
 import android.os.Bundle;
 import android.support.annotation.Nullable;
@@ -6,31 +6,43 @@ import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentTransaction;
 import android.view.Gravity;
+import android.view.LayoutInflater;
+import android.view.View;
+import android.view.ViewGroup;
 import android.widget.Toast;
 
-import com.trello.rxlifecycle2.components.support.RxAppCompatActivity;
-import com.yanxing.baselibrary.view.LoadDialog;
+import com.trello.rxlifecycle2.components.support.RxFragment;
+import com.yanxing.baseextendlibrary.view.LoadDialog;
 
 import butterknife.ButterKnife;
+import butterknife.Unbinder;
 
 /**
  * Created by 李双祥 on 2017/10/19.
  */
-public abstract class BaseLibraryActivity extends RxAppCompatActivity {
+public abstract class BaseLibraryFragment extends RxFragment {
 
+    private Unbinder mUnbinder;
     protected FragmentManager mFragmentManager;
+    protected View mView;
     protected String TAG = getClass().getName();
 
     @Nullable
     @Override
-    public void onCreate(@Nullable Bundle savedInstanceState) {
-        super.onCreate(savedInstanceState);
-        mFragmentManager = getSupportFragmentManager();
-        setContentView(getLayoutResID());
-        ButterKnife.bind(this);
-        afterInstanceView();
+    public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container
+            , @Nullable Bundle savedInstanceState) {
+        super.onCreateView(inflater, container, savedInstanceState);
+        mView = inflater.inflate(getLayoutResID(), container, false);
+        mFragmentManager = getFragmentManager();
+        mUnbinder = ButterKnife.bind(this, mView);
+        return mView;
     }
 
+    @Override
+    public void onViewCreated(View view, @Nullable Bundle savedInstanceState) {
+        super.onViewCreated(view, savedInstanceState);
+        afterInstanceView();
+    }
 
     /**
      * 显示toast消息
@@ -38,20 +50,12 @@ public abstract class BaseLibraryActivity extends RxAppCompatActivity {
      * @param tip
      */
     public void showToast(String tip) {
-        Toast toast = Toast.makeText(getApplicationContext(), tip, Toast.LENGTH_LONG);
-        toast.setGravity(Gravity.CENTER, 0, 0);
-        toast.show();
+        if (isAdded()&&getActivity()!=null){
+            Toast toast = Toast.makeText(getActivity(), tip, Toast.LENGTH_LONG);
+            toast.setGravity(Gravity.CENTER, 0, 0);
+            toast.show();
+        }
     }
-
-    /**
-     * 子类布局，例如R.layout.activity_main
-     */
-    protected abstract int getLayoutResID();
-
-    /**
-     * 实例化控件之后操作
-     */
-    protected abstract void afterInstanceView();
 
     /**
      * 显示加载框
@@ -87,7 +91,23 @@ public abstract class BaseLibraryActivity extends RxAppCompatActivity {
         Fragment fragment = mFragmentManager.findFragmentByTag(LoadDialog.TAG);
         if (fragment != null) {
             //移除正在显示的对话框
-            fragmentTransaction.remove(fragment).commitNow();
+            fragmentTransaction.remove(fragment).commitAllowingStateLoss();
         }
+    }
+
+    /**
+     * 子类布局ID
+     */
+    protected abstract int getLayoutResID();
+
+    /**
+     * 实例化控件之后操作
+     */
+    protected abstract void afterInstanceView();
+
+    @Override
+    public void onDestroy() {
+        super.onDestroy();
+        mUnbinder.unbind();
     }
 }

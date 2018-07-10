@@ -1,4 +1,4 @@
-package com.yanxing.baselibrary.adapter;
+package com.yanxing.baseextendlibrary.adapter;
 
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;

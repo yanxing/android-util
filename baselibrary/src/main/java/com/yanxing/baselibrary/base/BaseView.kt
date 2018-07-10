@@ -1,4 +1,4 @@
-package com.yanxing.baselibrary.base.mvp
+package com.yanxing.baselibrary.base
 
 /**
  * View接口的基类

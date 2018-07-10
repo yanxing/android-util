@@ -1,4 +1,4 @@
-package com.yanxing.baselibrary.view;
+package com.yanxing.baseextendlibrary.view;
 
 import android.os.Bundle;
 import android.support.v4.app.DialogFragment;
@@ -10,7 +10,8 @@ import android.view.Window;
 import android.view.WindowManager;
 import android.widget.TextView;
 
-import com.yanxing.baselibrary.R;
+import com.yanxing.baseextendlibrary.R;
+
 
 /**
  * 进度条

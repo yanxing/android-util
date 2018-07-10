@@ -1,4 +1,4 @@
-package com.yanxing.baselibrary.base.mvp
+package com.yanxing.baselibrary.base
 
 /**
  * 基础Presenter，统一销毁持有的View
