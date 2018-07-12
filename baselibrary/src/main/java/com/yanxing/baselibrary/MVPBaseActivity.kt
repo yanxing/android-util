@@ -19,7 +19,7 @@ abstract class MVPBaseActivity<V : BaseView, P : BasePresenter<V>> : BaseActivit
     }
 
     /**
-     * 创建Presenter，不含需要初始的参数
+     * 创建无参Presenter
      */
     abstract fun createPresenter(): P
 

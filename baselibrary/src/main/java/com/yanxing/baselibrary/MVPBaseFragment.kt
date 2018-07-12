@@ -18,7 +18,7 @@ abstract class MVPBaseFragment<V : BaseView, P : BasePresenter<V>> : BaseFragmen
     }
 
     /**
-     * 创建Presenter，不含需要初始的参数
+     * 创建无参Presenter
      */
     abstract fun createPresenter(): P
 
