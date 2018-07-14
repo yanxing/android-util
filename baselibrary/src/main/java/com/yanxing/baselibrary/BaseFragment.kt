@@ -29,7 +29,7 @@ abstract class BaseFragment : Fragment(), LifecycleProvider<ActivityEvent> {
      */
     private val lifecycleSubject = BehaviorSubject.create<ActivityEvent>()
     protected lateinit var mFragmentManager: FragmentManager
-    protected val TAG: String = javaClass.name
+    val TAG: String = javaClass.name
 
     @CheckResult
     override fun lifecycle(): Observable<ActivityEvent> {

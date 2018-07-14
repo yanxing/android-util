@@ -24,11 +24,11 @@ import io.reactivex.subjects.BehaviorSubject
  */
 abstract class BaseDialogFragment : DialogFragment(), LifecycleProvider<ActivityEvent> {
 
-    protected val TAG: String = javaClass.name
     /**
      * rxlifecycle2用于取消Rxjava订阅，防止内存泄露
      */
     private val lifecycleSubject = BehaviorSubject.create<ActivityEvent>()
+    val TAG: String = javaClass.name
 
     @CheckResult
     override fun lifecycle(): Observable<ActivityEvent> {

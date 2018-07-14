@@ -40,11 +40,27 @@ public class ParameterInterceptor implements Interceptor {
     @Override
     public Response intercept(Chain chain) throws IOException {
         Request oldRequest = chain.request();
-
         HttpUrl.Builder urlBuilder = oldRequest.url()
                 .newBuilder()
                 .scheme(oldRequest.url().scheme())
                 .host(oldRequest.url().host());
+
+        Request.Builder builder = oldRequest.newBuilder()
+                .method(oldRequest.method(), oldRequest.body())
+                .url(urlBuilder.build());
+        //添加header
+        if (mHeadMap != null) {
+            for (Map.Entry<String, String> entry : mHeadMap.entrySet()) {
+                if (!TextUtils.isEmpty(entry.getValue())) {
+                    builder.addHeader(entry.getKey(), entry.getValue());
+                }
+            }
+        }
+        //不打印，不拼接参数，不重新构造
+        if (!LogUtil.isDebug){
+            return chain.proceed(builder.build());
+        }
+
 
         //get请求的参数
         Set<String> parameters = oldRequest.url().queryParameterNames();
@@ -56,6 +72,7 @@ public class ParameterInterceptor implements Interceptor {
                     .append(oldRequest.url().queryParameter(param))
                     .append("  ");
         }
+
 
         //post请求的参数
         StringBuilder postParams = new StringBuilder();
@@ -82,20 +99,9 @@ public class ParameterInterceptor implements Interceptor {
             }
         }
 
-        Request.Builder builder = oldRequest.newBuilder()
-                .method(oldRequest.method(), oldRequest.body())
-                .url(urlBuilder.build());
+        //header参数
         StringBuilder headerParams = new StringBuilder();
-        //添加header
-        if (mHeadMap != null) {
-            for (Map.Entry<String, String> entry : mHeadMap.entrySet()) {
-                if (!TextUtils.isEmpty(entry.getValue())) {
-                    builder.addHeader(entry.getKey(), entry.getValue());
-                }
-            }
-        }
         Request newRequest = builder.build();
-        //获取所有header参数
         for (String name : newRequest.headers().names()) {
             headerParams
                     .append(name)
@@ -103,8 +109,9 @@ public class ParameterInterceptor implements Interceptor {
                     .append(newRequest.headers().get(name))
                     .append("  ");
         }
-        String headParamsStr = TextUtils.isEmpty(headerParams.toString()) ? "" : "  头部参数" + headerParams.toString();
+        String headParamsStr = TextUtils.isEmpty(headerParams.toString()) ? "" : "  header参数" + headerParams.toString();
         LogUtil.d(TAG, newRequest.url().url().toString() + "  请求参数:" + getParams.toString() + postParams.toString() + headParamsStr);
+
 
         long b = System.currentTimeMillis();
         //此句异常，将不执行后续打印耗时代码
