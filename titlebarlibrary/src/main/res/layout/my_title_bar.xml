@@ -53,7 +53,6 @@
             android:layout_centerVertical="true"
             android:layout_marginRight="15dp"
             android:gravity="center"
-            android:paddingTop="2dp"
             android:src="@mipmap/down"
             android:visibility="gone"/>
 
