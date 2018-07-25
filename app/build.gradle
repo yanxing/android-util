@@ -123,7 +123,7 @@ dependencies {
     compile project(':photodialoglibrary')
     compile project(':downloadlibrary')
 //    compile project(':networklibrary')
-    compile 'com.yanxing:networklibrary:1.1.0'
+    compile 'com.yanxing:networklibrary:1.1.1'
     compile project(':analyzelibrary')
 //    compile project(':baselibrary')
     compile 'com.yanxing:baselibrary:1.0.4'

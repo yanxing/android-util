@@ -46,13 +46,11 @@ public abstract class AbstractObserver<T extends BaseModel> implements Observer<
      */
     protected AbstractObserver(Context context, String message) {
         this.mContext = context;
-        this.mIsShowToast = true;
         this.mMessage = message;
     }
 
     protected AbstractObserver(Context context, boolean isShowToast) {
-        this.mContext = context;
-        this.mIsShowToast = isShowToast;
+        this(context, null, null, isShowToast);
     }
 
     /**
@@ -71,7 +69,6 @@ public abstract class AbstractObserver<T extends BaseModel> implements Observer<
     protected AbstractObserver(Context context, PullToRefresh pullToRefresh, String message) {
         this.mPullToRefresh = pullToRefresh;
         this.mContext = context;
-        this.mIsShowToast = true;
         this.mMessage = message;
     }
 
@@ -79,10 +76,19 @@ public abstract class AbstractObserver<T extends BaseModel> implements Observer<
      * @param pullToRefresh 用来结束掉刷新状态
      * @param isShowToast   true显示错误信息
      */
-    protected AbstractObserver(Context context, PullToRefresh pullToRefresh, boolean isShowToast) {
+    protected AbstractObserver(Context context, PullToRefresh pullToRefresh, FragmentManager fragmentManager, boolean isShowToast) {
         this.mPullToRefresh = pullToRefresh;
         this.mContext = context;
         this.mIsShowToast = isShowToast;
+        this.mFragmentManager = fragmentManager;
+    }
+
+    /**
+     * @param pullToRefresh 用来结束掉刷新状态
+     * @param isShowToast   true显示错误信息
+     */
+    protected AbstractObserver(Context context, PullToRefresh pullToRefresh, boolean isShowToast) {
+        this(context, pullToRefresh, null, isShowToast);
     }
 
     /**
@@ -97,9 +103,8 @@ public abstract class AbstractObserver<T extends BaseModel> implements Observer<
      * @param message         自定义错误信息，接口报错生效
      */
     protected AbstractObserver(Context context, FragmentManager fragmentManager, String message) {
-        this.mFragmentManager = fragmentManager;
         this.mContext = context;
-        this.mIsShowToast = true;
+        this.mFragmentManager = fragmentManager;
         this.mMessage = message;
     }
 
@@ -107,9 +112,7 @@ public abstract class AbstractObserver<T extends BaseModel> implements Observer<
      * @param fragmentManager 用来请求结束，移除对话框
      */
     protected AbstractObserver(Context context, FragmentManager fragmentManager, boolean isShowToast) {
-        this.mFragmentManager = fragmentManager;
-        this.mContext = context;
-        this.mIsShowToast = isShowToast;
+        this(context, null, fragmentManager, isShowToast);
     }
 
     @Override
