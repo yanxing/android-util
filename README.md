@@ -147,20 +147,20 @@ public class BaiduMapExampleActivity extends BaseActivity implements RoutePlanRe
    </declare-styleable>
 ```
 ## tablayoutlibrary
-TabLayout+ViewPager封装。[example](https://github.com/yanxing/android-util/blob/master/app/src/main/java/com/yanxing/ui/TabLayoutPagerExampleActivity.java)
+TabLayout+ViewPager封装。
 * gradle  
 ```java
  compile 'com.yanxing:tablayoutlibrary:1.0.1'
  ```
-
+[example](https://github.com/yanxing/android-util/blob/master/app/src/main/java/com/yanxing/ui/TabLayoutPagerExampleActivity.java)
 ```XML
-    <com.yanxing.tablayoutlibrary.TabLayoutPager
-        android:id="@+id/tabLayoutPager"
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        app:tabLayoutBackground="@color/white"
-        app:tabLayoutIndicatorColor="@color/colorGreen"
-        app:tabLayoutSelectedTextColor="@color/colorGreen"/>
+ <com.yanxing.tablayoutlibrary.TabLayoutPager
+      android:id="@+id/tabLayoutPager"
+      android:layout_width="match_parent"
+      android:layout_height="match_parent"
+      app:tabLayoutBackground="@color/white"
+      app:tabLayoutIndicatorColor="@color/colorGreen"
+      app:tabLayoutSelectedTextColor="@color/colorGreen"/>
 ```
 ```Java
 mFragmentList.add(new TabLayoutPager1Fragment_());
