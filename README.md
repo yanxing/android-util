@@ -150,7 +150,7 @@ public class BaiduMapExampleActivity extends BaseActivity implements RoutePlanRe
 TabLayout+ViewPager封装。
 * gradle  
 ```java
- compile 'com.yanxing:tablayoutlibrary:1.0.1'
+ compile 'com.yanxing:tablayoutlibrary:1.0.3'
  ```
 [example](https://github.com/yanxing/android-util/blob/master/app/src/main/java/com/yanxing/ui/TabLayoutPagerExampleActivity.java)
 ```XML

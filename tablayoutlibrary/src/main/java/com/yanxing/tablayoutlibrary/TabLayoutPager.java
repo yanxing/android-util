@@ -1,12 +1,10 @@
 package com.yanxing.tablayoutlibrary;
 
 import android.content.Context;
-import android.content.res.ColorStateList;
 import android.content.res.Resources;
 import android.content.res.TypedArray;
 import android.support.design.widget.TabLayout;
 import android.support.v4.app.Fragment;
-import android.support.v4.app.FragmentActivity;
 import android.support.v4.app.FragmentManager;
 import android.support.v4.view.ViewCompat;
 import android.support.v4.view.ViewPager;
@@ -18,7 +16,6 @@ import android.view.View;
 import android.widget.FrameLayout;
 import android.widget.LinearLayout;
 
-import com.yanxing.tablayoutlibrary.R;
 
 import java.lang.reflect.Field;
 import java.util.List;
@@ -30,7 +27,7 @@ import java.util.List;
 public class TabLayoutPager extends FrameLayout {
 
     private TabLayout mTabLayout;
-    private ViewPager mViewPager;
+    private NoScrollViewPager mViewPager;
     private int mTabBackgroundResId;
 
     public TabLayoutPager(Context context) {
@@ -58,14 +55,18 @@ public class TabLayoutPager extends FrameLayout {
             final int selected = a.getColor(R.styleable.TabLayoutPager_tabLayoutSelectedTextColor, getResources().getColor(R.color.tablayout_black));
             mTabLayout.setTabTextColors(noSelected, selected);
             mTabBackgroundResId = a.getResourceId(R.styleable.TabLayoutPager_tabLayoutBackground, getResources().getColor(R.color.tablayout_white));
-            mTabLayout.setBackgroundColor(mTabBackgroundResId);
-            ViewCompat.setBackground(mTabLayout, AppCompatResources.getDrawable(context, mTabBackgroundResId));
+            mTabLayout.setBackgroundResource(mTabBackgroundResId);
         } finally {
             a.recycle();
             ta.recycle();
         }
+    }
 
-
+    /**
+     * @param scroll true Viewpager可以滑动，false不可以滑动，默认可以
+     */
+    public void setViewPagerScroll(boolean scroll) {
+        mViewPager.setScroll(scroll);
     }
 
     /**
@@ -76,7 +77,20 @@ public class TabLayoutPager extends FrameLayout {
      */
     public void addTab(FragmentManager fragmentManager, List<Fragment> fragments, List<String> tabs) {
         for (int i = 0; i < tabs.size(); i++) {
-            mTabLayout.addTab(mTabLayout.newTab().setText(tabs.get(i)));
+            TabLayout.Tab tab = mTabLayout.newTab();
+            mTabLayout.addTab(tab.setText(tabs.get(i)));
+            //反射改变tabview的背景色
+            Class<?> tabClass = tab.getClass();
+            Field field;
+            try {
+                field = tabClass.getDeclaredField("mView");
+                field.setAccessible(true);
+                ViewCompat.setBackground((View) field.get(tab), AppCompatResources.getDrawable(getContext(), mTabBackgroundResId));
+            } catch (NoSuchFieldException e) {
+                e.printStackTrace();
+            } catch (IllegalAccessException e) {
+                e.printStackTrace();
+            }
         }
         TabLayoutPagerAdapter tabLayoutPagerAdapter = new TabLayoutPagerAdapter(fragmentManager, fragments, tabs);
         mViewPager.setAdapter(tabLayoutPagerAdapter);
