@@ -8,7 +8,8 @@
         android:id="@+id/tabLayoutPager"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        app:tabLayoutIndicatorColor="@color/colorPrimary"
-        app:tabLayoutSelectedTextColor="@color/colorPrimary"/>
+        app:tabLayoutBackground="@color/white"
+        app:tabLayoutIndicatorColor="@color/colorGreen"
+        app:tabLayoutSelectedTextColor="@color/colorGreen"/>
 
 </LinearLayout>

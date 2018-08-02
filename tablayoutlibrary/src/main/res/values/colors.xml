@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-    <color name="colorPrimary">#37c14f</color>
-    <color name="colorDark">#2d2c2c</color>
-    <color name="colorGray">#f9f9f9</color>
+    <color name="tablayout_black">#000000</color>
+    <color name="tablayout_colorGray">#999999</color>
+    <color name="tablayout_white">#ffffff</color>
 
 </resources>

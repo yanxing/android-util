@@ -37,7 +37,8 @@ public class TabLayoutPagerFragment extends BaseFragment {
         mStringList.add(getString(R.string.menu1));
         mStringList.add(getString(R.string.menu2));
         mStringList.add(getString(R.string.menu3));
-        mTabLayoutPager.addTab(mFragmentList,mStringList);
+        mTabLayoutPager.addTab(getFragmentManager(),mFragmentList,mStringList);
+        mTabLayoutPager.setIndicator(30,30);
         mTabLayoutPager.getTabLayout().addOnTabSelectedListener(new TabLayout.OnTabSelectedListener() {
             @Override
             public void onTabSelected(TabLayout.Tab tab) {

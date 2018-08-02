@@ -7,5 +7,6 @@
         <attr name="tabLayoutSelectedTextColor" format="color"/>
         <!-- 选项卡文字颜色-->
         <attr name="tabLayoutTextColor" format="color"/>
+        <attr name="tabLayoutBackground" format="color|reference"/>
     </declare-styleable>
 </resources>

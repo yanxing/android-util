@@ -148,14 +148,19 @@ public class BaiduMapExampleActivity extends BaseActivity implements RoutePlanRe
 ```
 ## tablayoutlibrary
 TabLayout+ViewPager封装。[example](https://github.com/yanxing/android-util/blob/master/app/src/main/java/com/yanxing/ui/TabLayoutPagerExampleActivity.java)
+* gradle  
+```java
+ compile 'com.yanxing:tablayoutlibrary:1.0.1'
+ ```
+
 ```XML
-<com.yanxing.tablayoutlibrary.TabLayoutPager
+    <com.yanxing.tablayoutlibrary.TabLayoutPager
         android:id="@+id/tabLayoutPager"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        app:tabLayoutTextColor="@color/colorDark"
-        app:tabLayoutIndicatorColor="@color/colorPrimary"
-        app:tabLayoutSelectedTextColor="@color/colorPrimary"/>
+        app:tabLayoutBackground="@color/white"
+        app:tabLayoutIndicatorColor="@color/colorGreen"
+        app:tabLayoutSelectedTextColor="@color/colorGreen"/>
 ```
 ```Java
 mFragmentList.add(new TabLayoutPager1Fragment_());
@@ -165,6 +170,7 @@ mStringList.add("菜单一");
 mStringList.add("菜单二");
 mStringList.add("菜单三");
 mTabLayoutPager.addTab(mFragmentList,mStringList);
+mTabLayoutPager.setIndicator(30,30);
 mTabLayoutPager.getTabLayout().setOnTabSelectedListener(new TabLayout.OnTabSelectedListener() {
     @Override
     public void onTabSelected(TabLayout.Tab tab) {

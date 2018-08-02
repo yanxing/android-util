@@ -1,5 +1,30 @@
 apply plugin: 'com.android.library'
 
+ext {
+    bintrayRepo = 'android-util'
+    bintrayName = 'tablayoutlibrary'
+
+    publishedGroupId = 'com.yanxing'
+    libraryName = 'tablayoutlibrary'
+    artifact = 'tablayoutlibrary'
+
+    libraryDescription = 'base activity,fragment and dialogfragment'
+
+    siteUrl = 'https://github.com/yanxing/android-util'
+    gitUrl = 'https://github.com/yanxing/android-util.git'
+
+    libraryVersion = '1.0.1'
+
+    developerId = 'yanxing'
+    developerName = 'yanxing'
+    developerEmail = 'lyxtime@163.com'
+
+    licenseName = 'The Apache Software License, Version 2.0'
+    licenseUrl = 'http://www.apache.org/licenses/LICENSE-2.0.txt'
+    allLicenses = ["Apache-2.0"]
+}
+
+
 android {
     compileSdkVersion COMPILE_SDK_VERSION as int
     buildToolsVersion BUILD_TOOLS_VERSION
@@ -24,3 +49,6 @@ dependencies {
     compile "com.android.support:appcompat-v7:${SUPPORT_VERSION}"
     compile "com.android.support:design:${SUPPORT_VERSION}"
 }
+
+apply from: 'https://raw.githubusercontent.com/nuuneoi/JCenter/master/installv1.gradle'
+apply from: 'https://raw.githubusercontent.com/nuuneoi/JCenter/master/bintrayv1.gradle'
