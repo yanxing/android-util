@@ -11,7 +11,7 @@
         android:layout_height="wrap_content">
 
         <android.support.design.widget.CollapsingToolbarLayout
-            android:id="@+id/collapsing_toolbar_layout"
+            android:id="@+id/collapsingToolbarLayout"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             app:contentScrim="#37c14f"

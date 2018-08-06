@@ -17,31 +17,21 @@
         android:orientation="vertical">
 
         <Button
-            android:id="@+id/adapter_button"
+            android:id="@+id/adapterButton"
             style="@style/style_btn"
             android:text="@string/adapterlibrary"/>
 
         <Button
-            android:id="@+id/list_dialog_button"
-            style="@style/style_btn"
-            android:text="@string/list_dialog"/>
-
-        <Button
-            android:id="@+id/confirm_dialog_button"
-            style="@style/style_btn"
-            android:text="@string/confirm_dialog"/>
-
-        <Button
-            android:id="@+id/loading_dialog_button"
+            android:id="@+id/loading"
             style="@style/style_btn"
             android:text="@string/loading_dialog"/>
 
         <Button
-            android:id="@+id/select_image"
+            android:id="@+id/selectImage"
             style="@style/style_btn"
             android:text="@string/select_image"/>
         <Button
-            android:id="@+id/select_image_dialog"
+            android:id="@+id/selectImageDialog"
             style="@style/style_btn"
             android:text="@string/select_image_dialog"/>
         <Button
@@ -50,7 +40,7 @@
             android:text="matisse(知乎开源的图片选择)"/>
 
         <Button
-            android:id="@+id/browse_image"
+            android:id="@+id/browseImage"
             style="@style/style_btn"
             android:text="@string/browse_image"/>
 
@@ -103,17 +93,13 @@
             android:text="room"/>
 
         <Button
-            android:id="@+id/ultra_ptr"
+            android:id="@+id/ultraPtr"
             style="@style/style_btn"
             android:text="@string/ultra_ptr"/>
         <Button
             android:id="@+id/animation"
             style="@style/style_btn"
             android:text="@string/animation"/>
-        <Button
-            android:id="@+id/dialog"
-            style="@style/style_btn"
-            android:text="@string/activity"/>
         <Button
             android:id="@+id/expandableListViewCheckbox"
             style="@style/style_btn"
@@ -147,18 +133,6 @@
             style="@style/style_btn"
             android:text="@string/hide_title_bottom"/>
         <Button
-            android:id="@+id/swipeBackLayout"
-            style="@style/style_btn"
-            android:text="@string/swipebacklayout"/>
-        <Button
-            android:id="@+id/design"
-            style="@style/style_btn"
-            android:text="@string/design"/>
-        <Button
-            android:id="@+id/time"
-            style="@style/style_btn"
-            android:text="@string/countdown_time"/>
-        <Button
             android:id="@+id/luban"
             style="@style/style_btn"
             android:text="Luban压缩"/>
@@ -167,7 +141,7 @@
             style="@style/style_btn"
             android:text="MPAndroidChart图表"/>
         <Button
-            android:id="@+id/swipe_to_load_layout"
+            android:id="@+id/swipeToLoadLayout"
             style="@style/style_btn"
             android:text="SwipeToLoadLayout"/>
         <Button

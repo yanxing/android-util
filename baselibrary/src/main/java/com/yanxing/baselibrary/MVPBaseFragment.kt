@@ -20,7 +20,7 @@ abstract class MVPBaseFragment<V : BaseView, P : BasePresenter<V>> : BaseFragmen
     /**
      * 创建无参Presenter
      */
-    abstract fun createPresenter(): P
+    protected abstract fun createPresenter(): P
 
     override fun onDestroy() {
         super.onDestroy()

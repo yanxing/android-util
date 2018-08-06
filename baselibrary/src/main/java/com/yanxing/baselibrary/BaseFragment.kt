@@ -62,7 +62,7 @@ abstract class BaseFragment : Fragment(), LifecycleProvider<ActivityEvent> {
     /**
      * 显示toast消息
      */
-    fun showToast(tip: String) {
+    protected fun showToast(tip: String) {
         if (isAdded && activity != null) {
             val toast = Toast.makeText(activity, tip, Toast.LENGTH_LONG)
             toast.setGravity(Gravity.CENTER, 0, 0)
@@ -73,12 +73,12 @@ abstract class BaseFragment : Fragment(), LifecycleProvider<ActivityEvent> {
     /**
      * 子类布局，例如R.layout.activity_main
      */
-    abstract fun getLayoutResID(): Int
+    protected abstract fun getLayoutResID(): Int
 
     /**
      * 实例化控件之后的操作
      */
-    abstract fun afterInstanceView()
+    protected abstract fun afterInstanceView()
 
     @CallSuper
     override fun onStart() {

@@ -67,9 +67,6 @@
         <activity
             android:name=".animation.LayoutAnimationExampleActivity"/>
         <activity
-            android:name=".DialogActivity"
-            android:theme="@style/MyDialogStyleSelect"/>
-        <activity
             android:name=".animation.ObjectAnimationActivity"/>
         <activity
             android:name=".animation.QQHealthActivity"/>

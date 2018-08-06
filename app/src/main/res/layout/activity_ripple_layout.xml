@@ -34,7 +34,7 @@
     </com.yanxing.view.RippleLayout>
 
     <com.yanxing.view.CircleProgressView
-        android:id="@+id/circle_progress_view"
+        android:id="@+id/circleProgressView"
         android:layout_width="150dp"
         android:layout_height="150dp"
         android:layout_gravity="center"

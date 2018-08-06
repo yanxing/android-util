@@ -16,7 +16,7 @@
         android:text="@string/frame"/>
 
     <ImageView
-        android:id="@+id/frame_img"
+        android:id="@+id/frameImg"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginLeft="@dimen/margin20"
@@ -24,12 +24,12 @@
         android:layout_marginTop="@dimen/margin8"/>
 
     <Button
-        android:id="@+id/layout_animation"
+        android:id="@+id/layoutAnimation"
         style="@style/Animation_Button"
         android:text="@string/layout_animation"/>
 
     <Button
-        android:id="@+id/object_animation"
+        android:id="@+id/ObjectAnimation"
         style="@style/Animation_Button"
         android:text="@string/object_animation"/>
 
