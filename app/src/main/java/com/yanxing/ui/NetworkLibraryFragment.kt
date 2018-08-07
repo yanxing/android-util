@@ -13,7 +13,7 @@ import kotlinx.android.synthetic.main.fragment_networklibrary_kt.*
  * Networklibrary kotlin版例子
  * @author 李双祥 on 2018/3/2.
  */
-class NetworkLibraryKtFragment : BaseFragment() {
+class NetworkLibraryFragment : BaseFragment() {
 
     val mBaseUrl = "https://api.douban.com/v2/movie/"
 
