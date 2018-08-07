@@ -25,7 +25,7 @@
 其中使用了Rxlifecycle2来防止RxJava的内存泄露，所以基类需要继承Rxlifecycle2相关类，或者实现LifecycleProvider接口
 
 ## adapterlibrary
-ListView、GridView适配器，对BaseAdapter、ViewHolder的封装。[example](https://github.com/yanxing/android-util/blob/master/app/src/main/java/com/yanxing/ui/AdapterExampleActivity.kt)
+ListView、GridView适配器，对BaseAdapter、ViewHolder的封装。[example](https://github.com/yanxing/android-util/blob/master/app/src/main/java/com/yanxing/ui/CommonAdapterFragment.kt)
 ```Java
 mMenu.add("菜单1");
 mMenu.add("菜单2");
@@ -43,7 +43,7 @@ mMyGridView.setAdapter(new CommonAdapter<String>(mMenu,R.layout.adapter_grid_ite
     }
 });
 ```
-RecyclerView适配器。[example](https://github.com/yanxing/android-util/blob/master/app/src/main/java/com/yanxing/ui/RecyclerViewExampleActivity.kt)
+RecyclerView适配器。[example](https://github.com/yanxing/android-util/blob/master/app/src/main/java/com/yanxing/ui/CommonAdapterFragment.kt)
 ```Java
 mStrings.add("1");
 mStrings.add("2");
@@ -61,7 +61,7 @@ mRecyclerViewAdapter = new RecyclerViewAdapter<String>(mStrings,R.layout.adapter
 mRecyclerView.setAdapter(mRecyclerViewAdapter);
 ```
 ## baidumaplibrary
-对百度地图API的封装。[example](https://github.com/yanxing/android-util/blob/master/app/src/main/java/com/yanxing/ui/BaiduMapExampleActivity.kt)
+对百度地图API的封装。[example](https://github.com/yanxing/android-util/blob/master/app/src/main/java/com/yanxing/ui/BaiduMapFragment.kt)
 ```Java 
 /**
  * 百度地图封装测试
@@ -111,7 +111,7 @@ public class BaiduMapExampleActivity extends BaseActivity implements RoutePlanRe
     }
 ```
 ## titlebarlibrary
-自定义标题栏。[example](https://github.com/yanxing/android-util/blob/master/app/src/main/java/com/yanxing/ui/TitleBarExampleActivity.kt)
+自定义标题栏。[example](https://github.com/yanxing/android-util/blob/master/app/src/main/java/com/yanxing/ui/TitleBarFragment.kt)
 ```XML
 <com.yanxing.titlebarlibrary.TitleBar
         android:layout_width="match_parent"
@@ -152,7 +152,7 @@ TabLayout+ViewPager封装。
 ```java
  compile 'com.yanxing:tablayoutlibrary:1.0.3'
  ```
-[example](https://github.com/yanxing/android-util/blob/master/app/src/main/java/com/yanxing/ui/TabLayoutPagerExampleActivity.kt)
+[example](https://github.com/yanxing/android-util/blob/master/app/src/main/java/com/yanxing/ui/tablayout/TabLayoutPagerFragment.kt)
 ```XML
  <com.yanxing.tablayoutlibrary.TabLayoutPager
       android:id="@+id/tabLayoutPager"
