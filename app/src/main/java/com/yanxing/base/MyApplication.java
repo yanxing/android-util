@@ -19,8 +19,6 @@ import com.nostra13.universalimageloader.core.assist.QueueProcessingType;
 import com.squareup.leakcanary.LeakCanary;
 import com.tencent.bugly.Bugly;
 import com.tencent.bugly.beta.Beta;
-import com.yanxing.dao.DaoMaster;
-import com.yanxing.dao.DaoSession;
 import com.yanxing.util.ConstantValue;
 import com.yanxing.util.FileUtil;
 
@@ -35,7 +33,6 @@ import java.util.Set;
 public class  MyApplication extends Application {
 
     private SQLiteDatabase db;
-    private DaoSession mDaoSession;
     private static MyApplication mMyApplication;
 
     @Override
@@ -44,7 +41,6 @@ public class  MyApplication extends Application {
         initImageLoader();
         initBaiduMap();
         initFresco();
-        initGreen();
         mMyApplication=this;
         //内存泄漏检测
         LeakCanary.install(this);
@@ -60,23 +56,6 @@ public class  MyApplication extends Application {
 
     public static Application getInstance() {
         return mMyApplication;
-    }
-
-    /**
-     * 初始化GreenDao
-     */
-    public void initGreen(){
-        DaoMaster.DevOpenHelper helper = new DaoMaster.DevOpenHelper(getApplicationContext(), "yanxing-db", null);
-        DaoMaster daoMaster = new DaoMaster(helper.getWritableDatabase());
-        mDaoSession = daoMaster.newSession();
-    }
-
-    public DaoSession getDaoSession() {
-        return mDaoSession;
-    }
-
-    public SQLiteDatabase getDb() {
-        return db;
     }
 
     /**

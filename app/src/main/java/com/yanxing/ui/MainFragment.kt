@@ -20,6 +20,7 @@ import com.yanxing.ui.animation.AnimationMainFragment
 import com.yanxing.ui.swipetoloadlayout.SwipeToLoadLayoutFragment
 import com.yanxing.ui.tablayout.TabLayoutPagerFragment
 import com.yanxing.util.ConstantValue
+import com.yanxing.util.EventBusUtil
 import com.yanxing.util.FileUtil
 import com.yanxing.util.PermissionUtil
 import com.zhihu.matisse.Matisse
@@ -38,7 +39,7 @@ import kotlinx.android.synthetic.main.fragment_main.*
 class MainFragment : BaseFragment(), AMapLocListener {
     //选择的图片名称
     private var mImageName: String? = null
-    private var mCity: String=""
+    private var mCity: String = ""
     private lateinit var mAMapLoc: AMapLoc
     private val QUESTION_IMAGE_CODE = 1
     private val QUESTION_SORT_LISTVIEW_CODE = 2
@@ -78,9 +79,6 @@ class MainFragment : BaseFragment(), AMapLocListener {
         }
         ultraPtr.setOnClickListener {
             replace(UltraPtrFragment())
-        }
-        greenDao.setOnClickListener {
-            replace(GreenDaoFragment())
         }
         room.setOnClickListener {
             replace(RoomFragment())
@@ -184,7 +182,7 @@ class MainFragment : BaseFragment(), AMapLocListener {
             replace(TableViewFragment())
         }
         navigationTop.setOnClickListener {
-            add(NavigationTopFragment())
+            replace(NavigationTopFragment())
         }
         matisse.setOnClickListener {
             Matisse.from(activity)
@@ -216,26 +214,8 @@ class MainFragment : BaseFragment(), AMapLocListener {
      * 替换新的Fragment
      */
     private fun replace(fragment: Fragment) {
-        val tag = fragment.javaClass.toString()
-        activity.supportFragmentManager
-                .beginTransaction()
-                .addToBackStack(tag)
-                .replace(R.id.main_content, fragment, tag)
-                .commit()
+        EventBusUtil.getDefault().post(fragment)
     }
-
-    /**
-     * 添加新的Fragment
-     */
-    private fun add(fragment: Fragment) {
-        val tag = fragment.javaClass.toString()
-        activity.supportFragmentManager
-                .beginTransaction()
-                .addToBackStack(tag)
-                .add(R.id.main_content, fragment, tag)
-                .commit()
-    }
-
 
 
     override fun onDestroy() {

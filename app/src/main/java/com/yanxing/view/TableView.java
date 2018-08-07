@@ -22,38 +22,20 @@ import com.yanxing.util.DoubleUtil;
 import java.util.ArrayList;
 import java.util.List;
 
-import butterknife.BindView;
-import butterknife.ButterKnife;
-
 /**
  * 表格 第一行为标题，最后一行为合计
  * Created by lishuangxiang on 2017/4/4.
  */
 public class TableView extends LinearLayout {
 
-    @BindView(R.id.head1)
-    TextView mHead1;
-
-    @BindView(R.id.firstColumn)
-    RecyclerView mFirstColumn;
-
-    @BindView(R.id.otherHead)
-    LinearLayout mOtherHead;
-
-    @BindView(R.id.otherColumn)
-    RecyclerView mOtherColumn;
-
-    @BindView(R.id.buttomLine)
-    View mButtomLine;
-
-    @BindView(R.id.topLine)
-    View mTopLine;
-
-    @BindView(R.id.text)
-    View mText;
-
-    @BindView(R.id.line)
-    View mLine;
+    private TextView mHead1;
+    private RecyclerView mFirstColumn;
+    private LinearLayout mOtherHead;
+    private RecyclerView mOtherColumn;
+    private View mButtomLine;
+    private View mTopLine;
+    private View mText;
+    private View mLine;
 
     //展示第一列数据
     private RecyclerViewAdapter<Table> mFirstColumnAdapter;
@@ -81,7 +63,14 @@ public class TableView extends LinearLayout {
 
     private void init(final Context context) {
         View view = LayoutInflater.from(context).inflate(R.layout.table_view, this);
-        ButterKnife.bind(view);
+        mHead1=view.findViewById(R.id.head1);
+        mFirstColumn=view.findViewById(R.id.firstColumn);
+        mOtherHead=view.findViewById(R.id.otherHead);
+        mOtherColumn=view.findViewById(R.id.otherColumn);
+        mButtomLine=view.findViewById(R.id.buttomLine);
+        mTopLine=view.findViewById(R.id.topLine);
+        mText=view.findViewById(R.id.text);
+        mLine=view.findViewById(R.id.line);
         //第一列
         mFirstColumnAdapter = new RecyclerViewAdapter<Table>(mColumnData, R.layout.table_view_first_column_item) {
             @Override

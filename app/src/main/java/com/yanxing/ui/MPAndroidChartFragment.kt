@@ -4,8 +4,6 @@ package com.yanxing.ui
 import android.content.Context
 import android.widget.TextView
 
-import com.github.mikephil.charting.charts.PieChart
-import com.github.mikephil.charting.charts.RadarChart
 import com.github.mikephil.charting.components.Description
 import com.github.mikephil.charting.components.Legend
 import com.github.mikephil.charting.components.MarkerView
@@ -31,7 +29,6 @@ import com.yanxing.base.BaseFragment
 
 import java.util.ArrayList
 
-import butterknife.BindView
 import kotlinx.android.synthetic.main.fragment_mpandroid_chart.*
 
 /**
@@ -42,11 +39,7 @@ class MPAndroidChartFragment : BaseFragment() {
 
 
 
-    @BindView(R.id.pieChart)
-    internal var mPieChart: PieChart? = null
 
-    @BindView(R.id.radarChart)
-    internal var mRadarChart: RadarChart? = null
 
     protected var mMonths = arrayOf("03-01", "03-01", "03-01", "03-01", "03-01", "03-01", "03-01", "03-01", "03-01", "03-01", "03-01", "03-01")
 
@@ -164,26 +157,26 @@ class MPAndroidChartFragment : BaseFragment() {
         val pieDataSet = PieDataSet(pieEntryList, "")
         pieDataSet.setColors(resources.getColor(R.color.colorPrimary), resources.getColor(R.color.colorYellow)
                 , resources.getColor(R.color.colorRed), resources.getColor(R.color.colorBlue))
-        mPieChart!!.setUsePercentValues(false)
-        mPieChart!!.isHighlightPerTapEnabled = true
+        pieChart.setUsePercentValues(false)
+        pieChart.isHighlightPerTapEnabled = true
         pieDataSet.valueFormatter = PercentFormatter()
         val pieData = PieData()
         pieData.dataSet = pieDataSet
         pieData.setValueTextColor(resources.getColor(R.color.white))
         pieData.setValueTextSize(14f)
-        mPieChart!!.data = pieData
-        mPieChart!!.description.isEnabled = false
-        mPieChart!!.isDrawHoleEnabled = false
-        mPieChart!!.setDrawEntryLabels(false)//不绘制字体
+        pieChart.data = pieData
+        pieChart.description.isEnabled = false
+        pieChart.isDrawHoleEnabled = false
+        pieChart.setDrawEntryLabels(false)//不绘制字体
 
-        val l = mPieChart!!.legend
+        val l = pieChart.legend
         l.verticalAlignment = Legend.LegendVerticalAlignment.CENTER
         l.horizontalAlignment = Legend.LegendHorizontalAlignment.RIGHT
         l.orientation = Legend.LegendOrientation.VERTICAL
         l.setDrawInside(false)
         l.textColor = resources.getColor(R.color.colorBlue)
         l.textSize = 12f
-        mPieChart!!.invalidate()
+        radarChart.invalidate()
     }
 
     /**
@@ -201,11 +194,11 @@ class MPAndroidChartFragment : BaseFragment() {
         val radarData = RadarData(radarDataSet)
         radarData.setValueTextColor(resources.getColor(R.color.colorRed))
         radarDataSet.valueTextSize = 11f
-        mRadarChart!!.data = radarData
-        mRadarChart!!.invalidate()
+        radarChart.data = radarData
+        radarChart.invalidate()
         val description = Description()
         description.text = "雷达图"
-        mRadarChart!!.description = description
+        radarChart.description = description
     }
 
     inner class MyMarkerView(context: Context, layoutResource: Int) : MarkerView(context, layoutResource) {

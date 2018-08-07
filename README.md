@@ -9,7 +9,7 @@
 ```java
  compile 'com.yanxing:networklibrary:1.1.1'
  ```
-[example](https://github.com/yanxing/android-util/blob/master/app/src/main/java/com/yanxing/ui/NetworkLibraryFragment.java)
+[example](https://github.com/yanxing/android-util/blob/master/app/src/main/java/com/yanxing/ui/NetworkLibraryFragment.kt)
 ```java
  RetrofitManage.getInstance().init(baseUrl,true);
  RetrofitManage.getInstance().getRetrofit().create(ServiceAPI.class)
@@ -25,7 +25,7 @@
 其中使用了Rxlifecycle2来防止RxJava的内存泄露，所以基类需要继承Rxlifecycle2相关类，或者实现LifecycleProvider接口
 
 ## adapterlibrary
-ListView、GridView适配器，对BaseAdapter、ViewHolder的封装。[example](https://github.com/yanxing/android-util/blob/master/app/src/main/java/com/yanxing/ui/AdapterExampleActivity.java)
+ListView、GridView适配器，对BaseAdapter、ViewHolder的封装。[example](https://github.com/yanxing/android-util/blob/master/app/src/main/java/com/yanxing/ui/AdapterExampleActivity.kt)
 ```Java
 mMenu.add("菜单1");
 mMenu.add("菜单2");
@@ -43,7 +43,7 @@ mMyGridView.setAdapter(new CommonAdapter<String>(mMenu,R.layout.adapter_grid_ite
     }
 });
 ```
-RecyclerView适配器。[example](https://github.com/yanxing/android-util/blob/master/app/src/main/java/com/yanxing/ui/RecyclerViewExampleActivity.java)
+RecyclerView适配器。[example](https://github.com/yanxing/android-util/blob/master/app/src/main/java/com/yanxing/ui/RecyclerViewExampleActivity.kt)
 ```Java
 mStrings.add("1");
 mStrings.add("2");
@@ -61,7 +61,7 @@ mRecyclerViewAdapter = new RecyclerViewAdapter<String>(mStrings,R.layout.adapter
 mRecyclerView.setAdapter(mRecyclerViewAdapter);
 ```
 ## baidumaplibrary
-对百度地图API的封装。[example](https://github.com/yanxing/android-util/blob/master/app/src/main/java/com/yanxing/ui/BaiduMapExampleActivity.java)
+对百度地图API的封装。[example](https://github.com/yanxing/android-util/blob/master/app/src/main/java/com/yanxing/ui/BaiduMapExampleActivity.kt)
 ```Java 
 /**
  * 百度地图封装测试
@@ -111,7 +111,7 @@ public class BaiduMapExampleActivity extends BaseActivity implements RoutePlanRe
     }
 ```
 ## titlebarlibrary
-自定义标题栏。[example](https://github.com/yanxing/android-util/blob/master/app/src/main/java/com/yanxing/ui/TitleBarExampleActivity.java)
+自定义标题栏。[example](https://github.com/yanxing/android-util/blob/master/app/src/main/java/com/yanxing/ui/TitleBarExampleActivity.kt)
 ```XML
 <com.yanxing.titlebarlibrary.TitleBar
         android:layout_width="match_parent"
@@ -152,7 +152,7 @@ TabLayout+ViewPager封装。
 ```java
  compile 'com.yanxing:tablayoutlibrary:1.0.3'
  ```
-[example](https://github.com/yanxing/android-util/blob/master/app/src/main/java/com/yanxing/ui/TabLayoutPagerExampleActivity.java)
+[example](https://github.com/yanxing/android-util/blob/master/app/src/main/java/com/yanxing/ui/TabLayoutPagerExampleActivity.kt)
 ```XML
  <com.yanxing.tablayoutlibrary.TabLayoutPager
       android:id="@+id/tabLayoutPager"
@@ -244,5 +244,5 @@ delete(Context context, String url);//删除下载记录
 getDownloadProgressByUrl(Context context, String url);//获取已下载的进度，用作刚进入界面显示用
 ```
 ## TableView
-表格，上滑标题不动，右滑，第一列不动，[example](https://github.com/yanxing/android-util/blob/master/app/src/main/java/com/yanxing/ui/TableViewFragment.java)<br>
+表格，上滑标题不动，右滑，第一列不动，[example](https://github.com/yanxing/android-util/blob/master/app/src/main/java/com/yanxing/ui/TableViewFragment.kt)<br>
 ![image](https://github.com/yanxing/android-util/raw/master/image/1.gif)

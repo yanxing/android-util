@@ -23,8 +23,6 @@ import com.nostra13.universalimageloader.core.assist.QueueProcessingType;
 import com.tencent.bugly.Bugly;
 import com.tencent.bugly.beta.Beta;
 import com.tencent.tinker.loader.app.DefaultApplicationLike;
-import com.yanxing.dao.DaoMaster;
-import com.yanxing.dao.DaoSession;
 import com.yanxing.util.ConstantValue;
 import com.yanxing.util.FileUtil;
 
@@ -40,7 +38,6 @@ public class SampleApplicationLike extends DefaultApplicationLike {
     public static final String TAG = "Tinker.SampleApplicationLike";
     private BaiduLoc mBaiduLoc;
     private SQLiteDatabase db;
-    private DaoSession mDaoSession;
     private static SampleApplicationLike mApplication;
     private Context mContext;
 
@@ -58,7 +55,6 @@ public class SampleApplicationLike extends DefaultApplicationLike {
         initImageLoader();
         initBaiduMap();
         initFresco();
-        initGreen();
         //内存泄漏检测
 //        LeakCanary.install(this);
     }
@@ -79,22 +75,6 @@ public class SampleApplicationLike extends DefaultApplicationLike {
     @TargetApi(Build.VERSION_CODES.ICE_CREAM_SANDWICH)
     public void registerActivityLifecycleCallback(Application.ActivityLifecycleCallbacks callbacks) {
         getApplication().registerActivityLifecycleCallbacks(callbacks);
-    }
-    /**
-     * 初始化GreenDao
-     */
-    public void initGreen(){
-        DaoMaster.DevOpenHelper helper = new DaoMaster.DevOpenHelper(mContext, "yanxing-db", null);
-        DaoMaster daoMaster = new DaoMaster(helper.getWritableDatabase());
-        mDaoSession = daoMaster.newSession();
-    }
-
-    public DaoSession getDaoSession() {
-        return mDaoSession;
-    }
-
-    public SQLiteDatabase getDb() {
-        return db;
     }
 
     /**
