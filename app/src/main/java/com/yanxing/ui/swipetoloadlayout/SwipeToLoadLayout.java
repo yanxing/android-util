@@ -51,7 +51,7 @@ public class SwipeToLoadLayout extends com.aspsine.swipetoloadlayout.SwipeToLoad
         setLoadMoreFooterView(refreshFootView);
         setRefreshHeaderView(refreshHeaderView);
         setRefreshEnabled(true);
-        setLoadMoreEnabled(true);
+        setLoadingMore(false);
     }
 
 }

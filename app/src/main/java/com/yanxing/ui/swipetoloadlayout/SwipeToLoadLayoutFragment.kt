@@ -1,6 +1,5 @@
 package com.yanxing.ui.swipetoloadlayout
 
-import android.os.Bundle
 import android.support.v7.widget.LinearLayoutManager
 
 import com.aspsine.swipetoloadlayout.OnLoadMoreListener
@@ -19,10 +18,8 @@ import kotlinx.android.synthetic.main.fragment_swipe_to_load_layout.*
  */
 class SwipeToLoadLayoutFragment : BaseFragment(), OnRefreshListener, OnLoadMoreListener {
 
-
-
     private val mList = ArrayList<Int>()
-    private var mIntegerRecyclerViewAdapter: RecyclerViewAdapter<Int>? = null
+    private lateinit var mIntegerRecyclerViewAdapter: RecyclerViewAdapter<Int>
     private var mIndex = 4
 
     override fun getLayoutResID(): Int {
@@ -32,26 +29,7 @@ class SwipeToLoadLayoutFragment : BaseFragment(), OnRefreshListener, OnLoadMoreL
     override fun afterInstanceView() {
         swipeToLoadLayout.setOnRefreshListener(this)
         swipeToLoadLayout.setOnLoadMoreListener(this)
-
-    }
-
-    override fun onActivityCreated(savedInstanceState: Bundle?) {
-        super.onActivityCreated(savedInstanceState)
-        swipeToLoadLayout.post { swipeToLoadLayout.isRefreshing = true }
-    }
-
-    override fun onLoadMore() {
-        for (i in mIndex until mIndex + 4) {
-            mList.add(i)
-        }
-        mIndex = mIndex + 4
-        mIntegerRecyclerViewAdapter!!.update(mList)
-    }
-
-    override fun onRefresh() {
-        mList.add(1)
-        mList.add(2)
-        mList.add(3)
+        swipeToLoadLayout.initSwipeToLoadLayout(activity)
         mIntegerRecyclerViewAdapter = object : RecyclerViewAdapter<Int>(mList, R.layout.adapter_recyclerview_load_more) {
             override fun onBindViewHolder(holder: RecyclerViewAdapter.MyViewHolder, position: Int) {
                 holder.setText(R.id.text, mList[position].toString())
@@ -59,6 +37,24 @@ class SwipeToLoadLayoutFragment : BaseFragment(), OnRefreshListener, OnLoadMoreL
         }
         swipe_target.layoutManager = LinearLayoutManager(activity)
         swipe_target.adapter = mIntegerRecyclerViewAdapter
+    }
+
+    override fun onLoadMore() {
+        for (i in mIndex until mIndex + 4) {
+            mList.add(i)
+        }
+        mIndex = mIndex + 4
+        mIntegerRecyclerViewAdapter.update(mList)
         swipeToLoadLayout.isRefreshing = false
+    }
+
+    override fun onRefresh() {
+        mList.clear()
+        mList.add(1)
+        mList.add(2)
+        mList.add(3)
+        mIntegerRecyclerViewAdapter.update(mList)
+        swipeToLoadLayout.isRefreshing = false
+        swipeToLoadLayout.isLoadMoreEnabled=true
     }
 }

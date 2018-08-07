@@ -17,11 +17,6 @@
             android:text="@string/adapterlibrary"/>
 
         <Button
-            android:id="@+id/loading"
-            style="@style/style_btn"
-            android:text="@string/loading_dialog"/>
-
-        <Button
             android:id="@+id/selectImage"
             style="@style/style_btn"
             android:text="@string/select_image"/>

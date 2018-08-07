@@ -128,9 +128,6 @@ class MainFragment : BaseFragment(), AMapLocListener {
         MPAndroidChart.setOnClickListener {
             replace(MPAndroidChartFragment())
         }
-        loading.setOnClickListener {
-            showLoadingDialog(getString(R.string.load))
-        }
         val intent = Intent()
         val bundle = Bundle()
         selectImage.setOnClickListener {
