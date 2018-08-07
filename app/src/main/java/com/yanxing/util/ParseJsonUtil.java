@@ -19,10 +19,24 @@ public class ParseJsonUtil {
 
 
     /**
+     * 转化json为bean
+     */
+    public static <T> T convertJson(String json,Class<T> clazz){
+        Gson gson = new Gson();
+        T t = gson.fromJson(json,clazz);
+        return t;
+    }
+
+    /**
+     * 转化bean为json
+     */
+    public static String convertBean(Object object){
+        Gson gson=new Gson();
+        return gson.toJson(object);
+    }
+
+    /**
      * 读取Json文件
-     * @param context
-     * @param jsonFileName
-     * @return String
      */
     public static String getJsonFileString(Context context,String jsonFileName) {
         StringBuilder stringBuffer = new StringBuilder();
@@ -39,19 +53,6 @@ public class ParseJsonUtil {
 
         }
         return null;
-    }
-
-    /**
-     * 转化json为bean
-     * @param json
-     * @param clazz
-     * @param <T>
-     * @return
-     */
-    public static <T> T convertJson(String json,Class<T> clazz){
-        Gson gson = new Gson();
-        T t = gson.fromJson(json,clazz);
-        return t;
     }
 
     /**

@@ -21,7 +21,7 @@ public class FileUtil {
      * 获取android文件系统，外置存储
      */
     private static final String STORAGE_PATH = Environment.getExternalStorageDirectory() + "/";
-    private static final String TAG="FileUtil";
+    private static final String TAG = "FileUtil";
 
     /**
      * 获取存储根目录
@@ -38,7 +38,11 @@ public class FileUtil {
      * @return
      */
     public static boolean checkStorage() {
-        return android.os.Environment.getExternalStorageState().equals(android.os.Environment.MEDIA_MOUNTED);
+        boolean result = android.os.Environment.getExternalStorageState().equals(android.os.Environment.MEDIA_MOUNTED);
+        if (result) {
+            LogUtil.i(TAG, "外部存储不存在");
+        }
+        return result;
     }
 
     /**
@@ -46,7 +50,7 @@ public class FileUtil {
      *
      * @throws IOException
      */
-    public static File createFile(String fileName){
+    public static File createFile(String fileName) {
         File file = new File(fileName);
         if (checkStorage()) {
             try {
@@ -54,26 +58,25 @@ public class FileUtil {
             } catch (IOException e) {
                 e.printStackTrace();
             }
-        } else {
-            LogUtil.i(TAG, "外存设备不存在");
         }
         return file;
     }
 
     /**
      * 文件是否存在，true存在,绝对路径
+     *
      * @param filePath 文件路径
      * @return 存在 返回true 否则false
      */
-    public static Boolean isExistFile(String filePath){
+    public static Boolean isExistFile(String filePath) {
         File file = new File(filePath);
-        if (checkStorage()) {//存储设备存在
-            if (file.isDirectory()){//如果是目录返回
+        //存储设备存在
+        if (checkStorage()) {
+            //如果是目录返回
+            if (file.isDirectory()) {
                 return false;
             }
             return file.exists();
-        } else {
-            LogUtil.i(TAG, "外存设备不存在");
         }
         return false;
     }
@@ -81,17 +84,16 @@ public class FileUtil {
     /**
      * 创建目录,如果存在，则不创建 ,绝对路径
      *
-     * @param dirName  文件路径
+     * @param dirName 文件路径
      */
     public static File createDir(String dirName) {
         File dir = new File(dirName);
-        if (checkStorage()) {//存储设备存在
+        //存储设备存在
+        if (checkStorage()) {
             if (!dir.exists()) {
-                Boolean bo=dir.mkdir();
+                Boolean bo = dir.mkdir();
                 LogUtil.i(TAG, bo.toString());
             }
-        } else {
-            LogUtil.i(TAG, "外存设备不存在");
         }
         return dir;
     }
@@ -103,12 +105,11 @@ public class FileUtil {
      */
     public static void deleteFile(String path) {
         File file = new File(path);
-        if (checkStorage()) {//存储设备存在
+        //存储设备存在
+        if (checkStorage()) {
             if (file.exists()) {
                 file.delete();
             }
-        } else {
-            LogUtil.i(TAG, "外存设备不存在");
         }
     }
 
@@ -127,8 +128,8 @@ public class FileUtil {
             output = new FileOutputStream(file);
             byte buffer[] = new byte[4 * 1024];
             int offset;
-            while ((offset=input.read(buffer)) != -1) {
-                output.write(buffer,0,offset);
+            while ((offset = input.read(buffer)) != -1) {
+                output.write(buffer, 0, offset);
             }
             output.flush();
         } catch (Exception e) {
@@ -145,10 +146,11 @@ public class FileUtil {
 
     /**
      * file文件转成字节流
+     *
      * @param filePath
      * @return
      */
-    public static byte[] getBytes(String filePath){
+    public static byte[] getBytes(String filePath) {
         byte[] buffer = null;
         try {
             File file = new File(filePath);
@@ -172,18 +174,17 @@ public class FileUtil {
 
     /**
      * 重命名文件
-     * @param path  文件本地路径 比如Environment.getExternalStorageDirectory() + "/123.png"
+     *
+     * @param path    文件本地路径 比如Environment.getExternalStorageDirectory() + "/123.png"
      * @param newName 文件新命名  456.png  结果Environment.getExternalStorageDirectory() + "/456.png"
      */
-    public static void rename(String path,String newName){
-        File file=new File(path);
-        if (checkStorage()){
+    public static void rename(String path, String newName) {
+        File file = new File(path);
+        if (checkStorage()) {
             if (file.exists()) {
-                File file1=new File(path.substring(0,path.lastIndexOf("/")+1)+newName);
+                File file1 = new File(path.substring(0, path.lastIndexOf("/") + 1) + newName);
                 file.renameTo(file1);
             }
-        }else {
-            LogUtil.i(TAG, "外存设备不存在");
         }
     }
 }

@@ -45,7 +45,7 @@ class SelectCityFragment : BaseFragment(), AdapterView.OnItemClickListener {
         currentCity.add(cityBean)
         currentArea.city = currentCity
         mAreaList.add(currentArea)
-        mAreaList.addAll(ParseJsonUtil.getArea(activity)!!)
+        mAreaList.addAll(ParseJsonUtil.getArea(activity))
         mProvinceAdapter = object : CommonAdapter<Area>(mAreaList, R.layout.adapter_province) {
             override fun onBindViewHolder(viewHolder: ViewHolder, position: Int) {
                 if (mDataList[position].isCheck) {
