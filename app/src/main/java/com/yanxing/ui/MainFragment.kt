@@ -72,7 +72,7 @@ class MainFragment : BaseFragment(), AMapLocListener {
             replace(DownloadLibraryFragment())
         }
         RxJava2.setOnClickListener {
-            replace(NetworkLibraryKtFragment())
+            replace(NetworkLibraryFragment())
         }
         expandableListViewCheckbox.setOnClickListener {
             replace(ExpandableListViewCheckBoxFragment())
