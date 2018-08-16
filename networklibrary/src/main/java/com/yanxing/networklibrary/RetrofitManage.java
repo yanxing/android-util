@@ -6,6 +6,7 @@ import android.content.Context;
 import com.yanxing.networklibrary.intercepter.CacheInterceptor;
 import com.yanxing.networklibrary.intercepter.ParameterInterceptor;
 import com.yanxing.networklibrary.intercepter.Interceptor;
+import com.yanxing.networklibrary.util.GsonUtil;
 import com.yanxing.networklibrary.util.LogUtil;
 
 import java.util.Map;
@@ -48,7 +49,7 @@ public class RetrofitManage {
                 .addInterceptor(new ParameterInterceptor());
         mRetrofitBuilder = new Retrofit.Builder()
                 .baseUrl(baseUrl)
-                .addConverterFactory(GsonConverterFactory.create())
+                .addConverterFactory(GsonConverterFactory.create(GsonUtil.createGson()))
                 .addCallAdapterFactory(RxJava2CallAdapterFactory.create())
                 .client(mOkHttpClientBuilder.build());
     }

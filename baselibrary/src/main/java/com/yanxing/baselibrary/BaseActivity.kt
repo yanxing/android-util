@@ -55,7 +55,10 @@ abstract class BaseActivity : AppCompatActivity(), LifecycleProvider<ActivityEve
      * 显示toast消息
      */
     protected fun showToast(tip: String) {
-        val toast = Toast.makeText(applicationContext, tip, Toast.LENGTH_LONG)
+        var toast = Toast.makeText(applicationContext, tip, Toast.LENGTH_LONG)
+        if (tip.length<=7){
+            toast = Toast.makeText(applicationContext, tip, Toast.LENGTH_SHORT)
+        }
         toast.setGravity(Gravity.CENTER, 0, 0)
         toast.show()
     }

@@ -1,5 +1,6 @@
 package com.yanxing.model;
 
+import com.google.gson.annotations.Expose;
 import com.yanxing.networklibrary.model.BaseModel;
 
 import java.util.List;

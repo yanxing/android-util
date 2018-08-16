@@ -1,6 +1,6 @@
 apply plugin: 'com.android.application'
 // 依赖插件脚本
-apply from: 'tinker-support.gradle'
+//apply from: 'tinker-support.gradle'
 apply plugin: 'kotlin-android'
 apply plugin: 'kotlin-android-extensions'
 
@@ -112,7 +112,7 @@ dependencies {
     compile project(':photodialoglibrary')
     compile project(':downloadlibrary')
 //    compile project(':networklibrary')
-    compile 'com.yanxing:networklibrary:1.1.1'
+    compile 'com.yanxing:networklibrary:1.1.2'
     compile project(':analyzelibrary')
     compile project(':baseextendlibrary')
 }

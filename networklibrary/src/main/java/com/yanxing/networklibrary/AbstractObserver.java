@@ -6,13 +6,13 @@ import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentTransaction;
 import android.text.TextUtils;
 import android.util.Log;
-import android.widget.Toast;
 
 import com.yanxing.networklibrary.dialog.LoadDialog;
 import com.yanxing.networklibrary.model.BaseModel;
 import com.yanxing.networklibrary.refresh.PullToRefresh;
 import com.yanxing.networklibrary.util.ErrorCodeUtil;
 import com.yanxing.networklibrary.util.LogUtil;
+import com.yanxing.networklibrary.util.ToastUtil;
 
 import io.reactivex.Observer;
 import io.reactivex.annotations.NonNull;
@@ -135,7 +135,8 @@ public abstract class AbstractObserver<T extends BaseModel> implements Observer<
         //打印具体的错误信息
         LogUtil.e(getClass().getName(), Log.getStackTraceString(e));
         if (mContext != null && mIsShowToast) {
-            Toast.makeText(mContext, ErrorCodeUtil.getException(e), Toast.LENGTH_LONG).show();
+            String message = ErrorCodeUtil.getException(e);
+            ToastUtil.showToast(mContext, message);
         }
         if (mPullToRefresh != null) {
             mPullToRefresh.refreshComplete();
@@ -156,9 +157,9 @@ public abstract class AbstractObserver<T extends BaseModel> implements Observer<
         } else {
             if (mContext != null && mIsShowToast) {
                 if (TextUtils.isEmpty(mMessage)) {
-                    Toast.makeText(mContext, TextUtils.isEmpty(t.getMessage()) ? "" : t.getMessage(), Toast.LENGTH_LONG).show();
+                    ToastUtil.showToast(mContext, TextUtils.isEmpty(t.getMessage()) ? "" : t.getMessage());
                 } else {
-                    Toast.makeText(mContext, mMessage, Toast.LENGTH_LONG).show();
+                    ToastUtil.showToast(mContext, mMessage);
                 }
             }
         }
