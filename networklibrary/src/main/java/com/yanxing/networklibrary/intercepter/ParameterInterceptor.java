@@ -109,9 +109,6 @@ public class ParameterInterceptor implements Interceptor {
                     .append(newRequest.headers().get(name))
                     .append("  ");
         }
-        String headParamsStr = TextUtils.isEmpty(headerParams.toString()) ? "" : "  header参数" + headerParams.toString();
-        LogUtil.d(TAG, newRequest.url().url().toString() + "  请求参数:" + getParams.toString() + postParams.toString() + headParamsStr);
-
 
         long b = System.currentTimeMillis();
         //此句异常，将不执行后续打印耗时代码
@@ -122,7 +119,9 @@ public class ParameterInterceptor implements Interceptor {
             message = ErrorCodeUtil.getMessage(response.code());
         }
         String content = response.body().string();
-        LogUtil.d(TAG, "请求耗时：" + (a - b) + "ms，" + "请求结果\n" + content + "\n");
+        String headParamsStr = TextUtils.isEmpty(headerParams.toString()) ? "" : "  header参数" + headerParams.toString();
+        LogUtil.d(TAG, newRequest.url().url().toString() + "  请求参数:" + getParams.toString() + postParams.toString() + headParamsStr
+                +"\n请求耗时：" + (a - b) + "ms，" + "请求结果\n" + content + "\n");
 
         ResponseBody body = ResponseBody.create(newRequest.body() == null ? null : newRequest.body().contentType(), content);
         //重新构造body
