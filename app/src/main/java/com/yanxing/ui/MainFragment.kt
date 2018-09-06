@@ -19,6 +19,7 @@ import com.yanxing.sortlistviewlibrary.CityListActivity
 import com.yanxing.ui.animation.AnimationMainFragment
 import com.yanxing.ui.swipetoloadlayout.SwipeToLoadLayoutFragment
 import com.yanxing.ui.tablayout.TabLayoutPagerFragment
+import com.yanxing.ui.time.TimeFragment
 import com.yanxing.util.ConstantValue
 import com.yanxing.util.EventBusUtil
 import com.yanxing.util.FileUtil
@@ -196,6 +197,9 @@ class MainFragment : BaseFragment(), AMapLocListener {
             intent.setClass(activity, WebOpenPhotoActivity::class.java)
             startActivity(intent)
         }
+        time.setOnClickListener {
+            replace(TimeFragment())
+        }
 
     }
 
@@ -203,8 +207,11 @@ class MainFragment : BaseFragment(), AMapLocListener {
      * 申请定位权限
      */
     fun checkPermission() {
-        PermissionUtil.requestPermission(this, arrayOf(Manifest.permission.CAMERA, Manifest.permission.ACCESS_FINE_LOCATION
-                , Manifest.permission.WRITE_EXTERNAL_STORAGE, Manifest.permission.READ_PHONE_STATE, Manifest.permission.WRITE_SETTINGS), QUESTION_LOCATION)
+        if (PermissionUtil.findNeedRequestPermissions(activity, arrayOf(Manifest.permission.CAMERA, Manifest.permission.ACCESS_FINE_LOCATION
+                        , Manifest.permission.WRITE_EXTERNAL_STORAGE, Manifest.permission.READ_PHONE_STATE, Manifest.permission.WRITE_SETTINGS)).size > 0) {
+            PermissionUtil.requestPermission(this, arrayOf(Manifest.permission.CAMERA, Manifest.permission.ACCESS_FINE_LOCATION
+                    , Manifest.permission.WRITE_EXTERNAL_STORAGE, Manifest.permission.READ_PHONE_STATE, Manifest.permission.WRITE_SETTINGS), QUESTION_LOCATION)
+        }
     }
 
     /**

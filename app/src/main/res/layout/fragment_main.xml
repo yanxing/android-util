@@ -141,5 +141,9 @@
             android:id="@+id/webOpenPhoto"
             style="@style/style_btn"
             android:text="webview选择图片"/>
+        <Button
+            android:id="@+id/time"
+            style="@style/style_btn"
+            android:text="时间倒计时"/>
     </LinearLayout>
 </android.support.v4.widget.NestedScrollView>
