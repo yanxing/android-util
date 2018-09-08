@@ -2,11 +2,11 @@
 
 buildscript {
     // buildToolsVersion
-    ext.BUILD_TOOLS_VERSION = '26.0.2'
+    ext.BUILD_TOOLS_VERSION = '27.0.3'
     // targetSdkVersion
-    ext.TARGET_SDK_VERSION = 25
+    ext.TARGET_SDK_VERSION = 26
     // Library minSdkVersion
-    ext.COMMON_MIN_SDK_VERSION = 17
+    ext.COMMON_MIN_SDK_VERSION = 18
     // compileSdkVersion
     ext.COMPILE_SDK_VERSION = 26
     // support-v7
@@ -23,7 +23,7 @@ buildscript {
         google()
     }
     dependencies {
-        classpath 'com.android.tools.build:gradle:2.3.3'
+        classpath 'com.android.tools.build:gradle:3.0.1'
         classpath "com.tencent.bugly:tinker-support:1.0.8"
         classpath "org.jetbrains.kotlin:kotlin-gradle-plugin:$kotlin_version"
         classpath 'com.jfrog.bintray.gradle:gradle-bintray-plugin:1.6'
