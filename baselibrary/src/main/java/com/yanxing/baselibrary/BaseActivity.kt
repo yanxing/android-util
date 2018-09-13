@@ -56,7 +56,7 @@ abstract class BaseActivity : AppCompatActivity(), LifecycleProvider<ActivityEve
      */
     protected fun showToast(tip: String) {
         var toast = Toast.makeText(applicationContext, tip, Toast.LENGTH_LONG)
-        if (tip.length<=7){
+        if (tip.length<=30){
             toast = Toast.makeText(applicationContext, tip, Toast.LENGTH_SHORT)
         }
         toast.setGravity(Gravity.CENTER, 0, 0)

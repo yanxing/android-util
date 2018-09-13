@@ -77,7 +77,10 @@ abstract class BaseDialogFragment : DialogFragment(), LifecycleProvider<Activity
      * 显示toast消息
      */
     protected fun showToast(tip: String) {
-        val toast = Toast.makeText(activity, tip, Toast.LENGTH_LONG)
+        var toast = Toast.makeText(activity, tip, Toast.LENGTH_LONG)
+        if (tip.length<=30){
+            toast = Toast.makeText(activity, tip, Toast.LENGTH_SHORT)
+        }
         toast.setGravity(Gravity.CENTER, 0, 0)
         toast.show()
     }
