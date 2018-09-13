@@ -22,4 +22,12 @@ dependencies {
     testCompile 'junit:junit:4.12'
     compile "com.android.support:appcompat-v7:${SUPPORT_VERSION}"
     compile "com.android.support:support-v4:${SUPPORT_VERSION}"
+    //2D地图
+    compile 'com.amap.api:map2d:latest.integration'
+    //定位
+    compile 'com.amap.api:location:latest.integration'
+    //搜索
+//    compile 'com.amap.api:search:latest.integration'
+    //3D地图
+//    compile 'com.amap.api:3dmap:latest.integration'
 }

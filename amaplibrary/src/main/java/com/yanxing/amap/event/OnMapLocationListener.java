@@ -1,4 +1,4 @@
-package com.amap.location.event;
+package com.yanxing.amap.event;
 
 import com.amap.api.location.AMapLocation;
 
@@ -6,7 +6,7 @@ import com.amap.api.location.AMapLocation;
  * 定位监听
  * Created by lishuangxiang on 2016/6/8.
  */
-public interface AMapLocListener {
+public interface OnMapLocationListener {
 
     void onLocationChanged(AMapLocation aMapLocation);
 }

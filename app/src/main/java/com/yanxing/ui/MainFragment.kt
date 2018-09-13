@@ -8,9 +8,6 @@ import android.os.Bundle
 import android.support.v4.app.Fragment
 import android.support.v4.app.FragmentActivity
 
-import com.amap.api.location.AMapLocation
-import com.amap.location.AMapLoc
-import com.amap.location.event.AMapLocListener
 import com.photo.ui.PhotoUtilsActivity
 import com.yanxing.base.BaseFragment
 import com.yanxing.dialog.PhotoParam
@@ -37,11 +34,9 @@ import kotlinx.android.synthetic.main.fragment_main.*
  * 菜单列表
  * Created by lishuangxiang on 2016/12/21.
  */
-class MainFragment : BaseFragment(), AMapLocListener {
+class MainFragment : BaseFragment(){
     //选择的图片名称
     private var mImageName: String? = null
-    private var mCity: String = ""
-    private lateinit var mAMapLoc: AMapLoc
     private val QUESTION_IMAGE_CODE = 1
     private val QUESTION_SORT_LISTVIEW_CODE = 2
     private val QUESTION_LOCATION = 3
@@ -54,9 +49,6 @@ class MainFragment : BaseFragment(), AMapLocListener {
     override fun afterInstanceView() {
         // showToast("测试Tinker热更新");
         checkPermission()
-        mAMapLoc = AMapLoc(activity.applicationContext)
-        mAMapLoc.setAMapLocListener(this)
-        mAMapLoc.startLocation()
         adapterButton.setOnClickListener {
             replace(CommonAdapterFragment())
         }
@@ -113,7 +105,8 @@ class MainFragment : BaseFragment(), AMapLocListener {
             replace(ExtendRecyclerViewFragment())
         }
         amap.setOnClickListener {
-            showToast(mCity);
+            val intent=Intent(activity,AMapActivity::class.java)
+            startActivity(intent)
         }
         browseImage.setOnClickListener {
             val list = ArrayList<String>()
@@ -140,9 +133,6 @@ class MainFragment : BaseFragment(), AMapLocListener {
             bundle.putBoolean("cut", true)
             intent.putExtras(bundle)
             startActivityForResult(intent, QUESTION_IMAGE_CODE)
-        }
-        amap.setOnClickListener {
-            showToast(mCity)
         }
         selectImageDialog.setOnClickListener {
             val currentTimeDialog = System.currentTimeMillis()
@@ -222,11 +212,6 @@ class MainFragment : BaseFragment(), AMapLocListener {
     }
 
 
-    override fun onDestroy() {
-        mAMapLoc.onDestroy()
-        super.onDestroy()
-    }
-
     override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
         super.onActivityResult(requestCode, resultCode, data)
         if (resultCode == FragmentActivity.RESULT_OK) {
@@ -237,13 +222,6 @@ class MainFragment : BaseFragment(), AMapLocListener {
             } else if (requestCode == QUESTION_SORT_LISTVIEW_CODE) {
                 showToast(data!!.extras!!.getString("city")!!)
             }
-        }
-    }
-
-    override fun onLocationChanged(aMapLocation: AMapLocation?) {
-        if (aMapLocation != null) {
-            mCity = getString(R.string.current_city_tip) + aMapLocation.address
-            mAMapLoc.stopLocation()
         }
     }
 

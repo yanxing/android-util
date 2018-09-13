@@ -1,4 +1,4 @@
-package com.amap.location;
+package com.yanxing.amap;
 
 import android.content.Context;
 
@@ -6,29 +6,30 @@ import com.amap.api.location.AMapLocation;
 import com.amap.api.location.AMapLocationClient;
 import com.amap.api.location.AMapLocationClientOption;
 import com.amap.api.location.AMapLocationListener;
-import com.amap.location.event.AMapLocListener;
+import com.amap.api.maps2d.model.MyLocationStyle;
+import com.yanxing.amap.event.OnMapLocationListener;
 
 /**
- * 高德定位
+ * 高德定位，和地图容器分离的,可以单独使用
  * Created by lishuangxiang on 2016/6/8.
  */
-public class AMapLoc implements AMapLocationListener {
+public class MapLoc implements AMapLocationListener {
 
     private AMapLocationClient mLocationClient;
-    private AMapLocationClientOption mLocationOption;
-    private AMapLocListener mAMapLocListener;
+    private OnMapLocationListener mOnMapLocationListener;
 
-    public AMapLoc(Context context) {
-        mLocationClient = new AMapLocationClient(context);
-        mLocationOption = new AMapLocationClientOption();
+    public MapLoc(Context context) {
+        AMapLocationClientOption locationOption = new AMapLocationClientOption();
         // 设置地址信息
-        mLocationOption.setNeedAddress(true);
+        locationOption.setNeedAddress(true);
         // 设置是否开启缓存
-        mLocationOption.setLocationCacheEnable(true);
+        locationOption.setLocationCacheEnable(true);
         //发送请求间隔时间
-        mLocationOption.setInterval(2000);
+        locationOption.setInterval(2000);
         // 设置定位模式为高精度模式
-        mLocationOption.setLocationMode(AMapLocationClientOption.AMapLocationMode.Hight_Accuracy);
+        locationOption.setLocationMode(AMapLocationClientOption.AMapLocationMode.Hight_Accuracy);
+        mLocationClient = new AMapLocationClient(context);
+        mLocationClient.setLocationOption(locationOption);
         // 设置定位监听
         mLocationClient.setLocationListener(this);
     }
@@ -36,10 +37,10 @@ public class AMapLoc implements AMapLocationListener {
     /**
      * 设置监听
      *
-     * @param aMapLocListener
+     * @param onMapLocationListener
      */
-    public void setAMapLocListener(AMapLocListener aMapLocListener) {
-        mAMapLocListener = aMapLocListener;
+    public void setOnMapLocationListener(OnMapLocationListener onMapLocationListener) {
+        mOnMapLocationListener = onMapLocationListener;
     }
 
     /**
@@ -59,7 +60,7 @@ public class AMapLoc implements AMapLocationListener {
     @Override
     public void onLocationChanged(AMapLocation aMapLocation) {
         if (null != aMapLocation) {
-            mAMapLocListener.onLocationChanged(aMapLocation);
+            mOnMapLocationListener.onLocationChanged(aMapLocation);
         }
     }
 
@@ -70,8 +71,6 @@ public class AMapLoc implements AMapLocationListener {
     public void onDestroy() {
         if (null != mLocationClient) {
             mLocationClient.onDestroy();
-            mLocationClient = null;
-            mLocationOption = null;
         }
     }
 }

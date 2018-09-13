@@ -1,4 +1,4 @@
-package com.amap.location;
+package com.yanxing.amap;
 
 import org.junit.Test;
 
