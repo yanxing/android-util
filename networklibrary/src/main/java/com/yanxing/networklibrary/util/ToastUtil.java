@@ -11,7 +11,7 @@ public class ToastUtil {
 
     public static void showToast(Context context, String tip) {
         Toast toast;
-        if (tip.length() <= 7) {
+        if (tip.length() <= 30) {
             toast = Toast.makeText(context, tip, Toast.LENGTH_SHORT);
         } else {
             toast = Toast.makeText(context, tip, Toast.LENGTH_LONG);

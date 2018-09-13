@@ -34,11 +34,10 @@ public class Transformer<T> {
         return new ObservableTransformer<T, T>() {
             @Override
             public ObservableSource<T> apply(Observable<T> observable) {
-                Observable<T> observable1
-                        = observable
+                return observable
                         .subscribeOn(Schedulers.io())
-                        .observeOn(AndroidSchedulers.mainThread());
-                return observable1.compose(lifecycleProvider.bindToLifecycle());
+                        .observeOn(AndroidSchedulers.mainThread())
+                        .compose(lifecycleProvider.bindToLifecycle());
             }
         };
     }
@@ -83,8 +82,7 @@ public class Transformer<T> {
         return new ObservableTransformer<T, T>() {
             @Override
             public ObservableSource<T> apply(Observable<T> observable) {
-                Observable<T> observable1
-                        = observable
+                return observable
                         .subscribeOn(Schedulers.io())
                         .doOnSubscribe(new Consumer<Disposable>() {
                             @Override
@@ -115,8 +113,8 @@ public class Transformer<T> {
                             }
                         })
                         .subscribeOn(AndroidSchedulers.mainThread())
-                        .observeOn(AndroidSchedulers.mainThread());
-                return observable1.compose(lifecycleProvider.<T>bindToLifecycle());
+                        .observeOn(AndroidSchedulers.mainThread())
+                        .compose(lifecycleProvider.<T>bindToLifecycle());
             }
         };
     }
