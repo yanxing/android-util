@@ -30,7 +30,7 @@ class NetworkLibraryFragment : BaseFragment() {
      * 获取电影排行
      */
     fun getData() {
-        RetrofitManage.getInstance().retrofit!!.create(DouBanAPI::class.java)
+        RetrofitManage.getInstance().retrofit.create(DouBanAPI::class.java)
                 .getTopMovie(0, 10)
                 .compose(Transformer<DouBan>().iOMainHasProgress(this, mFragmentManager, "请稍等..."))
                 .subscribe(object : AbstractObserver<DouBan>(applicationContext, mFragmentManager, false) {

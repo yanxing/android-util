@@ -96,7 +96,7 @@ public class RetrofitManage {
 
     public Retrofit getRetrofit() {
         if (mRetrofitBuilder==null){
-            return null;
+            throw new NullPointerException("you need to call init method");
         }
         return mRetrofitBuilder.build();
     }

@@ -7,17 +7,13 @@ package com.yanxing.networklibrary.model;
 public class BaseModel {
 
     /**
-     * 返回状态
+     * 返回状态码
      */
     protected String status;
     /**
-     * 返回说明
+     * 返回（错误）信息
      */
     protected String message;
-    /**
-     * 存放错误信息字段
-     */
-    protected String operation;
 
     public String getStatus() {
         return status;
@@ -33,13 +29,5 @@ public class BaseModel {
 
     public void setMessage(String message) {
         this.message = message;
-    }
-
-    public String getOperation() {
-        return operation;
-    }
-
-    public void setOperation(String operation) {
-        this.operation = operation;
     }
 }

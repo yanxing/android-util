@@ -7,20 +7,19 @@
 对retrofit2+rxjava2网络请求的简单封装（包括网络请求时显示等待对话框和请求完成后上下拉刷新控件置为完成状态）。
 * gradle  
 ```java
- compile 'com.yanxing:networklibrary:1.1.3'
+ compile 'com.yanxing:networklibrary:1.1.5'
  ```
 [example](https://github.com/yanxing/android-util/blob/master/app/src/main/java/com/yanxing/ui/NetworkLibraryFragment.kt)
 ```java
- RetrofitManage.getInstance().init(baseUrl,true);
- RetrofitManage.getInstance().getRetrofit().create(ServiceAPI.class)
-     .getTopMovie(0,10)
-     .compose(new Transformer<DouBan>().iOMainHasProgress(this,getFragmentManager(),"请稍等..."))
-     .subscribe(new AbstractObserver<DouBan>(getActivity(),pullToRefreshImpl) {
-          @Override
-          public void onCall(DouBan douBan) {
+ RetrofitManage.getInstance().init(mBaseUrl, true)
+ RetrofitManage.getInstance().retrofit!!.create(DouBanAPI::class.java)
+                .getTopMovie(0, 10)
+                .compose(Transformer<DouBan>().iOMainHasProgress(this, mFragmentManager, "请稍等..."))
+                .subscribe(object : AbstractObserver<DouBan>(applicationContext, mFragmentManager, false) {
+                    override fun onCall(douBan: DouBan) {
 
-          }
-      });
+                    }
+                })
 ```
 其中使用了Rxlifecycle2来防止RxJava的内存泄露，所以基类需要继承Rxlifecycle2相关类，或者实现LifecycleProvider接口
 
@@ -30,11 +29,6 @@ ListView、GridView适配器，对BaseAdapter、ViewHolder的封装。[example](
 mMenu.add("菜单1");
 mMenu.add("菜单2");
 mMenu.add("菜单3");
-mMenu.add("菜单4");
-mMenu.add("菜单5");
-mMenu.add("菜单6");
-mMenu.add("菜单7");
-mMenu.add("菜单8");
 mMyGridView.setAdapter(new CommonAdapter<String>(mMenu,R.layout.adapter_grid_item) {
     @Override
     public void onBindViewHolder(ViewHolder viewHolder, int position) {
@@ -48,7 +42,6 @@ RecyclerView适配器。[example](https://github.com/yanxing/android-util/blob/m
 mStrings.add("1");
 mStrings.add("2");
 mStrings.add("3");
-mStrings.add("4");
 //线性
 mRecyclerView.setLayoutManager(new LinearLayoutManager(this));
 mRecyclerViewAdapter = new RecyclerViewAdapter<String>(mStrings,R.layout.adapter_recycler_view){
