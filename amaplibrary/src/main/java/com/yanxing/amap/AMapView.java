@@ -19,6 +19,7 @@ import com.amap.api.maps2d.model.Marker;
 import com.amap.api.maps2d.model.MarkerOptions;
 import com.amap.api.maps2d.model.Text;
 import com.amap.api.maps2d.model.TextOptions;
+import com.amap.location.R;
 import com.yanxing.amap.event.InfoWindowAdapter;
 import com.yanxing.amap.event.OnInfoWindowClickListener;
 import com.yanxing.amap.event.OnMapLoadedListener;
@@ -61,11 +62,18 @@ public class AMapView extends FrameLayout {
 
     /**
      * 设置地图定位
+     */
+    public void setLocation() {
+        setLocation(0, null);
+    }
+
+    /**
+     * 设置地图定位
      *
      * @param locationSourse 定位图标
      */
-    public void setLocationSourse(final int locationSourse) {
-        setLocationSourse(locationSourse, null);
+    public void setLocation(final int locationSourse) {
+        setLocation(locationSourse, null);
     }
 
     /**
@@ -74,7 +82,7 @@ public class AMapView extends FrameLayout {
      * @param locationSourse        定位图标
      * @param onMapLocationListener 定位成功回调
      */
-    public void setLocationSourse(final int locationSourse, final OnMapLocationListener onMapLocationListener) {
+    public void setLocation(final int locationSourse, final OnMapLocationListener onMapLocationListener) {
         final MapLoc mapLoc = new MapLoc(mContext);
         mapLoc.startLocation();
         mapLoc.setOnMapLocationListener(new OnMapLocationListener() {
@@ -84,7 +92,7 @@ public class AMapView extends FrameLayout {
                     LatLng latLng = new LatLng(aMapLocation.getLatitude(), aMapLocation.getLongitude());
                     mMap.moveCamera(CameraUpdateFactory.newLatLngZoom(latLng, 16));
                     mMap.addMarker(new MarkerOptions()
-                            .icon(BitmapDescriptorFactory.fromResource(locationSourse))
+                            .icon(BitmapDescriptorFactory.fromResource(locationSourse == 0 ? R.mipmap.amap_location : locationSourse))
                             .draggable(true)
                             .position(latLng));
                     if (onMapLocationListener != null) {
@@ -148,8 +156,8 @@ public class AMapView extends FrameLayout {
      *
      * @param textOptions
      */
-    public void addTextMark(TextOptions textOptions) {
-        mMap.addText(textOptions);
+    public Text addTextMark(TextOptions textOptions) {
+        return mMap.addText(textOptions);
     }
 
     /**
@@ -161,7 +169,7 @@ public class AMapView extends FrameLayout {
      * @param textSize        文本字体大小
      * @param backgroundColor 文本背景色
      */
-    public void addTextMark(LatLng latLng, String text, int textColor, int textSize, int backgroundColor) {
+    public Text addTextMark(LatLng latLng, String text, int textColor, int textSize, int backgroundColor) {
         TextOptions textOptions = new TextOptions()
                 .position(latLng)
                 .text("Text")
@@ -169,7 +177,7 @@ public class AMapView extends FrameLayout {
                 .backgroundColor(backgroundColor)
                 .fontSize(textSize)
                 .align(Text.ALIGN_CENTER_HORIZONTAL, Text.ALIGN_CENTER_VERTICAL);
-        mMap.addText(textOptions);
+        return mMap.addText(textOptions);
     }
 
     /**
@@ -177,8 +185,8 @@ public class AMapView extends FrameLayout {
      *
      * @param markerOptions
      */
-    public void addMark(MarkerOptions markerOptions) {
-        mMap.addMarker(markerOptions);
+    public Marker addMark(MarkerOptions markerOptions) {
+        return mMap.addMarker(markerOptions);
     }
 
     /**
@@ -189,8 +197,8 @@ public class AMapView extends FrameLayout {
      * @param resourceImage 图标，例如R.drawable.app_logo
      * @param drag          是否可以拖动
      */
-    public void addMark(double latitude, double longitude, int resourceImage, boolean drag) {
-        addMark(latitude, longitude, null, null, resourceImage, drag);
+    public Marker addMark(double latitude, double longitude, int resourceImage, boolean drag) {
+        return addMark(latitude, longitude, null, null, resourceImage, drag);
     }
 
     /**
@@ -201,7 +209,7 @@ public class AMapView extends FrameLayout {
      * @param resourceImage 图标，例如R.drawable.app_logo
      * @param drag          是否可以拖动
      */
-    public void addMark(double latitude, double longitude, String title, String content, int resourceImage, boolean drag) {
+    public Marker addMark(double latitude, double longitude, String title, String content, int resourceImage, boolean drag) {
         MarkerOptions markerOptions = new MarkerOptions()
                 .position(new LatLng(latitude, longitude))
                 .icon(BitmapDescriptorFactory.fromResource(resourceImage))
@@ -212,7 +220,7 @@ public class AMapView extends FrameLayout {
         if (!TextUtils.isEmpty(content)) {
             markerOptions.snippet(content);
         }
-        mMap.addMarker(markerOptions);
+        return mMap.addMarker(markerOptions);
     }
 
     /**
@@ -223,8 +231,8 @@ public class AMapView extends FrameLayout {
      * @param bitmap    图标
      * @param drag      是否可以拖动
      */
-    public void addMark(double latitude, double longitude, Bitmap bitmap, boolean drag) {
-        addMark(latitude, longitude, null, null, bitmap, drag);
+    public Marker addMark(double latitude, double longitude, Bitmap bitmap, boolean drag) {
+        return addMark(latitude, longitude, null, null, bitmap, drag);
     }
 
     /**
@@ -235,7 +243,7 @@ public class AMapView extends FrameLayout {
      * @param bitmap    图标
      * @param drag      是否可以拖动
      */
-    public void addMark(double latitude, double longitude, String title, String content, Bitmap bitmap, boolean drag) {
+    public Marker addMark(double latitude, double longitude, String title, String content, Bitmap bitmap, boolean drag) {
 
         MarkerOptions markerOptions = new MarkerOptions()
                 .position(new LatLng(latitude, longitude))
@@ -247,7 +255,27 @@ public class AMapView extends FrameLayout {
         if (!TextUtils.isEmpty(content)) {
             markerOptions.snippet(content);
         }
-        mMap.addMarker(markerOptions);
+        return mMap.addMarker(markerOptions);
+    }
+
+    /**
+     * 更新覆盖物的图标
+     *
+     * @param marker
+     * @param bitmap 图标
+     */
+    public void updateMarkIcon(Marker marker, Bitmap bitmap) {
+        marker.setIcon(BitmapDescriptorFactory.fromBitmap(bitmap));
+    }
+
+    /**
+     * 更新覆盖物的图标
+     *
+     * @param marker
+     * @param resourceImage 图标
+     */
+    public void updateMarkIcon(Marker marker, int resourceImage) {
+        marker.setIcon(BitmapDescriptorFactory.fromResource(resourceImage));
     }
 
     /**

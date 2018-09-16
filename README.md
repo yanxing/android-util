@@ -61,7 +61,7 @@ mRecyclerViewAdapter = new RecyclerViewAdapter<String>(mStrings,R.layout.adapter
 mRecyclerView.setAdapter(mRecyclerViewAdapter);
 ```
 ## baidumaplibrary
-对百度地图API的封装。[example](https://github.com/yanxing/android-util/blob/master/app/src/main/java/com/yanxing/ui/BaiduMapFragment.kt)
+对百度地图API(定位、添加marker、路线、POI、搜索建议搜索)的封装。[example](https://github.com/yanxing/android-util/blob/master/app/src/main/java/com/yanxing/ui/BaiduMapFragment.kt)
 ```Java 
 /**
  * 百度地图封装测试
@@ -96,7 +96,7 @@ public class BaiduMapExampleActivity extends BaseActivity implements RoutePlanRe
     //回调略
   ```
 ## amaploclibrary
-高德地图定位封装。
+高德地图封装（定位，添加marker）。[example](https://github.com/yanxing/android-util/blob/master/app/src/main/java/com/yanxing/ui/AMapActivity.kt)
 ```Java
    mAMapLoc=new AMapLoc(getApplicationContext());
    mAMapLoc.setAMapLocListener(this);
