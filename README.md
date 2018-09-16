@@ -61,55 +61,11 @@ mRecyclerViewAdapter = new RecyclerViewAdapter<String>(mStrings,R.layout.adapter
 mRecyclerView.setAdapter(mRecyclerViewAdapter);
 ```
 ## baidumaplibrary
-对百度地图API(定位、添加marker、路线、POI、搜索建议搜索)的封装。[example](https://github.com/yanxing/android-util/blob/master/app/src/main/java/com/yanxing/ui/BaiduMapFragment.kt)
-```Java 
-/**
- * 百度地图封装测试
- */
-@EActivity(R.layout.activity_baidu_map_example)
-public class BaiduMapExampleActivity extends BaseActivity implements RoutePlanResultListener{
+对百度地图(定位、添加marker、路线、POI、搜索建议)的封装。[example](https://github.com/yanxing/android-util/blob/master/app/src/main/java/com/yanxing/ui/BaiduMapFragment.kt)
 
-    @ViewById(R.id.map)
-    LinearLayout mMap;
-
-    private BaiduMapView mBaiduMapView;
-
-    @AfterViews
-    @Override
-    protected void afterInstanceView() {
-        mBaiduMapView=new BaiduMapView(this, mMap);
-        mBaiduMapView.setRoutePlanResultListener(this);
-        //驾车路径
-        LatLng fromLatLng = new LatLng(31.1145130000, 121.4112010000);
-        PlanNode senderNode = PlanNode.withLocation(fromLatLng);
-        LatLng toLatLng = new LatLng(31.2166060000, 121.4471340000);
-        PlanNode receiverNode = PlanNode.withLocation(toLatLng);
-        mBaiduMapView.drivingSearch((new DrivingRoutePlanOption()
-                .policy(DrivingRoutePlanOption.DrivingPolicy.ECAR_DIS_FIRST))
-                .from(senderNode)
-                .to(receiverNode));
-        //设置视角中心
-        mBaiduMapView.setCenterOnly(fromLatLng.latitude, fromLatLng.longitude);
-        //添加覆盖物
-        mBaiduMapView.setOverlay(31.1744546784,121.4980140000,R.mipmap.ic_launcher);
-    }
-    //回调略
-  ```
 ## amaploclibrary
 高德地图封装（定位，添加marker）。[example](https://github.com/yanxing/android-util/blob/master/app/src/main/java/com/yanxing/ui/AMapActivity.kt)
-```Java
-   mAMapLoc=new AMapLoc(getApplicationContext());
-   mAMapLoc.setAMapLocListener(this);
-   mAMapLoc.startLocation();
-   
-   
-    @Override
-    public void onLocationChanged(AMapLocation aMapLocation) {
-        if (aMapLocation!=null){
-            
-        }
-    }
-```
+
 ## titlebarlibrary
 自定义标题栏。[example](https://github.com/yanxing/android-util/blob/master/app/src/main/java/com/yanxing/ui/TitleBarFragment.kt)
 ```XML
