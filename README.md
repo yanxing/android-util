@@ -63,7 +63,7 @@ mRecyclerView.setAdapter(mRecyclerViewAdapter);
 ## baidumaplibrary
 对百度地图(定位、添加marker、路线、POI、搜索建议)的封装。[example](https://github.com/yanxing/android-util/blob/master/app/src/main/java/com/yanxing/ui/BaiduMapFragment.kt)
 
-## amaploclibrary
+## amaplibrary
 高德地图封装（定位，添加marker）。[example](https://github.com/yanxing/android-util/blob/master/app/src/main/java/com/yanxing/ui/AMapActivity.kt)
 
 ## titlebarlibrary
