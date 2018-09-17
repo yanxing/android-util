@@ -2,18 +2,27 @@ package com.yanxing.amap;
 
 import android.content.Context;
 import android.graphics.Bitmap;
+import android.graphics.Point;
 import android.os.Bundle;
+import android.os.Handler;
+import android.os.SystemClock;
 import android.text.TextUtils;
 import android.util.AttributeSet;
 import android.view.View;
 import android.view.ViewGroup;
+import android.view.animation.AccelerateInterpolator;
+import android.view.animation.BounceInterpolator;
+import android.view.animation.DecelerateInterpolator;
+import android.view.animation.Interpolator;
 import android.widget.FrameLayout;
 
 import com.amap.api.location.AMapLocation;
 import com.amap.api.maps2d.AMap;
 import com.amap.api.maps2d.CameraUpdateFactory;
 import com.amap.api.maps2d.MapView;
+import com.amap.api.maps2d.Projection;
 import com.amap.api.maps2d.model.BitmapDescriptorFactory;
+import com.amap.api.maps2d.model.CameraPosition;
 import com.amap.api.maps2d.model.LatLng;
 import com.amap.api.maps2d.model.Marker;
 import com.amap.api.maps2d.model.MarkerOptions;
@@ -24,6 +33,7 @@ import com.yanxing.amap.event.InfoWindowAdapter;
 import com.yanxing.amap.event.OnInfoWindowClickListener;
 import com.yanxing.amap.event.OnMapLoadedListener;
 import com.yanxing.amap.event.OnMapLocationListener;
+import com.yanxing.amap.event.OnMapStatusChangeListener;
 import com.yanxing.amap.event.OnMarkClickListener;
 import com.yanxing.amap.event.OnMarkerDragListener;
 
@@ -60,26 +70,63 @@ public class AMapView extends FrameLayout {
         this.addView(mMapView);
     }
 
+
+    /**
+     * 必须在Fragment/Activity调用
+     *
+     * @param savedInstanceState
+     */
+    public void onCreate(Bundle savedInstanceState) {
+        mMapView.onCreate(savedInstanceState);
+    }
+
+
+    /**
+     * 监听地图可视范围改变
+     *
+     * @param onMapStatusChangeListener
+     */
+    public void setOnMapStateChange(final OnMapStatusChangeListener onMapStatusChangeListener) {
+        mMap.setOnCameraChangeListener(new AMap.OnCameraChangeListener() {
+            @Override
+            public void onCameraChange(CameraPosition cameraPosition) {
+                onMapStatusChangeListener.onMapStatusChange(cameraPosition);
+            }
+
+            @Override
+            public void onCameraChangeFinish(CameraPosition cameraPosition) {
+                onMapStatusChangeListener.onMapStatusChangeFinish(cameraPosition);
+            }
+        });
+    }
+
+
     /**
      * 设置地图定位
+     *
+     * @param showLocationIcon 是否隐藏定位图标
      */
-    public void setLocation() {
-        setLocation(0, null);
+    public void setLocation(boolean showLocationIcon, OnMapLocationListener onMapLocationListener) {
+        if (showLocationIcon) {
+            setLocation(0, onMapLocationListener);
+        } else {
+            setLocation(-1, onMapLocationListener);
+        }
     }
 
     /**
      * 设置地图定位
      *
-     * @param locationSourse 定位图标
+     * @param onMapLocationListener
      */
-    public void setLocation(final int locationSourse) {
-        setLocation(locationSourse, null);
+    public void setLocation(OnMapLocationListener onMapLocationListener) {
+        setLocation(true, onMapLocationListener);
     }
 
     /**
      * 设置地图定位
      *
-     * @param locationSourse        定位图标
+     * @param locationSourse        自定义定位图标
      * @param onMapLocationListener 定位成功回调
      */
     public void setLocation(final int locationSourse, final OnMapLocationListener onMapLocationListener) {
@@ -91,10 +138,17 @@ public class AMapView extends FrameLayout {
                 if (aMapLocation != null && aMapLocation.getErrorCode() == 0) {
                     LatLng latLng = new LatLng(aMapLocation.getLatitude(), aMapLocation.getLongitude());
                     mMap.moveCamera(CameraUpdateFactory.newLatLngZoom(latLng, 16));
-                    mMap.addMarker(new MarkerOptions()
-                            .icon(BitmapDescriptorFactory.fromResource(locationSourse == 0 ? R.mipmap.amap_location : locationSourse))
-                            .draggable(true)
-                            .position(latLng));
+                    //显示定位图标
+                    if (locationSourse != -1) {
+                        MarkerOptions markerOptions = new MarkerOptions();
+                        //自定义图标
+                        if (locationSourse != 0) {
+                            markerOptions.icon(BitmapDescriptorFactory.fromResource(locationSourse));
+                        }
+                        markerOptions.draggable(false).position(latLng);
+                        mMap.addMarker(markerOptions);
+                    }
+
                     if (onMapLocationListener != null) {
                         onMapLocationListener.onLocationChanged(aMapLocation);
                     }
@@ -104,14 +158,6 @@ public class AMapView extends FrameLayout {
         });
     }
 
-    /**
-     * 必须在Fragment/Activity调用
-     *
-     * @param savedInstanceState
-     */
-    public void onCreate(Bundle savedInstanceState) {
-        mMapView.onCreate(savedInstanceState);
-    }
 
     /**
      * 设置marker拖拽监听
@@ -220,7 +266,9 @@ public class AMapView extends FrameLayout {
         if (!TextUtils.isEmpty(content)) {
             markerOptions.snippet(content);
         }
-        return mMap.addMarker(markerOptions);
+        Marker marker = mMap.addMarker(markerOptions);
+        jumpPoint(marker);
+        return marker;
     }
 
     /**
@@ -255,7 +303,41 @@ public class AMapView extends FrameLayout {
         if (!TextUtils.isEmpty(content)) {
             markerOptions.snippet(content);
         }
-        return mMap.addMarker(markerOptions);
+        Marker marker = mMap.addMarker(markerOptions);
+        jumpPoint(marker);
+        return marker;
+    }
+
+    /**
+     * marker跳动一下
+     */
+    public void jumpPoint(final Marker marker) {
+        final Handler handler = new Handler();
+        final long start = SystemClock.uptimeMillis();
+        Projection proj = mMap.getProjection();
+        final LatLng markerLatlng = marker.getPosition();
+        Point markerPoint = proj.toScreenLocation(markerLatlng);
+        markerPoint.offset(0, -60);
+        final LatLng startLatLng = proj.fromScreenLocation(markerPoint);
+        final long duration = 400;
+
+        final Interpolator interpolator = new AccelerateInterpolator();
+        handler.post(new Runnable() {
+            @Override
+            public void run() {
+                long elapsed = SystemClock.uptimeMillis() - start;
+                float t = interpolator.getInterpolation((float) elapsed
+                        / duration);
+                double lng = t * markerLatlng.longitude + (1 - t)
+                        * startLatLng.longitude;
+                double lat = t * markerLatlng.latitude + (1 - t)
+                        * startLatLng.latitude;
+                marker.setPosition(new LatLng(lat, lng));
+                if (t < 1.0) {
+                    handler.postDelayed(this, 16);
+                }
+            }
+        });
     }
 
     /**
