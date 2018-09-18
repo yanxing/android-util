@@ -54,7 +54,7 @@ abstract class BaseFragment : Fragment(), LifecycleProvider<ActivityEvent> {
         return view
     }
 
-    override fun onViewCreated(view: View?, savedInstanceState: Bundle?) {
+    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         afterInstanceView()
         super.onViewCreated(view, savedInstanceState)
     }
