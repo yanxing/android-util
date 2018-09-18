@@ -4,10 +4,10 @@ import android.support.v7.widget.StaggeredGridLayoutManager
 import android.view.View
 import android.widget.TextView
 
-import com.yanxing.adapterlibrary.CommonAdapter
-import com.yanxing.adapterlibrary.RecyclerViewAdapter
-import com.yanxing.adapterlibrary.ViewHolder
 import com.yanxing.base.BaseFragment
+import com.yanxing.commonlibrary.adapter.CommonAdapter
+import com.yanxing.commonlibrary.adapter.RecyclerViewAdapter
+import com.yanxing.commonlibrary.adapter.ViewHolder
 
 import java.util.ArrayList
 
@@ -43,15 +43,21 @@ class CommonAdapterFragment : BaseFragment() {
         val recyclerViewAdapter = object : RecyclerViewAdapter<Int>(list, R.layout.adapter_recycler_view) {
 
             override fun onBindViewHolder(holder: RecyclerViewAdapter.MyViewHolder, position: Int) {
+                super.onBindViewHolder(holder, position)
                 val textView = holder.findViewById<View>(R.id.text) as TextView
                 //瀑布流，动态设置item大小
                 val lp = textView.layoutParams
                 lp.height = (50 + Math.random() * 300).toInt()
                 textView.layoutParams = lp
                 textView.text = list[position].toString()
-                holder.itemView.setOnClickListener { showToast(getString(R.string.you_click) + (position + 1) + getString(R.string.ge)) }
             }
         }
+        recyclerViewAdapter.setOnItemClick(object : RecyclerViewAdapter.OnItemClickListener {
+            override fun onItemClick(viewHolder: RecyclerViewAdapter.MyViewHolder?, position: Int) {
+                showToast(getString(R.string.you_click) + (position + 1) + getString(R.string.ge))
+            }
+
+        })
         recyclerView.adapter = recyclerViewAdapter
     }
 }

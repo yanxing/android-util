@@ -1,14 +1,14 @@
 package com.yanxing.ui
 
 
-import com.yanxing.adapterlibrary.CommonAdapter
-import com.yanxing.adapterlibrary.ViewHolder
 import com.yanxing.base.BaseFragment
 
 import java.util.ArrayList
 
 import `in`.srain.cube.views.ptr.PtrDefaultHandler
 import `in`.srain.cube.views.ptr.PtrFrameLayout
+import com.yanxing.commonlibrary.adapter.CommonAdapter
+import com.yanxing.commonlibrary.adapter.ViewHolder
 import kotlinx.android.synthetic.main.fragment_ultra_ptr.*
 
 /**

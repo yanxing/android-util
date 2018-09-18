@@ -2,7 +2,7 @@ package com.yanxing.base
 
 import android.os.Bundle
 
-import com.yanxing.baseextendlibrary.view.LoadDialog
+import com.yanxing.commonlibrary.view.LoadDialog
 import com.yanxing.util.StatusBarUtil
 
 /**

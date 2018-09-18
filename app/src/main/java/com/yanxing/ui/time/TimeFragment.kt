@@ -1,10 +1,9 @@
 package com.yanxing.ui.time
 
 import android.support.v7.widget.LinearLayoutManager
-import android.widget.TextView
 
 import com.yanxing.base.BaseFragment
-import com.yanxing.baseextendlibrary.adapter.RecyclerViewAdapter
+import com.yanxing.commonlibrary.adapter.RecyclerViewAdapter
 import com.yanxing.ui.R
 import kotlinx.android.synthetic.main.fragment_time.*
 

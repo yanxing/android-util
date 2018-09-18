@@ -4,8 +4,8 @@ import android.support.v7.widget.RecyclerView
 import android.view.View
 import android.widget.TextView
 
-import com.yanxing.adapterlibrary.RecyclerViewAdapter
 import com.yanxing.base.BaseFragment
+import com.yanxing.commonlibrary.adapter.RecyclerViewAdapter
 import com.yanxing.view.CustomLinearLayoutManager
 
 import java.util.ArrayList

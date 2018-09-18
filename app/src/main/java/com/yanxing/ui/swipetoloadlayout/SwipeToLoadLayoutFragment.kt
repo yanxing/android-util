@@ -4,8 +4,8 @@ import android.support.v7.widget.LinearLayoutManager
 
 import com.aspsine.swipetoloadlayout.OnLoadMoreListener
 import com.aspsine.swipetoloadlayout.OnRefreshListener
-import com.yanxing.adapterlibrary.RecyclerViewAdapter
 import com.yanxing.base.BaseFragment
+import com.yanxing.commonlibrary.adapter.RecyclerViewAdapter
 import com.yanxing.ui.R
 
 import java.util.ArrayList

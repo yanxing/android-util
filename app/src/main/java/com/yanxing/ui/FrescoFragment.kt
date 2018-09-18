@@ -8,8 +8,8 @@ import android.view.View
 import com.facebook.drawee.backends.pipeline.Fresco
 import com.facebook.drawee.controller.BaseControllerListener
 import com.facebook.imagepipeline.image.ImageInfo
-import com.yanxing.adapterlibrary.RecyclerViewAdapter
 import com.yanxing.base.BaseFragment
+import com.yanxing.commonlibrary.adapter.RecyclerViewAdapter
 
 import java.util.ArrayList
 

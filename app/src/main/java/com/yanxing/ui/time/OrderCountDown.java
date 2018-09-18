@@ -4,7 +4,7 @@ import android.os.Handler;
 import android.os.Message;
 import android.util.SparseArray;
 
-import com.yanxing.baseextendlibrary.adapter.RecyclerViewAdapter;
+import com.yanxing.commonlibrary.adapter.RecyclerViewAdapter;
 
 import java.lang.ref.WeakReference;
 import java.util.List;

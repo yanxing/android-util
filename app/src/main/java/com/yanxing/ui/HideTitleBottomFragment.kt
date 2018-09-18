@@ -2,8 +2,8 @@ package com.yanxing.ui
 
 import android.support.v7.widget.LinearLayoutManager
 
-import com.yanxing.adapterlibrary.RecyclerViewAdapter
 import com.yanxing.base.BaseFragment
+import com.yanxing.commonlibrary.adapter.RecyclerViewAdapter
 import com.yanxing.util.RecycleViewUtil
 
 import java.util.ArrayList

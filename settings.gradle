@@ -1,5 +1,4 @@
 include ':app',
-        ':adapterlibrary',
         ':photolibrary',
         ':baidumaplibrary',
         ':titlebarlibrary',
@@ -12,4 +11,4 @@ include ':app',
         ':networklibrary',
         ':analyzelibrary',
         ':baselibrary',
-        ':baseextendlibrary'
+        ':commonlibrary'
