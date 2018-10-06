@@ -87,28 +87,31 @@ public class Transformer<T> {
                         .doOnSubscribe(new Consumer<Disposable>() {
                             @Override
                             public void accept(Disposable disposable) throws Exception {
-                                if (fragmentManager == null) {
-                                    return;
-                                }
-                                FragmentTransaction fragmentTransaction = fragmentManager.beginTransaction();
-                                Fragment fragment = fragmentManager.findFragmentByTag(LoadDialog.TAG);
-                                if (fragment != null) {
-                                    if (baseDialog != null) {
-                                        fragmentTransaction.remove(fragment).commitAllowingStateLoss();
-                                        baseDialog.show(fragmentTransaction, LoadDialog.TAG);
+                                try {
+                                    if (fragmentManager == null) {
+                                        return;
                                     }
-                                } else {
-                                    if (baseDialog == null) {
-                                        LoadDialog loadDialog = new LoadDialog();
-                                        if (toast != null) {
-                                            Bundle bundle = new Bundle();
-                                            bundle.putString(LoadDialog.ARGUMENT_KEY, toast);
-                                            loadDialog.setArguments(bundle);
+                                    FragmentTransaction fragmentTransaction = fragmentManager.beginTransaction();
+                                    Fragment fragment = fragmentManager.findFragmentByTag(LoadDialog.TAG);
+                                    if (fragment != null) {
+                                        if (baseDialog != null) {
+                                            fragmentTransaction.remove(fragment).commitAllowingStateLoss();
+                                            baseDialog.show(fragmentTransaction, LoadDialog.TAG);
                                         }
-                                        loadDialog.show(fragmentTransaction, LoadDialog.TAG);
                                     } else {
-                                        baseDialog.show(fragmentTransaction, LoadDialog.TAG);
+                                        if (baseDialog == null) {
+                                            LoadDialog loadDialog = new LoadDialog();
+                                            if (toast != null) {
+                                                Bundle bundle = new Bundle();
+                                                bundle.putString(LoadDialog.ARGUMENT_KEY, toast);
+                                                loadDialog.setArguments(bundle);
+                                            }
+                                            loadDialog.show(fragmentTransaction, LoadDialog.TAG);
+                                        } else {
+                                            baseDialog.show(fragmentTransaction, LoadDialog.TAG);
+                                        }
                                     }
+                                } catch (Exception e) {
                                 }
                             }
                         })

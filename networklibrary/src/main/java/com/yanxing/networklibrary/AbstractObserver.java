@@ -125,7 +125,10 @@ public abstract class AbstractObserver<T extends BaseModel> implements Observer<
             Fragment fragment = mFragmentManager.findFragmentByTag(LoadDialog.TAG);
             if (fragment != null) {
                 //移除正在显示的对话框
-                fragmentTransaction.remove(fragment).commitNowAllowingStateLoss();
+                try {
+                    fragmentTransaction.remove(fragment).commitNowAllowingStateLoss();
+                } catch (Exception e) {
+                }
             }
         }
     }
@@ -145,7 +148,10 @@ public abstract class AbstractObserver<T extends BaseModel> implements Observer<
             FragmentTransaction fragmentTransaction = mFragmentManager.beginTransaction();
             Fragment fragment = mFragmentManager.findFragmentByTag(LoadDialog.TAG);
             if (fragment != null) {
-                fragmentTransaction.remove(fragment).commitNowAllowingStateLoss();
+                try {
+                    fragmentTransaction.remove(fragment).commitNowAllowingStateLoss();
+                } catch (Exception e1) {
+                }
             }
         }
     }
