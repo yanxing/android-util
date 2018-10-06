@@ -64,9 +64,9 @@ abstract class BaseFragment : Fragment(), LifecycleProvider<ActivityEvent> {
      */
     protected fun showToast(tip: String) {
         if (isAdded && activity != null) {
-            var toast = Toast.makeText(activity, tip, Toast.LENGTH_LONG)
-            if (tip.length<=30){
-                toast = Toast.makeText(activity, tip, Toast.LENGTH_SHORT)
+            var toast = Toast.makeText(activity, tip, Toast.LENGTH_SHORT)
+            if (tip.length>30){
+                toast = Toast.makeText(activity, tip, Toast.LENGTH_LONG)
             }
             toast.setGravity(Gravity.CENTER, 0, 0)
             toast.show()
