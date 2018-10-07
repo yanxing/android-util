@@ -50,7 +50,7 @@ public class  MyApplication extends Application {
     @Override
     public void attachBaseContext(Context base) {
         super.attachBaseContext(base);
-        MultiDex.install(base);
+        MultiDex.install(this);
         Beta.installTinker();
     }
 

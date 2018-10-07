@@ -66,6 +66,7 @@ public class AMapView extends FrameLayout {
         this.mContext = context;
         this.mMapView = new MapView(context);
         this.mMap = mMapView.getMap();
+        this.mMap.getUiSettings().setZoomControlsEnabled(false);
         this.mMapView.setLayoutParams(new LayoutParams(ViewGroup.LayoutParams.MATCH_PARENT, ViewGroup.LayoutParams.MATCH_PARENT));
         this.addView(mMapView);
     }
@@ -429,8 +430,12 @@ public class AMapView extends FrameLayout {
     }
 
     public void onDestroy() {
-        mMap.clear();
-        mMapView.onDestroy();
+        if (mMap!=null) {
+            mMap.clear();
+        }
+        if (mMapView!=null) {
+            mMapView.onDestroy();
+        }
     }
 
 }

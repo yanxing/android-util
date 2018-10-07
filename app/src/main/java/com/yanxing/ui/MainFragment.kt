@@ -190,6 +190,9 @@ class MainFragment : BaseFragment(){
         time.setOnClickListener {
             replace(TimeFragment())
         }
+        design.setOnClickListener{
+            replace(DesignFragment())
+        }
 
     }
 

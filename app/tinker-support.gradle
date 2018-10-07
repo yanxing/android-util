@@ -45,7 +45,7 @@ tinkerSupport {
     // isProtectedApp = true
 
     // 是否开启反射Application模式
-    enableProxyApplication = false
+    enableProxyApplication = true
 
 }
 

@@ -6,8 +6,6 @@ android {
 
     defaultConfig {
         minSdkVersion COMMON_MIN_SDK_VERSION as int
-        versionCode CURRENT_RELEASE_VERSION_CODE as int
-        versionName CURRENT_RELEASE_VERSION_NAME as String
     }
     buildTypes {
         release {
@@ -20,8 +18,6 @@ android {
 dependencies {
     compile fileTree(include: ['*.jar'], dir: 'libs')
     testCompile 'junit:junit:4.12'
-    compile "com.android.support:appcompat-v7:${SUPPORT_VERSION}"
-    compile "com.android.support:support-v4:${SUPPORT_VERSION}"
     //2D地图
     compile 'com.amap.api:map2d:latest.integration'
     //定位

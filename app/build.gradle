@@ -100,7 +100,6 @@ dependencies {
     compile 'top.zibin:Luban:1.1.3'
     compile 'com.github.Aspsine:SwipeToLoadLayout:1.0.4'
     compile 'com.zhihu.android:matisse:0.4.3'
-    compile 'com.github.bumptech.glide:glide:3.7.0'
     compile project(':sortlistviewlibrary')
 //    compile project(':adapterlibrary')
     compile project(':photolibrary')
@@ -113,7 +112,7 @@ dependencies {
     compile project(':photodialoglibrary')
     compile project(':downloadlibrary')
 //    compile project(':networklibrary')
-    compile 'com.yanxing:networklibrary:1.1.5'
+    compile 'com.yanxing:networklibrary:1.1.6'
     compile project(':analyzelibrary')
     compile project(':commonlibrary')
 }

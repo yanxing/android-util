@@ -145,5 +145,9 @@
             android:id="@+id/time"
             style="@style/style_btn"
             android:text="时间倒计时"/>
+        <Button
+            android:id="@+id/design"
+            style="@style/style_btn"
+            android:text="@string/design"/>
     </LinearLayout>
 </android.support.v4.widget.NestedScrollView>
