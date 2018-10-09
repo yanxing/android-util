@@ -106,7 +106,7 @@ dependencies {
     compile project(':baidumaplibrary')
     compile project(':titlebarlibrary')
 //    compile project(':tablayoutlibrary')
-    compile 'com.yanxing:tablayoutlibrary:1.0.3'
+    compile 'com.yanxing:tablayoutlibrary:1.0.4'
     compile project(':amaplibrary')
     compile project(':heartbubblelibrary')
     compile project(':photodialoglibrary')
