@@ -147,7 +147,7 @@ public class TabLayoutPager extends FrameLayout {
     /**
      * @return
      */
-    public ViewPager getViewPager() {
+    public NoScrollViewPager getViewPager() {
         return mViewPager;
     }
 
