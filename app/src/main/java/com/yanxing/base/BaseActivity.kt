@@ -3,6 +3,7 @@ package com.yanxing.base
 import android.os.Bundle
 
 import com.yanxing.commonlibrary.view.LoadDialog
+import com.yanxing.util.StatusBarColorUtil
 import com.yanxing.util.StatusBarUtil
 
 /**
@@ -14,8 +15,7 @@ abstract class BaseActivity : com.yanxing.baselibrary.BaseActivity() {
     public override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         StatusBarUtil.setStatusBarDarkMode(true, this)
-        StatusBarUtil.setStatusBarDarkIcon(window, true)
-        StatusBarUtil.setStatusBarDark6(this)
+        StatusBarColorUtil.setStatusBarDarkIcon(this,true)
     }
 
     /**

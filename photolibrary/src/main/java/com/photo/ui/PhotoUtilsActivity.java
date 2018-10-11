@@ -139,10 +139,7 @@ public class PhotoUtilsActivity extends Activity implements OnClickListener {
      * 沉浸式布局
      */
     public void initImmersionStatus(){
-        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.KITKAT) {
-            //透明状态栏
-            getWindow().addFlags(WindowManager.LayoutParams.FLAG_TRANSLUCENT_STATUS);
-        }
+        AppUtil.setTranslucentStatus(this);
         AppUtil.setStatusBarDarkMode(true,this);
     }
 

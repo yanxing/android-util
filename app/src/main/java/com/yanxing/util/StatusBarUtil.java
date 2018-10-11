@@ -1,6 +1,7 @@
 package com.yanxing.util;
 
 import android.app.Activity;
+import android.graphics.Color;
 import android.os.Build;
 import android.util.Log;
 import android.view.View;
@@ -36,44 +37,19 @@ public class StatusBarUtil {
     }
 
     /**
-     * 设置6.0以上字体为暗的
+     * 设置沉浸式，避免直接加WindowManager.LayoutParams.FLAG_TRANSLUCENT_STATUS)华为手机状态栏有阴影
+     *
+     * @param activity
      */
-    public static void setStatusBarDark6(Activity activity){
-        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
-            activity.getWindow().getDecorView().setSystemUiVisibility(View.SYSTEM_UI_FLAG_LIGHT_STATUS_BAR);
+    public static void setTranslucentStatus(Activity activity) {
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {
+            Window window = activity.getWindow();
+            window.clearFlags(WindowManager.LayoutParams.FLAG_TRANSLUCENT_STATUS);
+            window.getDecorView().setSystemUiVisibility(View.SYSTEM_UI_FLAG_LAYOUT_FULLSCREEN
+                    | View.SYSTEM_UI_FLAG_LAYOUT_STABLE);
+            window.addFlags(WindowManager.LayoutParams.FLAG_DRAWS_SYSTEM_BAR_BACKGROUNDS);
+            window.setStatusBarColor(Color.TRANSPARENT);
         }
-    }
-
-    /**
-     * 魅族设置状态栏字体为灰色
-     * @param window
-     * @param dark
-     * @return
-     */
-    public static boolean setStatusBarDarkIcon(Window window, boolean dark) {
-        boolean result = false;
-        if (window != null) {
-            try {
-                WindowManager.LayoutParams lp = window.getAttributes();
-                Field darkFlag = WindowManager.LayoutParams.class.getDeclaredField("MEIZU_FLAG_DARK_STATUS_BAR_ICON");
-                Field meizuFlags = WindowManager.LayoutParams.class.getDeclaredField("meizuFlags");
-                darkFlag.setAccessible(true);
-                meizuFlags.setAccessible(true);
-                int bit = darkFlag.getInt(null);
-                int value = meizuFlags.getInt(lp);
-                if (dark) {
-                    value |= bit;
-                } else {
-                    value &= ~bit;
-                }
-                meizuFlags.setInt(lp, value);
-                window.setAttributes(lp);
-                result = true;
-            } catch (Exception e) {
-                Log.e("MeiZu", "setStatusBarDarkIcon: failed");
-            }
-        }
-        return result;
     }
 
 }
