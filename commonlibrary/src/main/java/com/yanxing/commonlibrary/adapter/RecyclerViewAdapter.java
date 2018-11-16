@@ -68,7 +68,7 @@ public abstract class RecyclerViewAdapter<T> extends RecyclerView.Adapter<Recycl
                 if (mOnItemLongClickListener != null) {
                     return mOnItemLongClickListener.onItemLongClick(holder, position);
                 }
-                return false;
+                return true;
             }
         });
     }
