@@ -8,5 +8,7 @@
         <!-- 选项卡文字颜色-->
         <attr name="tabLayoutTextColor" format="color"/>
         <attr name="tabLayoutBackground" format="color|reference"/>
+        <!--TabLayout高度-->
+        <attr name="tabLayoutHigh" format="dimension"/>
     </declare-styleable>
 </resources>

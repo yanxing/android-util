@@ -56,6 +56,10 @@ public class TabLayoutPager extends FrameLayout {
             mTabLayout.setTabTextColors(noSelected, selected);
             mTabBackgroundResId = a.getResourceId(R.styleable.TabLayoutPager_tabLayoutBackground, getResources().getColor(R.color.tablayout_white));
             mTabLayout.setBackgroundResource(mTabBackgroundResId);
+            if (a.hasValue(R.styleable.TabLayoutPager_tabLayoutHigh)){
+                LinearLayout.LayoutParams params= (LinearLayout.LayoutParams) mTabLayout.getLayoutParams();
+                params.height= (int) a.getDimension(R.styleable.TabLayoutPager_tabLayoutHigh,40.f);
+            }
         } finally {
             a.recycle();
             ta.recycle();
