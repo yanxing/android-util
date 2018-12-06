@@ -7,7 +7,7 @@
 对retrofit2+rxjava2网络请求的简单封装（包括网络请求时显示等待对话框和请求完成后上下拉刷新控件置为完成状态）。
 * gradle  
 ```java
- compile 'com.yanxing:networklibrary:1.2.0'
+ compile 'com.yanxing:networklibrary:1.2.1'
  ```
 [example](https://github.com/yanxing/android-util/blob/master/app/src/main/java/com/yanxing/ui/NetworkLibraryFragment.kt)
 ```java
