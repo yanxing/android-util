@@ -76,7 +76,7 @@ abstract class BaseDialogFragment : DialogFragment(), LifecycleProvider<Activity
     /**
      * 显示toast消息
      */
-    protected fun showToast(tip: String) {
+    open fun showToast(tip: String) {
         var toast = Toast.makeText(activity, tip, Toast.LENGTH_SHORT)
         if (tip.length>30){
             toast = Toast.makeText(activity, tip, Toast.LENGTH_LONG)

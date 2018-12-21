@@ -62,7 +62,7 @@ abstract class BaseFragment : Fragment(), LifecycleProvider<ActivityEvent> {
     /**
      * 显示toast消息
      */
-    protected fun showToast(tip: String) {
+    open fun showToast(tip: String) {
         if (isAdded && activity != null) {
             var toast = Toast.makeText(activity, tip, Toast.LENGTH_SHORT)
             if (tip.length>30){
