@@ -3,7 +3,7 @@ package com.yanxing.ui
 import com.tencent.bugly.Bugly.applicationContext
 import com.yanxing.baselibrary.BaseFragment
 import com.yanxing.model.DouBan
-import com.yanxing.networklibrary.AbstractObserver
+import com.yanxing.networklibrary.BaseAbstractObserver
 import com.yanxing.networklibrary.RetrofitManage
 import com.yanxing.networklibrary.Transformer
 import com.yanxing.ui.retrofit.DouBanAPI
@@ -33,13 +33,8 @@ class NetworkLibraryFragment : BaseFragment() {
         RetrofitManage.getInstance().retrofit.create(DouBanAPI::class.java)
                 .getTopMovie(0, 10)
                 .compose(Transformer<DouBan>().iOMainHasProgress(this, mFragmentManager, "请稍等..."))
-                .subscribe(object : AbstractObserver<DouBan>(applicationContext, mFragmentManager, false) {
+                .subscribe(object : BaseAbstractObserver<DouBan>(applicationContext, mFragmentManager) {
                     override fun onCall(douBan: DouBan) {
-
-                    }
-
-                    override fun onNext(douBan: DouBan) {
-                        super.onNext(douBan)
                         val stringBuilder = StringBuilder()
                         for (i in 0 until douBan.subjects.size) {
                             stringBuilder.append(i.toString())

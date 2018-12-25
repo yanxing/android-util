@@ -14,8 +14,8 @@
  RetrofitManage.getInstance().init(mBaseUrl, true)
  RetrofitManage.getInstance().retrofit!!.create(DouBanAPI::class.java)
                 .getTopMovie(0, 10)
-                .compose(Transformer<DouBan>().iOMainHasProgress(this, mFragmentManager, "请稍等..."))
-                .subscribe(object : AbstractObserver<DouBan>(applicationContext, mFragmentManager, false) {
+                .compose(Transformer<DouBan>().iOMainHasProgress(this, fragmentManager, "请稍等..."))
+                .subscribe(object : BaseAbstractObserver<DouBan>(context, fragmentManager) {
                     override fun onCall(douBan: DouBan) {
 
                     }
