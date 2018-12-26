@@ -5,6 +5,7 @@ import android.support.annotation.CallSuper
 import android.support.annotation.CheckResult
 import android.support.v4.app.Fragment
 import android.support.v4.app.FragmentManager
+import android.text.TextUtils
 import android.view.Gravity
 import android.view.LayoutInflater
 import android.view.View
@@ -62,10 +63,13 @@ abstract class BaseFragment : Fragment(), LifecycleProvider<ActivityEvent> {
     /**
      * 显示toast消息
      */
-    open fun showToast(tip: String) {
+    open fun showToast(tip: String?) {
+        if (TextUtils.isEmpty(tip)){
+            return
+        }
         if (isAdded && activity != null) {
             var toast = Toast.makeText(activity, tip, Toast.LENGTH_SHORT)
-            if (tip.length>30){
+            if (tip!!.length>30){
                 toast = Toast.makeText(activity, tip, Toast.LENGTH_LONG)
             }
             toast.setGravity(Gravity.CENTER, 0, 0)

@@ -5,6 +5,7 @@ import android.support.annotation.CallSuper
 import android.support.annotation.CheckResult
 import android.support.v4.app.FragmentManager
 import android.support.v7.app.AppCompatActivity
+import android.text.TextUtils
 import android.view.Gravity
 import android.widget.Toast
 import com.trello.rxlifecycle2.LifecycleProvider
@@ -54,9 +55,12 @@ abstract class BaseActivity : AppCompatActivity(), LifecycleProvider<ActivityEve
     /**
      * 显示toast消息
      */
-    open fun showToast(tip: String) {
+    open fun showToast(tip: String?) {
+        if (TextUtils.isEmpty(tip)){
+            return
+        }
         var toast = Toast.makeText(applicationContext, tip, Toast.LENGTH_SHORT)
-        if (tip.length>30){
+        if (tip!!.length>30){
             toast = Toast.makeText(applicationContext, tip, Toast.LENGTH_LONG)
         }
         toast.setGravity(Gravity.CENTER, 0, 0)
