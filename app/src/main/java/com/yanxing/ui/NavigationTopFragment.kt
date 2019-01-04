@@ -1,6 +1,6 @@
 package com.yanxing.ui
 
-import android.support.v7.widget.LinearLayoutManager
+import androidx.recyclerview.widget.LinearLayoutManager
 
 import com.yanxing.base.BaseFragment
 import com.yanxing.commonlibrary.adapter.RecyclerViewAdapter
@@ -17,7 +17,7 @@ import kotlinx.android.synthetic.main.fragment_navigation_top.*
 class NavigationTopFragment : BaseFragment() {
 
 
-    private var mLinearManager: LinearLayoutManager? = null
+    private var mLinearManager: androidx.recyclerview.widget.LinearLayoutManager? = null
     private var mWidth = 1080
 
     override fun getLayoutResID(): Int {
@@ -29,7 +29,7 @@ class NavigationTopFragment : BaseFragment() {
         if (displayMetrics != null) {
             mWidth = displayMetrics.widthPixels
         }
-        mLinearManager = LinearLayoutManager(activity, LinearLayoutManager.HORIZONTAL, false)
+        mLinearManager = androidx.recyclerview.widget.LinearLayoutManager(activity, androidx.recyclerview.widget.LinearLayoutManager.HORIZONTAL, false)
         recyclerView.layoutManager = mLinearManager
 
         //javaScript

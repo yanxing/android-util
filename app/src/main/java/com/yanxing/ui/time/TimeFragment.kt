@@ -1,6 +1,6 @@
 package com.yanxing.ui.time
 
-import android.support.v7.widget.LinearLayoutManager
+import androidx.recyclerview.widget.LinearLayoutManager
 
 import com.yanxing.base.BaseFragment
 import com.yanxing.commonlibrary.adapter.RecyclerViewAdapter
@@ -26,7 +26,7 @@ class TimeFragment : BaseFragment() {
 
     override fun afterInstanceView() {
         addTestData()
-        recyclerview.layoutManager = LinearLayoutManager(activity)
+        recyclerview.layoutManager = androidx.recyclerview.widget.LinearLayoutManager(activity)
         mRecyclerViewAdapter = object : RecyclerViewAdapter<Order>(mList, R.layout.adapter_recycler_view) {
             override fun onBindViewHolder(holder: RecyclerViewAdapter.MyViewHolder, position: Int) {
                 holder.setText(R.id.text,mDataList[position].payRemaindSecond.toString())

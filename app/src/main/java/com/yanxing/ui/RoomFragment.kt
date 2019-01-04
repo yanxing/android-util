@@ -1,6 +1,6 @@
 package com.yanxing.ui
 
-import android.arch.persistence.room.Room
+import androidx.room.Room
 
 import com.yanxing.base.BaseFragment
 import com.yanxing.dao.RoomDataBaseHelper
@@ -20,7 +20,7 @@ class RoomFragment : BaseFragment() {
     }
 
     override fun afterInstanceView() {
-        mRoomDataBaseHelper = Room.databaseBuilder(activity, RoomDataBaseHelper::class.java, "room")
+        mRoomDataBaseHelper = Room.databaseBuilder(activity!!, RoomDataBaseHelper::class.java, "room")
                 .allowMainThreadQueries()
                 .build()
         showStudents()

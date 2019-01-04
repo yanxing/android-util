@@ -1,7 +1,7 @@
 package com.yanxing.view;
 
 import android.content.Context;
-import android.support.v7.widget.LinearLayoutManager;
+import androidx.recyclerview.widget.LinearLayoutManager;
 
 /**
  * 自定义线性布局管理器，添加禁止上下滑动

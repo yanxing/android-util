@@ -116,7 +116,7 @@ class MPAndroidChartFragment : BaseFragment() {
         xAxis.isEnabled = false
         xAxis.valueFormatter = IAxisValueFormatter { value, axis -> mMonths[value.toInt() % mMonths.size] }
 
-        val mv = MyMarkerView(activity, R.layout.custom_marker_view)
+        val mv = MyMarkerView(activity!!, R.layout.custom_marker_view)
         mv.chartView = barChart
         barChart.marker = mv
 

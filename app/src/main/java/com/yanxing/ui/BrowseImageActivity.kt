@@ -1,8 +1,8 @@
 package com.yanxing.ui
 
 import android.graphics.drawable.Animatable
-import android.support.v4.view.PagerAdapter
-import android.support.v4.view.ViewPager
+import androidx.viewpager.widget.PagerAdapter
+import androidx.viewpager.widget.ViewPager
 import android.view.View
 import android.view.ViewGroup
 import android.view.WindowManager
@@ -49,7 +49,7 @@ class BrowseImageActivity : BaseActivity() {
                 }
                 viewPager.adapter = DraweePagerAdapter()
                 viewPager.currentItem = index
-                viewPager.addOnPageChangeListener(object : ViewPager.OnPageChangeListener {
+                viewPager.addOnPageChangeListener(object : androidx.viewpager.widget.ViewPager.OnPageChangeListener {
                     override fun onPageScrolled(position: Int, positionOffset: Float, positionOffsetPixels: Int) {}
 
                     override fun onPageSelected(position: Int) {
@@ -65,7 +65,7 @@ class BrowseImageActivity : BaseActivity() {
         }
     }
 
-    inner class DraweePagerAdapter : PagerAdapter() {
+    inner class DraweePagerAdapter : androidx.viewpager.widget.PagerAdapter() {
 
         override fun getCount(): Int {
             return mImageUrls.size

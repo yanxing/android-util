@@ -1,6 +1,6 @@
 package com.yanxing.ui
 
-import android.support.v7.widget.RecyclerView
+import androidx.recyclerview.widget.RecyclerView
 import android.view.View
 import android.widget.TextView
 
@@ -62,8 +62,8 @@ class ExtendRecyclerViewFragment : BaseFragment() {
     /**
      * 滑动监听，当指定位置位于最后可见项的后面时，移动最后的距离
      */
-    private inner class RecyclerViewListener : RecyclerView.OnScrollListener() {
-        override fun onScrolled(recyclerView: RecyclerView, dx: Int, dy: Int) {
+    private inner class RecyclerViewListener : androidx.recyclerview.widget.RecyclerView.OnScrollListener() {
+        override fun onScrolled(recyclerView: androidx.recyclerview.widget.RecyclerView, dx: Int, dy: Int) {
             super.onScrolled(recyclerView, dx, dy)
             if (mNeedScroll) {
                 mNeedScroll = false

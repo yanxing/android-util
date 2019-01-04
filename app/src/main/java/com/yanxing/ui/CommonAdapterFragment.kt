@@ -1,6 +1,6 @@
 package com.yanxing.ui
 
-import android.support.v7.widget.StaggeredGridLayoutManager
+import androidx.recyclerview.widget.StaggeredGridLayoutManager
 import android.view.View
 import android.widget.TextView
 
@@ -39,7 +39,7 @@ class CommonAdapterFragment : BaseFragment() {
         //GridView
         gridView.adapter = adapter
         //RecycleView
-        recyclerView.layoutManager = StaggeredGridLayoutManager(4, StaggeredGridLayoutManager.VERTICAL)
+        recyclerView.layoutManager = androidx.recyclerview.widget.StaggeredGridLayoutManager(4, androidx.recyclerview.widget.StaggeredGridLayoutManager.VERTICAL)
         val recyclerViewAdapter = object : RecyclerViewAdapter<Int>(list, R.layout.adapter_recycler_view) {
 
             override fun onBindViewHolder(holder: RecyclerViewAdapter.MyViewHolder, position: Int) {

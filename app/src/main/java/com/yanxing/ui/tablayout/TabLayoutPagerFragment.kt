@@ -1,7 +1,7 @@
 package com.yanxing.ui.tablayout
 
-import android.support.design.widget.TabLayout
-import android.support.v4.app.Fragment
+import com.google.android.material.tabs.TabLayout
+import androidx.fragment.app.Fragment
 
 import com.yanxing.base.BaseFragment
 import com.yanxing.ui.R
@@ -17,7 +17,7 @@ import kotlinx.android.synthetic.main.fragment_tablayoutpager.*
 class TabLayoutPagerFragment : BaseFragment() {
 
 
-    private val mFragmentList = ArrayList<Fragment>()
+    private val mFragmentList = ArrayList<androidx.fragment.app.Fragment>()
     private val mStringList = ArrayList<String>()
 
     override fun getLayoutResID(): Int {

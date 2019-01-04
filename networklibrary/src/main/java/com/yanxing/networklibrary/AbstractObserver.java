@@ -1,7 +1,7 @@
 package com.yanxing.networklibrary;
 
 import android.content.Context;
-import android.support.v4.app.FragmentManager;
+import androidx.fragment.app.FragmentManager;
 import android.text.TextUtils;
 
 import com.yanxing.networklibrary.model.BaseModel;

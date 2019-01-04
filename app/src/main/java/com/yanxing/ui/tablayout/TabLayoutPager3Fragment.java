@@ -13,15 +13,11 @@ import com.yanxing.util.LogUtil;
 
 import org.greenrobot.eventbus.Subscribe;
 
-import butterknife.BindView;
 
 /**
  * Created by lishuangxiang on 2016/3/14.
  */
 public class TabLayoutPager3Fragment extends BaseFragment {
-
-    @BindView(R.id.text)
-    TextView mTextView;
 
     @Override
     protected int getLayoutResID() {
@@ -36,7 +32,6 @@ public class TabLayoutPager3Fragment extends BaseFragment {
 
     @Subscribe
     public void onEvent(String content){
-        mTextView.setText(content);
     }
 
     @Override

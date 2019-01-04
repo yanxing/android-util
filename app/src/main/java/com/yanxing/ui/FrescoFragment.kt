@@ -2,7 +2,7 @@ package com.yanxing.ui
 
 import android.graphics.drawable.Animatable
 import android.net.Uri
-import android.support.v7.widget.LinearLayoutManager
+import androidx.recyclerview.widget.LinearLayoutManager
 import android.view.View
 
 import com.facebook.drawee.backends.pipeline.Fresco
@@ -53,7 +53,7 @@ class FrescoFragment : BaseFragment() {
                 photoDraweeView.controller = controller.build()
             }
         }
-        recyclerView.layoutManager = LinearLayoutManager(activity)
+        recyclerView.layoutManager = androidx.recyclerview.widget.LinearLayoutManager(activity)
         recyclerView.adapter = mCommonAdapter
     }
 }

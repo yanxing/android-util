@@ -2,7 +2,6 @@ apply plugin: 'com.android.library'
 
 android {
     compileSdkVersion COMPILE_SDK_VERSION as int
-    buildToolsVersion BUILD_TOOLS_VERSION
 
     defaultConfig {
         minSdkVersion COMMON_MIN_SDK_VERSION as int
@@ -16,12 +15,12 @@ android {
 }
 
 dependencies {
-    compile fileTree(include: ['*.jar'], dir: 'libs')
-    testCompile 'junit:junit:4.12'
+    implementation fileTree(include: ['*.jar'], dir: 'libs')
+    testImplementation 'junit:junit:4.12'
     //2D地图
-    compile 'com.amap.api:map2d:latest.integration'
+    api 'com.amap.api:map2d:latest.integration'
     //定位
-    compile 'com.amap.api:location:latest.integration'
+    api 'com.amap.api:location:latest.integration'
     //搜索
 //    compile 'com.amap.api:search:latest.integration'
     //3D地图

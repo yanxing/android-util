@@ -6,11 +6,9 @@ buildscript {
     // targetSdkVersion
     ext.TARGET_SDK_VERSION = 28
     // Library minSdkVersion
-    ext.COMMON_MIN_SDK_VERSION = 18
+    ext.COMMON_MIN_SDK_VERSION = 19
     // compileSdkVersion
     ext.COMPILE_SDK_VERSION = 28
-    // support-v7
-    ext.SUPPORT_VERSION = '26.1.0'
     //versionCode
     ext.CURRENT_RELEASE_VERSION_CODE = 1
     //versionName

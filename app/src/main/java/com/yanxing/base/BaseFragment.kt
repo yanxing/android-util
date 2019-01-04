@@ -23,10 +23,10 @@ abstract class BaseFragment : com.yanxing.baselibrary.BaseFragment() {
      * 显示加载框,带文字提示
      */
     fun showLoadingDialog(msg: String?) {
-        val fragmentTransaction = mFragmentManager.beginTransaction()
-        val fragment = mFragmentManager.findFragmentByTag(LoadDialog.TAG)
+        val fragmentTransaction = mFragmentManager?.beginTransaction()
+        val fragment = mFragmentManager?.findFragmentByTag(LoadDialog.TAG)
         if (fragment != null) {
-            fragmentTransaction.remove(fragment).commit()
+            fragmentTransaction?.remove(fragment)?.commit()
         } else {
             val loadDialog = LoadDialog()
             if (msg != null) {
@@ -34,7 +34,9 @@ abstract class BaseFragment : com.yanxing.baselibrary.BaseFragment() {
                 bundle.putString("tip", msg)
                 loadDialog.arguments = bundle
             }
-            loadDialog.show(fragmentTransaction, LoadDialog.TAG)
+            if (fragmentTransaction!=null) {
+                loadDialog.show(fragmentTransaction, LoadDialog.TAG)
+            }
         }
     }
 
@@ -42,11 +44,11 @@ abstract class BaseFragment : com.yanxing.baselibrary.BaseFragment() {
      * 隐藏加载框
      */
     fun dismissLoadingDialog() {
-        val fragmentTransaction = mFragmentManager.beginTransaction()
-        val fragment = mFragmentManager.findFragmentByTag(LoadDialog.TAG)
+        val fragmentTransaction = mFragmentManager?.beginTransaction()
+        val fragment = mFragmentManager?.findFragmentByTag(LoadDialog.TAG)
         if (fragment != null) {
             //移除正在显示的对话框
-            fragmentTransaction.remove(fragment).commitNow()
+            fragmentTransaction?.remove(fragment)?.commitNow()
         }
     }
 

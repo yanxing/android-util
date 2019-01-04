@@ -19,7 +19,7 @@
         android:numColumns="3"
         android:background="@color/default_bg"
         android:columnWidth="90dp"/>
-    <android.support.v7.widget.RecyclerView
+    <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/recyclerView"
         android:background="@color/gery"
         android:layout_width="match_parent"

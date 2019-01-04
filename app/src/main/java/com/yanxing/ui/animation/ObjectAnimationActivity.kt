@@ -2,7 +2,7 @@ package com.yanxing.ui.animation
 
 import android.animation.ObjectAnimator
 import android.animation.ValueAnimator
-import android.support.design.widget.Snackbar
+import com.google.android.material.snackbar.Snackbar
 
 import com.yanxing.base.BaseActivity
 import com.yanxing.model.Point

@@ -32,8 +32,7 @@ class DownloadLibraryFragment : BaseFragment() {
                 .setLog(true)
                 .builder()
         DownloadUtils.getInstance().init(downloadConfiguration)
-        val progressInt = DownloadUtils.getInstance().getDownloadProgressByUrl(activity
-                .applicationContext, url.text.toString())
+        val progressInt = DownloadUtils.getInstance().getDownloadProgressByUrl(activity, url.text.toString())
         if (progressInt == -1) {
             showToast(getString(R.string.file_delete_re_down))
         } else if (progressInt >= 0) {
@@ -58,7 +57,7 @@ class DownloadLibraryFragment : BaseFragment() {
      * 下载
      */
     fun download() {
-        DownloadUtils.getInstance().startDownload(activity.applicationContext, url.text.toString(), object : SimpleDownloadListener() {
+        DownloadUtils.getInstance().startDownload(activity, url.text.toString(), object : SimpleDownloadListener() {
             override fun onStart() {
                 LogUtil.d("DownloadUtils", getString(R.string.start_download1))
             }

@@ -1,6 +1,6 @@
 package com.yanxing.networklibrary.dialog;
 
-import android.support.v4.app.DialogFragment;
+import androidx.fragment.app.DialogFragment;
 
 /**
  * 进度对话框，Transformer中加入自定义的进度框，可继承这个类

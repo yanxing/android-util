@@ -1,7 +1,7 @@
 package com.yanxing.ui
 
 import android.graphics.Color
-import android.support.v7.widget.LinearLayoutManager
+import androidx.recyclerview.widget.LinearLayoutManager
 
 import com.yanxing.base.BaseFragment
 import com.yanxing.commonlibrary.adapter.RecyclerViewAdapter
@@ -29,7 +29,7 @@ class DesignFragment : BaseFragment() {
         for (i in 0..79) {
             strings.add(i.toString())
         }
-        recyclerView.layoutManager = LinearLayoutManager(activity)
+        recyclerView.layoutManager = androidx.recyclerview.widget.LinearLayoutManager(activity)
         val recyclerViewAdapter = object : RecyclerViewAdapter<String>(strings, R.layout.adapter_recycler_view) {
 
             override fun onBindViewHolder(holder: RecyclerViewAdapter.MyViewHolder, position: Int) {

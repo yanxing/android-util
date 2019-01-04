@@ -6,7 +6,7 @@ import android.content.Context;
 import android.content.Intent;
 import android.database.sqlite.SQLiteDatabase;
 import android.os.Build;
-import android.support.multidex.MultiDex;
+import androidx.multidex.MultiDex;
 
 import com.baidu.map.BaiduLoc;
 import com.baidu.mapapi.SDKInitializer;

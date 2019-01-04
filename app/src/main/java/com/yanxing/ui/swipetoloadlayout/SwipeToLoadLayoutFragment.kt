@@ -1,6 +1,6 @@
 package com.yanxing.ui.swipetoloadlayout
 
-import android.support.v7.widget.LinearLayoutManager
+import androidx.recyclerview.widget.LinearLayoutManager
 
 import com.aspsine.swipetoloadlayout.OnLoadMoreListener
 import com.aspsine.swipetoloadlayout.OnRefreshListener
@@ -35,7 +35,7 @@ class SwipeToLoadLayoutFragment : BaseFragment(), OnRefreshListener, OnLoadMoreL
                 holder.setText(R.id.text, mList[position].toString())
             }
         }
-        swipe_target.layoutManager = LinearLayoutManager(activity)
+        swipe_target.layoutManager = androidx.recyclerview.widget.LinearLayoutManager(activity)
         swipe_target.adapter = mIntegerRecyclerViewAdapter
     }
 

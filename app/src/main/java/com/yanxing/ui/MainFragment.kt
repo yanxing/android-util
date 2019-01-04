@@ -5,8 +5,8 @@ import android.content.Intent
 import android.content.pm.ActivityInfo
 import android.content.pm.PackageManager
 import android.os.Bundle
-import android.support.v4.app.Fragment
-import android.support.v4.app.FragmentActivity
+import androidx.fragment.app.Fragment
+import androidx.fragment.app.FragmentActivity
 
 import com.photo.ui.PhotoUtilsActivity
 import com.yanxing.base.BaseFragment
@@ -210,14 +210,14 @@ class MainFragment : BaseFragment(){
     /**
      * 替换新的Fragment
      */
-    private fun replace(fragment: Fragment) {
+    private fun replace(fragment: androidx.fragment.app.Fragment) {
         EventBusUtil.getDefault().post(fragment)
     }
 
 
     override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
         super.onActivityResult(requestCode, resultCode, data)
-        if (resultCode == FragmentActivity.RESULT_OK) {
+        if (resultCode == androidx.fragment.app.FragmentActivity.RESULT_OK) {
             if (requestCode == QUESTION_IMAGE_CODE) {
                 val intent = Intent(activity, ShowImageActivity::class.java)
                 intent.putExtra("name", data!!.getStringExtra("image"))

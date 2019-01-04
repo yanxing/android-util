@@ -1,7 +1,7 @@
 package com.yanxing.view;
 
 import android.app.Activity;
-import android.support.v7.app.AlertDialog;
+import androidx.appcompat.app.AlertDialog;
 import android.util.DisplayMetrics;
 import android.view.WindowManager;
 import android.widget.AdapterView;

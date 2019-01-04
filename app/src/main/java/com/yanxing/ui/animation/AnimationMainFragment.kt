@@ -12,7 +12,6 @@ import com.yanxing.base.BaseFragment
 import com.yanxing.ui.R
 import com.yanxing.util.CommonUtil
 
-import butterknife.OnClick
 import kotlinx.android.synthetic.main.fragment_animation_main.*
 
 /**
@@ -71,44 +70,58 @@ class AnimationMainFragment : BaseFragment() {
                 }
             })
         }
+        onClickHeartBubbleView()
+        onClickHealth()
+        onProgressBar()
+        onClickPath()
+        onClickHealth()
+        onCircleProgressBar()
+        onRippleSesame()
+
 
     }
 
-    @OnClick(R.id.heartBubbleView)
     fun onClickHeartBubbleView() {
-        val intent = Intent(activity, HeartBubbleViewActivity::class.java)
-        startActivity(intent)
+        heartBubbleView.setOnClickListener {
+            val intent = Intent(activity, HeartBubbleViewActivity::class.java)
+            startActivity(intent)
+        }
     }
 
 
-    @OnClick(R.id.health_animation)
     fun onClickHealth() {
-        val intent = Intent(activity, QQHealthActivity::class.java)
-        startActivity(intent)
+        health_animation.setOnClickListener {
+            val intent = Intent(activity, QQHealthActivity::class.java)
+            startActivity(intent)
+        }
     }
 
-    @OnClick(R.id.path_animation)
     fun onClickPath() {
-        val intent = Intent(activity, PathExampleActivity::class.java)
-        startActivity(intent)
+        path_animation.setOnClickListener {
+            val intent = Intent(activity, PathExampleActivity::class.java)
+            startActivity(intent)
+        }
     }
 
-    @OnClick(R.id.progressBar)
     fun onProgressBar() {
-        val intent = Intent(activity, ProgressBarActivity::class.java)
-        startActivity(intent)
+        progressBar.setOnClickListener {
+            val intent = Intent(activity, ProgressBarActivity::class.java)
+            startActivity(intent)
+        }
     }
 
-    @OnClick(R.id.circleProgressBar)
     fun onCircleProgressBar() {
-        val intent = Intent(activity, CircleProgressBarActivity::class.java)
-        startActivity(intent)
+        circleProgressBar.setOnClickListener {
+            val intent = Intent(activity, CircleProgressBarActivity::class.java)
+            startActivity(intent)
+        }
     }
 
-    @OnClick(R.id.ripple_sesame)
     fun onRippleSesame() {
-        val intent = Intent(activity, RippleLayoutActivity::class.java)
-        startActivity(intent)
+        ripple_sesame.setOnClickListener {
+            val intent = Intent(activity, RippleLayoutActivity::class.java)
+            startActivity(intent)
+        }
     }
 
     private class ViewWrapper internal constructor(private val mView: View) {

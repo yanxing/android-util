@@ -5,7 +5,7 @@ import android.graphics.BitmapFactory
 import android.net.Uri
 import android.os.Build
 import android.provider.MediaStore
-import android.support.v4.content.FileProvider
+import androidx.core.content.FileProvider
 
 import com.yanxing.base.BaseFragment
 import com.yanxing.util.ConstantValue
@@ -50,11 +50,11 @@ class LubanFragment : BaseFragment() {
         //file文件夹，和filepaths.xml中目录符合，或者是其子文件夹
         val file = File(FileUtil.getStoragePath() + ConstantValue.DCIM_IMAGE, tempPhoto)
         if (Build.VERSION.SDK_INT >= 24) { //判读版本是否在7.0以上
-            activity.sendBroadcast(Intent(Intent.ACTION_MEDIA_SCANNER_SCAN_FILE,
-                    FileProvider.getUriForFile(activity, AUTHORITY, file)))
-            intent.putExtra(MediaStore.EXTRA_OUTPUT, FileProvider.getUriForFile(activity, AUTHORITY, file))
+            activity?.sendBroadcast(Intent(Intent.ACTION_MEDIA_SCANNER_SCAN_FILE,
+                    FileProvider.getUriForFile(activity!!, AUTHORITY, file)))
+            intent.putExtra(MediaStore.EXTRA_OUTPUT, FileProvider.getUriForFile(activity!!, AUTHORITY, file))
         } else {
-            activity.sendBroadcast(Intent(Intent.ACTION_MEDIA_SCANNER_SCAN_FILE, Uri.fromFile(file)))
+            activity?.sendBroadcast(Intent(Intent.ACTION_MEDIA_SCANNER_SCAN_FILE, Uri.fromFile(file)))
             intent.putExtra(MediaStore.EXTRA_OUTPUT, Uri.fromFile(file))
         }
         startActivityForResult(intent, TAKE_PHOTO)

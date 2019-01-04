@@ -8,7 +8,7 @@ import android.os.Build;
 import android.os.Environment;
 import android.provider.DocumentsContract;
 import android.provider.MediaStore;
-import android.support.annotation.RequiresApi;
+import androidx.annotation.RequiresApi;
 
 /**
  * http://stackoverflow.com/questions/19985286/convert-content-uri-to-actual-path-in-android-4-4

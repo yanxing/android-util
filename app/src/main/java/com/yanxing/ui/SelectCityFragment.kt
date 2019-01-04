@@ -40,7 +40,7 @@ class SelectCityFragment : BaseFragment(), AdapterView.OnItemClickListener {
         currentArea.name = getString(R.string.current_area)
         val currentCity = ArrayList<Area.CityBean>()
         val cityBean = Area.CityBean()
-        val currentCityStr = arguments.getString("currentCity")
+        val currentCityStr = arguments?.getString("currentCity")
         cityBean.name = currentCityStr
         currentCity.add(cityBean)
         currentArea.city = currentCity

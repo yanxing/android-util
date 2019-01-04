@@ -53,7 +53,7 @@
             android:layout_height="1dp"
             android:visibility="invisible"
             android:background="@color/color_dde0df"/>
-        <android.support.v7.widget.RecyclerView
+        <androidx.recyclerview.widget.RecyclerView
             android:id="@+id/firstColumn"
             android:layout_width="wrap_content"
             android:layout_height="match_parent"/>
@@ -74,7 +74,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:orientation="horizontal"/>
-            <android.support.v7.widget.RecyclerView
+            <androidx.recyclerview.widget.RecyclerView
                 android:id="@+id/otherColumn"
                 android:layout_width="wrap_content"
                 android:layout_height="match_parent"/>

@@ -1,10 +1,10 @@
 package com.yanxing.baselibrary
 
 import android.os.Bundle
-import android.support.annotation.CallSuper
-import android.support.annotation.CheckResult
-import android.support.v4.app.Fragment
-import android.support.v4.app.FragmentManager
+import androidx.annotation.CallSuper
+import androidx.annotation.CheckResult
+import androidx.fragment.app.Fragment
+import androidx.fragment.app.FragmentManager
 import android.text.TextUtils
 import android.view.Gravity
 import android.view.LayoutInflater
@@ -29,7 +29,7 @@ abstract class BaseFragment : Fragment(), LifecycleProvider<ActivityEvent> {
      * rxlifecycle2用于取消Rxjava订阅，防止内存泄露
      */
     private val lifecycleSubject = BehaviorSubject.create<ActivityEvent>()
-    protected lateinit var mFragmentManager: FragmentManager
+    protected var mFragmentManager: FragmentManager?=null
     val TAG: String = javaClass.name
 
     @CheckResult

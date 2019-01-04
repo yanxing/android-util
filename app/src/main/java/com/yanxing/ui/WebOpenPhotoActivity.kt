@@ -107,11 +107,11 @@ class WebOpenPhotoActivity : BaseActivity() {
         }
     }
 
-    public override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent) {
+    public override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
         super.onActivityResult(requestCode, resultCode, data)
         if (resultCode == RESULT_OK) {
             if (requestCode == QUESTION_IMAGE_CODE) {
-                val path = data.getStringExtra("image")
+                val path = data?.getStringExtra("image")
                 val uri = Uri.fromFile(File(path))
                 mValueCallback!!.onReceiveValue(arrayOf(uri))
             }
