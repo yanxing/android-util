@@ -1,7 +1,6 @@
 package com.yanxing.tablayoutlibrary;
 
 import android.content.Context;
-import android.content.res.Resources;
 import android.content.res.TypedArray;
 import com.google.android.material.tabs.TabLayout;
 import androidx.fragment.app.Fragment;
@@ -9,12 +8,10 @@ import androidx.fragment.app.FragmentManager;
 import androidx.core.view.ViewCompat;
 import androidx.appcompat.content.res.AppCompatResources;
 import android.util.AttributeSet;
-import android.util.TypedValue;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.widget.FrameLayout;
 import android.widget.LinearLayout;
-import android.widget.TextView;
 
 
 import java.lang.reflect.Field;
@@ -85,12 +82,31 @@ public class TabLayoutPager extends FrameLayout {
             mTabLayout.addTab(tab.setText(tabs.get(i)));
             //反射改变tabview的背景色
             Class<?> tabClass = tab.getClass();
-            Field field;
+            Field field = null;
             try {
-                field = tabClass.getDeclaredField("mView");
-                field.setAccessible(true);
-                ViewCompat.setBackground((View) field.get(tab), AppCompatResources.getDrawable(getContext(), mTabBackgroundResId));
+                //androidx中的字段名
+                field = tabClass.getDeclaredField("view");
+                if (field != null) {
+                    field.setAccessible(true);
+                    if (field.get(tab)!=null) {
+                        ViewCompat.setBackground((View) field.get(tab), AppCompatResources.getDrawable(getContext(), mTabBackgroundResId));
+                    }
+                }
             } catch (NoSuchFieldException e) {
+                try {
+                    //android support
+                    tabClass.getDeclaredField("mView");
+                    if (field != null) {
+                        field.setAccessible(true);
+                        if (field.get(tab)!=null) {
+                            ViewCompat.setBackground((View) field.get(tab), AppCompatResources.getDrawable(getContext(), mTabBackgroundResId));
+                        }
+                    }
+                } catch (NoSuchFieldException e1) {
+                    e1.printStackTrace();
+                } catch (IllegalAccessException e1) {
+                    e1.printStackTrace();
+                }
                 e.printStackTrace();
             } catch (IllegalAccessException e) {
                 e.printStackTrace();
@@ -102,90 +118,6 @@ public class TabLayoutPager extends FrameLayout {
         mTabLayout.setupWithViewPager(mViewPager);
         //给Tabs设置适配器
         mTabLayout.setTabsFromPagerAdapter(tabLayoutPagerAdapter);
-    }
-
-    /**
-     * 修改tabLayout下划线宽度，在addTab方法之后设置
-     *
-     * @param leftDip
-     * @param rightDip
-     */
-    public void setIndicator(int leftDip, int rightDip) {
-        Class<?> tabLayout = mTabLayout.getClass();
-        Field tabStrip;
-        try {
-            //androidx中的字段
-            tabStrip = tabLayout.getDeclaredField("slidingTabIndicator");
-            if (tabStrip!=null){
-                tabStrip.setAccessible(true);
-                LinearLayout llTab = null;
-                try {
-                    llTab = (LinearLayout) tabStrip.get(mTabLayout);
-                } catch (IllegalAccessException e) {
-                    e.printStackTrace();
-                }
-
-                int left = (int) TypedValue.applyDimension(TypedValue.COMPLEX_UNIT_DIP, leftDip, Resources.getSystem().getDisplayMetrics());
-                int right = (int) TypedValue.applyDimension(TypedValue.COMPLEX_UNIT_DIP, rightDip, Resources.getSystem().getDisplayMetrics());
-
-                for (int i = 0; i < llTab.getChildCount(); i++) {
-                    View child = llTab.getChildAt(i);
-                    child.setPadding(0, 0, 0, 0);
-                    LinearLayout.LayoutParams params = new LinearLayout.LayoutParams(0, LinearLayout.LayoutParams.MATCH_PARENT, 1);
-                    params.leftMargin = left;
-                    params.rightMargin = right;
-                    child.setLayoutParams(params);
-                    child.invalidate();
-                }
-            }
-        } catch (NoSuchFieldException e) {
-            e.printStackTrace();
-        }
-    }
-
-    /**
-     * 修改tabLayout下划线宽度
-     *
-     * @param tabLayout
-     * @param padding
-     */
-    public static void setTabWidth(final TabLayout tabLayout, final int padding) {
-        tabLayout.post(new Runnable() {
-            @Override
-            public void run() {
-                try {
-                    //拿到tabLayout的mTabStrip属性
-                    LinearLayout mTabStrip = (LinearLayout) tabLayout.getChildAt(0);
-                    for (int i = 0; i < mTabStrip.getChildCount(); i++) {
-                        View tabView = mTabStrip.getChildAt(i);
-                        //拿到tabView的mTextView属性  tab的字数不固定一定用反射取mTextView，androidx中
-                        Field mTextViewField = tabView.getClass().getDeclaredField("textView");
-                        if (mTextViewField!=null){
-                            mTextViewField.setAccessible(true);
-                            TextView mTextView = (TextView) mTextViewField.get(tabView);
-                            tabView.setPadding(0, 0, 0, 0);
-                            //因为我想要的效果是   字多宽线就多宽，所以测量mTextView的宽度
-                            int width = 0;
-                            width = mTextView.getWidth();
-                            if (width == 0) {
-                                mTextView.measure(0, 0);
-                                width = mTextView.getMeasuredWidth();
-                            }
-                            //设置tab左右间距 注意这里不能使用Padding 因为源码中线的宽度是根据 tabView的宽度来设置的
-                            LinearLayout.LayoutParams params = (LinearLayout.LayoutParams) tabView.getLayoutParams();
-                            params.width = width;
-                            params.leftMargin = padding;
-                            params.rightMargin = padding;
-                            tabView.setLayoutParams(params);
-                            tabView.invalidate();
-                        }
-                    }
-                } catch (NoSuchFieldException | IllegalAccessException e) {
-                    e.printStackTrace();
-                }
-            }
-        });
-
     }
 
     /**

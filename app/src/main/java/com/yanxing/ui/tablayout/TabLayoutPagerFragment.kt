@@ -32,7 +32,6 @@ class TabLayoutPagerFragment : BaseFragment() {
         mStringList.add(getString(R.string.menu2))
         mStringList.add(getString(R.string.menu3))
         tabLayoutPager.addTab(fragmentManager, mFragmentList, mStringList)
-        tabLayoutPager.setIndicator(30, 30)
         tabLayoutPager.tabLayout.addOnTabSelectedListener(object : TabLayout.OnTabSelectedListener {
             override fun onTabSelected(tab: TabLayout.Tab) {
                 tabLayoutPager.viewPager.currentItem = tab.position
