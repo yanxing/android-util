@@ -71,7 +71,7 @@ class TextConversionBitmapFragment : BaseFragment() {
         } else {
             canvas.drawText(content, x.toFloat(), (y + getBaseLine(paint)).toFloat(), paint)
         }
-        canvas.save(Canvas.ALL_SAVE_FLAG)// 保存
+        canvas.save()// 保存
         canvas.restore()// 存储
         return save(bitmap, fileName)
     }
