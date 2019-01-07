@@ -80,37 +80,6 @@ public class TabLayoutPager extends FrameLayout {
         for (int i = 0; i < tabs.size(); i++) {
             TabLayout.Tab tab = mTabLayout.newTab();
             mTabLayout.addTab(tab.setText(tabs.get(i)));
-            //反射改变tabview的背景色
-            Class<?> tabClass = tab.getClass();
-            Field field = null;
-            try {
-                //androidx中的字段名
-                field = tabClass.getDeclaredField("view");
-                if (field != null) {
-                    field.setAccessible(true);
-                    if (field.get(tab)!=null) {
-                        ViewCompat.setBackground((View) field.get(tab), AppCompatResources.getDrawable(getContext(), mTabBackgroundResId));
-                    }
-                }
-            } catch (NoSuchFieldException e) {
-                try {
-                    //android support
-                    tabClass.getDeclaredField("mView");
-                    if (field != null) {
-                        field.setAccessible(true);
-                        if (field.get(tab)!=null) {
-                            ViewCompat.setBackground((View) field.get(tab), AppCompatResources.getDrawable(getContext(), mTabBackgroundResId));
-                        }
-                    }
-                } catch (NoSuchFieldException e1) {
-                    e1.printStackTrace();
-                } catch (IllegalAccessException e1) {
-                    e1.printStackTrace();
-                }
-                e.printStackTrace();
-            } catch (IllegalAccessException e) {
-                e.printStackTrace();
-            }
         }
         TabLayoutPagerAdapter tabLayoutPagerAdapter = new TabLayoutPagerAdapter(fragmentManager, fragments, tabs);
         mViewPager.setAdapter(tabLayoutPagerAdapter);
