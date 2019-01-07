@@ -15,9 +15,6 @@ android {
     }
     compileSdkVersion COMPILE_SDK_VERSION as int
 
-    aaptOptions.cruncherEnabled = false
-    aaptOptions.useNewCruncher = false
-
     defaultConfig {
         applicationId "com.yanxing.ui"
         minSdkVersion COMMON_MIN_SDK_VERSION as int
@@ -105,14 +102,14 @@ dependencies {
     implementation project(':photolibrary')
     implementation project(':baidumaplibrary')
     implementation project(':titlebarlibrary')
-    compile project(':tablayoutlibrary')
-//    implementation 'com.yanxing:tablayoutlibrary:1.0.6'
+//    compile project(':tablayoutlibrary')
+    implementation 'com.yanxing:tablayoutlibrary:2.0.0'
     implementation project(':amaplibrary')
     implementation project(':heartbubblelibrary')
     implementation project(':photodialoglibrary')
     implementation project(':downloadlibrary')
-    compile project(':networklibrary')
-//    api 'com.yanxing:networklibrary:1.2.1'
+//    compile project(':networklibrary')
+    api 'com.yanxing:networklibrary:2.0.0'
     implementation project(':analyzelibrary')
     api project(':commonlibrary')
 }

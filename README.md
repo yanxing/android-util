@@ -12,7 +12,7 @@
 [example](https://github.com/yanxing/android-util/blob/master/app/src/main/java/com/yanxing/ui/NetworkLibraryFragment.kt)
 ```java
  RetrofitManage.getInstance().init(mBaseUrl, true)
- RetrofitManage.getInstance().retrofit!!.create(DouBanAPI::class.java)
+ RetrofitManage.getInstance().retrofit.create(DouBanAPI::class.java)
                 .getTopMovie(0, 10)
                 .compose(Transformer<DouBan>().iOMainHasProgress(this, fragmentManager, "请稍等..."))
                 .subscribe(object : BaseAbstractObserver<DouBan>(context, fragmentManager) {

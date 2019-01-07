@@ -15,18 +15,6 @@ android {
             proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
         }
     }
-
-    configurations.all {
-        resolutionStrategy.eachDependency { DependencyResolveDetails details ->
-            def requested = details.requested
-            if (requested.group == 'com.android.support') {
-                if (!requested.name.startsWith("multidex")) {
-                    details.useVersion "${SUPPORT_VERSION}"
-                }
-            }
-        }
-    }
-
 }
 
 dependencies {
@@ -37,6 +25,6 @@ dependencies {
     api 'com.trello.rxlifecycle2:rxlifecycle:2.2.0'
     api 'com.trello.rxlifecycle2:rxlifecycle-components:2.2.0'
     implementation "org.jetbrains.kotlin:kotlin-stdlib-jdk7:${kotlin_version}"
-    api project(':baselibrary')
-//    api 'com.yanxing:baselibrary:1.0.9'
+//    api project(':baselibrary')
+    api 'com.yanxing:baselibrary:2.0.0'
 }

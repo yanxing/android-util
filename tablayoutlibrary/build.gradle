@@ -13,7 +13,7 @@ ext {
     siteUrl = 'https://github.com/yanxing/android-util'
     gitUrl = 'https://github.com/yanxing/android-util.git'
 
-    libraryVersion = '1.0.6'
+    libraryVersion = '2.0.0'
 
     developerId = 'yanxing'
     developerName = 'yanxing'
@@ -23,7 +23,6 @@ ext {
     licenseUrl = 'http://www.apache.org/licenses/LICENSE-2.0.txt'
     allLicenses = ["Apache-2.0"]
 }
-
 
 android {
     compileSdkVersion COMPILE_SDK_VERSION as int
@@ -42,11 +41,13 @@ android {
 }
 
 dependencies {
-    implementation fileTree(include: ['*.jar'], dir: 'libs')
-    testImplementation 'junit:junit:4.12'
-    implementation 'androidx.appcompat:appcompat:1.1.0-alpha01'
-    implementation 'com.google.android.material:material:1.1.0-alpha02'
+    compile fileTree(include: ['*.jar'], dir: 'libs')
+    testCompile 'junit:junit:4.12'
+    compile 'androidx.appcompat:appcompat:1.1.0-alpha01'
+    compile 'com.google.android.material:material:1.1.0-alpha02'
 }
+
 
 apply from: 'https://raw.githubusercontent.com/nuuneoi/JCenter/master/installv1.gradle'
 apply from: 'https://raw.githubusercontent.com/nuuneoi/JCenter/master/bintrayv1.gradle'
+

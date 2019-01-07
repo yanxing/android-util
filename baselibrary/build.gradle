@@ -1,6 +1,7 @@
 apply plugin: 'com.android.library'
 apply plugin: 'kotlin-android'
 
+
 ext {
     bintrayRepo = 'android-util'
     bintrayName = 'baselibrary'
@@ -14,7 +15,7 @@ ext {
     siteUrl = 'https://github.com/yanxing/android-util'
     gitUrl = 'https://github.com/yanxing/android-util.git'
 
-    libraryVersion = '1.1.2'
+    libraryVersion = '2.0.0'
 
     developerId = 'yanxing'
     developerName = 'yanxing'
@@ -43,13 +44,14 @@ android {
 }
 
 dependencies {
-    implementation fileTree(include: ['*.jar'], dir: 'libs')
-    testImplementation 'junit:junit:4.12'
-    api 'com.trello.rxlifecycle2:rxlifecycle:2.2.0'
-    api 'com.trello.rxlifecycle2:rxlifecycle-components:2.2.0'
-    api "org.jetbrains.kotlin:kotlin-stdlib-jdk7:${kotlin_version}"
-
+    compile fileTree(include: ['*.jar'], dir: 'libs')
+    testCompile 'junit:junit:4.12'
+    compile 'com.trello.rxlifecycle2:rxlifecycle:2.2.0'
+    compile 'com.trello.rxlifecycle2:rxlifecycle-components:2.2.0'
+    compile "org.jetbrains.kotlin:kotlin-stdlib-jdk7:${kotlin_version}"
 }
+
+
 apply from: 'https://raw.githubusercontent.com/nuuneoi/JCenter/master/installv1.gradle'
 apply from: 'https://raw.githubusercontent.com/nuuneoi/JCenter/master/bintrayv1.gradle'
 
