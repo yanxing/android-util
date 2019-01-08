@@ -102,8 +102,8 @@ dependencies {
     implementation project(':photolibrary')
     implementation project(':baidumaplibrary')
     implementation project(':titlebarlibrary')
-//    compile project(':tablayoutlibrary')
-    implementation 'com.yanxing:tablayoutlibrary:2.0.0'
+    compile project(':tablayoutlibrary')
+//    implementation 'com.yanxing:tablayoutlibrary:2.0.2'
     implementation project(':amaplibrary')
     implementation project(':heartbubblelibrary')
     implementation project(':photodialoglibrary')
