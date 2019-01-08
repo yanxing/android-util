@@ -10,5 +10,5 @@ include ':app',
         ':downloadlibrary',
         ':networklibrary',
         ':analyzelibrary',
-        ':baselibrary',
+        ':baseactivitylibrary',
         ':commonlibrary'
