@@ -99,7 +99,7 @@ mRecyclerView.setAdapter(mRecyclerViewAdapter);
 TabLayout+ViewPager封装。
 * gradle  
 ```java
- compile 'com.yanxing:tablayoutlibrary:1.0.3'
+ compile 'com.yanxing:tablayoutlibrary:2.0.2'
  ```
 [example](https://github.com/yanxing/android-util/blob/master/app/src/main/java/com/yanxing/ui/tablayout/TabLayoutPagerFragment.kt)
 ```XML
@@ -119,7 +119,6 @@ mStringList.add("菜单一");
 mStringList.add("菜单二");
 mStringList.add("菜单三");
 mTabLayoutPager.addTab(mFragmentList,mStringList);
-mTabLayoutPager.setIndicator(30,30);
 mTabLayoutPager.getTabLayout().setOnTabSelectedListener(new TabLayout.OnTabSelectedListener() {
     @Override
     public void onTabSelected(TabLayout.Tab tab) {
