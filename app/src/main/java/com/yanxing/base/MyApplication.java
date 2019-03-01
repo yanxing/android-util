@@ -16,7 +16,6 @@ import com.nostra13.universalimageloader.cache.disc.impl.UnlimitedDiskCache;
 import com.nostra13.universalimageloader.core.ImageLoader;
 import com.nostra13.universalimageloader.core.ImageLoaderConfiguration;
 import com.nostra13.universalimageloader.core.assist.QueueProcessingType;
-import com.squareup.leakcanary.LeakCanary;
 import com.tencent.bugly.Bugly;
 import com.tencent.bugly.beta.Beta;
 import com.yanxing.util.ConstantValue;
@@ -42,8 +41,6 @@ public class  MyApplication extends Application {
         initBaiduMap();
         initFresco();
         mMyApplication=this;
-        //内存泄漏检测
-        LeakCanary.install(this);
         Bugly.init(getApplicationContext(), "cb96408e0e", false);
     }
 
@@ -67,14 +64,11 @@ public class  MyApplication extends Application {
         File file=new File(FileUtil.getStoragePath());
         //自定义图片的磁盘配置,fresco缓存文件后缀cnt
         DiskCacheConfig diskCacheConfig =  DiskCacheConfig.newBuilder(this)
-                .setBaseDirectoryPath(file)//缓存图片基路径
-                .setBaseDirectoryName(ConstantValue.CACHE_IMAGE)//文件夹名
-                .setMaxCacheSize(ConstantValue.MAX_DISK_CACHE_SIZE)//默认缓存的最大大小。
-                .setMaxCacheSizeOnLowDiskSpace(ConstantValue.MAX_DISK_CACHE_LOW_SIZE)//缓存的最大大小,使用设备时低磁盘空间。
-                .setMaxCacheSizeOnVeryLowDiskSpace(ConstantValue.MAX_DISK_CACHE_VERYLOW_SIZE)//缓存的最大大小,当设备极低磁盘空间
+                .setBaseDirectoryPath(file)
+                .setBaseDirectoryName(ConstantValue.CACHE_IMAGE)
                 .build();
         ImagePipelineConfig imagePipelineConfig = ImagePipelineConfig.newBuilder(this)
-                .setMainDiskCacheConfig(diskCacheConfig)//磁盘缓存配置
+                .setMainDiskCacheConfig(diskCacheConfig)
                 .setRequestListeners(requestListeners)
                 .build();
         Fresco.initialize(getApplicationContext(),imagePipelineConfig);
