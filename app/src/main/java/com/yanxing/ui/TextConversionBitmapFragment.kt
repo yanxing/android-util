@@ -8,7 +8,6 @@ import android.graphics.Paint
 import android.graphics.Typeface
 import android.net.Uri
 
-import com.nostra13.universalimageloader.core.ImageLoader
 import com.yanxing.base.BaseFragment
 import com.yanxing.util.FileUtil
 
@@ -29,7 +28,7 @@ class TextConversionBitmapFragment : BaseFragment() {
 
     override fun afterInstanceView() {
         val content = "把秋衣扎进秋裤/n把秋裤扎进/n袜子/n是对冬天最起码的/n尊重"
-        ImageLoader.getInstance().displayImage("file://" + createTextImage(content, "javaScript.png"), image)
+        image.setImageURI("file://" + createTextImage(content, "javaScript.png"))
     }
 
     /**

@@ -12,10 +12,6 @@ import com.facebook.drawee.backends.pipeline.Fresco;
 import com.facebook.imagepipeline.core.ImagePipelineConfig;
 import com.facebook.imagepipeline.listener.RequestListener;
 import com.facebook.imagepipeline.listener.RequestLoggingListener;
-import com.nostra13.universalimageloader.cache.disc.impl.UnlimitedDiskCache;
-import com.nostra13.universalimageloader.core.ImageLoader;
-import com.nostra13.universalimageloader.core.ImageLoaderConfiguration;
-import com.nostra13.universalimageloader.core.assist.QueueProcessingType;
 import com.tencent.bugly.Bugly;
 import com.tencent.bugly.beta.Beta;
 import com.yanxing.util.ConstantValue;
@@ -37,7 +33,6 @@ public class  MyApplication extends Application {
     @Override
     public void onCreate() {
         super.onCreate();
-        initImageLoader();
         initBaiduMap();
         initFresco();
         mMyApplication=this;
@@ -80,21 +75,5 @@ public class  MyApplication extends Application {
      */
     private void initBaiduMap(){
         SDKInitializer.initialize(getApplicationContext());
-    }
-
-    /**
-     * 初始化UIL配置
-     *
-     */
-    public void initImageLoader() {
-        File file =new File(FileUtil.getStoragePath()+ConstantValue.CACHE_IMAGE);
-        ImageLoaderConfiguration config = new ImageLoaderConfiguration.Builder(getApplicationContext())
-                .denyCacheImageMultipleSizesInMemory()
-                .diskCache(new UnlimitedDiskCache(file))
-                .diskCacheSize(50 * 1024 * 1024) // 50 Mb
-                .tasksProcessingOrder(QueueProcessingType.LIFO)
-                .writeDebugLogs()
-                .build();
-        ImageLoader.getInstance().init(config);
     }
 }

@@ -1,7 +1,6 @@
 package com.yanxing.ui
 
 
-import com.nostra13.universalimageloader.core.ImageLoader
 import com.yanxing.base.BaseActivity
 import kotlinx.android.synthetic.main.activity_show_image.*
 
@@ -19,6 +18,6 @@ class ShowImageActivity : BaseActivity() {
 
     override fun afterInstanceView() {
         val imageName = intent.getStringExtra("name")
-        ImageLoader.getInstance().displayImage("file://$imageName", image)
+        image.setImageURI("file://$imageName")
     }
 }

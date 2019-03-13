@@ -13,6 +13,8 @@ import java.net.ConnectException;
 import java.net.SocketTimeoutException;
 import java.net.UnknownHostException;
 
+import javax.net.ssl.SSLHandshakeException;
+
 /**
  * 错误代码
  * Created by 李双祥 on 2017/4/1
@@ -36,6 +38,7 @@ public class ErrorCodeUtil {
     private static final String SERVICE_NOT_AVAILABLE = "服务器不可用";
     private static final String REQUEST_METHOD_ERROR = "请求方法出错";
     private static final String CONNECT_EXCEPTION = "连接异常";
+    private static final String SSL_ERROR="CA证书不信任";
 
     /**
      * 获取异常信息
@@ -54,7 +57,9 @@ public class ErrorCodeUtil {
             return NETWORK_ERROR;
         } else if (e instanceof SocketTimeoutException) {
             return CONNET_SERVICE_TIME_OUT;
-        } else if (e instanceof IOException) {
+        } else if (e instanceof SSLHandshakeException){
+            return SSL_ERROR;
+        }else if (e instanceof IOException) {
             //unexpected end of stream on Connection 情况
             return CONNECT_EXCEPTION;
         } else {

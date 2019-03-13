@@ -1,8 +1,7 @@
 apply plugin: 'com.android.application'
-// 依赖插件脚本
-//apply from: 'tinker-support.gradle'
 apply plugin: 'kotlin-android'
 apply plugin: 'kotlin-android-extensions'
+//apply from: 'tinker-support.gradle'
 
 
 def keystorePropertiesFile = rootProject.file("./app/keystore/keystore.properties")
@@ -85,7 +84,7 @@ dependencies {
     implementation 'com.facebook.fresco:animated-gif:1.5.0'
     implementation 'me.relex:photodraweeview:1.1.2'
     implementation 'org.greenrobot:eventbus:3.0.0'
-    implementation 'com.nostra13.universalimageloader:universal-image-loader:1.9.5'
+//    implementation 'com.nostra13.universalimageloader:universal-image-loader:1.9.5'
 
     implementation 'com.github.PhilJay:MPAndroidChart:v3.0.2'
 
@@ -101,18 +100,17 @@ dependencies {
     implementation 'com.github.Aspsine:SwipeToLoadLayout:1.0.4'
     implementation 'com.zhihu.android:matisse:0.4.3'
     implementation project(':sortlistviewlibrary')
-//    compile project(':adapterlibrary')
     implementation project(':photolibrary')
     implementation project(':baidumaplibrary')
     implementation project(':titlebarlibrary')
-//    compile project(':tablayoutlibrary')
-    implementation 'com.yanxing:tablayoutlibrary:2.0.2'
+    compile project(':tablayoutlibrary')
+//    implementation 'com.yanxing:tablayoutlibrary:2.0.2'
     implementation project(':amaplibrary')
     implementation project(':heartbubblelibrary')
     implementation project(':photodialoglibrary')
     implementation project(':downloadlibrary')
-//    compile project(':networklibrary')
-    api 'com.yanxing:networklibrary:2.0.0'
+    compile project(':networklibrary')
+//    api 'com.yanxing:networklibrary:2.0.0'
     implementation project(':analyzelibrary')
     api project(':commonlibrary')
 }
