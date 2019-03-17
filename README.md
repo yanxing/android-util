@@ -5,8 +5,12 @@
 [DownloadImageUtil](https://github.com/yanxing/android-util/blob/master/app/src/main/java/com/yanxing/util/DownloadImageUtil.java)、[TimeUtil](https://github.com/yanxing/android-util/blob/master/app/src/main/java/com/yanxing/util/TimeUtil.java)
 ## networklibrary
 对retrofit2+rxjava2网络请求的简单封装（包括网络请求时显示等待对话框和请求完成后上下拉刷新控件置为完成状态）。
-* gradle  
+* gradle 
 ```java
+ compile 'com.yanxing:networklibrary:1.2.1'
+ ```
+ androidx
+ ```java
  compile 'com.yanxing:networklibrary:2.0.0'
  ```
 [example](https://github.com/yanxing/android-util/blob/master/app/src/main/java/com/yanxing/ui/NetworkLibraryFragment.kt)
