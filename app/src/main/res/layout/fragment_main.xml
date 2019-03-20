@@ -126,10 +126,6 @@
             style="@style/style_btn"
             android:text="MPAndroidChart图表"/>
         <Button
-            android:id="@+id/swipeToLoadLayout"
-            style="@style/style_btn"
-            android:text="SwipeToLoadLayout"/>
-        <Button
             android:id="@+id/tableView"
             style="@style/style_btn"
             android:text="tableView"/>

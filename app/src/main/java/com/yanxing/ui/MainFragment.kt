@@ -5,8 +5,6 @@ import android.content.Intent
 import android.content.pm.ActivityInfo
 import android.content.pm.PackageManager
 import android.os.Bundle
-import androidx.fragment.app.Fragment
-import androidx.fragment.app.FragmentActivity
 
 import com.photo.ui.PhotoUtilsActivity
 import com.yanxing.base.BaseFragment
@@ -14,7 +12,6 @@ import com.yanxing.dialog.PhotoParam
 import com.yanxing.dialog.SelectPhotoActivity
 import com.yanxing.sortlistviewlibrary.CityListActivity
 import com.yanxing.ui.animation.AnimationMainFragment
-import com.yanxing.ui.swipetoloadlayout.SwipeToLoadLayoutFragment
 import com.yanxing.ui.tablayout.TabLayoutPagerFragment
 import com.yanxing.ui.time.TimeFragment
 import com.yanxing.util.ConstantValue
@@ -162,9 +159,6 @@ class MainFragment : BaseFragment(){
         surfaceView.setOnClickListener {
             intent.setClass(activity, SurfaceViewMediaPlayerActivity::class.java)
             startActivity(intent)
-        }
-        swipeToLoadLayout.setOnClickListener {
-            replace(SwipeToLoadLayoutFragment())
         }
         tableView.setOnClickListener {
             replace(TableViewFragment())

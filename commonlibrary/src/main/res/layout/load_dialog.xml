@@ -19,14 +19,14 @@
         android:paddingLeft="20dp"
         android:paddingRight="20dp"
         android:paddingTop="14dp">
-        <com.yanxing.baselibrary.view.ProgressWheel
+        <com.yanxing.commonlibrary.view.ProgressWheel
             android:id="@+id/progressBar"
             android:layout_width="38dp"
             android:layout_height="38dp"
-            app:matProg_barColor="#646464"
-            app:matProg_barWidth="3dp"
+            app:matProgress_barColor="#646464"
+            app:matProgress_barWidth="3dp"
             android:alpha="1"
-            app:matProg_progressIndeterminate="true"/>
+            app:matProgress_progressIndeterminate="true"/>
 
         <TextView
             android:id="@+id/progress_text"
