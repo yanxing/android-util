@@ -109,6 +109,5 @@ dependencies {
     implementation project(':downloadlibrary')
 //    compile project(':networklibrary')
     api 'com.yanxing:networklibrary:2.0.0'
-    implementation project(':analyzelibrary')
     api project(':commonlibrary')
 }
