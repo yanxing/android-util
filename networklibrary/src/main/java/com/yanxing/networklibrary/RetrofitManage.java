@@ -82,6 +82,21 @@ public class RetrofitManage {
     }
 
     /**
+     * 设置超时时间，单位秒
+     *
+     * @param readTimeOut
+     * @param connectTimeout
+     * @param writeTimeout
+     */
+    public void setTimeOut(long readTimeOut, long connectTimeout, long writeTimeout) {
+        mOkHttpClientBuilder
+                .connectTimeout(connectTimeout, TimeUnit.SECONDS)
+                .readTimeout(readTimeOut, TimeUnit.SECONDS)
+                .writeTimeout(writeTimeout, TimeUnit.SECONDS);
+        mRetrofitBuilder.client(mOkHttpClientBuilder.build());
+    }
+
+    /**
      * 设置无网络时是否缓存
      *
      * @param context
@@ -90,12 +105,12 @@ public class RetrofitManage {
     public void setNoNetworkCache(Context context, boolean cache) {
         if (cache) {
             mOkHttpClientBuilder.addInterceptor(new CacheInterceptor(context));
-            mRetrofitBuilder.client(mOkHttpClientBuilder.build()).build();
+            mRetrofitBuilder.client(mOkHttpClientBuilder.build());
         }
     }
 
     public Retrofit getRetrofit() {
-        if (mRetrofitBuilder==null){
+        if (mRetrofitBuilder == null) {
             throw new NullPointerException("you need to call init method");
         }
         return mRetrofitBuilder.build();
