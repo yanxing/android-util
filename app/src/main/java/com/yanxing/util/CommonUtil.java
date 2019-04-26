@@ -387,16 +387,18 @@ public class CommonUtil {
     }
 
     /**
-     * 获取屏幕参数
+     * 获取屏幕参数，不包括虚拟按键
      *
      * @param context
      * @return
      */
-    public static Display getScreenDisplay(Context context) {
-        WindowManager wm;
+    public static DisplayMetrics getScreenMetrics(Context context) {
         try {
-            wm = (WindowManager) context.getSystemService(Context.WINDOW_SERVICE);
-            return wm.getDefaultDisplay();
+
+            WindowManager wm = (WindowManager) context.getSystemService(Context.WINDOW_SERVICE);
+            DisplayMetrics dm = new DisplayMetrics();
+            wm.getDefaultDisplay().getMetrics(dm);
+            return dm;
         } catch (Exception e) {
             e.printStackTrace();
         }
@@ -404,17 +406,17 @@ public class CommonUtil {
     }
 
     /**
-     * 获取屏幕参数
+     * 获取屏幕参数，包括虚拟按键
      *
      * @param context
      * @return
      */
-    public static DisplayMetrics getDisplayMetrics(Context context) {
+    public static DisplayMetrics getRealScreenMetrics(Context context) {
         try {
 
             WindowManager wm = (WindowManager) context.getSystemService(Context.WINDOW_SERVICE);
             DisplayMetrics dm = new DisplayMetrics();
-            wm.getDefaultDisplay().getMetrics(dm);
+            wm.getDefaultDisplay().getRealMetrics(dm);
             return dm;
         } catch (Exception e) {
             e.printStackTrace();
