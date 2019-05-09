@@ -1,5 +1,9 @@
 package com.yanxing.util;
 
+import android.content.ActivityNotFoundException;
+import android.content.Context;
+import android.content.Intent;
+import android.net.Uri;
 import android.os.Build;
 
 /**
@@ -45,6 +49,23 @@ public class PhoneBrandUtil {
      */
     public static boolean isOppo(){
         return "oppo".equalsIgnoreCase(Build.BRAND);
+    }
+
+    /**
+     * 三星手机跳转应用市场
+     * @param context
+     * @param packageName
+     */
+    public static void goToSamsungappsMarket(Context context, String packageName) {
+        Uri uri = Uri.parse("http://www.samsungapps.com/appquery/appDetail.as?appId=" + packageName);
+        Intent goToMarket = new Intent();
+        goToMarket.setClassName("com.sec.android.app.samsungapps", "com.sec.android.app.samsungapps.Main");
+        goToMarket.setData(uri);
+        try {
+            context.startActivity(goToMarket);
+        } catch (ActivityNotFoundException e) {
+            e.printStackTrace();
+        }
     }
 
 }
