@@ -49,7 +49,7 @@ class AnimationMainFragment : BaseFragment() {
         }
         ObjectAnimation.setOnClickListener {
             val viewWrapper = ViewWrapper(ObjectAnimation)
-            val objectAnimator = ObjectAnimator.ofInt(viewWrapper, "width", CommonUtil.getScreenDisplay(activity)!!.width - 20).setDuration(3000)
+            val objectAnimator = ObjectAnimator.ofInt(viewWrapper, "width", CommonUtil.getScreenMetrics(activity)!!.widthPixels - 20).setDuration(3000)
             objectAnimator.start()
             objectAnimator.addListener(object : Animator.AnimatorListener {
                 override fun onAnimationStart(animation: Animator) {

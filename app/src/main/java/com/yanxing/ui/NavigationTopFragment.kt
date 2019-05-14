@@ -25,7 +25,7 @@ class NavigationTopFragment : BaseFragment() {
     }
 
     override fun afterInstanceView() {
-        val displayMetrics = CommonUtil.getDisplayMetrics(activity)
+        val displayMetrics = CommonUtil.getScreenMetrics(activity)
         if (displayMetrics != null) {
             mWidth = displayMetrics.widthPixels
         }

@@ -21,6 +21,7 @@ import com.yanxing.util.PermissionUtil
 import com.zhihu.matisse.Matisse
 import com.zhihu.matisse.MimeType
 import com.zhihu.matisse.engine.impl.GlideEngine
+import kotlinx.android.synthetic.main.fragment_download_library.*
 
 import java.io.Serializable
 import java.util.ArrayList

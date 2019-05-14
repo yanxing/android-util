@@ -38,7 +38,7 @@ class SurfaceViewMediaPlayerActivity : BaseActivity(), SurfaceHolder.Callback {
         try {
             mMediaPlayer.setDataSource(URL)
             mMediaPlayer.prepare()
-            val bitmap = CommonUtil.getVideoThumbnail(URL, CommonUtil.getScreenDisplay(this)!!.width, surface.height, MediaStore.Images.Thumbnails.MINI_KIND)
+            val bitmap = CommonUtil.getVideoThumbnail(URL, CommonUtil.getScreenMetrics(this).widthPixels, surface.height, MediaStore.Images.Thumbnails.MINI_KIND)
             firstFrame.setImageBitmap(bitmap)
         } catch (e: Exception) {
             e.printStackTrace()

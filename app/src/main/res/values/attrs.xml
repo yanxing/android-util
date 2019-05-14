@@ -57,5 +57,15 @@
         <attr name="IndicatorTextColor" format="color"/>
     </declare-styleable>
 
+    <declare-styleable name="OverlayView">
+        <attr name="overlayColor" format="color"/>
+        <!--半径-->
+        <attr name="overlayRadius" format="dimension"/>
+        <!--图片长宽-->
+        <attr name="overlayImgSize" format="dimension"/>
+        <!--里面图片距离圆顶部距离-->
+        <attr name="overlayImgTop" format="dimension"/>
+    </declare-styleable>
+
 
 </resources>
