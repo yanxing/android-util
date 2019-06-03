@@ -2,7 +2,6 @@ package com.yanxing.ui
 
 import android.Manifest
 import android.content.Intent
-import android.content.pm.ActivityInfo
 import android.content.pm.PackageManager
 import android.os.Bundle
 
@@ -18,13 +17,7 @@ import com.yanxing.util.ConstantValue
 import com.yanxing.util.EventBusUtil
 import com.yanxing.util.FileUtil
 import com.yanxing.util.PermissionUtil
-import com.zhihu.matisse.Matisse
-import com.zhihu.matisse.MimeType
-import com.zhihu.matisse.engine.impl.GlideEngine
-import kotlinx.android.synthetic.main.fragment_download_library.*
 
-import java.io.Serializable
-import java.util.ArrayList
 
 import kotlinx.android.synthetic.main.fragment_main.*
 
@@ -53,9 +46,6 @@ class MainFragment : BaseFragment(){
         textImage.setOnClickListener {
             replace(TextAddImageBeforeLastFragment())
         }
-        textConversionBitmap.setOnClickListener {
-            replace(TextConversionBitmapFragment())
-        }
         hideTitleBottom.setOnClickListener {
             replace(HideTitleBottomFragment())
         }
@@ -68,20 +58,8 @@ class MainFragment : BaseFragment(){
         expandableListViewCheckbox.setOnClickListener {
             replace(ExpandableListViewCheckBoxFragment())
         }
-        ultraPtr.setOnClickListener {
-            replace(UltraPtrFragment())
-        }
-        room.setOnClickListener {
-            replace(RoomFragment())
-        }
-        fresco.setOnClickListener {
-            replace(FrescoFragment())
-        }
         animation.setOnClickListener {
             replace(AnimationMainFragment())
-        }
-        luban.setOnClickListener {
-            replace(LubanFragment())
         }
         tabLayoutPager.setOnClickListener {
             replace(TabLayoutPagerFragment())
@@ -104,17 +82,6 @@ class MainFragment : BaseFragment(){
         }
         amap.setOnClickListener {
             val intent=Intent(activity,AMapActivity::class.java)
-            startActivity(intent)
-        }
-        browseImage.setOnClickListener {
-            val list = ArrayList<String>()
-            val bundle = Bundle()
-            list.add("http://wx4.sinaimg.cn/thumbnail/61e7f4aaly1fbgnxq7bh7j20c8138gpn.jpg")
-            list.add("http://wx4.sinaimg.cn/thumbnail/61e7f4aaly1fbgo4v08ftj20pg0wa468.jpg")
-            list.add("http://wx4.sinaimg.cn/thumbnail/61e7f4aaly1fbgo5cc9pbj20c80eeta5.jpg")
-            bundle.putSerializable("imageUrl", list as Serializable)
-            val intent = Intent(activity, BrowseImageActivity::class.java)
-            intent.putExtras(bundle)
             startActivity(intent)
         }
         MPAndroidChart.setOnClickListener {
@@ -167,17 +134,6 @@ class MainFragment : BaseFragment(){
         navigationTop.setOnClickListener {
             replace(NavigationTopFragment())
         }
-        matisse.setOnClickListener {
-            Matisse.from(activity)
-                    .choose(MimeType.allOf())
-                    .countable(true)
-                    .maxSelectable(9)
-                    .gridExpectedSize(resources.getDimensionPixelSize(R.dimen.grid_expected_size))
-                    .restrictOrientation(ActivityInfo.SCREEN_ORIENTATION_UNSPECIFIED)
-                    .thumbnailScale(0.85f)
-                    .imageEngine(GlideEngine())
-                    .forResult(REQUEST_CODE_CHOOSE)
-        }
         webOpenPhoto.setOnClickListener {
             intent.setClass(activity, WebOpenPhotoActivity::class.java)
             startActivity(intent)
@@ -214,9 +170,7 @@ class MainFragment : BaseFragment(){
         super.onActivityResult(requestCode, resultCode, data)
         if (resultCode == androidx.fragment.app.FragmentActivity.RESULT_OK) {
             if (requestCode == QUESTION_IMAGE_CODE) {
-                val intent = Intent(activity, ShowImageActivity::class.java)
-                intent.putExtra("name", data!!.getStringExtra("image"))
-                startActivity(intent)
+                showToast("图片地址"+data?.getStringExtra("image"))
             } else if (requestCode == QUESTION_SORT_LISTVIEW_CODE) {
                 showToast(data!!.extras!!.getString("city")!!)
             }

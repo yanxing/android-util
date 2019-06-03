@@ -1,9 +1,0 @@
-<?xml version="1.0" encoding="utf-8"?>
-<me.relex.photodraweeview.PhotoDraweeView xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
-                                          android:id="@+id/simple_drawee_view"
-                                          android:layout_width="match_parent"
-                                          android:layout_height="300dp"
-                                          app:progressBarImage="@drawable/loading_fresco">
-
-</me.relex.photodraweeview.PhotoDraweeView>

@@ -24,15 +24,6 @@
             android:id="@+id/selectImageDialog"
             style="@style/style_btn"
             android:text="@string/select_image_dialog"/>
-        <Button
-            android:id="@+id/matisse"
-            style="@style/style_btn"
-            android:text="matisse(知乎开源的图片选择)"/>
-
-        <Button
-            android:id="@+id/browseImage"
-            style="@style/style_btn"
-            android:text="@string/browse_image"/>
 
         <Button
             android:id="@+id/map"
@@ -42,11 +33,6 @@
             android:id="@+id/amap"
             style="@style/style_btn"
             android:text="@string/gao_de"/>
-
-        <Button
-            android:id="@+id/fresco"
-            style="@style/style_btn"
-            android:text="@string/fresco"/>
 
         <Button
             android:id="@+id/titleBar"
@@ -72,15 +58,6 @@
             android:id="@+id/selectCity"
             style="@style/style_btn"
             android:text="@string/city_select"/>
-        <Button
-            android:id="@+id/room"
-            style="@style/style_btn"
-            android:text="room"/>
-
-        <Button
-            android:id="@+id/ultraPtr"
-            style="@style/style_btn"
-            android:text="@string/ultra_ptr"/>
         <Button
             android:id="@+id/animation"
             style="@style/style_btn"
@@ -110,17 +87,9 @@
             style="@style/style_btn"
             android:text="@string/surfaceview_mediaplayer"/>
         <Button
-            android:id="@+id/textConversionBitmap"
-            style="@style/style_btn"
-            android:text="@string/text_change_picture"/>
-        <Button
             android:id="@+id/hideTitleBottom"
             style="@style/style_btn"
             android:text="@string/hide_title_bottom"/>
-        <Button
-            android:id="@+id/luban"
-            style="@style/style_btn"
-            android:text="Luban压缩"/>
         <Button
             android:id="@+id/MPAndroidChart"
             style="@style/style_btn"
