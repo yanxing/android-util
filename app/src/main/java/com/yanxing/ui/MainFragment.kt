@@ -12,7 +12,6 @@ import com.yanxing.dialog.SelectPhotoActivity
 import com.yanxing.sortlistviewlibrary.CityListActivity
 import com.yanxing.ui.animation.AnimationMainFragment
 import com.yanxing.ui.tablayout.TabLayoutPagerFragment
-import com.yanxing.ui.time.TimeFragment
 import com.yanxing.util.ConstantValue
 import com.yanxing.util.EventBusUtil
 import com.yanxing.util.FileUtil
@@ -43,9 +42,6 @@ class MainFragment : BaseFragment(){
         adapterButton.setOnClickListener {
             replace(CommonAdapterFragment())
         }
-        textImage.setOnClickListener {
-            replace(TextAddImageBeforeLastFragment())
-        }
         hideTitleBottom.setOnClickListener {
             replace(HideTitleBottomFragment())
         }
@@ -54,9 +50,6 @@ class MainFragment : BaseFragment(){
         }
         RxJava2.setOnClickListener {
             replace(NetworkLibraryFragment())
-        }
-        expandableListViewCheckbox.setOnClickListener {
-            replace(ExpandableListViewCheckBoxFragment())
         }
         animation.setOnClickListener {
             replace(AnimationMainFragment())
@@ -124,10 +117,6 @@ class MainFragment : BaseFragment(){
             intent.setClass(activity, InputEditButtonActivity::class.java)
             startActivity(intent)
         }
-        surfaceView.setOnClickListener {
-            intent.setClass(activity, SurfaceViewMediaPlayerActivity::class.java)
-            startActivity(intent)
-        }
         tableView.setOnClickListener {
             replace(TableViewFragment())
         }
@@ -137,12 +126,6 @@ class MainFragment : BaseFragment(){
         webOpenPhoto.setOnClickListener {
             intent.setClass(activity, WebOpenPhotoActivity::class.java)
             startActivity(intent)
-        }
-        time.setOnClickListener {
-            replace(TimeFragment())
-        }
-        design.setOnClickListener{
-            replace(DesignFragment())
         }
 
     }

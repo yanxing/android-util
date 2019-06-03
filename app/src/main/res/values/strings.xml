@@ -9,7 +9,7 @@
     <string name="confirm_dialog">确定对话框</string>
     <string name="title_activity_loading_dialog_example">进度框测试</string>
     <string name="loading_dialog">进度框</string>
-    <string name="select_image">图片选择(类似微信图片选择)</string>
+    <string name="select_image">图片选择1</string>
     <string name="browse_image">图片浏览(类似微博图片浏览)</string>
     <string name="map">百度地图封装</string>
     <string name="map_lable">百度地图封装测试</string>
