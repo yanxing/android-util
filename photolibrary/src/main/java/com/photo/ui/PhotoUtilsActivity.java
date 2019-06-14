@@ -33,6 +33,8 @@ import android.widget.RelativeLayout;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import androidx.core.content.FileProvider;
+
 import com.photo.R;
 import com.photo.atapter.GirdItemAdapter;
 import com.photo.atapter.ImageFloderAdapter;
@@ -112,6 +114,8 @@ public class PhotoUtilsActivity extends Activity implements OnClickListener {
     private boolean flag = false;//是否要剪切图片
 
     private final static String CAMERA = Environment.getExternalStorageDirectory() + "/DCIM/Camera";
+    //和清单文件中provider一致
+    private static final String AUTHORITY = "com.yanxing.ui.photolibrary.provider";
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -302,9 +306,16 @@ public class PhotoUtilsActivity extends Activity implements OnClickListener {
                         e.printStackTrace();
                     }
                     fromFile = Uri.fromFile(file);
+                    if (Build.VERSION.SDK_INT >= 24) { //判读版本是否在7.0以上
+                        sendBroadcast(new Intent(Intent.ACTION_MEDIA_SCANNER_SCAN_FILE,
+                                FileProvider.getUriForFile(getApplicationContext(), AUTHORITY, file)));
+                        intent.putExtra(MediaStore.EXTRA_OUTPUT, FileProvider.getUriForFile(getApplicationContext(), AUTHORITY, file));
+                    } else {
+                        sendBroadcast(new Intent(Intent.ACTION_MEDIA_SCANNER_SCAN_FILE, Uri.fromFile(file)));
+                        intent.putExtra(MediaStore.EXTRA_OUTPUT, Uri.fromFile(file));
+                    }
                     intent.putExtra(
                             MediaStore.Images.Media.ORIENTATION, 0);
-                    intent.putExtra(MediaStore.EXTRA_OUTPUT, fromFile);
                     startActivityForResult(intent,
                             ConstantUtils.CAMERA_REQUEST_CODE);
                 } else {

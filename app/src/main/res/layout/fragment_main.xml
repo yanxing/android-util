@@ -94,5 +94,10 @@
             android:id="@+id/webOpenPhoto"
             style="@style/style_btn"
             android:text="webview选择图片"/>
+        <Button
+            android:id="@+id/workManager"
+            style="@style/style_btn"
+            android:visibility="gone"
+            android:text="WorkManager例子"/>
     </LinearLayout>
 </androidx.core.widget.NestedScrollView>

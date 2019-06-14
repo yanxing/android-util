@@ -40,8 +40,6 @@
         <!-- 定位需要的服务 -->
         <service android:name="com.amap.api.location.APSService"/>
 
-        <service android:name="com.dianmei.analyzelibrary.AnalyzeService"/>
-
         <meta-data
             android:name="com.baidu.lbsapi.API_KEY"
             android:value="85X6xtNAnjVoaYf016NScDTy"/>
@@ -50,6 +48,7 @@
             android:name="com.baidu.location.f"
             android:enabled="true"
             android:process=":remote"/>
+        <service android:name=".work.TaskJobService" android:permission="android.permission.BIND_JOB_SERVICE"/>
 
         <activity
             android:name=".MainActivity">
@@ -59,8 +58,6 @@
                 <category android:name="android.intent.category.LAUNCHER"/>
             </intent-filter>
         </activity>
-        <activity
-            android:name=".ShowImageActivity"/>
         <activity
             android:name=".animation.LayoutAnimationExampleActivity"/>
         <activity
@@ -75,18 +72,12 @@
         <activity
             android:name=".animation.HeartBubbleViewActivity"/>
         <activity
-            android:name=".SurfaceViewMediaPlayerActivity"
-            android:theme="@style/AppTheme"/>
-        <activity
             android:name=".animation.ProgressBarActivity"/>
         <activity
             android:name=".animation.CircleProgressBarActivity"/>
         <activity
             android:name=".animation.RippleLayoutActivity"
             android:hardwareAccelerated="false"/>
-        <activity
-            android:name=".BrowseImageActivity"
-            android:screenOrientation="portrait"/>
         <activity android:name=".WebOpenPhotoActivity"
                   android:screenOrientation="portrait"/>
         <activity android:name=".AMapActivity"/>

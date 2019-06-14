@@ -6,5 +6,14 @@
             android:name="com.photo.ui.PhotoUtilsActivity"
             android:screenOrientation="portrait"
             android:theme="@style/AppBaseLibrary"/>
+        <provider
+            android:name=".util.MyFileProvider"
+            android:authorities="com.yanxing.ui.photolibrary.provider"
+            android:grantUriPermissions="true"
+            android:exported="false">
+            <meta-data
+                android:name="android.support.FILE_PROVIDER_PATHS"
+                android:resource="@xml/photo_library_filepaths" />
+        </provider>
     </application>
 </manifest>

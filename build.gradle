@@ -4,7 +4,7 @@ buildscript {
     // targetSdkVersion
     ext.TARGET_SDK_VERSION = 28
     // Library minSdkVersion
-    ext.COMMON_MIN_SDK_VERSION = 19
+    ext.COMMON_MIN_SDK_VERSION = 21
     // compileSdkVersion
     ext.COMPILE_SDK_VERSION = 28
     //versionCode
