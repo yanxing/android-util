@@ -13,6 +13,8 @@ import java.io.OutputStream;
 
 /**
  * 磁盘数据存储操作
+ * 由于androidQ存储权限更改，使用SAF操作
+ * @see com.yanxing.util.DocumentFileUtil
  * Created by lishuangxiang on 2016/1/25.
  */
 public class FileUtil {

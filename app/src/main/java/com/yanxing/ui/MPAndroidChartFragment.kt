@@ -20,8 +20,7 @@ import com.github.mikephil.charting.data.PieEntry
 import com.github.mikephil.charting.data.RadarData
 import com.github.mikephil.charting.data.RadarDataSet
 import com.github.mikephil.charting.data.RadarEntry
-import com.github.mikephil.charting.formatter.IAxisValueFormatter
-import com.github.mikephil.charting.formatter.PercentFormatter
+import com.github.mikephil.charting.formatter.*
 import com.github.mikephil.charting.highlight.Highlight
 import com.github.mikephil.charting.utils.MPPointF
 import com.github.mikephil.charting.utils.Utils
@@ -38,9 +37,6 @@ import kotlinx.android.synthetic.main.fragment_mpandroid_chart.*
 class MPAndroidChartFragment : BaseFragment() {
 
 
-
-
-
     protected var mMonths = arrayOf("03-01", "03-01", "03-01", "03-01", "03-01", "03-01", "03-01", "03-01", "03-01", "03-01", "03-01", "03-01")
 
     override fun getLayoutResID(): Int {
@@ -52,6 +48,9 @@ class MPAndroidChartFragment : BaseFragment() {
         addBarChart()
         addPieChart()
         addRadarChart()
+
+        addPieChartFirst()
+        addPieChartSecond()
     }
 
     /**
@@ -114,7 +113,9 @@ class MPAndroidChartFragment : BaseFragment() {
 
         val xAxis = barChart.xAxis
         xAxis.isEnabled = false
-        xAxis.valueFormatter = IAxisValueFormatter { value, axis -> mMonths[value.toInt() % mMonths.size] }
+//        xAxis.valueFormatter = object : DefaultAxisValueFormatter(di:Int) {
+//
+//        }
 
         val mv = MyMarkerView(activity!!, R.layout.custom_marker_view)
         mv.chartView = barChart
@@ -176,7 +177,69 @@ class MPAndroidChartFragment : BaseFragment() {
         l.setDrawInside(false)
         l.textColor = resources.getColor(R.color.colorBlue)
         l.textSize = 12f
-        radarChart.invalidate()
+        pieChart.invalidate()
+    }
+
+    fun addPieChartFirst() {
+        val pieEntryList = ArrayList<PieEntry>()
+        pieEntryList.add(PieEntry(18.5f,""))
+        pieEntryList.add(PieEntry(26.7f,""))
+        pieEntryList.add(PieEntry(24.0f,""))
+        pieEntryList.add(PieEntry(30.8f,""))
+
+        val pieDataSet = PieDataSet(pieEntryList, "")
+        pieDataSet.setColors(resources.getColor(R.color.colorGreen), resources.getColor(R.color.colorYellow)
+                , resources.getColor(R.color.colorRed), resources.getColor(R.color.colorBlue))
+        pieChartFirst.setUsePercentValues(false)
+
+        pieDataSet.valueFormatter = PercentFormatter()
+        val pieData = PieData()
+        pieData.dataSet = pieDataSet
+        pieData.setValueTextColor(resources.getColor(R.color.white))
+        pieData.setValueTextSize(9f)
+        pieChartFirst.data = pieData
+        pieChartFirst.setTransparentCircleAlpha(0)
+        pieChartFirst.holeRadius = 80f
+        pieChartFirst.isHighlightPerTapEnabled = true
+        //pieChartFirst.setDrawSlicesUnderHole(true)
+        pieChartFirst.description.isEnabled = false
+        //pieChartFirst.draws
+        pieChartFirst.setDrawRoundedSlices(true)
+        pieChartFirst.setDrawEntryLabels(false)
+        //pieChartFirst.setTouchEnabled(false)
+
+        val l = pieChartFirst.legend
+        l.isEnabled = false
+        pieChartFirst.invalidate()
+    }
+
+    fun addPieChartSecond() {
+        val pieEntryList = ArrayList<PieEntry>()
+        pieEntryList.add(PieEntry(18.5f))
+        pieEntryList.add(PieEntry(26.7f))
+        pieEntryList.add(PieEntry(24.0f))
+        pieEntryList.add(PieEntry(30.8f))
+
+        val pieDataSet = PieDataSet(pieEntryList, "")
+        pieDataSet.setColors(resources.getColor(R.color.colorGreen), resources.getColor(R.color.colorYellow)
+                , resources.getColor(R.color.colorRed), resources.getColor(R.color.colorBlue))
+        pieChartSecond.setUsePercentValues(false)
+        pieChartSecond.isHighlightPerTapEnabled = true
+        pieDataSet.valueFormatter = PercentFormatter()
+        val pieData = PieData()
+        pieData.dataSet = pieDataSet
+        pieData.setValueTextColor(resources.getColor(R.color.white))
+        pieData.setValueTextSize(8f)
+        pieChartSecond.data = pieData
+        pieChartSecond.description.isEnabled = false
+        pieChartSecond.setTransparentCircleAlpha(0)
+        //pieChartSecond.isDrawHoleEnabled = false
+        pieChartSecond.holeRadius = 40f
+        pieChartSecond.setDrawEntryLabels(false)
+
+        val l = pieChartSecond.legend
+        l.isEnabled = false
+        pieChartSecond.invalidate()
     }
 
     /**
