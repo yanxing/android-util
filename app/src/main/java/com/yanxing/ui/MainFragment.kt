@@ -97,17 +97,6 @@ class MainFragment : BaseFragment(){
             replace(MPAndroidChartFragment())
         }
         val intent = Intent()
-        val bundle = Bundle()
-        selectImage.setOnClickListener {
-            val currentTime = System.currentTimeMillis()
-            intent.setClass(activity, PhotoUtilsActivity::class.java)
-            mImageName = currentTime.toString() + ".png "
-            bundle.putString("path", FileUtil.getStoragePath() + ConstantValue.CACHE_IMAGE)
-            bundle.putString("name", mImageName)
-            bundle.putBoolean("cut", true)
-            intent.putExtras(bundle)
-            startActivityForResult(intent, QUESTION_IMAGE_CODE)
-        }
         selectImageDialog.setOnClickListener {
             val currentTimeDialog = System.currentTimeMillis()
             intent.setClass(activity, SelectPhotoActivity::class.java)

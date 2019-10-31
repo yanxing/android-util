@@ -1,5 +1,4 @@
 include ':app',
-        ':photolibrary',
         ':baidumaplibrary',
         ':titlebarlibrary',
 //        ':tablayoutlibrary',

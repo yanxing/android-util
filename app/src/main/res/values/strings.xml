@@ -57,7 +57,7 @@
     <string name="health_animation">仿QQ健康（来自网上）</string>
     <string name="path_animation">path类</string>
     <string name="get_data">获取数据</string>
-    <string name="select_image_dialog">图片选择(调用图库)</string>
+    <string name="select_image_dialog">图片选择</string>
     <string name="select_image1">选择的图片</string>
     <string name="start_download1">开始下载</string>
     <string name="stop_download">暂停下载</string>

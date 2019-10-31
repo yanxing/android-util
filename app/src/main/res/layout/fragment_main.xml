@@ -15,11 +15,6 @@
             android:id="@+id/adapterButton"
             style="@style/style_btn"
             android:text="@string/adapterlibrary"/>
-
-        <Button
-            android:id="@+id/selectImage"
-            style="@style/style_btn"
-            android:text="@string/select_image"/>
         <Button
             android:id="@+id/selectImageDialog"
             style="@style/style_btn"

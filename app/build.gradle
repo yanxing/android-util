@@ -83,7 +83,6 @@ dependencies {
 
     implementation 'com.jakewharton:disklrucache:2.0.2'
     implementation project(':sortlistviewlibrary')
-    implementation project(':photolibrary')
     implementation project(':baidumaplibrary')
     implementation project(':titlebarlibrary')
 //    compile project(':tablayoutlibrary')
