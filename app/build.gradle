@@ -92,7 +92,7 @@ dependencies {
     implementation project(':photodialoglibrary')
     implementation project(':downloadlibrary')
 //    implementation project(':networklibrary')
-    api 'com.yanxing:networklibrary:2.0.3'
+    api 'com.yanxing:networklibrary:2.0.4'
     api project(':commonlibrary')
     implementation 'androidx.work:work-runtime:2.1.0-alpha03'
 }
