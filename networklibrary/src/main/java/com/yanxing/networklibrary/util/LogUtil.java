@@ -51,23 +51,30 @@ public class LogUtil {
         if (msg.contains("},")){
             msg=msg.replaceAll("\\},","\n},");
         }
-        switch (key) {
-            case 1:
-                Log.v(tag, msg);
-                break;
-            case 2:
-                Log.d(tag, msg);
-                break;
-            case 3:
-                Log.i(tag, msg);
-                break;
-            case 4:
-                Log.w(tag, msg);
-                break;
-            case 5:
-                Log.e(tag, msg);
-                break;
-            default:
+        //防止中文过多，改为字符数，避免换行少字符
+        int maxLogSize = 2001;
+        for (int i = 0; i <= msg.length() / maxLogSize; i++) {
+            int start = i * maxLogSize;
+            int end = (i + 1) * maxLogSize;
+            end = Math.min(end, msg.length());
+            switch (key) {
+                case 1:
+                    Log.v(tag, msg.substring(start, end));
+                    break;
+                case 2:
+                    Log.d(tag, msg.substring(start, end));
+                    break;
+                case 3:
+                    Log.i(tag, msg.substring(start, end));
+                    break;
+                case 4:
+                    Log.w(tag, msg.substring(start, end));
+                    break;
+                case 5:
+                    Log.e(tag, msg.substring(start, end));
+                    break;
+                default:
+            }
         }
     }
 }

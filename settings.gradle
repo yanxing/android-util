@@ -7,6 +7,6 @@ include ':app',
         ':heartbubblelibrary',
         ':photodialoglibrary',
         ':downloadlibrary',
-//        ':networklibrary',
+        ':networklibrary',
 //        ':baseactivitylibrary',
         ':commonlibrary'

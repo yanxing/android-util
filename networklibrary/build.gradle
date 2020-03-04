@@ -13,7 +13,7 @@ ext {
     siteUrl = 'https://github.com/yanxing/android-util'
     gitUrl = 'https://github.com/yanxing/android-util.git'
 
-    libraryVersion = '2.0.1'
+    libraryVersion = '2.0.3'
 
     developerId = 'yanxing'
     developerName = 'yanxing'
@@ -55,10 +55,10 @@ dependencies {
     compile 'com.squareup.retrofit2:converter-gson:2.4.0'
     compile 'com.trello.rxlifecycle2:rxlifecycle:2.2.0'
     compile 'com.trello.rxlifecycle2:rxlifecycle-components:2.2.0'
-    compile 'com.google.code.gson:gson:2.8.2'
+    compile 'com.google.code.gson:gson:2.8.5'
     compile 'androidx.legacy:legacy-support-v4:1.0.0'
 }
 
-apply from: 'https://raw.githubusercontent.com/nuuneoi/JCenter/master/installv1.gradle'
-apply from: 'https://raw.githubusercontent.com/nuuneoi/JCenter/master/bintrayv1.gradle'
+apply from: 'install.gradle'
+apply from: 'bintray.gradle'
 

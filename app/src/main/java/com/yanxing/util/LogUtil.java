@@ -41,11 +41,11 @@ public class LogUtil {
     }
 
     private static void print(int key, String tag, String msg) {
-        int maxLogSize = 4000;
+        int maxLogSize = 2001;
         for (int i = 0; i <= msg.length() / maxLogSize; i++) {
             int start = i * maxLogSize;
             int end = (i + 1) * maxLogSize;
-            end = end > msg.length()?msg.length() : end;
+            end = Math.min(end, msg.length());
             switch (key) {
                 case 1:
                     Log.v(tag, msg.substring(start, end));
