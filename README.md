@@ -12,7 +12,7 @@
  ```
  androidx
  ```java
- compile 'com.yanxing:networklibrary:2.0.3'
+ compile 'com.yanxing:networklibrary:2.0.4'
  ```
 [example](https://github.com/yanxing/android-util/blob/master/app/src/main/java/com/yanxing/ui/NetworkLibraryFragment.kt)
 ```java

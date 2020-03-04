@@ -13,7 +13,7 @@ ext {
     siteUrl = 'https://github.com/yanxing/android-util'
     gitUrl = 'https://github.com/yanxing/android-util.git'
 
-    libraryVersion = '2.0.3'
+    libraryVersion = '2.0.4'
 
     developerId = 'yanxing'
     developerName = 'yanxing'
@@ -26,11 +26,10 @@ ext {
 
 
 android {
-    compileSdkVersion COMPILE_SDK_VERSION as int
+    compileSdkVersion 29
 
 
     defaultConfig {
-        minSdkVersion COMMON_MIN_SDK_VERSION as int
         versionCode 1
         versionName "1.0.0"
 
