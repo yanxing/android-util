@@ -34,6 +34,7 @@ Properties properties = new Properties()
 properties.load(project.rootProject.file('local.properties').newDataInputStream())
 
 bintray {
+    //apikey写到local.properties文件中
     user = properties.getProperty("bintray.user")
     key = properties.getProperty("bintray.apikey")
 
