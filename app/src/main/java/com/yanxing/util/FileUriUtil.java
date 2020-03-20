@@ -1,7 +1,6 @@
 package com.yanxing.util;
 
 import android.content.ContentResolver;
-import android.content.ContentValues;
 import android.content.Context;
 import android.database.Cursor;
 import android.net.Uri;
@@ -129,7 +128,7 @@ public class FileUriUtil {
             Uri baseUri = Uri.parse("content://media/external/images/media");
             return Uri.withAppendedPath(baseUri, "" + id);
         } else {
-            //不再对MediaStore.Images.Media.EXTERNAL_CONTENT_URI进行插入数据，再返回content://,若图片被闪退，将会冗余
+            //不再对MediaStore.Images.Media.EXTERNAL_CONTENT_URI进行插入数据，再返回content://,若图片被删除，将会冗余
             // 另外Android Q上私有目录图片不能插入到MediaStore.Images.Media.EXTERNAL_CONTENT_URI，以及沙盒外图片都需要授权，
             // 所以如果不存在此处不再转为content://
             return Uri.parse(filePath);
@@ -162,7 +161,7 @@ public class FileUriUtil {
             Uri baseUri = Uri.parse("content://media/external/images/media");
             return Uri.withAppendedPath(baseUri, "" + id);
         } else {
-            //不再对MediaStore.Images.Media.EXTERNAL_CONTENT_URI进行插入数据，再返回content://,若图片被闪退，将会冗余，
+            //不再对MediaStore.Images.Media.EXTERNAL_CONTENT_URI进行插入数据，再返回content://,若图片被删除，将会冗余，
             // 另外Android Q上私有目录图片不能插入到MediaStore.Images.Media.EXTERNAL_CONTENT_URI，以及沙盒外图片都需要授权，
             // 所以如果不存在此处不再转为content://
             return Uri.parse(filePath);
