@@ -5,11 +5,15 @@ import android.content.Context;
 import android.database.Cursor;
 import android.net.Uri;
 import android.os.Build;
+import android.os.ParcelFileDescriptor;
 import android.provider.MediaStore;
 
 import androidx.annotation.RequiresApi;
 
 import java.io.File;
+import java.io.FileDescriptor;
+import java.io.FileInputStream;
+import java.io.IOException;
 
 /**
  * target androidQ时，本地文件uri和file互相转化
@@ -165,6 +169,43 @@ public class FileUriUtil {
             // 另外Android Q上私有目录图片不能插入到MediaStore.Images.Media.EXTERNAL_CONTENT_URI，以及沙盒外图片都需要授权，
             // 所以如果不存在此处不再转为content://
             return Uri.parse(filePath);
+        }
+    }
+
+    /**
+     * 转成byte流数据
+     *
+     * @param context
+     * @param uri
+     * @return
+     * @throws IOException
+     */
+    public static byte[] getByteStreamFromUri(Context context, Uri uri) {
+        try {
+            if (uri == null) {
+                return null;
+            }
+            final String scheme = uri.getScheme();
+            if (scheme == null || ContentResolver.SCHEME_FILE.equals(scheme)) {
+                String path = uri.getPath();
+                File file = new File(path);
+                FileInputStream fileInputStream = new FileInputStream(file);
+                byte[] byt = new byte[fileInputStream.available()];
+                fileInputStream.read(byt);
+                return byt;
+            } else if (ContentResolver.SCHEME_CONTENT.equals(scheme)) {
+                ParcelFileDescriptor parcelFileDescriptor =
+                        context.getContentResolver().openFileDescriptor(uri, "r");
+                FileDescriptor fileDescriptor = parcelFileDescriptor.getFileDescriptor();
+                FileInputStream fileInputStream = new FileInputStream(fileDescriptor);
+                byte[] byt = new byte[fileInputStream.available()];
+                fileInputStream.read(byt);
+                return byt;
+            } else {
+                return null;
+            }
+        } catch (Exception e) {
+            return null;
         }
     }
 
