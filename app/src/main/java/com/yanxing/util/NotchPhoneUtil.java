@@ -2,7 +2,9 @@ package com.yanxing.util;
 
 import android.app.Activity;
 import android.content.Context;
+import android.content.res.Resources;
 import android.os.Build;
+import android.text.TextUtils;
 import android.util.Log;
 import android.view.WindowManager;
 
@@ -80,7 +82,9 @@ public class NotchPhoneUtil {
             return hasNotchInScreen(activity);
         } else if (PhoneBrandUtil.isOppo()) {
             return hasNotInOppoScreen(activity);
-        } else {
+        } else if(PhoneBrandUtil.isSamsung()){
+            return hasNotInSamsung(activity);
+        }else {
             return false;
         }
     }
@@ -161,6 +165,22 @@ public class NotchPhoneUtil {
     private static boolean hasNotInOppoScreen(Context context) {
         try {
             return context.getPackageManager().hasSystemFeature("com.oppo.feature.screen.heteromorphism");
+        } catch (Exception e) {
+            return false;
+        }
+    }
+
+    /**
+     * 三星手机是否是挖孔屏
+     * @param context
+     * @return
+     */
+    private static boolean hasNotInSamsung(Context context){
+        try {
+            final Resources res = context.getResources();
+            final int resId = res.getIdentifier("config_mainBuiltInDisplayCutout", "string", "android");
+            final String spec = resId > 0 ? res.getString(resId): null;
+            return spec != null && !TextUtils.isEmpty(spec);
         } catch (Exception e) {
             return false;
         }
