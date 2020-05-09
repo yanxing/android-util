@@ -4,6 +4,7 @@ import android.content.Context;
 import android.content.Intent;
 import android.net.Uri;
 import android.os.Build;
+
 import androidx.core.content.FileProvider;
 
 import java.io.File;
@@ -15,9 +16,9 @@ import java.io.File;
 public class OpenFileUtil {
 
     /**
-     * 为兼容7.0 需要配置provider
+     * 可能存在不同环境的applicationId
      */
-    private static final String AU="com.yanxing.openFile.fileProvider";
+    private static final String AU=".fileProvider";
     /**
      * 查找打开word文件的intent
      * @param file 文件
@@ -25,18 +26,22 @@ public class OpenFileUtil {
      */
     public static Intent getWordFileIntent(Context context,File file)
     {
-        Intent intent = new Intent("android.intent.action.VIEW");
-        intent.addCategory("android.intent.category.DEFAULT");
-        intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
-        Uri uri;
-        if (Build.VERSION.SDK_INT >= 24) {
-            intent.setFlags(Intent.FLAG_GRANT_READ_URI_PERMISSION);
-            uri= FileProvider.getUriForFile(context,AU,file);
-        }else {
-            uri = Uri.fromFile(file);
+        try{
+            Intent intent = new Intent("android.intent.action.VIEW");
+            intent.addCategory("android.intent.category.DEFAULT");
+            intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
+            Uri uri;
+            if (Build.VERSION.SDK_INT >= 24) {
+                intent.setFlags(Intent.FLAG_GRANT_READ_URI_PERMISSION);
+                uri= FileProvider.getUriForFile(context,context.getPackageName()+AU,file);
+            }else {
+                uri = Uri.fromFile(file);
+            }
+            intent.setDataAndType(uri, "application/msword");
+            return intent;
+        }catch (Exception e){
+            return null;
         }
-        intent.setDataAndType(uri, "application/msword");
-        return intent;
     }
 
     /**
@@ -46,18 +51,22 @@ public class OpenFileUtil {
      */
     public static Intent getPPTFileIntent(Context context,File file)
     {
-        Intent intent = new Intent("android.intent.action.VIEW");
-        intent.addCategory("android.intent.category.DEFAULT");
-        intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
-        Uri uri;
-        if (Build.VERSION.SDK_INT >= 24) {
-            intent.setFlags(Intent.FLAG_GRANT_READ_URI_PERMISSION);
-            uri= FileProvider.getUriForFile(context,AU,file);
-        }else {
-            uri = Uri.fromFile(file);
+        try{
+            Intent intent = new Intent("android.intent.action.VIEW");
+            intent.addCategory("android.intent.category.DEFAULT");
+            intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
+            Uri uri;
+            if (Build.VERSION.SDK_INT >= 24) {
+                intent.setFlags(Intent.FLAG_GRANT_READ_URI_PERMISSION);
+                uri= FileProvider.getUriForFile(context,context.getPackageName()+AU,file);
+            }else {
+                uri = Uri.fromFile(file);
+            }
+            intent.setDataAndType(uri, "application/vnd.ms-powerpoint");
+            return intent;
+        }catch (Exception e){
+            return null;
         }
-        intent.setDataAndType(uri, "application/vnd.ms-powerpoint");
-        return intent;
     }
 
     /**
@@ -67,18 +76,22 @@ public class OpenFileUtil {
      */
     public static Intent getExcelFileIntent(Context context,File file)
     {
-        Intent intent = new Intent("android.intent.action.VIEW");
-        intent.addCategory("android.intent.category.DEFAULT");
-        intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
-        Uri uri;
-        if (Build.VERSION.SDK_INT >= 24) {
-            intent.setFlags(Intent.FLAG_GRANT_READ_URI_PERMISSION);
-            uri= FileProvider.getUriForFile(context,AU,file);
-        }else {
-            uri = Uri.fromFile(file);
+        try{
+            Intent intent = new Intent("android.intent.action.VIEW");
+            intent.addCategory("android.intent.category.DEFAULT");
+            intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
+            Uri uri;
+            if (Build.VERSION.SDK_INT >= 24) {
+                intent.setFlags(Intent.FLAG_GRANT_READ_URI_PERMISSION);
+                uri= FileProvider.getUriForFile(context,context.getPackageName()+AU,file);
+            }else {
+                uri = Uri.fromFile(file);
+            }
+            intent.setDataAndType(uri, "application/vnd.ms-excel");
+            return intent;
+        }catch (Exception e){
+            return null;
         }
-        intent.setDataAndType(uri, "application/vnd.ms-excel");
-        return intent;
     }
 
     /**
@@ -91,7 +104,7 @@ public class OpenFileUtil {
         Uri uri;
         if (Build.VERSION.SDK_INT >= 24) {
             intent.setFlags(Intent.FLAG_GRANT_READ_URI_PERMISSION);
-            uri= FileProvider.getUriForFile(context,AU,file);
+            uri= FileProvider.getUriForFile(context,context.getPackageName()+AU,file);
         }else {
             uri = Uri.fromFile(file);
         }
@@ -107,7 +120,7 @@ public class OpenFileUtil {
      * @return true 是Excel文件,false不是
      */
     public static boolean isFileExcel(String fileName){
-        String fileExcel[]=new String[]{".xls",".xlsx"}; //excel文件后缀
+        String fileExcel[]=new String[]{".xls",".xlsx"};
         String suffixStr=fileName.substring(fileName.lastIndexOf("."),fileName.length());
         for (int i=0;i<fileExcel.length;i++){
             if (suffixStr.equals(fileExcel[i])){
@@ -123,7 +136,7 @@ public class OpenFileUtil {
      * @return true 是PPT文件,false不是
      */
     public static boolean isFilePPT(String fileName){
-        String filePPT[]=new String[]{".ppt",".pptx"}; //ppt文件后缀
+        String filePPT[]=new String[]{".ppt",".pptx"};
         String suffixStr=fileName.substring(fileName.lastIndexOf("."),fileName.length());
         for (int i=0;i<filePPT.length;i++){
             if (suffixStr.equals(filePPT[i])){
@@ -139,7 +152,7 @@ public class OpenFileUtil {
      * @return true 是word文件,false不是
      */
     public static boolean isFileWord(String fileName){
-        String fileWord[]=new String[]{".doc",".docx"};//word文件后缀
+        String fileWord[]=new String[]{".doc",".docx"};
         String suffixStr=fileName.substring(fileName.lastIndexOf("."),fileName.length());
         for (int i=0;i<fileWord.length;i++){
             if (suffixStr.equals(fileWord[i])){
@@ -157,7 +170,7 @@ public class OpenFileUtil {
      * @return
      */
     public static boolean isIntentAvailable(Context context, Intent intent) {
-        if (intent.resolveActivity(context.getPackageManager())!=null){//存在
+        if (intent!=null&&intent.resolveActivity(context.getPackageManager())!=null){
             return true;
         }else {
             return false;
@@ -170,7 +183,7 @@ public class OpenFileUtil {
      * @return true 是pdf文件,false不是
      */
     public static boolean isFilePdf(String fileName){
-        String filePdf[]=new String[]{".pdf",".PDF"};//pdf文件后缀
+        String filePdf[]=new String[]{".pdf",".PDF"};
         String suffixStr=fileName.substring(fileName.lastIndexOf("."),fileName.length());
         for (int i=0;i<filePdf.length;i++){
             if (suffixStr.equals(filePdf[i])){
