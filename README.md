@@ -5,7 +5,7 @@
 [DownloadImageUtil](https://github.com/yanxing/android-util/blob/master/app/src/main/java/com/yanxing/util/DownloadImageUtil.java)、[TimeUtil](https://github.com/yanxing/android-util/blob/master/app/src/main/java/com/yanxing/util/TimeUtil.java)、
 [NotchPhoneUtil](https://github.com/yanxing/android-util/blob/master/app/src/main/java/com/yanxing/util/NotchPhoneUtil.java)、[FileUriUtil](https://github.com/yanxing/android-util/blob/master/app/src/main/java/com/yanxing/util/FileUriUtil.java) (android10文件uri和file互相转化)
 ## networklibrary
-[已经单独作为一个仓库NetworklibraryDemo](https://github.com/yanxing/NetworklibraryDemo)
+[已经单独作为一个仓库NetworklibraryDemo，新的使用说明](https://github.com/yanxing/NetworklibraryDemo)
 
 对retrofit2+rxjava2网络请求的简单封装（包括网络请求时显示等待对话框和请求完成后上下拉刷新控件置为完成状态）。
 * gradle 
