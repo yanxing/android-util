@@ -1,8 +1,8 @@
 package com.yanxing.ui.animation
 
-import com.photo.util.AppUtil
 import com.yanxing.base.BaseActivity
 import com.yanxing.ui.R
+import com.yanxing.util.StatusBarUtil
 
 /**
  * 防QQ健康，来自
@@ -16,6 +16,6 @@ class QQHealthActivity : BaseActivity() {
     }
 
     override fun afterInstanceView() {
-        AppUtil.setStatusBarDarkMode(true, this)
+        StatusBarUtil.setStatusBarDarkMode(true, this)
     }
 }

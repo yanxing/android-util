@@ -1,8 +1,8 @@
 package com.yanxing.ui.animation
 
-import com.photo.util.AppUtil
 import com.yanxing.base.BaseActivity
 import com.yanxing.ui.R
+import com.yanxing.util.StatusBarUtil
 
 /**
  * Path类
@@ -16,7 +16,7 @@ class PathExampleActivity : BaseActivity() {
     }
 
     override fun afterInstanceView() {
-        AppUtil.setStatusBarDarkMode(true, this)
+        StatusBarUtil.setStatusBarDarkMode(true, this)
 
     }
 }

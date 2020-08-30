@@ -9,7 +9,6 @@ import androidx.lifecycle.LiveData
 import androidx.lifecycle.Observer
 import androidx.work.*
 
-import com.photo.ui.PhotoUtilsActivity
 import com.yanxing.base.BaseFragment
 import com.yanxing.dialog.PhotoParam
 import com.yanxing.dialog.SelectPhotoActivity
@@ -99,7 +98,7 @@ class MainFragment : BaseFragment(){
         val intent = Intent()
         selectImageDialog.setOnClickListener {
             val currentTimeDialog = System.currentTimeMillis()
-            intent.setClass(activity, SelectPhotoActivity::class.java)
+            activity?.let { it1 -> intent.setClass(it1, SelectPhotoActivity::class.java) }
             mImageName = currentTimeDialog.toString() + ".png"
             val photoParam = PhotoParam()
             photoParam.name = mImageName
@@ -111,12 +110,12 @@ class MainFragment : BaseFragment(){
         }
         //城市列表
         sortListView.setOnClickListener {
-            intent.setClass(activity, CityListActivity::class.java)
+            activity?.let { it1 -> intent.setClass(it1, CityListActivity::class.java) }
             intent.putExtra("city", getString(R.string.city_test))
             startActivityForResult(intent, QUESTION_SORT_LISTVIEW_CODE)
         }
         inputEditButton.setOnClickListener {
-            intent.setClass(activity, InputEditButtonActivity::class.java)
+            activity?.let { it1 -> intent.setClass(it1, InputEditButtonActivity::class.java) }
             startActivity(intent)
         }
         tableView.setOnClickListener {
@@ -126,7 +125,7 @@ class MainFragment : BaseFragment(){
             replace(NavigationTopFragment())
         }
         webOpenPhoto.setOnClickListener {
-            intent.setClass(activity, WebOpenPhotoActivity::class.java)
+            activity?.let { it1 -> intent.setClass(it1, WebOpenPhotoActivity::class.java) }
             startActivity(intent)
         }
         //workManager例子
@@ -146,7 +145,7 @@ class MainFragment : BaseFragment(){
             })
 
             //jobservice
-            val componentName = ComponentName(activity, TaskJobService::class.java)
+            val componentName = ComponentName(activity!!, TaskJobService::class.java)
             val builder = JobInfo.Builder(1000, componentName).setPeriodic(16*60 * 1000L)
             val tm = getSystemService(activity!!,JobScheduler::class.java)
             tm?.schedule(builder.build())
