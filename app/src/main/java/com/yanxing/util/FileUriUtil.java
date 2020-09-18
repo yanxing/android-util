@@ -16,7 +16,7 @@ import java.io.FileInputStream;
 import java.io.IOException;
 
 /**
- * target androidQ时，本地文件uri和file互相转化
+ * target androidQ时，本地图片uri和file互相转化
  * @author 李双祥 on 2019/10/31.
  */
 public class FileUriUtil {
@@ -37,13 +37,13 @@ public class FileUriUtil {
     }
 
     /**
-     * AndroidQ以前版本，URI转化文件路径
+     * AndroidQ以前版本，URI转化图片路径
      *
      * @param context
      * @param uri
      * @return 文件路径
      */
-    public static String getRealFilePath(final Context context, final Uri uri) {
+    private static String getRealFilePath(final Context context, final Uri uri) {
         if (null == uri) return null;
         final String scheme = uri.getScheme();
         String data = null;
@@ -68,14 +68,14 @@ public class FileUriUtil {
     }
 
     /**
-     * AndroidQ URI转化文件路径
+     * AndroidQ URI转化图片路径
      *
      * @param context
      * @param uri
      * @return
      */
     @RequiresApi(api = 29)
-    public static String getAndroidQRealFilePath(final Context context, final Uri uri) {
+    private static String getAndroidQRealFilePath(final Context context, final Uri uri) {
         if (null == uri) return null;
         final String scheme = uri.getScheme();
         String data = null;
@@ -99,7 +99,7 @@ public class FileUriUtil {
     }
 
     /**
-     * file转Uri，针对android Q存储权限改动，使用uri访问文件
+     * file转Uri，针对android Q存储权限改动，使用uri访问图片
      *
      * @param context
      * @param imageFile
