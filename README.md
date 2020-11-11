@@ -154,7 +154,7 @@ startActivityForResult(intent,QUESTION_SORT_LISTVIEW_CODE);
 ```
 ![image](https://github.com/yanxing/android-util/raw/master/sortlistviewlibrary/1.png)
 ## photodialoglibrary
-图片选择（拍照和从图库选择）。
+图片选择（拍照和从图库选择），[最新兼容AndroidQ，见PhotoSelector](https://github.com/yanxing/PhotoSelector)。
 ```Java
 Intent intent=new Intent(getApplicationContext(), SelectPhotoActivity.class);
 mImageName = System.currentTimeMillis() + ".png";
