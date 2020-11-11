@@ -3,7 +3,7 @@
 [CommonUtil](https://github.com/yanxing/android-util/blob/master/app/src/main/java/com/yanxing/util/CommonUtil.java)(包含关闭显示输入法、
 截图、获取通知栏高度、应用是否在前台、检验应用签名、打电话、校验邮箱和手机号等)、[NetworkStateUtil](https://github.com/yanxing/android-util/blob/master/app/src/main/java/com/yanxing/util/NetworkStateUtil.java)、[DESUtil](https://github.com/yanxing/android-util/blob/master/app/src/main/java/com/yanxing/util/DESUtil.java)、[ParseJsonUtil](https://github.com/yanxing/android-util/blob/master/app/src/main/java/com/yanxing/util/ParseJsonUtil.java)、[OpenFileUtil](https://github.com/yanxing/android-util/blob/master/app/src/main/java/com/yanxing/util/OpenFileUtil.java)（打开word、PPT、excel文件）、[FileUtil](https://github.com/yanxing/android-util/blob/master/app/src/main/java/com/yanxing/util/FileUtil.java)、[BitmapUtil](https://github.com/yanxing/android-util/blob/master/app/src/main/java/com/yanxing/util/BitmapUtil.java)、[VideoFrameLoader](https://github.com/yanxing/android-util/blob/master/app/src/main/java/com/yanxing/util/VideoFrameLoader.java)（加载视频某一帧）、[PermissionUtil](https://github.com/yanxing/android-util/blob/master/app/src/main/java/com/yanxing/util/PermissionUtil.java)、
 [DownloadImageUtil](https://github.com/yanxing/android-util/blob/master/app/src/main/java/com/yanxing/util/DownloadImageUtil.java)、[TimeUtil](https://github.com/yanxing/android-util/blob/master/app/src/main/java/com/yanxing/util/TimeUtil.java)、
-[NotchPhoneUtil](https://github.com/yanxing/android-util/blob/master/app/src/main/java/com/yanxing/util/NotchPhoneUtil.java)、[FileUriUtil](https://github.com/yanxing/android-util/blob/master/app/src/main/java/com/yanxing/util/FileUriUtil.java) (android10文件uri和file互相转化)
+[NotchPhoneUtil](https://github.com/yanxing/android-util/blob/master/app/src/main/java/com/yanxing/util/NotchPhoneUtil.java)、[FileUriUtil](https://github.com/yanxing/android-util/blob/master/app/src/main/java/com/yanxing/util/FileUriUtil.java) (android10图片uri和file互相转化)
 ## networklibrary
 [已经单独作为一个仓库NetworklibraryDemo，新的使用说明](https://github.com/yanxing/NetworklibraryDemo)
 
@@ -154,7 +154,7 @@ startActivityForResult(intent,QUESTION_SORT_LISTVIEW_CODE);
 ```
 ![image](https://github.com/yanxing/android-util/raw/master/sortlistviewlibrary/1.png)
 ## photodialoglibrary
-图片选择（拍照和从图库选择）。
+图片选择（拍照和从图库选择），[最新兼容AndroidQ，见PhotoSelector](https://github.com/yanxing/PhotoSelector)。
 ```Java
 Intent intent=new Intent(getApplicationContext(), SelectPhotoActivity.class);
 mImageName = System.currentTimeMillis() + ".png";
