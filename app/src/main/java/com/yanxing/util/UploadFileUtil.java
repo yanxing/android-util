@@ -15,7 +15,7 @@ import okhttp3.RequestBody;
 public class UploadFileUtil {
 
     /**
-     * 多个文件需要的Part
+     * 多个文件需要的Part，targetSdkVersion29+，不是沙盒内文件不用此方法
      * @param fileKeys
      * @param files
      * @return
@@ -71,7 +71,31 @@ public class UploadFileUtil {
     }
 
     /**
-     * 单个文件需要的Part
+     * 文件一起上传附带参数
+     * @param map
+     * @return
+     */
+    public static MultipartBody.Part[] multipartByteBodyPart(List<String> fileKeys, List<String> fileNames, List<byte[]> files
+            , Map<String,String> map){
+        if (fileKeys!=null&&files!=null&&map!=null){
+            MultipartBody.Part parts[]=new MultipartBody.Part[fileKeys.size()+map.size()];
+            int j=0;
+            for (int i=0;i<fileKeys.size();i++){
+                RequestBody requestBody=RequestBody.create(MediaType.parse("multipart/form-data"),files.get(i));
+                parts[i]=MultipartBody.Part.createFormData(fileKeys.get(i),fileNames.get(i),requestBody);
+                j=i;
+            }
+            for (Map.Entry<String,String> entry:map.entrySet()){
+                j++;
+                parts[j]=MultipartBody.Part.createFormData(entry.getKey(),entry.getValue());
+            }
+            return parts;
+        }
+        return null;
+    }
+
+    /**
+     * 单个文件需要的Part，targetSdkVersion29+，不是沙盒内文件不用此方法
      * @param fileKey
      * @param file
      * @return
