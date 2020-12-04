@@ -1,6 +1,5 @@
 package com.yanxing.util;
 
-import com.yanxing.networklibrary.util.LogUtil;
 
 import java.io.ByteArrayInputStream;
 import java.io.File;
@@ -102,8 +101,7 @@ public class UploadFileRequestBody extends RequestBody {
                 uploaded += read;
                 sink.write(buffer, 0, read);
                 if (mOnProgressListener!=null){
-                    LogUtil.d("文件上传",contentLength()+"  "+uploaded);
-                    mOnProgressListener.onProgress(mTag, contentLength(), uploaded, ((int) (uploaded / contentLength()) * 100));
+                    mOnProgressListener.onProgress(mTag, contentLength(), uploaded, ((int) (uploaded*1.0 / contentLength()) * 100));
                 }
             }
             sink.flush();
