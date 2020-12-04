@@ -76,12 +76,13 @@ public class UploadFileUtil {
      * @return
      */
     public static MultipartBody.Part[] multipartByteBodyPart(List<String> fileKeys, List<String> fileNames, List<byte[]> files
-            , Map<String,String> map){
+            , Map<String,String> map,UploadFileRequestBody.OnProgressListener onProgressListener){
         if (fileKeys!=null&&files!=null&&map!=null){
             MultipartBody.Part parts[]=new MultipartBody.Part[fileKeys.size()+map.size()];
             int j=0;
             for (int i=0;i<fileKeys.size();i++){
-                RequestBody requestBody=RequestBody.create(MediaType.parse("multipart/form-data"),files.get(i));
+                UploadFileRequestBody requestBody=new UploadFileRequestBody(String.valueOf(i+1),files.get(i),MediaType.parse("multipart/form-data")
+                        ,onProgressListener);
                 parts[i]=MultipartBody.Part.createFormData(fileKeys.get(i),fileNames.get(i),requestBody);
                 j=i;
             }
