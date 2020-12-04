@@ -101,7 +101,7 @@ public class UploadFileRequestBody extends RequestBody {
                 uploaded += read;
                 sink.write(buffer, 0, read);
                 if (mOnProgressListener!=null){
-                    mOnProgressListener.onProgress(mTag, contentLength(), uploaded, ((int) (uploaded*1.0 / contentLength()) * 100));
+                    mOnProgressListener.onProgress(mTag, contentLength(), uploaded, (int) (uploaded*100.0 / contentLength()));
                 }
             }
             sink.flush();
