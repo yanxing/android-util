@@ -11,7 +11,6 @@ import java.lang.reflect.InvocationTargetException;
 import java.lang.reflect.Method;
 
 /**
- * 魅族提供的沉浸式支持
  * Created by wangchende on 15-9-7.
  */
 public class StatusBarColorUtil {
@@ -24,25 +23,19 @@ public class StatusBarColorUtil {
         try {
             mSetStatusBarColorIcon = Activity.class.getMethod("setStatusBarDarkIcon", int.class);
         } catch (NoSuchMethodException e) {
-            e.printStackTrace();
         }
         try {
             mSetStatusBarDarkIcon = Activity.class.getMethod("setStatusBarDarkIcon", boolean.class);
         } catch (NoSuchMethodException e) {
-            e.printStackTrace();
         }
         try {
             mStatusBarColorFiled = WindowManager.LayoutParams.class.getField("statusBarColor");
         } catch (NoSuchFieldException e) {
-            e.printStackTrace();
         }
         try {
             Field field = View.class.getField("SYSTEM_UI_FLAG_LIGHT_STATUS_BAR");
             SYSTEM_UI_FLAG_LIGHT_STATUS_BAR = field.getInt(null);
-        } catch (NoSuchFieldException e) {
-            e.printStackTrace();
-        } catch (IllegalAccessException e) {
-            e.printStackTrace();
+        } catch (Exception e) {
         }
     }
 
@@ -81,10 +74,8 @@ public class StatusBarColorUtil {
         if (mSetStatusBarColorIcon != null) {
             try {
                 mSetStatusBarColorIcon.invoke(activity, color);
-            } catch (IllegalAccessException e) {
-                e.printStackTrace();
-            } catch (InvocationTargetException e) {
-                e.printStackTrace();
+            } catch (IllegalAccessException | InvocationTargetException e) {
+
             }
         } else {
             boolean whiteColor = isBlackColor(color, 50);
@@ -124,36 +115,6 @@ public class StatusBarColorUtil {
         setStatusBarDarkIcon(activity, dark, true);
     }
 
-    private static boolean changeMeizuFlag(WindowManager.LayoutParams winParams, String flagName, boolean on) {
-        try {
-            Field f = winParams.getClass().getDeclaredField(flagName);
-            f.setAccessible(true);
-            int bits = f.getInt(winParams);
-            Field f2 = winParams.getClass().getDeclaredField("meizuFlags");
-            f2.setAccessible(true);
-            int meizuFlags = f2.getInt(winParams);
-            int oldFlags = meizuFlags;
-            if (on) {
-                meizuFlags |= bits;
-            } else {
-                meizuFlags &= ~bits;
-            }
-            if (oldFlags != meizuFlags) {
-                f2.setInt(winParams, meizuFlags);
-                return true;
-            }
-        } catch (NoSuchFieldException e) {
-            e.printStackTrace();
-        } catch (IllegalAccessException e) {
-            e.printStackTrace();
-        } catch (IllegalArgumentException e) {
-            e.printStackTrace();
-        } catch (Throwable e) {
-            e.printStackTrace();
-        }
-        return false;
-    }
-
     /**
      * 设置状态栏颜色
      *
@@ -189,7 +150,6 @@ public class StatusBarColorUtil {
                     window.setAttributes(winParams);
                 }
             } catch (IllegalAccessException e) {
-                e.printStackTrace();
             }
         }
     }
@@ -201,9 +161,7 @@ public class StatusBarColorUtil {
      * @param dark   是否深色 true为深色 false 为白色
      */
     public static void setStatusBarDarkIcon(Window window, boolean dark) {
-        if (Build.VERSION.SDK_INT < 23) {
-            changeMeizuFlag(window.getAttributes(), "MEIZU_FLAG_DARK_STATUS_BAR_ICON", dark);
-        } else {
+        if (Build.VERSION.SDK_INT >= 23) {
             try {
                 View decorView = window.getDecorView();
                 if (decorView != null) {
@@ -220,10 +178,7 @@ public class StatusBarColorUtil {
         if (mSetStatusBarDarkIcon != null) {
             try {
                 mSetStatusBarDarkIcon.invoke(activity, dark);
-            } catch (IllegalAccessException e) {
-                e.printStackTrace();
-            } catch (InvocationTargetException e) {
-                e.printStackTrace();
+            } catch (IllegalAccessException | InvocationTargetException e) {
             }
         } else {
             if (flag) {

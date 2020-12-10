@@ -16,6 +16,5 @@ class QQHealthActivity : BaseActivity() {
     }
 
     override fun afterInstanceView() {
-        StatusBarUtil.setStatusBarDarkMode(true, this)
     }
 }

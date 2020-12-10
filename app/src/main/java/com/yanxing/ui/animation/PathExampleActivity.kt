@@ -16,7 +16,6 @@ class PathExampleActivity : BaseActivity() {
     }
 
     override fun afterInstanceView() {
-        StatusBarUtil.setStatusBarDarkMode(true, this)
 
     }
 }

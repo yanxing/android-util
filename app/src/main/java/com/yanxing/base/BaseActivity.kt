@@ -14,7 +14,6 @@ abstract class BaseActivity : com.yanxing.baselibrary.BaseActivity() {
 
     public override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        StatusBarUtil.setStatusBarDarkMode(true, this)
         StatusBarColorUtil.setStatusBarDarkIcon(this,true)
     }
 
