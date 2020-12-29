@@ -18,9 +18,9 @@ dependencies {
     implementation fileTree(include: ['*.jar'], dir: 'libs')
     testImplementation 'junit:junit:4.12'
     //2D地图
-    api 'com.amap.api:map2d:latest.integration'
+    api 'com.amap.api:map2d:6.0.0'
     //定位
-    api 'com.amap.api:location:latest.integration'
+    api 'com.amap.api:location:5.2.0'
     //搜索
 //    compile 'com.amap.api:search:latest.integration'
     //3D地图

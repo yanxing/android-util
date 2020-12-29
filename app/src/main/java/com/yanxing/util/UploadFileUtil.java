@@ -3,6 +3,7 @@ package com.yanxing.util;
 import java.io.File;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Map;
 
 import okhttp3.MediaType;
 import okhttp3.MultipartBody;
@@ -76,7 +77,7 @@ public class UploadFileUtil {
      * @return
      */
     public static MultipartBody.Part[] multipartByteBodyPart(List<String> fileKeys, List<String> fileNames, List<byte[]> files
-            , Map<String,String> map,UploadFileRequestBody.OnProgressListener onProgressListener){
+            , Map<String,String> map, UploadFileRequestBody.OnProgressListener onProgressListener){
         if (fileKeys!=null&&files!=null&&map!=null){
             MultipartBody.Part parts[]=new MultipartBody.Part[fileKeys.size()+map.size()];
             int j=0;

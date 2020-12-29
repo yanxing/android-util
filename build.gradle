@@ -15,8 +15,14 @@ buildscript {
     ext.kotlin_version = '1.2.71'
     repositories {
         jcenter()
+        mavenLocal()
         mavenCentral()
-        google()
+        maven { url "https://maven.aliyun.com/repository/google"}
+        maven { url "https://maven.aliyun.com/repository/public"}
+        maven { url "https://maven.aliyun.com/repository/central"}
+//        maven {url 'https://dl.google.com/dl/android/maven2/'}
+//        maven { url "https://maven.google.com" }
+        //google()
     }
     dependencies {
         classpath 'com.android.tools.build:gradle:3.2.1'
@@ -33,9 +39,13 @@ allprojects {
         jcenter()
         mavenCentral()
         mavenLocal()
+        maven { url "https://maven.aliyun.com/repository/google"}
+        maven { url "https://maven.aliyun.com/repository/public"}
+        maven { url "https://maven.aliyun.com/repository/central"}
         maven { url "https://jitpack.io" }
-        maven { url "https://maven.google.com" }
-        google()
+        //maven {url 'https://dl.google.com/dl/android/maven2/'}
+        //maven { url "https://maven.google.com" }
+        //google()
     }
 
     tasks.withType(Javadoc){
