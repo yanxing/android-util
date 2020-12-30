@@ -1,18 +1,19 @@
 package com.yanxing.util;
 
-
-import java.io.ByteArrayInputStream;
+import java.io.File;
+import java.io.FileInputStream;
 import java.io.IOException;
+import java.io.InputStream;
 
 import okhttp3.MediaType;
 import okhttp3.RequestBody;
 import okio.BufferedSink;
 
 /**
- * 文件上传进度
+ * 文件上传进度，file形式
  * @author 李双祥 on 2020/12/4.
  */
-public class UploadFileRequestBody extends RequestBody {
+public class UploadFileRequestBody2 extends RequestBody {
 
     public interface OnProgressListener{
         /**
@@ -26,15 +27,16 @@ public class UploadFileRequestBody extends RequestBody {
     }
 
     private OnProgressListener mOnProgressListener;
-    private byte[] mContent;
+    private File mFile;
     private MediaType mContentType;
     private String mTag;
 
-    public UploadFileRequestBody(String tag, byte[] content, MediaType contentType, OnProgressListener onProgressListener) {
+
+    public UploadFileRequestBody2(String tag, File file, MediaType contentType, OnProgressListener progressListener) {
+        this.mFile=file;
         this.mTag=tag;
-        this.mContent = content;
         this.mContentType=contentType;
-        this.mOnProgressListener = onProgressListener;
+        this.mOnProgressListener = progressListener;
     }
 
     @Override
@@ -44,13 +46,13 @@ public class UploadFileRequestBody extends RequestBody {
 
     @Override
     public long contentLength() throws IOException {
-        return mContent.length;
+        return mFile.length();
     }
 
     @Override
     public void writeTo(BufferedSink sink) throws IOException {
         byte[] buffer = new byte[1024];
-        java.io.InputStream in = new ByteArrayInputStream(mContent);
+        InputStream in = new FileInputStream(mFile);
         long uploaded = 0;
         try {
             int read;

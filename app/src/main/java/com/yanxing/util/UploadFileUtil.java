@@ -1,13 +1,11 @@
 package com.yanxing.util;
 
 import java.io.File;
-import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
 
 import okhttp3.MediaType;
 import okhttp3.MultipartBody;
-import okhttp3.RequestBody;
 
 /**
  * 用于retrofit上传文件，封装MultipartBody对象
@@ -16,100 +14,64 @@ import okhttp3.RequestBody;
 public class UploadFileUtil {
 
     /**
-     * 多个文件需要的Part，targetSdkVersion29+，不是沙盒内文件不用此方法
-     * @param fileKeys
-     * @param files
-     * @return
-     */
-    public static MultipartBody.Part[] multipartBodyPart(List<String> fileKeys, List<File> files){
-
-        if (fileKeys!=null&&files!=null){
-            MultipartBody.Part parts[]=new MultipartBody.Part[fileKeys.size()];
-            for (int i=0;i<fileKeys.size();i++){
-                RequestBody requestBody=RequestBody.create(MediaType.parse("multipart/form-data"),files.get(i));
-                parts[i]=MultipartBody.Part.createFormData(fileKeys.get(i),files.get(i).getName(),requestBody);
-            }
-            return parts;
-        }
-        return null;
-    }
-
-    /**
-     * 多个文件需要的Part
-     * @param fileKeys
-     * @param files
-     * @return
-     */
-    public static MultipartBody.Part[] multipartByteBodyPart(List<String> fileKeys,List<byte[]> files){
-        if (fileKeys!=null&&files!=null){
-            MultipartBody.Part parts[]=new MultipartBody.Part[fileKeys.size()];
-            for (int i=0;i<fileKeys.size();i++){
-                RequestBody requestBody=RequestBody.create(MediaType.parse("multipart/form-data"),files.get(i));
-                parts[i]=MultipartBody.Part.createFormData(fileKeys.get(i),null,requestBody);
-            }
-            return parts;
-        }
-        return null;
-    }
-
-    /**
-     * 多个文件需要的Part，本应用传入byte[]为了适配Android Q权限（沙盒外图片，权限不足问题），上传接口需要传入文件名
-     * @param fileKeys
+     * 文件一起上传附带参数,targetSdkVersion29+，不是沙盒内文件不用此方法
+     * @param fileKeys  文件key，不重复就可以
      * @param fileNames 文件名称
-     * @param files
+     * @param files 文件
+     * @param map 携带参数，可以为null
+     * @param onProgressListener 进度监听回调，可以为null
      * @return
      */
-    public static MultipartBody.Part[] multipartByteBodyPart(List<String> fileKeys, List<String> fileNames,List<byte[]> files){
+    public static MultipartBody.Part[] multipartFileBodyPart(List<String> fileKeys, List<String> fileNames, List<File> files
+            , Map<String,String> map,UploadFileRequestBody2.OnProgressListener onProgressListener){
         if (fileKeys!=null&&files!=null){
-            MultipartBody.Part parts[]=new MultipartBody.Part[fileKeys.size()];
-            for (int i=0;i<fileKeys.size();i++){
-                RequestBody requestBody=RequestBody.create(MediaType.parse("multipart/form-data"),files.get(i));
-                parts[i]=MultipartBody.Part.createFormData(fileKeys.get(i),fileNames.get(i),requestBody);
-            }
-            return parts;
-        }
-        return null;
-    }
-
-    /**
-     * 文件一起上传附带参数
-     * @param map
-     * @return
-     */
-    public static MultipartBody.Part[] multipartByteBodyPart(List<String> fileKeys, List<String> fileNames, List<byte[]> files
-            , Map<String,String> map, UploadFileRequestBody.OnProgressListener onProgressListener){
-        if (fileKeys!=null&&files!=null&&map!=null){
-            MultipartBody.Part parts[]=new MultipartBody.Part[fileKeys.size()+map.size()];
+            MultipartBody.Part parts[]=new MultipartBody.Part[fileKeys.size()+(map==null?0:map.size())];
             int j=0;
             for (int i=0;i<fileKeys.size();i++){
-                UploadFileRequestBody requestBody=new UploadFileRequestBody(String.valueOf(i+1),files.get(i),MediaType.parse("multipart/form-data")
+                UploadFileRequestBody2 requestBody=new UploadFileRequestBody2(String.valueOf(i+1),files.get(i),MediaType.parse("multipart/form-data")
                         ,onProgressListener);
                 parts[i]=MultipartBody.Part.createFormData(fileKeys.get(i),fileNames.get(i),requestBody);
                 j=i;
             }
-            for (Map.Entry<String,String> entry:map.entrySet()){
-                j++;
-                parts[j]=MultipartBody.Part.createFormData(entry.getKey(),entry.getValue());
+            if (map!=null) {
+                for (Map.Entry<String, String> entry : map.entrySet()) {
+                    j++;
+                    parts[j] = MultipartBody.Part.createFormData(entry.getKey(), entry.getValue());
+                }
             }
             return parts;
         }
         return null;
     }
 
+
     /**
-     * 单个文件需要的Part，targetSdkVersion29+，不是沙盒内文件不用此方法
-     * @param fileKey
-     * @param file
+     * 文件一起上传附带参数
+     * @param fileKeys  文件key，不重复就可以
+     * @param fileNames 文件名称
+     * @param fileBytes 文件流
+     * @param map 携带参数，可以为null
+     * @param onProgressListener 进度监听回调，可以为null
      * @return
      */
-    public static MultipartBody.Part multipartBodyPart(String fileKey, File file){
-        List<String> fileKeys=new ArrayList<>();
-        List<File> files=new ArrayList<>();
-        fileKeys.add(fileKey);
-        files.add(file);
-        MultipartBody.Part parts[]=multipartBodyPart(fileKeys,files);
-        if (parts!=null){
-            return parts[0];
+    public static MultipartBody.Part[] multipartByteBodyPart(List<String> fileKeys, List<String> fileNames, List<byte[]> fileBytes
+            , Map<String,String> map,UploadFileRequestBody.OnProgressListener onProgressListener){
+        if (fileKeys!=null&&fileBytes!=null){
+            MultipartBody.Part parts[]=new MultipartBody.Part[fileKeys.size()+(map==null?0:map.size())];
+            int j=0;
+            for (int i=0;i<fileKeys.size();i++){
+                UploadFileRequestBody requestBody=new UploadFileRequestBody(String.valueOf(i+1),fileBytes.get(i),MediaType.parse("multipart/form-data")
+                        ,onProgressListener);
+                parts[i]=MultipartBody.Part.createFormData(fileKeys.get(i),fileNames.get(i),requestBody);
+                j=i;
+            }
+            if (map!=null) {
+                for (Map.Entry<String, String> entry : map.entrySet()) {
+                    j++;
+                    parts[j] = MultipartBody.Part.createFormData(entry.getKey(), entry.getValue());
+                }
+            }
+            return parts;
         }
         return null;
     }
