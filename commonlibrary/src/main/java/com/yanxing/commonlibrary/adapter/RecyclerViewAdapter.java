@@ -2,6 +2,8 @@ package com.yanxing.commonlibrary.adapter;
 
 import androidx.annotation.DrawableRes;
 import androidx.recyclerview.widget.RecyclerView;
+
+import android.util.SparseArray;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -140,8 +142,11 @@ public abstract class RecyclerViewAdapter<T> extends RecyclerView.Adapter<Recycl
      */
     public static class MyViewHolder extends RecyclerView.ViewHolder {
 
+        private SparseArray<View> mViews;
+
         public MyViewHolder(View view) {
             super(view);
+            mViews = new SparseArray<>();
         }
 
         /**
@@ -152,7 +157,11 @@ public abstract class RecyclerViewAdapter<T> extends RecyclerView.Adapter<Recycl
          * @return
          */
         public <T extends View> T findViewById(int viewID) {
-            View view = itemView.findViewById(viewID);
+            View view=mViews.get(viewID);
+            if (view==null){
+                view=itemView.findViewById(viewID);
+                mViews.put(viewID,view);
+            }
             return (T) view;
         }
 
