@@ -48,7 +48,13 @@ android {
     }
 
 
-    lintOptions {
+    compileOptions {
+        sourceCompatibility JavaVersion.VERSION_1_8
+        targetCompatibility JavaVersion.VERSION_1_8
+    }
+
+
+     lintOptions {
         checkReleaseBuilds false
         abortOnError false
     }
@@ -91,8 +97,9 @@ dependencies {
     implementation project(':heartbubblelibrary')
     implementation project(':photodialoglibrary')
     implementation project(':downloadlibrary')
-//    implementation project(':networklibrary')
-    api 'com.yanxing:networklibrary:2.0.4'
+    implementation project(':networklibrary')
+    //api 'com.yanxing:networklibrary:2.1.3'
+    //api 'io.github.yanxing:networklibrary:2.1.3'
     api project(':commonlibrary')
     implementation 'androidx.work:work-runtime:2.1.0-alpha03'
 }
