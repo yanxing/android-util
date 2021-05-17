@@ -7,7 +7,7 @@ import org.greenrobot.eventbus.Subscribe
 
 class MainActivity : BaseActivity() {
 
-    private var mCurrentFragment: androidx.fragment.app.Fragment? = null
+    private var mCurrentFragment: Fragment? = null
     private lateinit var mMainFragment: MainFragment
 
     override fun getLayoutResID(): Int {

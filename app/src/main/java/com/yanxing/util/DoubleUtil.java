@@ -1,6 +1,7 @@
 package com.yanxing.util;
 
 import java.math.BigDecimal;
+import java.text.DecimalFormat;
 
 /**
  * double数值精度问题
@@ -60,5 +61,25 @@ public class DoubleUtil {
         BigDecimal b1 = new BigDecimal(Double.toString(v1));
         BigDecimal b2 = new BigDecimal(Double.toString(v2));
         return b1.multiply(b2).doubleValue();
+    }
+
+    /**
+     * 格式化double为1位小数
+     * @param d
+     * @return
+     */
+    public static String formatOneDigits(double d){
+        DecimalFormat df= new DecimalFormat("######0.0");
+        return df.format(d);
+    }
+
+    /**
+     * 格式化double为2位小数
+     * @param d
+     * @return
+     */
+    public static String formatTWODigits(double d){
+        DecimalFormat df= new DecimalFormat("######0.00");
+        return df.format(d);
     }
 }

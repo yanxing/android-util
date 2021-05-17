@@ -1,33 +1,13 @@
 apply plugin: 'com.android.library'
 apply plugin: 'kotlin-android'
-
-
-ext {
-    bintrayRepo = 'android-util'
-    bintrayName = 'baseactivitylibrary'
-
-    publishedGroupId = 'com.yanxing'
-    libraryName = 'baseactivitylibrary'
-    artifact = 'baseactivitylibrary'
-
-    libraryDescription = 'base activity,fragment and dialogfragment'
-
-    siteUrl = 'https://github.com/yanxing/android-util'
-    gitUrl = 'https://github.com/yanxing/android-util.git'
-
-    libraryVersion = '1.0.0'
-
-    developerId = 'yanxing'
-    developerName = 'yanxing'
-    developerEmail = 'lyxtime@163.com'
-
-    licenseName = 'The Apache Software License, Version 2.0'
-    licenseUrl = 'http://www.apache.org/licenses/LICENSE-2.0.txt'
-    allLicenses = ["Apache-2.0"]
-}
+apply plugin: 'kotlin-kapt'
 
 android {
     compileSdkVersion COMPILE_SDK_VERSION as int
+
+    buildFeatures {
+        dataBinding true
+    }
 
     defaultConfig {
         minSdkVersion COMMON_MIN_SDK_VERSION as int
@@ -44,14 +24,10 @@ android {
 }
 
 dependencies {
-    compile fileTree(include: ['*.jar'], dir: 'libs')
-    testCompile 'junit:junit:4.12'
-    compile 'com.trello.rxlifecycle2:rxlifecycle:2.2.0'
-    compile 'com.trello.rxlifecycle2:rxlifecycle-components:2.2.0'
-    compile "org.jetbrains.kotlin:kotlin-stdlib-jdk7:${kotlin_version}"
+    implementation fileTree(include: ['*.jar'], dir: 'libs')
+    testImplementation 'junit:junit:4.12'
+    implementation 'com.trello.rxlifecycle2:rxlifecycle:2.2.0'
+    implementation 'com.trello.rxlifecycle2:rxlifecycle-components:2.2.0'
+    implementation "org.jetbrains.kotlin:kotlin-stdlib-jdk7:${kotlin_version}"
 }
-
-
-apply from: 'https://raw.githubusercontent.com/nuuneoi/JCenter/master/installv1.gradle'
-apply from: 'https://raw.githubusercontent.com/nuuneoi/JCenter/master/bintrayv1.gradle'
 

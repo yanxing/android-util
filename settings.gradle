@@ -8,5 +8,5 @@ include ':app',
         ':photodialoglibrary',
         ':downloadlibrary',
         ':networklibrary',
-//        ':baseactivitylibrary',
-        ':commonlibrary'
+        ':baseactivitylibrary',
+        ':adapterlibrary'

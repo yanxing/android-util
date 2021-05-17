@@ -44,6 +44,17 @@ abstract class BaseActivity : com.yanxing.baselibrary.BaseActivity() {
     }
 
     /**
+     * 添加新的Fragment
+     */
+    protected fun add(fragment: androidx.fragment.app.Fragment, id: Int) {
+        val tag = fragment.javaClass.toString()
+        mFragmentManager
+            .beginTransaction()
+            .add(id, fragment, tag)
+            .commitAllowingStateLoss()
+    }
+
+    /**
      * 隐藏加载框
      */
     fun dismissLoadingDialog() {
