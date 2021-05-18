@@ -94,7 +94,7 @@ dependencies {
     implementation project(':amaplibrary')
     implementation project(':heartbubblelibrary')
     implementation project(':downloadlibrary')
-    implementation project(':baseactivitylibrary')
+    implementation project(':activitylibrary')
     //implementation project(':networklibrary')
     //api 'com.yanxing:networklibrary:2.1.3'
     //api 'io.github.yanxing:networklibrary:2.1.3'

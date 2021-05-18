@@ -7,5 +7,5 @@ include ':app',
         ':heartbubblelibrary',
         ':downloadlibrary',
         //':networklibrary',
-        ':baseactivitylibrary',
+        ':activitylibrary',
         ':adapterlibrary'
