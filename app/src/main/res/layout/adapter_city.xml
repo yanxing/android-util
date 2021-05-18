@@ -22,6 +22,6 @@
         android:layout_marginLeft="@dimen/margin8"
         android:text="@string/current_city"
         android:textColor="@color/colorMainDark"
-        android:textSize="@dimen/text_normal_x"/>
+        android:textSize="16dp"/>
 
 </LinearLayout>

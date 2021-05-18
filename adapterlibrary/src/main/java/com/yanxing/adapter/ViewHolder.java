@@ -1,4 +1,4 @@
-package com.yanxing.commonlibrary.adapter;
+package com.yanxing.adapter;
 
 import android.util.SparseArray;
 import android.view.LayoutInflater;

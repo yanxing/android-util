@@ -10,28 +10,20 @@ import androidx.lifecycle.Observer
 import androidx.work.*
 
 import com.yanxing.base.BaseFragment
-import com.yanxing.dialog.PhotoParam
-import com.yanxing.dialog.SelectPhotoActivity
 import com.yanxing.sortlistviewlibrary.CityListActivity
 import com.yanxing.ui.animation.AnimationMainFragment
 import com.yanxing.ui.tablayout.TabLayoutPagerFragment
 import com.yanxing.ui.work.TaskWork
-import com.yanxing.util.ConstantValue
 import com.yanxing.util.EventBusUtil
-import com.yanxing.util.FileUtil
 import com.yanxing.util.PermissionUtil
 
 
 import kotlinx.android.synthetic.main.fragment_main.*
 import java.util.concurrent.TimeUnit
 import android.app.job.JobInfo
-import androidx.work.impl.Schedulers.schedule
-import android.content.Context.JOB_SCHEDULER_SERVICE
 import androidx.core.content.ContextCompat.getSystemService
 import android.app.job.JobScheduler
-import android.content.Context
 import android.content.ComponentName
-import androidx.work.impl.utils.futures.SettableFuture
 import com.yanxing.ui.work.TaskJobService
 
 
@@ -40,31 +32,20 @@ import com.yanxing.ui.work.TaskJobService
  * Created by lishuangxiang on 2016/12/21.
  */
 class MainFragment : BaseFragment(){
-    //选择的图片名称
-    private var mImageName: String? = null
-    private val QUESTION_IMAGE_CODE = 1
     private val QUESTION_SORT_LISTVIEW_CODE = 2
     private val QUESTION_LOCATION = 3
-    private val REQUEST_CODE_CHOOSE = 4
 
     override fun getLayoutResID(): Int {
         return R.layout.fragment_main
     }
 
     override fun afterInstanceView() {
-        // showToast("测试Tinker热更新");
         checkPermission()
         adapterButton.setOnClickListener {
             replace(CommonAdapterFragment())
         }
         hideTitleBottom.setOnClickListener {
             replace(HideTitleBottomFragment())
-        }
-        downloadlibrary.setOnClickListener {
-            replace(DownloadLibraryFragment())
-        }
-        RxJava2.setOnClickListener {
-            replace(NetworkLibraryFragment())
         }
         animation.setOnClickListener {
             replace(AnimationMainFragment())
@@ -82,9 +63,6 @@ class MainFragment : BaseFragment(){
         titleBar.setOnClickListener {
             replace(TitleBarFragment())
         }
-        map.setOnClickListener {
-            replace(BaiduMapFragment())
-        }
         extendRecyclerView.setOnClickListener {
             replace(ExtendRecyclerViewFragment())
         }
@@ -96,18 +74,6 @@ class MainFragment : BaseFragment(){
             replace(MPAndroidChartFragment())
         }
         val intent = Intent()
-        selectImageDialog.setOnClickListener {
-            val currentTimeDialog = System.currentTimeMillis()
-            activity?.let { it1 -> intent.setClass(it1, SelectPhotoActivity::class.java) }
-            mImageName = currentTimeDialog.toString() + ".png"
-            val photoParam = PhotoParam()
-            photoParam.name = mImageName
-            photoParam.path = FileUtil.getStoragePath() + ConstantValue.CACHE_IMAGE
-            val bundle1 = Bundle()
-            bundle1.putParcelable("photoParam", photoParam)
-            intent.putExtras(bundle1)
-            startActivityForResult(intent, QUESTION_IMAGE_CODE)
-        }
         //城市列表
         sortListView.setOnClickListener {
             activity?.let { it1 -> intent.setClass(it1, CityListActivity::class.java) }
@@ -124,10 +90,6 @@ class MainFragment : BaseFragment(){
         navigationTop.setOnClickListener {
             replace(NavigationTopFragment())
         }
-        webOpenPhoto.setOnClickListener {
-            activity?.let { it1 -> intent.setClass(it1, WebOpenPhotoActivity::class.java) }
-            startActivity(intent)
-        }
         //workManager例子
         workManager.setOnClickListener {
             val data=Data.Builder().putString("data","workManager周期性测试").build()
@@ -135,8 +97,8 @@ class MainFragment : BaseFragment(){
             val periodicWorkRequest= PeriodicWorkRequest.Builder(TaskWork::class.java,15, TimeUnit.SECONDS)
                     .setInputData(data)
                     .build()
-            WorkManager.getInstance(activity!!).enqueue(periodicWorkRequest)
-            val status=WorkManager.getInstance(activity!!).getWorkInfoByIdLiveData(periodicWorkRequest.id) as LiveData<WorkInfo>
+            WorkManager.getInstance(requireActivity()).enqueue(periodicWorkRequest)
+            val status=WorkManager.getInstance(requireActivity()).getWorkInfoByIdLiveData(periodicWorkRequest.id) as LiveData<WorkInfo>
             status.observe(this,object : Observer<WorkInfo>{
 
                 override fun onChanged(t: WorkInfo) {
@@ -145,9 +107,9 @@ class MainFragment : BaseFragment(){
             })
 
             //jobservice
-            val componentName = ComponentName(activity!!, TaskJobService::class.java)
+            val componentName = ComponentName(requireActivity(), TaskJobService::class.java)
             val builder = JobInfo.Builder(1000, componentName).setPeriodic(16*60 * 1000L)
-            val tm = getSystemService(activity!!,JobScheduler::class.java)
+            val tm = getSystemService(requireActivity(),JobScheduler::class.java)
             tm?.schedule(builder.build())
 
 
@@ -177,9 +139,7 @@ class MainFragment : BaseFragment(){
     override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
         super.onActivityResult(requestCode, resultCode, data)
         if (resultCode == androidx.fragment.app.FragmentActivity.RESULT_OK) {
-            if (requestCode == QUESTION_IMAGE_CODE) {
-                showToast("图片地址:"+data?.getStringExtra("image"))
-            } else if (requestCode == QUESTION_SORT_LISTVIEW_CODE) {
+            if (requestCode == QUESTION_SORT_LISTVIEW_CODE) {
                 showToast(data!!.extras!!.getString("city")!!)
             }
         }

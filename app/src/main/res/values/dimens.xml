@@ -22,4 +22,7 @@
     <dimen name="margin15">15dp</dimen>
     <dimen name="grid_expected_size">180dp</dimen>
     <dimen name="refresh_header_foot_height">80dp</dimen>
+    <dimen name="text_normal_xx">16sp</dimen>
+    <dimen name="text_normal_x">15sp</dimen>
+    <dimen name="text_small">13sp</dimen>
 </resources>

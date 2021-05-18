@@ -13,7 +13,7 @@
         android:paddingLeft="@dimen/margin20"
         android:paddingRight="@dimen/margin20"
         android:text="编辑"
-        android:textSize="@dimen/text_normal_xx"/>
+        android:textSize="16dp"/>
 
     <TextView
         android:id="@+id/menu2"
@@ -25,6 +25,6 @@
         android:paddingRight="@dimen/margin20"
         android:text="删除"
         android:textColor="@android:color/white"
-        android:textSize="@dimen/text_normal_xx"/>
+        android:textSize="16dp"/>
 
 </LinearLayout>

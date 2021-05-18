@@ -78,8 +78,6 @@
         <activity
             android:name=".animation.RippleLayoutActivity"
             android:hardwareAccelerated="false"/>
-        <activity android:name=".WebOpenPhotoActivity"
-                  android:screenOrientation="portrait"/>
         <activity android:name=".AMapActivity"/>
 
         <provider

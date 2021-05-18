@@ -16,15 +16,6 @@
             style="@style/style_btn"
             android:text="@string/adapterlibrary"/>
         <Button
-            android:id="@+id/selectImageDialog"
-            style="@style/style_btn"
-            android:text="@string/select_image_dialog"/>
-
-        <Button
-            android:id="@+id/map"
-            style="@style/style_btn"
-            android:text="@string/map"/>
-        <Button
             android:id="@+id/amap"
             style="@style/style_btn"
             android:text="@string/gao_de"/>
@@ -58,17 +49,9 @@
             style="@style/style_btn"
             android:text="@string/animation"/>
         <Button
-            android:id="@+id/RxJava2"
-            style="@style/style_btn"
-            android:text="networklibrary"/>
-        <Button
             android:id="@+id/inputEditButton"
             style="@style/style_btn"
             android:text="@string/edittext_edittext_botton"/>
-        <Button
-            android:id="@+id/downloadlibrary"
-            style="@style/style_btn"
-            android:text="@string/downloadlibrary"/>
         <Button
             android:id="@+id/hideTitleBottom"
             style="@style/style_btn"
@@ -85,10 +68,6 @@
             android:id="@+id/navigationTop"
             style="@style/style_btn"
             android:text="navigationTop"/>
-        <Button
-            android:id="@+id/webOpenPhoto"
-            style="@style/style_btn"
-            android:text="webview选择图片"/>
         <Button
             android:id="@+id/workManager"
             style="@style/style_btn"

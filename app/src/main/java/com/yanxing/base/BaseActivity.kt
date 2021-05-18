@@ -2,9 +2,8 @@ package com.yanxing.base
 
 import android.os.Bundle
 
-import com.yanxing.commonlibrary.view.LoadDialog
+import com.yanxing.view.LoadDialog
 import com.yanxing.util.StatusBarColorUtil
-import com.yanxing.util.StatusBarUtil
 
 /**
  * 基类

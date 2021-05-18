@@ -3,7 +3,7 @@ package com.yanxing.ui
 import androidx.recyclerview.widget.LinearLayoutManager
 
 import com.yanxing.base.BaseFragment
-import com.yanxing.commonlibrary.adapter.RecyclerViewAdapter
+import com.yanxing.adapter.RecyclerViewAdapter
 import com.yanxing.util.RecycleViewUtil
 
 import java.util.ArrayList
@@ -26,7 +26,7 @@ class HideTitleBottomFragment : BaseFragment() {
         for (i in 0..79) {
             strings.add(i.toString())
         }
-        recyclerView.layoutManager = androidx.recyclerview.widget.LinearLayoutManager(activity)
+        recyclerView.layoutManager =LinearLayoutManager(activity)
         val recyclerViewAdapter = object : RecyclerViewAdapter<String>(strings, R.layout.adapter_hide_title_bottom) {
 
             override fun onBindViewHolder(holder: RecyclerViewAdapter.MyViewHolder, position: Int) {

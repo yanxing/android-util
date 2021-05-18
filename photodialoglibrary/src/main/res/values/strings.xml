@@ -1,5 +1,0 @@
-<resources>
-    <string name="app_name">PhotoDialogLibrary</string>
-    <string name="take_photo">拍照</string>
-    <string name="from_picture">从相册中选</string>
-</resources>

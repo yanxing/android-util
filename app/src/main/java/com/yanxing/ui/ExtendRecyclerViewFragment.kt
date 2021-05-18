@@ -1,11 +1,10 @@
 package com.yanxing.ui
 
-import androidx.recyclerview.widget.RecyclerView
 import android.view.View
 import android.widget.TextView
 
 import com.yanxing.base.BaseFragment
-import com.yanxing.commonlibrary.adapter.RecyclerViewAdapter
+import com.yanxing.adapter.RecyclerViewAdapter
 import com.yanxing.view.CustomLinearLayoutManager
 
 import java.util.ArrayList

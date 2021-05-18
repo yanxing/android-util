@@ -13,7 +13,7 @@ import android.widget.LinearLayout;
 import android.widget.TextView;
 
 
-import com.yanxing.commonlibrary.adapter.RecyclerViewAdapter;
+import com.yanxing.adapter.RecyclerViewAdapter;
 import com.yanxing.model.Table;
 import com.yanxing.ui.R;
 import com.yanxing.util.CommonUtil;

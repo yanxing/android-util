@@ -5,8 +5,8 @@ import android.view.View
 import android.widget.AdapterView
 
 import com.yanxing.base.BaseFragment
-import com.yanxing.commonlibrary.adapter.CommonAdapter
-import com.yanxing.commonlibrary.adapter.ViewHolder
+import com.yanxing.adapter.CommonAdapter
+import com.yanxing.adapter.ViewHolder
 import com.yanxing.model.Area
 import com.yanxing.util.ParseJsonUtil
 

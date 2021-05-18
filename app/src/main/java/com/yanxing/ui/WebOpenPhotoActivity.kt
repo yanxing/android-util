@@ -13,8 +13,6 @@ import android.webkit.WebSettings
 import android.webkit.WebView
 
 import com.yanxing.base.BaseActivity
-import com.yanxing.dialog.PhotoParam
-import com.yanxing.dialog.SelectPhotoActivity
 import com.yanxing.util.ConstantValue
 import com.yanxing.util.FileUtil
 import com.yanxing.util.LogUtil
@@ -50,14 +48,14 @@ class WebOpenPhotoActivity : BaseActivity() {
 
             override fun onShowFileChooser(webView: WebView, filePathCallback: ValueCallback<Array<Uri>>, fileChooserParams: WebChromeClient.FileChooserParams): Boolean {
                 mValueCallback = filePathCallback
-                val currentTimeDialog = System.currentTimeMillis()
-                val intent = Intent(applicationContext, SelectPhotoActivity::class.java)
-                val photoParam = PhotoParam()
-                photoParam.name = currentTimeDialog.toString() + ".png"
-                photoParam.path = FileUtil.getStoragePath() + ConstantValue.CACHE_IMAGE
-                val bundle = Bundle()
-                bundle.putParcelable("photoParam", photoParam)
-                intent.putExtras(bundle)
+//                val currentTimeDialog = System.currentTimeMillis()
+//                val intent = Intent(applicationContext, SelectPhotoActivity::class.java)
+//                val photoParam = PhotoParam()
+//                photoParam.name = currentTimeDialog.toString() + ".png"
+//                photoParam.path = FileUtil.getStoragePath() + ConstantValue.CACHE_IMAGE
+//                val bundle = Bundle()
+//                bundle.putParcelable("photoParam", photoParam)
+//                intent.putExtras(bundle)
                 startActivityForResult(intent, QUESTION_IMAGE_CODE)
                 return true
             }
@@ -95,15 +93,15 @@ class WebOpenPhotoActivity : BaseActivity() {
          */
         @JavascriptInterface
         fun selectPhoto() {
-            val currentTimeDialog = System.currentTimeMillis()
-            val intent = Intent(applicationContext, SelectPhotoActivity::class.java)
-            val photoParam = PhotoParam()
-            photoParam.name = currentTimeDialog.toString() + ".png"
-            photoParam.path = FileUtil.getStoragePath() + ConstantValue.CACHE_IMAGE
-            val bundle = Bundle()
-            bundle.putParcelable("photoParam", photoParam)
-            intent.putExtras(bundle)
-            startActivityForResult(intent, QUESTION_IMAGE_CODE)
+//            val currentTimeDialog = System.currentTimeMillis()
+//            val intent = Intent(applicationContext, SelectPhotoActivity::class.java)
+//            val photoParam = PhotoParam()
+//            photoParam.name = currentTimeDialog.toString() + ".png"
+//            photoParam.path = FileUtil.getStoragePath() + ConstantValue.CACHE_IMAGE
+//            val bundle = Bundle()
+//            bundle.putParcelable("photoParam", photoParam)
+//            intent.putExtras(bundle)
+//            startActivityForResult(intent, QUESTION_IMAGE_CODE)
         }
     }
 

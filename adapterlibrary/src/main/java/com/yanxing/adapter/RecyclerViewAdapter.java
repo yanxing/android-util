@@ -1,4 +1,4 @@
-package com.yanxing.commonlibrary.adapter;
+package com.yanxing.adapter;
 
 import androidx.annotation.DrawableRes;
 import androidx.recyclerview.widget.RecyclerView;

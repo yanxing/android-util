@@ -5,9 +5,7 @@ import android.view.View
 import android.widget.TextView
 
 import com.yanxing.base.BaseFragment
-import com.yanxing.commonlibrary.adapter.CommonAdapter
-import com.yanxing.commonlibrary.adapter.RecyclerViewAdapter
-import com.yanxing.commonlibrary.adapter.ViewHolder
+import com.yanxing.adapter.RecyclerViewAdapter
 
 import java.util.ArrayList
 
@@ -29,17 +27,8 @@ class CommonAdapterFragment : BaseFragment() {
             list.add(i)
 
         }
-        val adapter = object : CommonAdapter<Int>(list, R.layout.list_dialog_textview) {
-            override fun onBindViewHolder(viewHolder: ViewHolder, position: Int) {
-                viewHolder.setText(R.id.text, mDataList[position].toString())
-            }
-        }
-        //ListView
-        listView.adapter = adapter
-        //GridView
-        gridView.adapter = adapter
         //RecycleView
-        recyclerView.layoutManager = androidx.recyclerview.widget.StaggeredGridLayoutManager(4, androidx.recyclerview.widget.StaggeredGridLayoutManager.VERTICAL)
+        recyclerView.layoutManager = StaggeredGridLayoutManager(4, StaggeredGridLayoutManager.VERTICAL)
         val recyclerViewAdapter = object : RecyclerViewAdapter<Int>(list, R.layout.adapter_recycler_view) {
 
             override fun onBindViewHolder(holder: RecyclerViewAdapter.MyViewHolder, position: Int) {
@@ -52,12 +41,10 @@ class CommonAdapterFragment : BaseFragment() {
                 textView.text = list[position].toString()
             }
         }
-        recyclerViewAdapter.setOnItemClick(object : RecyclerViewAdapter.OnItemClickListener {
-            override fun onItemClick(viewHolder: RecyclerViewAdapter.MyViewHolder?, position: Int) {
-                showToast(getString(R.string.you_click) + (position + 1) + getString(R.string.ge))
-            }
-
-        })
+        recyclerViewAdapter.setOnItemClick { viewHolder, position ->
+            showToast(getString(R.string.you_click) + (position + 1) + getString(
+                    R.string.ge))
+        }
         recyclerView.adapter = recyclerViewAdapter
     }
 }

@@ -2,8 +2,8 @@ package com.yanxing.ui.animation
 
 
 import com.yanxing.base.BaseActivity
-import com.yanxing.commonlibrary.adapter.CommonAdapter
-import com.yanxing.commonlibrary.adapter.ViewHolder
+import com.yanxing.adapter.CommonAdapter
+import com.yanxing.adapter.ViewHolder
 import com.yanxing.ui.R
 
 import java.util.ArrayList

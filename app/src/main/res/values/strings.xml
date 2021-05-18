@@ -2,7 +2,7 @@
     <string name="app_name">android-util</string>
     <string name="action_settings">Settings</string>
     <string name="title_activity_adapter">通用适配器测试</string>
-    <string name="adapterlibrary">ListView、GridView和RecycleView适配器封装</string>
+    <string name="adapterlibrary">adapterlibrary（适配器封装）</string>
     <string name="title_activity_list_dialog_example">自定义列表对话框测试</string>
     <string name="list_dialog">列表对话框</string>
     <string name="title_activity_confirm_example">自定义确定对话框测试</string>

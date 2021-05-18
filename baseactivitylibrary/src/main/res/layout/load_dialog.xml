@@ -19,7 +19,7 @@
         android:paddingLeft="20dp"
         android:paddingRight="20dp"
         android:paddingTop="14dp">
-        <com.yanxing.commonlibrary.view.ProgressWheel
+        <com.yanxing.view.ProgressWheel
             android:id="@+id/progressBar"
             android:layout_width="38dp"
             android:layout_height="38dp"

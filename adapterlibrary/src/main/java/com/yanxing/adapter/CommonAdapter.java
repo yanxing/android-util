@@ -1,4 +1,4 @@
-package com.yanxing.commonlibrary.adapter;
+package com.yanxing.adapter;
 
 import android.view.View;
 import android.view.ViewGroup;
