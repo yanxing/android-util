@@ -4,31 +4,7 @@
 截图、获取通知栏高度、应用是否在前台、检验应用签名、打电话、校验邮箱和手机号等)、[NetworkStateUtil](https://github.com/yanxing/android-util/blob/master/app/src/main/java/com/yanxing/util/NetworkStateUtil.java)、[DESUtil](https://github.com/yanxing/android-util/blob/master/app/src/main/java/com/yanxing/util/DESUtil.java)、[ParseJsonUtil](https://github.com/yanxing/android-util/blob/master/app/src/main/java/com/yanxing/util/ParseJsonUtil.java)、[OpenFileUtil](https://github.com/yanxing/android-util/blob/master/app/src/main/java/com/yanxing/util/OpenFileUtil.java)（打开word、PPT、excel文件）、[FileUtil](https://github.com/yanxing/android-util/blob/master/app/src/main/java/com/yanxing/util/FileUtil.java)、[BitmapUtil](https://github.com/yanxing/android-util/blob/master/app/src/main/java/com/yanxing/util/BitmapUtil.java)、[VideoFrameLoader](https://github.com/yanxing/android-util/blob/master/app/src/main/java/com/yanxing/util/VideoFrameLoader.java)（加载视频某一帧）、[PermissionUtil](https://github.com/yanxing/android-util/blob/master/app/src/main/java/com/yanxing/util/PermissionUtil.java)、
 [DownloadImageUtil](https://github.com/yanxing/android-util/blob/master/app/src/main/java/com/yanxing/util/DownloadImageUtil.java)、[TimeUtil](https://github.com/yanxing/android-util/blob/master/app/src/main/java/com/yanxing/util/TimeUtil.java)、
 [NotchPhoneUtil](https://github.com/yanxing/android-util/blob/master/app/src/main/java/com/yanxing/util/NotchPhoneUtil.java)、[FileUriUtil](https://github.com/yanxing/android-util/blob/master/app/src/main/java/com/yanxing/util/FileUriUtil.java) (android10图片视频uri和file互相转化)、[UploadFileUtil](https://github.com/yanxing/android-util/blob/master/app/src/main/java/com/yanxing/util/UploadFileUtil.java)(retrofit上传文件，封装带有回调进度的MultipartBody)
-## networklibrary
-[已经单独作为一个仓库NetworklibraryDemo，新的使用说明](https://github.com/yanxing/NetworklibraryDemo)
 
-对retrofit2+rxjava2网络请求的简单封装（包括网络请求时显示等待对话框和请求完成后上下拉刷新控件置为完成状态）。
-* gradle 
-```java
- compile 'com.yanxing:networklibrary:1.2.1'
- ```
- androidx
- ```java
- compile 'com.yanxing:networklibrary:2.0.4'
- ```
-[example](https://github.com/yanxing/android-util/blob/master/app/src/main/java/com/yanxing/ui/NetworkLibraryFragment.kt)
-```java
- RetrofitManage.getInstance().init(mBaseUrl, true)
- RetrofitManage.getInstance().retrofit.create(DouBanAPI::class.java)
-                .getTopMovie(0, 10)
-                .compose(Transformer<DouBan>().iOMainHasProgress(this, fragmentManager, "请稍等..."))
-                .subscribe(object : BaseAbstractObserver<DouBan>(context, fragmentManager) {
-                    override fun onCall(douBan: DouBan) {
-
-                    }
-                })
-```
-其中使用了Rxlifecycle2来防止RxJava的内存泄露，所以基类需要继承Rxlifecycle2相关类，或者实现LifecycleProvider接口
 
 ### 适配器
 ListView、GridView适配器，对BaseAdapter、ViewHolder的封装。[example](https://github.com/yanxing/android-util/blob/master/app/src/main/java/com/yanxing/ui/CommonAdapterFragment.kt)
@@ -61,7 +37,7 @@ mRecyclerViewAdapter = new RecyclerViewAdapter<String>(mStrings,R.layout.adapter
 mRecyclerView.setAdapter(mRecyclerViewAdapter);
 ```
 ## baidumaplibrary
-百度地图封装(定位、添加marker、路线、POI、搜索建议)。[example](https://github.com/yanxing/android-util/blob/master/app/src/main/java/com/yanxing/ui/BaiduMapFragment.kt)
+百度地图封装(定位、添加marker、路线、POI、搜索建议)。
 
 ## amaplibrary
 高德地图封装（定位，添加marker）。[example](https://github.com/yanxing/android-util/blob/master/app/src/main/java/com/yanxing/ui/AMapActivity.kt)
@@ -153,51 +129,7 @@ intent.putExtra("city","上海");
 startActivityForResult(intent,QUESTION_SORT_LISTVIEW_CODE);
 ```
 ![image](https://github.com/yanxing/android-util/raw/master/sortlistviewlibrary/1.png)
-## photodialoglibrary
-图片选择（拍照和从图库选择），[最新兼容AndroidQ，见PhotoSelector](https://github.com/yanxing/PhotoSelector)。
-```Java
-Intent intent=new Intent(getApplicationContext(), SelectPhotoActivity.class);
-mImageName = System.currentTimeMillis() + ".png";
-PhotoParam photoParam=new PhotoParam();
-photoParam.setName(mImageName);
-photoParam.setPath(FileUtil.getStoragePath() + ConstantValue.CACHE_IMAGE);
-photoParam.setCut(true);
-photoParam.setOutputX(480);
-photoParam.setOutputY(480);
-Bundle bundle=new Bundle();
-bundle.putParcelable("photoParam",photoParam);
-intent.putExtras(bundle);
-startActivityForResult(intent, QUESTION_IMAGE_CODE);
-```
-## downloadlibrary
-多线程下载，支持断点续传。
-```Java
-DownloadUtils.getInstance().startDownload(getApplicationContext(),url
-        , new SimpleDownloadListener() {
-    @Override
-    public void onStart() {
-    }
 
-    @Override
-    public void onProgress(int progress, int totalSize) {
-    }
-
-    @Override
-    public void onError(int state, String message) {
-    }
-
-    @Override
-    public void onFinish() {
-    }
-});
-```
-其他方法:
-```Java
-stopDownload();//停止下载
-resumeDownload();//恢复下载
-delete(Context context, String url);//删除下载记录
-getDownloadProgressByUrl(Context context, String url);//获取已下载的进度，用作刚进入界面显示用
-```
 ## TableView
 表格，上滑标题不动，右滑，第一列不动，[example](https://github.com/yanxing/android-util/blob/master/app/src/main/java/com/yanxing/ui/TableViewFragment.kt)<br>
 ![image](https://github.com/yanxing/android-util/raw/master/image/1.gif)
