@@ -12,7 +12,7 @@ import androidx.work.*
 import com.yanxing.base.BaseFragment
 import com.yanxing.sortlistviewlibrary.CityListActivity
 import com.yanxing.ui.animation.AnimationMainFragment
-import com.yanxing.ui.tablayout.TabLayoutPagerFragment
+import com.yanxing.ui.tablayout.TabLayoutPagerActivity
 import com.yanxing.ui.work.TaskWork
 import com.yanxing.util.EventBusUtil
 import com.yanxing.util.PermissionUtil
@@ -51,7 +51,8 @@ class MainFragment : BaseFragment(){
             replace(AnimationMainFragment())
         }
         tabLayoutPager.setOnClickListener {
-            replace(TabLayoutPagerFragment())
+            val intent=Intent(requireActivity(),TabLayoutPagerActivity::class.java)
+            startActivity(intent)
         }
         selectCity.setOnClickListener {
             val selectCityFragment = SelectCityFragment()

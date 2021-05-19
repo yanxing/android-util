@@ -79,6 +79,7 @@
             android:name=".animation.RippleLayoutActivity"
             android:hardwareAccelerated="false"/>
         <activity android:name=".AMapActivity"/>
+        <activity android:name=".tablayout.TabLayoutPagerActivity" />
 
         <provider
             android:name="androidx.core.content.FileProvider"

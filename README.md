@@ -79,12 +79,9 @@ mRecyclerView.setAdapter(mRecyclerViewAdapter);
    </declare-styleable>
 ```
 ## tablayoutlibrary
-TabLayout+ViewPager封装。
-* gradle  
-```java
- compile 'com.yanxing:tablayoutlibrary:2.0.2'
- ```
-[example](https://github.com/yanxing/android-util/blob/master/app/src/main/java/com/yanxing/ui/tablayout/TabLayoutPagerFragment.kt)
+TabLayout+ViewPager2封装。
+
+[example](https://github.com/yanxing/android-util/blob/master/app/src/main/java/com/yanxing/ui/tablayout/TabLayoutPagerActivity.kt)
 ```XML
  <com.yanxing.tablayoutlibrary.TabLayoutPager
       android:id="@+id/tabLayoutPager"
@@ -94,31 +91,14 @@ TabLayout+ViewPager封装。
       app:tabLayoutIndicatorColor="@color/colorGreen"
       app:tabLayoutSelectedTextColor="@color/colorGreen"/>
 ```
-```Java
-mFragmentList.add(new TabLayoutPager1Fragment_());
-mFragmentList.add(new TabLayoutPager2Fragment_());
-mFragmentList.add(new TabLayoutPager3Fragment_());
-mStringList.add("菜单一");
-mStringList.add("菜单二");
-mStringList.add("菜单三");
-mTabLayoutPager.addTab(mFragmentList,mStringList);
-mTabLayoutPager.getTabLayout().setOnTabSelectedListener(new TabLayout.OnTabSelectedListener() {
-    @Override
-    public void onTabSelected(TabLayout.Tab tab) {
-        mTabLayoutPager.getViewPager().setCurrentItem(tab.getPosition());
-        showToast("第"+(tab.getPosition()+1)+"个");
-    }
-
-    @Override
-    public void onTabUnselected(TabLayout.Tab tab) {
-
-    }
-
-    @Override
-    public void onTabReselected(TabLayout.Tab tab) {
-
-    }
-});
+```kotlin
+mFragmentList.add(TabLayoutPager1Fragment())
+mFragmentList.add(TabLayoutPager2Fragment())
+mFragmentList.add(TabLayoutPager3Fragment())
+mStringList.add(getString(R.string.menu1))
+mStringList.add(getString(R.string.menu2))
+mStringList.add(getString(R.string.menu3))
+tabLayoutPager.addTab(this, mFragmentList, mStringList)
 ```
 ## sortlistviewlibrary
 城市列表，修改自[http://blog.csdn.net/jdsjlzx/article/details/41052953](http://blog.csdn.net/jdsjlzx/article/details/41052953)。修改UI，增加当前和热门城市。
