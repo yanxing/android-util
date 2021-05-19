@@ -79,7 +79,7 @@ mRecyclerView.setAdapter(mRecyclerViewAdapter);
    </declare-styleable>
 ```
 ## tablayoutlibrary
-TabLayout+ViewPager2封装。
+TabLayout+ViewPager2封装,懒加载。
 
 [example](https://github.com/yanxing/android-util/blob/master/app/src/main/java/com/yanxing/ui/tablayout/TabLayoutPagerActivity.kt)
 ```XML
