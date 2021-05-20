@@ -2,10 +2,8 @@ package com.yanxing.ui
 
 import android.Manifest
 import android.content.Intent
-import android.content.pm.PackageManager
 import android.net.Uri
 import android.os.Build
-import android.os.Bundle
 import android.webkit.JavascriptInterface
 import android.webkit.ValueCallback
 import android.webkit.WebChromeClient
@@ -13,10 +11,7 @@ import android.webkit.WebSettings
 import android.webkit.WebView
 
 import com.yanxing.base.BaseActivity
-import com.yanxing.util.ConstantValue
-import com.yanxing.util.FileUtil
-import com.yanxing.util.LogUtil
-import com.yanxing.util.PermissionUtil
+import com.yanxing.util.*
 
 import java.io.File
 
@@ -31,7 +26,6 @@ class WebOpenPhotoActivity : BaseActivity() {
 
 
     private var mValueCallback: ValueCallback<Array<Uri>>? = null
-    private val QUESTION = 1
     private val QUESTION_IMAGE_CODE = 2
 
     override fun getLayoutResID(): Int {
@@ -67,23 +61,16 @@ class WebOpenPhotoActivity : BaseActivity() {
     }
 
     fun requestPermission() {
-        if (PermissionUtil.findNeedRequestPermissions(this, arrayOf(Manifest.permission.CAMERA, Manifest.permission.WRITE_EXTERNAL_STORAGE, Manifest.permission.WRITE_SETTINGS)).size > 0) {
-            PermissionUtil.requestPermission(this, arrayOf(Manifest.permission.CAMERA, Manifest.permission.WRITE_EXTERNAL_STORAGE, Manifest.permission.WRITE_SETTINGS), QUESTION)
-        }
-
-    }
-
-    override fun onRequestPermissionsResult(requestCode: Int, permissions: Array<String>, grantResults: IntArray) {
-        if (requestCode == QUESTION) {
-            for (i in grantResults.indices) {
-                if (grantResults[i] != PackageManager.PERMISSION_GRANTED) {
-                    for (permission in permissions) {
-                        PermissionUtil.getPermissionTip(permission)
-                    }
+        PermissonUtil.requestPermission(this,arrayOf(Manifest.permission.CAMERA, Manifest.permission.WRITE_EXTERNAL_STORAGE
+            , Manifest.permission.WRITE_SETTINGS)
+        ) { result ->
+            result?.forEach {
+                if (!it.value) {
+                    showToast(it.key+"授权失败")
                 }
             }
         }
-        super.onRequestPermissionsResult(requestCode, permissions, grantResults)
+
     }
 
     private inner class Photo {

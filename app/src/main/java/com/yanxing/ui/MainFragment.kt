@@ -1,30 +1,32 @@
 package com.yanxing.ui
 
+
 import android.Manifest
+import android.app.job.JobInfo
+import android.app.job.JobScheduler
+import android.content.ComponentName
+import android.content.Context
 import android.content.Intent
-import android.content.pm.PackageManager
 import android.os.Bundle
 import android.util.Log
+import androidx.activity.result.contract.ActivityResultContract
+import androidx.core.content.ContextCompat.getSystemService
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.Observer
-import androidx.work.*
-
+import androidx.work.Data
+import androidx.work.PeriodicWorkRequest
+import androidx.work.WorkInfo
+import androidx.work.WorkManager
 import com.yanxing.base.BaseFragment
 import com.yanxing.sortlistviewlibrary.CityListActivity
 import com.yanxing.ui.animation.AnimationMainFragment
 import com.yanxing.ui.tablayout.TabLayoutPagerActivity
+import com.yanxing.ui.work.TaskJobService
 import com.yanxing.ui.work.TaskWork
 import com.yanxing.util.EventBusUtil
-import com.yanxing.util.PermissionUtil
-
-
+import com.yanxing.util.PermissonUtil
 import kotlinx.android.synthetic.main.fragment_main.*
 import java.util.concurrent.TimeUnit
-import android.app.job.JobInfo
-import androidx.core.content.ContextCompat.getSystemService
-import android.app.job.JobScheduler
-import android.content.ComponentName
-import com.yanxing.ui.work.TaskJobService
 
 
 /**
@@ -32,15 +34,22 @@ import com.yanxing.ui.work.TaskJobService
  * Created by lishuangxiang on 2016/12/21.
  */
 class MainFragment : BaseFragment(){
-    private val QUESTION_SORT_LISTVIEW_CODE = 2
-    private val QUESTION_LOCATION = 3
 
     override fun getLayoutResID(): Int {
         return R.layout.fragment_main
     }
 
     override fun afterInstanceView() {
-        checkPermission()
+        PermissonUtil.requestPermission(this,arrayOf(Manifest.permission.CAMERA, Manifest.permission.ACCESS_FINE_LOCATION
+            , Manifest.permission.WRITE_EXTERNAL_STORAGE, Manifest.permission.READ_PHONE_STATE, Manifest.permission.WRITE_SETTINGS)
+        ) { result ->
+            result?.forEach {
+                if (!it.value) {
+                    showToast(it.key+"授权失败")
+                }
+            }
+        }
+
         adapterButton.setOnClickListener {
             replace(CommonAdapterFragment())
         }
@@ -74,15 +83,13 @@ class MainFragment : BaseFragment(){
         MPAndroidChart.setOnClickListener {
             replace(MPAndroidChartFragment())
         }
-        val intent = Intent()
+        val launcher = registerForActivityResult(ResultContract()) { result -> showToast(result) };
         //城市列表
         sortListView.setOnClickListener {
-            activity?.let { it1 -> intent.setClass(it1, CityListActivity::class.java) }
-            intent.putExtra("city", getString(R.string.city_test))
-            startActivityForResult(intent, QUESTION_SORT_LISTVIEW_CODE)
+            launcher.launch(getString(R.string.city_test))
         }
         inputEditButton.setOnClickListener {
-            activity?.let { it1 -> intent.setClass(it1, InputEditButtonActivity::class.java) }
+            val intent=Intent(requireActivity(), InputEditButtonActivity::class.java)
             startActivity(intent)
         }
         tableView.setOnClickListener {
@@ -119,44 +126,22 @@ class MainFragment : BaseFragment(){
     }
 
     /**
-     * 申请定位权限
-     */
-    fun checkPermission() {
-        if (PermissionUtil.findNeedRequestPermissions(activity, arrayOf(Manifest.permission.CAMERA, Manifest.permission.ACCESS_FINE_LOCATION
-                        , Manifest.permission.WRITE_EXTERNAL_STORAGE, Manifest.permission.READ_PHONE_STATE, Manifest.permission.WRITE_SETTINGS)).size > 0) {
-            PermissionUtil.requestPermission(this, arrayOf(Manifest.permission.CAMERA, Manifest.permission.ACCESS_FINE_LOCATION
-                    , Manifest.permission.WRITE_EXTERNAL_STORAGE, Manifest.permission.READ_PHONE_STATE, Manifest.permission.WRITE_SETTINGS), QUESTION_LOCATION)
-        }
-    }
-
-    /**
      * 替换新的Fragment
      */
     private fun replace(fragment: androidx.fragment.app.Fragment) {
         EventBusUtil.getDefault().post(fragment)
     }
 
+    class ResultContract: ActivityResultContract<String,String>() {
 
-    override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
-        super.onActivityResult(requestCode, resultCode, data)
-        if (resultCode == androidx.fragment.app.FragmentActivity.RESULT_OK) {
-            if (requestCode == QUESTION_SORT_LISTVIEW_CODE) {
-                showToast(data!!.extras!!.getString("city")!!)
-            }
+        override fun createIntent(context: Context, input: String?): Intent {
+            val intent=Intent(context,CityListActivity::class.java)
+            intent.putExtra("city",input)
+            return intent
+        }
+
+        override fun parseResult(resultCode: Int, intent: Intent?): String {
+            return intent!!.extras!!.getString("city")!!
         }
     }
-
-    override fun onRequestPermissionsResult(requestCode: Int, permissions: Array<String>, grantResults: IntArray) {
-        if (requestCode == QUESTION_LOCATION) {
-            for (i in grantResults.indices) {
-                if (grantResults[i] != PackageManager.PERMISSION_GRANTED) {
-                    for (permission in permissions) {
-                        PermissionUtil.getPermissionTip(permission)
-                    }
-                }
-            }
-        }
-        super.onRequestPermissionsResult(requestCode, permissions, grantResults)
-    }
-
 }
