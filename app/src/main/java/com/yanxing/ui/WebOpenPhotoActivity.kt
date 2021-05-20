@@ -61,7 +61,7 @@ class WebOpenPhotoActivity : BaseActivity() {
     }
 
     fun requestPermission() {
-        PermissonUtil.requestPermission(this,arrayOf(Manifest.permission.CAMERA, Manifest.permission.WRITE_EXTERNAL_STORAGE
+        PermissionUtil.requestPermission(this,arrayOf(Manifest.permission.CAMERA, Manifest.permission.WRITE_EXTERNAL_STORAGE
             , Manifest.permission.WRITE_SETTINGS)
         ) { result ->
             result?.forEach {

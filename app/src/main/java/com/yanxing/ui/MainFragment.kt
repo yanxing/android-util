@@ -24,7 +24,7 @@ import com.yanxing.ui.tablayout.TabLayoutPagerActivity
 import com.yanxing.ui.work.TaskJobService
 import com.yanxing.ui.work.TaskWork
 import com.yanxing.util.EventBusUtil
-import com.yanxing.util.PermissonUtil
+import com.yanxing.util.PermissionUtil
 import kotlinx.android.synthetic.main.fragment_main.*
 import java.util.concurrent.TimeUnit
 
@@ -40,7 +40,7 @@ class MainFragment : BaseFragment(){
     }
 
     override fun afterInstanceView() {
-        PermissonUtil.requestPermission(this,arrayOf(Manifest.permission.CAMERA, Manifest.permission.ACCESS_FINE_LOCATION
+        PermissionUtil.requestPermission(this,arrayOf(Manifest.permission.CAMERA, Manifest.permission.ACCESS_FINE_LOCATION
             , Manifest.permission.WRITE_EXTERNAL_STORAGE, Manifest.permission.READ_PHONE_STATE, Manifest.permission.WRITE_SETTINGS)
         ) { result ->
             result?.forEach {

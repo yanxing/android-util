@@ -8,7 +8,7 @@ import androidx.fragment.app.FragmentActivity
 /**
  * ActivityResultContract申请权限方式
  */
-object PermissonUtil {
+object PermissionUtil {
 
 
     /**
