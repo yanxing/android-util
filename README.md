@@ -87,6 +87,7 @@ TabLayout+ViewPager2封装,懒加载。
         android:id="@+id/tabLayoutPager"
         android:layout_width="match_parent"
         android:layout_height="match_parent">
+        <!--可以使用TabLayout的众多属性-->
         <com.google.android.material.tabs.TabLayout
             android:id="@+id/tabLayout"
             android:layout_width="match_parent"
