@@ -96,4 +96,8 @@
         <item name="android:layout_height">1px</item>
         <item name="android:background">@color/line</item>
     </style>
+
+    <style name="tablayoutTextStyle" parent="TextAppearance.Design.Tab">
+        <item name="android:textSize">14dp</item>
+    </style>
 </resources>

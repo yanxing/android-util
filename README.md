@@ -83,13 +83,15 @@ TabLayout+ViewPager2封装,懒加载。
 
 [example](https://github.com/yanxing/android-util/blob/master/app/src/main/java/com/yanxing/ui/tablayout/TabLayoutPagerActivity.kt)
 ```XML
- <com.yanxing.tablayoutlibrary.TabLayoutPager
-      android:id="@+id/tabLayoutPager"
-      android:layout_width="match_parent"
-      android:layout_height="match_parent"
-      app:tabLayoutBackground="@color/white"
-      app:tabLayoutIndicatorColor="@color/colorGreen"
-      app:tabLayoutSelectedTextColor="@color/colorGreen"/>
+    <com.yanxing.tablayout.TabLayoutPager
+        android:id="@+id/tabLayoutPager"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+        <com.google.android.material.tabs.TabLayout
+            android:id="@+id/tabLayout"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"/>
+    </com.yanxing.tablayout.TabLayoutPager>
 ```
 ```kotlin
 mFragmentList.add(TabLayoutPager1Fragment())

@@ -41,7 +41,7 @@ class MainFragment : BaseFragment(){
 
     override fun afterInstanceView() {
         PermissionUtil.requestPermission(this,arrayOf(Manifest.permission.CAMERA, Manifest.permission.ACCESS_FINE_LOCATION
-            , Manifest.permission.WRITE_EXTERNAL_STORAGE, Manifest.permission.READ_PHONE_STATE, Manifest.permission.WRITE_SETTINGS)
+            , Manifest.permission.WRITE_EXTERNAL_STORAGE, Manifest.permission.READ_PHONE_STATE)
         ) { result ->
             result?.forEach {
                 if (!it.value) {

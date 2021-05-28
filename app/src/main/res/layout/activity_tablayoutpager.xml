@@ -7,10 +7,17 @@
     <com.yanxing.tablayout.TabLayoutPager
         android:id="@+id/tabLayoutPager"
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        app:tabLayoutBackground="@color/white"
-        app:tabLayoutHigh="40dp"
-        app:tabLayoutIndicatorColor="@color/colorGreen"
-        app:tabLayoutSelectedTextColor="@color/colorGreen"/>
+        android:layout_height="match_parent">
+        <com.google.android.material.tabs.TabLayout
+            android:id="@+id/tabLayout"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            app:tabSelectedTextColor="@color/colorGreen"
+            app:tabIndicatorFullWidth="false"
+            app:tabTextAppearance="@style/tablayoutTextStyle"
+            app:tabIndicatorColor="@color/colorGreen"
+            app:tabRippleColor="@android:color/transparent"
+            style="@style/MyCustomTabLayout"/>
+    </com.yanxing.tablayout.TabLayoutPager>
 
 </LinearLayout>
