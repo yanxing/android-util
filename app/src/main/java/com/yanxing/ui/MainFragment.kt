@@ -20,6 +20,7 @@ import androidx.work.WorkManager
 import com.yanxing.base.BaseFragment
 import com.yanxing.sortlistviewlibrary.CityListActivity
 import com.yanxing.ui.animation.AnimationMainFragment
+import com.yanxing.ui.mvvmdemo.MVVMDemoActivity
 import com.yanxing.ui.tablayout.TabLayoutPagerActivity
 import com.yanxing.ui.work.TaskJobService
 import com.yanxing.ui.work.TaskWork
@@ -97,6 +98,9 @@ class MainFragment : BaseFragment(){
         }
         navigationTop.setOnClickListener {
             replace(NavigationTopFragment())
+        }
+        mvvm.setOnClickListener {
+            startActivity(Intent(requireContext(),MVVMDemoActivity::class.java))
         }
         //workManager例子
         workManager.setOnClickListener {

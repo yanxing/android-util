@@ -77,6 +77,7 @@
             android:hardwareAccelerated="false"/>
         <activity android:name=".AMapActivity"/>
         <activity android:name=".tablayout.TabLayoutPagerActivity" />
+        <activity android:name=".mvvmdemo.MVVMDemoActivity" />
 
         <provider
             android:name="androidx.core.content.FileProvider"

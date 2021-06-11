@@ -69,6 +69,10 @@
             style="@style/style_btn"
             android:text="navigationTop"/>
         <Button
+            android:id="@+id/mvvm"
+            style="@style/style_btn"
+            android:text="mvvmDemo"/>
+        <Button
             android:id="@+id/workManager"
             style="@style/style_btn"
             android:visibility="gone"
