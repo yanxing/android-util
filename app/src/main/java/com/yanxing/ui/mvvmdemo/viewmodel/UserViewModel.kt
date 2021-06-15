@@ -13,4 +13,12 @@ class UserViewModel : ViewModel() {
        userLiveData.value = User("张三")
     }
 
+    /**
+     * 更新model
+     */
+    fun onLoginClicked(){
+        val user=User(userLiveData.value!!.name)
+        userLiveData.value=user
+    }
+
 }
