@@ -15,17 +15,14 @@ class MVVMDemoActivity :BaseActivity<ActivityMvvmDemoBinding>(){
     }
 
     override fun afterInstanceView() {
-        val userViewModel=ViewModelProvider(this).get(UserViewModel::class.java)
-        viewBinding.viewModel=userViewModel
         viewBinding.lifecycleOwner=this
-        userViewModel.apply {
+        viewBinding.viewModel=ViewModelProvider(this).get(UserViewModel::class.java).apply {
             getData()
             userLiveData.observe(this@MVVMDemoActivity,{
                 //获取界面输入框改变后的数据
-                  LogUtil.d("测试",it.name)
-                  ToastUtil.showToast(applicationContext,it.name)
+                LogUtil.d("测试",it.name)
+                ToastUtil.showToast(applicationContext,it.name)
             })
-
         }
     }
 
