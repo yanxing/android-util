@@ -11,8 +11,10 @@ import android.os.Bundle
 import android.util.Log
 import androidx.activity.result.contract.ActivityResultContract
 import androidx.core.content.ContextCompat.getSystemService
+import androidx.datastore.createDataStore
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.Observer
+import androidx.lifecycle.lifecycleScope
 import androidx.work.Data
 import androidx.work.PeriodicWorkRequest
 import androidx.work.WorkInfo
@@ -20,13 +22,17 @@ import androidx.work.WorkManager
 import com.yanxing.base.BaseFragment
 import com.yanxing.sortlistviewlibrary.CityListActivity
 import com.yanxing.ui.animation.AnimationMainFragment
+import com.yanxing.ui.datastoredemo.UserSerializer
 import com.yanxing.ui.mvvmdemo.MVVMDemoActivity
 import com.yanxing.ui.tablayout.TabLayoutPagerActivity
 import com.yanxing.ui.work.TaskJobService
 import com.yanxing.ui.work.TaskWork
 import com.yanxing.util.EventBusUtil
+import com.yanxing.util.LogUtil
 import com.yanxing.util.PermissionUtil
 import kotlinx.android.synthetic.main.fragment_main.*
+import kotlinx.coroutines.flow.collect
+import kotlinx.coroutines.launch
 import java.util.concurrent.TimeUnit
 
 
@@ -123,6 +129,21 @@ class MainFragment : BaseFragment(){
             val builder = JobInfo.Builder(1000, componentName).setPeriodic(16*60 * 1000L)
             val tm = getSystemService(requireActivity(),JobScheduler::class.java)
             tm?.schedule(builder.build())
+
+            //datastore demo
+            val datasource=requireContext().createDataStore("user", UserSerializer)
+            lifecycleScope.launch {
+                datasource.updateData {
+                    it.toBuilder().setName("言行").build()
+                }
+                datasource.data.collect {
+                    LogUtil.d("姓名",it.name)
+                }
+            }
+
+            lifecycleScope.launch {
+
+            }
 
 
         }

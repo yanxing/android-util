@@ -6,7 +6,7 @@ buildscript {
     // Library minSdkVersion
     ext.COMMON_MIN_SDK_VERSION = 21
     // compileSdkVersion
-    ext.COMPILE_SDK_VERSION = 29
+    ext.COMPILE_SDK_VERSION =30
     //versionCode
     ext.CURRENT_RELEASE_VERSION_CODE = 1
     //versionName
