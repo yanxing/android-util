@@ -25,7 +25,7 @@ class TabLayoutPager(context: Context, attrs: AttributeSet?, defStyle: Int) :
 
     constructor(context: Context, attrs: AttributeSet) : this(context, attrs, 0) {
         viewPager.layoutParams=LayoutParams(LayoutParams.MATCH_PARENT,LayoutParams.MATCH_PARENT)
-
+        orientation = VERTICAL
     }
 
     override fun onFinishInflate() {
