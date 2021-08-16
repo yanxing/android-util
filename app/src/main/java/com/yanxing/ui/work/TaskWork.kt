@@ -14,7 +14,7 @@ class TaskWork(@NonNull  context: Context, @NonNull workerParams: WorkerParamete
     override fun doWork(): Result {
         //执行任务
         val data=inputData.getString("data")
-        Log.d("TaskWork接收到的数据为：",data)
+        Log.d("TaskWork接收到的数据为：",data!!)
         return Result.success()
     }
 }

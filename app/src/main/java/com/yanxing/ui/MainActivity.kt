@@ -1,5 +1,7 @@
 package com.yanxing.ui
 
+import android.os.Bundle
+import android.os.PersistableBundle
 import androidx.fragment.app.Fragment
 import com.yanxing.base.BaseActivity
 import com.yanxing.util.EventBusUtil
@@ -22,6 +24,10 @@ class MainActivity : BaseActivity() {
                 .commit()
     }
 
+    override fun onCreate(savedInstanceState: Bundle?) {
+        setTheme(R.style.AppTheme)
+        super.onCreate(savedInstanceState)
+    }
 
     @Subscribe
     fun showFragment(fragment: androidx.fragment.app.Fragment) {

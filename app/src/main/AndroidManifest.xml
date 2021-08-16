@@ -48,7 +48,7 @@
         <service android:name=".work.TaskJobService" android:permission="android.permission.BIND_JOB_SERVICE"/>
 
         <activity
-            android:name=".MainActivity">
+            android:name=".MainActivity" android:theme="@style/SplashTheme">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN"/>
 

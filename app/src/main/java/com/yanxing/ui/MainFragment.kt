@@ -141,11 +141,6 @@ class MainFragment : BaseFragment(){
                 }
             }
 
-            lifecycleScope.launch {
-
-            }
-
-
         }
 
     }
