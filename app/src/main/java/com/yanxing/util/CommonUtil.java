@@ -1,33 +1,25 @@
 package com.yanxing.util;
 import android.app.Activity;
 import android.app.ActivityManager;
-import android.content.ContentResolver;
-import android.content.ContentValues;
 import android.content.Context;
 import android.content.Intent;
 import android.content.pm.PackageInfo;
 import android.content.pm.PackageManager;
 import android.content.pm.Signature;
-import android.database.Cursor;
 import android.graphics.Bitmap;
 import android.graphics.Rect;
 import android.media.MediaMetadataRetriever;
 import android.media.ThumbnailUtils;
 import android.net.Uri;
-import android.os.Build;
 import android.os.IBinder;
-import android.provider.MediaStore;
 import android.telephony.TelephonyManager;
 import android.util.DisplayMetrics;
-import android.view.Display;
 import android.view.View;
 import android.view.WindowManager;
 import android.view.inputmethod.InputMethodManager;
 import android.widget.EditText;
 
-import androidx.annotation.RequiresApi;
 
-import java.io.File;
 import java.io.FileOutputStream;
 import java.security.MessageDigest;
 import java.security.NoSuchAlgorithmException;
@@ -240,10 +232,8 @@ public class CommonUtil {
         for (ActivityManager.RunningAppProcessInfo appProcess : appProcesses) {
             if (appProcess.processName.equals(context.getPackageName())) {
                 if (appProcess.importance == ActivityManager.RunningAppProcessInfo.IMPORTANCE_BACKGROUND) {
-                    LogUtil.d("AppUtil",String.format("Background App:", appProcess.processName));
                     return true;
                 } else {
-                    LogUtil.d("AppUtil",String.format("Foreground App:",appProcess.processName));
                     return false;
                 }
             }
