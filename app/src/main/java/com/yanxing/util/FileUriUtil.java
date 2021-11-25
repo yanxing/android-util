@@ -23,7 +23,7 @@ import java.io.IOException;
 public class FileUriUtil {
 
     /**
-     * 图片/视频file形式转Uri，兼容AndroidQ
+     * 获取图片/视频绝对路径，兼容AndroidQ
      *
      * @param type 1图片，2视频
      */
@@ -37,7 +37,7 @@ public class FileUriUtil {
     }
 
     /**
-     * AndroidQ以前版本，URI转化图片路径
+     * AndroidQ以前版本，获取图片/视频绝对路径
      *
      * @param context
      * @param uri
@@ -81,7 +81,7 @@ public class FileUriUtil {
     }
 
     /**
-     * androidQ file转Uri
+     * androidQ 获取图片/视频绝对路径
      *
      * @param type 1图片，2视频
      */
@@ -122,7 +122,7 @@ public class FileUriUtil {
     }
 
     /**
-     * 图片/视频file形式转Uri，兼容AndroidQ
+     * 图片/视频file转Uri，兼容AndroidQ
      *
      * @param type 1图片，2视频
      */
