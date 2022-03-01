@@ -4,13 +4,17 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:paddingLeft="@dimen/activity_horizontal_margin"
-    android:paddingRight="@dimen/activity_horizontal_margin">
+    android:paddingRight="@dimen/activity_horizontal_margin"
+    android:paddingTop="@dimen/padding16">
 
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:orientation="vertical">
-
+        <Button
+            android:id="@+id/selectFile"
+            style="@style/style_btn"
+            android:text="调用系统文件管理器"/>
         <Button
             android:id="@+id/adapterButton"
             style="@style/style_btn"
@@ -36,9 +40,8 @@
 
         <Button
             android:id="@+id/sortListView"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
             android:textAllCaps="false"
+            style="@style/style_btn"
             android:text="@string/sortlistview"/>
         <Button
             android:id="@+id/selectCity"

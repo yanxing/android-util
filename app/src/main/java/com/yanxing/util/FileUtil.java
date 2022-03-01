@@ -1,5 +1,6 @@
 package com.yanxing.util;
 
+import android.content.Context;
 import android.os.Environment;
 
 import java.io.ByteArrayOutputStream;
@@ -35,16 +36,23 @@ public class FileUtil {
     }
 
     /**
-     * 检查外存设备是否存在，存在返回true
-     *
+     * androidQ沙盒内缓存路径
+     * @param context
      * @return
      */
-    public static boolean checkStorage() {
-        boolean result = android.os.Environment.getExternalStorageState().equals(android.os.Environment.MEDIA_MOUNTED);
-        if (result) {
-            LogUtil.i(TAG, "外部存储不存在");
-        }
-        return result;
+    public static String getCachePath(Context context){
+        File file=context.getExternalCacheDir();
+        return file.toString();
+    }
+
+    /**
+     * androidQ沙盒内存放文件路径
+     * @param context
+     * @return
+     */
+    public static String getFilesPath(Context context){
+        File file=context.getExternalFilesDir("");
+        return file.toString();
     }
 
     /**
@@ -54,12 +62,9 @@ public class FileUtil {
      */
     public static File createFile(String fileName) {
         File file = new File(fileName);
-        if (checkStorage()) {
-            try {
-                file.createNewFile();
-            } catch (IOException e) {
-                e.printStackTrace();
-            }
+        try {
+            file.createNewFile();
+        } catch (IOException e) {
         }
         return file;
     }
@@ -72,15 +77,7 @@ public class FileUtil {
      */
     public static Boolean isExistFile(String filePath) {
         File file = new File(filePath);
-        //存储设备存在
-        if (checkStorage()) {
-            //如果是目录返回
-            if (file.isDirectory()) {
-                return false;
-            }
-            return file.exists();
-        }
-        return false;
+        return file.exists();
     }
 
     /**
@@ -90,13 +87,7 @@ public class FileUtil {
      */
     public static File createDir(String dirName) {
         File dir = new File(dirName);
-        //存储设备存在
-        if (checkStorage()) {
-            if (!dir.exists()) {
-                Boolean bo = dir.mkdir();
-                LogUtil.i(TAG, bo.toString());
-            }
-        }
+        dir.mkdir();
         return dir;
     }
 
@@ -107,12 +98,7 @@ public class FileUtil {
      */
     public static void deleteFile(String path) {
         File file = new File(path);
-        //存储设备存在
-        if (checkStorage()) {
-            if (file.exists()) {
-                file.delete();
-            }
-        }
+        file.delete();
     }
 
     /**
@@ -182,11 +168,9 @@ public class FileUtil {
      */
     public static void rename(String path, String newName) {
         File file = new File(path);
-        if (checkStorage()) {
-            if (file.exists()) {
-                File file1 = new File(path.substring(0, path.lastIndexOf("/") + 1) + newName);
-                file.renameTo(file1);
-            }
+        if (file.exists()) {
+            File file1 = new File(path.substring(0, path.lastIndexOf("/") + 1) + newName);
+            file.renameTo(file1);
         }
     }
 }

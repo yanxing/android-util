@@ -10,7 +10,7 @@ import androidx.documentfile.provider.DocumentFile;
 import java.io.FileOutputStream;
 
 /**
- * 针对AndroidQ文件操作
+ * AndroidQ文件操作
  *
  * @author 李双祥 on 2019/10/30.
  */

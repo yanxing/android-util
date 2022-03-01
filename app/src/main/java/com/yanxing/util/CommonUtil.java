@@ -51,6 +51,19 @@ public class CommonUtil {
     }
 
     /**
+     * 判断集合是否为空（null||size=0）
+     *
+     * @param list
+     * @return
+     */
+    public static boolean isEmpty(List list) {
+        if (list != null && list.size() > 0) {
+            return false;
+        }
+        return true;
+    }
+
+    /**
      * 获取版本号
      *
      * @return 当前应用的版本号

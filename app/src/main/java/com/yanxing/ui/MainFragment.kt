@@ -9,6 +9,7 @@ import android.content.Context
 import android.content.Intent
 import android.os.Bundle
 import android.util.Log
+import androidx.activity.result.ActivityResultCallback
 import androidx.activity.result.contract.ActivityResultContract
 import androidx.core.content.ContextCompat.getSystemService
 import androidx.datastore.createDataStore
@@ -27,20 +28,27 @@ import com.yanxing.ui.mvvmdemo.MVVMDemoActivity
 import com.yanxing.ui.tablayout.TabLayoutPagerActivity
 import com.yanxing.ui.work.TaskJobService
 import com.yanxing.ui.work.TaskWork
-import com.yanxing.util.EventBusUtil
-import com.yanxing.util.LogUtil
-import com.yanxing.util.PermissionUtil
+import com.yanxing.util.*
 import kotlinx.android.synthetic.main.fragment_main.*
 import kotlinx.coroutines.flow.collect
 import kotlinx.coroutines.launch
 import java.util.concurrent.TimeUnit
-
 
 /**
  * 菜单列表
  * Created by lishuangxiang on 2016/12/21.
  */
 class MainFragment : BaseFragment(){
+
+    val mimeTypes = arrayOf<String>(
+        SelectFileUtil.MimeType.DOC,
+        SelectFileUtil.MimeType.DOCX,
+        SelectFileUtil.MimeType.PDF,
+        SelectFileUtil.MimeType.PPT,
+        SelectFileUtil.MimeType.PPTX,
+        SelectFileUtil.MimeType.XLS,
+        SelectFileUtil.MimeType.XLSX
+    )
 
     override fun getLayoutResID(): Int {
         return R.layout.fragment_main
@@ -55,6 +63,31 @@ class MainFragment : BaseFragment(){
                     showToast(it.key+"授权失败")
                 }
             }
+        }
+        //调用系统文件管理，选择文件复制到App沙盒目录例子
+        val launcherSelectFile=registerForActivityResult(object :ActivityResultContract<String,String>() {
+            override fun createIntent(context: Context, input: String?): Intent {
+                //return SelectFileUtil.openSelectFile(mimeTypes)
+                return SelectFileUtil.openSelectFile()
+            }
+            override fun parseResult(resultCode: Int, intent: Intent?): String {
+                var newPath=""
+                intent?.apply {
+                    data?.let {
+                        val name=FileUriUtil.getFileRealNameFromUri(requireActivity(),it)
+                        newPath=FileUtil.getFilesPath(requireContext())+"/"+name
+                        //复制到沙盒
+                        FileUriUtil.copyFileToDir(requireActivity(),it,newPath)
+                    }
+                }
+                return newPath
+            }
+        }) { result ->result?.let {
+                showToast(it)
+            }
+        }
+        selectFile.setOnClickListener {
+            launcherSelectFile.launch("")
         }
 
         adapterButton.setOnClickListener {
@@ -90,7 +123,7 @@ class MainFragment : BaseFragment(){
         MPAndroidChart.setOnClickListener {
             replace(MPAndroidChartFragment())
         }
-        val launcher = registerForActivityResult(ResultContract()) { result -> showToast(result) };
+        val launcher = registerForActivityResult(ResultContract()) { result -> showToast(result) }
         //城市列表
         sortListView.setOnClickListener {
             launcher.launch(getString(R.string.city_test))
