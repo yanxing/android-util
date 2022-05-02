@@ -13,11 +13,12 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             app:tabSelectedTextColor="@color/colorGreen"
+            app:tabTextColor="@color/colorMainGray"
             app:tabIndicatorFullWidth="false"
+            app:tabIndicator="@drawable/tab_indicator_shape"
             app:tabTextAppearance="@style/tablayoutTextStyle"
             app:tabIndicatorColor="@color/colorGreen"
-            app:tabRippleColor="@android:color/transparent"
-            style="@style/MyCustomTabLayout"/>
+            app:tabRippleColor="@android:color/transparent"/>
     </com.yanxing.tablayout.TabLayoutPager>
 
 </LinearLayout>

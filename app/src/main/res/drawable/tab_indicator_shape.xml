@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layer-list xmlns:android="http://schemas.android.com/apk/res/android">
+    <!--自定义指示器宽度，高度以及圆角，位置-->
+    <item
+        android:width="18dp"
+        android:height="4dp"
+        android:bottom="8dp"
+        android:gravity="center_horizontal">
+        <!-- 注：这里需要一个空的 <shape /> 标签，否则会报错 -->
+        <shape>
+            <corners android:radius="2dp" />
+        </shape>
+    </item>
+</layer-list>

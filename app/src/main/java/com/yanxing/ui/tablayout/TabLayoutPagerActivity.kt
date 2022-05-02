@@ -31,5 +31,6 @@ class TabLayoutPagerActivity : BaseActivity() {
         mStringList.add(getString(R.string.menu2))
         mStringList.add(getString(R.string.menu3))
         tabLayoutPager.addTab(this, mFragmentList, mStringList)
+        tabLayoutPager.setTextStyle(18,14,null)
     }
 }
