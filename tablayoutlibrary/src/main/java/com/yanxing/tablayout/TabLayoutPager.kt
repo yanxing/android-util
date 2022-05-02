@@ -115,18 +115,16 @@ class TabLayoutPager(context: Context, attrs: AttributeSet?, defStyle: Int) :
      */
     private fun setTextSize(tabLayout: TabLayout, selectPosition: Int, selectTextSize: Int, normalTextSize: Int) {
         for (i in 0 until tabLayout.tabCount) {
-            val tab = tabLayout.getTabAt(i)
-            if (tab != null) {
+            tabLayout.getTabAt(i)?.apply {
                 val builder = SpannableStringBuilder()
-                val text = if (tab.text == null) "" else tab.text.toString()
-                if (selectPosition == i) {
-                    builder.append(text)
+                text = if (selectPosition == i) {
+                    builder.append(text?:"")
                     builder.setSpan(AbsoluteSizeSpan(selectTextSize, true), 0, builder.length, Spanned.SPAN_INCLUSIVE_EXCLUSIVE)
-                    tab.text = builder
+                    builder
                 } else {
-                    builder.append(text)
+                    builder.append(text?:"")
                     builder.setSpan(AbsoluteSizeSpan(normalTextSize, true), 0, builder.length, Spanned.SPAN_INCLUSIVE_EXCLUSIVE)
-                    tab.text = builder
+                    builder
                 }
             }
         }
