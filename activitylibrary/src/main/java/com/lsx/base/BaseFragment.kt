@@ -8,7 +8,7 @@ import androidx.databinding.DataBindingUtil
 import androidx.databinding.ViewDataBinding
 import androidx.fragment.app.Fragment
 
-abstract class BaseFragment<T : ViewDataBinding> : Fragment() {
+abstract class BaseFragment<T : ViewDataBinding>(private var layoutId: Int) : Fragment() {
 
     protected var viewBinding: T? = null
 
@@ -18,7 +18,7 @@ abstract class BaseFragment<T : ViewDataBinding> : Fragment() {
     }
 
     override fun onCreateView(inflater: LayoutInflater,container: ViewGroup?,savedInstanceState: Bundle?): View {
-        viewBinding=DataBindingUtil.inflate(inflater,getLayoutResID(),container,false)
+        viewBinding=DataBindingUtil.inflate(inflater,layoutId,container,false)
         return viewBinding!!.root
     }
 
@@ -26,12 +26,6 @@ abstract class BaseFragment<T : ViewDataBinding> : Fragment() {
      * 实例化控件之后的操作
      */
     protected abstract fun afterInstanceView()
-
-
-    /**
-     * 子类布局，例如R.layout.activity_main
-     */
-    protected abstract fun getLayoutResID(): Int
 
     override fun onDestroyView() {
         super.onDestroyView()

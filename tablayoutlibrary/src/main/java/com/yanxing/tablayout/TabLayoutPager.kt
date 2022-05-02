@@ -82,8 +82,20 @@ class TabLayoutPager(context: Context, attrs: AttributeSet?, defStyle: Int) :
             val builder = SpannableStringBuilder()
             builder.append(tabTexts[position])
             if (position == currentItem) {
-                builder.setSpan(AbsoluteSizeSpan(18, true), 0, builder.length, Spanned.SPAN_INCLUSIVE_EXCLUSIVE)
-                viewPager.currentItem = currentItem
+                selectTextSize?.let {
+                    builder.setSpan(AbsoluteSizeSpan(it, true), 0, builder.length, Spanned.SPAN_INCLUSIVE_EXCLUSIVE)
+                    if (bold) {
+                        builder.setSpan(StyleSpan(Typeface.BOLD), 0, builder.length, Spannable.SPAN_INCLUSIVE_EXCLUSIVE)
+                    }
+                    viewPager.currentItem = currentItem
+                }
+            } else {
+                normalTextSize?.let {
+                    builder.setSpan(AbsoluteSizeSpan(it, true), 0, builder.length, Spanned.SPAN_INCLUSIVE_EXCLUSIVE)
+                    if (bold) {
+                        builder.setSpan(StyleSpan(Typeface.NORMAL), 0, builder.length, Spannable.SPAN_INCLUSIVE_EXCLUSIVE)
+                    }
+                }
             }
             tab.text = builder
         }.attach()
@@ -102,8 +114,20 @@ class TabLayoutPager(context: Context, attrs: AttributeSet?, defStyle: Int) :
             val builder = SpannableStringBuilder()
             builder.append(tabTexts[position])
             if (position == currentItem) {
-                builder.setSpan(AbsoluteSizeSpan(18, true), 0, builder.length, Spanned.SPAN_INCLUSIVE_EXCLUSIVE)
-                viewPager.currentItem = currentItem
+                selectTextSize?.let {
+                    builder.setSpan(AbsoluteSizeSpan(it, true), 0, builder.length, Spanned.SPAN_INCLUSIVE_EXCLUSIVE)
+                    if (bold) {
+                        builder.setSpan(StyleSpan(Typeface.BOLD), 0, builder.length, Spannable.SPAN_INCLUSIVE_EXCLUSIVE)
+                    }
+                    viewPager.currentItem = currentItem
+                }
+            } else {
+                normalTextSize?.let {
+                    builder.setSpan(AbsoluteSizeSpan(it, true), 0, builder.length, Spanned.SPAN_INCLUSIVE_EXCLUSIVE)
+                    if (bold) {
+                        builder.setSpan(StyleSpan(Typeface.NORMAL), 0, builder.length, Spannable.SPAN_INCLUSIVE_EXCLUSIVE)
+                    }
+                }
             }
             tab.text = builder
         }.attach()

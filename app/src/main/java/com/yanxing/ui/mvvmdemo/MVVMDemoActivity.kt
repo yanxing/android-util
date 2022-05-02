@@ -8,11 +8,7 @@ import com.yanxing.ui.mvvmdemo.viewmodel.UserViewModel
 import com.yanxing.util.LogUtil
 import com.yanxing.util.ToastUtil
 
-class MVVMDemoActivity :BaseActivity<ActivityMvvmDemoBinding>(){
-
-    override fun getLayoutResID(): Int {
-        return R.layout.activity_mvvm_demo
-    }
+class MVVMDemoActivity :BaseActivity<ActivityMvvmDemoBinding>(R.layout.activity_mvvm_demo){
 
     override fun afterInstanceView() {
         viewBinding.lifecycleOwner=this
