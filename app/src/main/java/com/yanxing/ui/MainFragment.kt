@@ -55,15 +55,15 @@ class MainFragment : BaseFragment(){
     }
 
     override fun afterInstanceView() {
-        PermissionUtil.requestPermission(this,arrayOf(Manifest.permission.CAMERA, Manifest.permission.ACCESS_FINE_LOCATION
-            , Manifest.permission.WRITE_EXTERNAL_STORAGE, Manifest.permission.READ_PHONE_STATE)
-        ) { result ->
+       val permission=PermissionUtil.requestMultiplePermission(this) { result ->
             result?.forEach {
                 if (!it.value) {
                     showToast(it.key+"授权失败")
                 }
             }
         }
+        permission.launch(arrayOf(Manifest.permission.CAMERA, Manifest.permission.ACCESS_FINE_LOCATION
+            , Manifest.permission.WRITE_EXTERNAL_STORAGE, Manifest.permission.READ_PHONE_STATE))
         //调用系统文件管理，选择文件复制到App沙盒目录例子
         val launcherSelectFile=registerForActivityResult(object :ActivityResultContract<String,String>() {
             override fun createIntent(context: Context, input: String?): Intent {

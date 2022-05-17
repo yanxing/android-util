@@ -61,8 +61,7 @@ class WebOpenPhotoActivity : BaseActivity() {
     }
 
     fun requestPermission() {
-        PermissionUtil.requestPermission(this,arrayOf(Manifest.permission.CAMERA, Manifest.permission.WRITE_EXTERNAL_STORAGE
-            , Manifest.permission.WRITE_SETTINGS)
+        val permission=PermissionUtil.requestMultiplePermission(this,
         ) { result ->
             result?.forEach {
                 if (!it.value) {
@@ -70,6 +69,8 @@ class WebOpenPhotoActivity : BaseActivity() {
                 }
             }
         }
+        permission.launch(arrayOf(Manifest.permission.CAMERA, Manifest.permission.WRITE_EXTERNAL_STORAGE
+            , Manifest.permission.WRITE_SETTINGS))
 
     }
 
